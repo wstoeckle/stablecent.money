@@ -3,170 +3,357 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CENT - Based on Real Pennies</title>
-    <meta name="description" content="CENT is a revolutionary stablecoin backed 1:1 by physical US pennies with inherent over-collateralization through metal value.">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>CENT - Protected By Eagles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --copper: #b87333;
+            --copper-dark: #8b4513;
+            --copper-light: #dba36d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: #1a1a1a;
+            color: white;
+            line-height: 1.5;
+        }
+
+        /* Glowing text effect */
+        .glow {
+            text-shadow: 0 0 10px var(--copper-light);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--copper);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--copper);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--copper);
+        }
+
+        /* Hero section */
+        .hero {
+            min-height: 100vh;
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(to bottom, #1a1a1a, #2a2a2a);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%23b87333" opacity="0.1"/></svg>');
+            background-size: 30px 30px;
+            animation: fadeInOut 3s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.2; }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--copper), var(--copper-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(184, 115, 51, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+
+        /* Button styles */
+        .button {
+            background: var(--copper);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 2px solid var(--copper);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .button:hover {
+            background: transparent;
+            border-color: var(--copper);
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px var(--copper-light);
+        }
+
+        /* Stats section */
+        .stats {
+            padding: 4rem 2rem;
+            background: #2a2a2a;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--copper);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card .number {
+            font-size: 3rem;
+            color: var(--copper);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Vault section */
+        .vault {
+            padding: 4rem 2rem;
+            background: #1a1a1a;
+        }
+
+        .vault-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .vault-feed {
+            background: #2a2a2a;
+            border: 2px solid var(--copper);
+            border-radius: 12px;
+            height: 400px;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--copper);
+            font-size: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vault-feed::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 48%, var(--copper) 49%, var(--copper) 51%, transparent 52%);
+            background-size: 10px 10px;
+            opacity: 0.1;
+            animation: slide 20s linear infinite;
+        }
+
+        @keyframes slide {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+
+        /* Footer */
+        footer {
+            background: #2a2a2a;
+            padding: 4rem 2rem;
+            border-top: 1px solid var(--copper);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-container h3 {
+            color: var(--copper);
+            margin-bottom: 1rem;
+        }
+
+        .footer-container a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .footer-container a:hover {
+            color: var(--copper);
+        }
+
+        .tagline {
+            color: var(--copper);
+            font-style: italic;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .stats-container,
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
 </head>
-<body class="bg-gray-900 text-white">
-    <!-- Navigation -->
-    <nav class="bg-gray-800 border-b border-copper">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="flex justify-between">
-                <div class="flex space-x-7">
-                    <div class="flex items-center py-4">
-                        <span class="font-mono text-3xl text-copper">¢ENT</span>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-6">
-                    <a href="#about" class="py-4 px-2 text-gray-300 hover:text-copper transition duration-300">About</a>
-                    <a href="#features" class="py-4 px-2 text-gray-300 hover:text-copper transition duration-300">Features</a>
-                    <a href="#vault" class="py-4 px-2 text-gray-300 hover:text-copper transition duration-300">Vault</a>
-                    <a href="#whitepaper" class="py-4 px-2 text-gray-300 hover:text-copper transition duration-300">Docs</a>
-                    <a href="#" class="bg-copper text-white px-4 py-2 rounded-lg hover:bg-copper-dark transition duration-300">Launch App</a>
-                </div>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">¢ENT</div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#features">Features</a>
+                <a href="#vault">Eagle's Nest</a>
+                <a href="#" class="button">Launch App</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <div class="relative overflow-hidden bg-gray-900">
-        <div class="max-w-6xl mx-auto px-4 py-24">
-            <div class="text-center">
-                <h1 class="text-6xl font-bold mb-6 bg-gradient-to-r from-copper to-amber-300 bg-clip-text text-transparent">
-                    The Most Based Stablecoin
-                </h1>
-                <p class="text-2xl text-gray-400 mb-8">
-                    1 CENT = 1 PENNY
-                    <br>
-                    <span class="text-copper">Always has been. 🦅</span>
-                </p>
-                <div class="space-x-4">
-                    <a href="#vault" class="bg-copper text-white px-8 py-4 rounded-lg hover:bg-copper-dark transition duration-300 inline-flex items-center">
-                        <i class="fas fa-vault mr-2"></i>View The Vault
-                    </a>
-                    <a href="#whitepaper" class="bg-gray-800 text-white px-8 py-4 rounded-lg hover:bg-gray-700 transition duration-300 inline-flex items-center">
-                        <i class="fas fa-book mr-2"></i>Read The Docs
-                    </a>
-                </div>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>The Most Based Stablecoin</h1>
+            <p>Each token backed by one real penny.<br>
+            <span class="glow">Protected by eagles. 🦅</span></p>
+            <div class="button-group">
+                <a href="#vault" class="button">Enter The Eagle's Nest</a>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Stats Section -->
-    <div class="bg-gray-800">
-        <div class="max-w-6xl mx-auto px-4 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="p-6">
-                    <p class="text-4xl font-bold text-copper">1,000,000</p>
-                    <p class="text-gray-400">Pennies in Vault</p>
-                </div>
-                <div class="p-6">
-                    <p class="text-4xl font-bold text-copper">275%</p>
-                    <p class="text-gray-400">Metal Value (Pre-1982)</p>
-                </div>
-                <div class="p-6">
-                    <p class="text-4xl font-bold text-copper">∞</p>
-                    <p class="text-gray-400">Meme Potential</p>
-                </div>
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="number">1,000,000</div>
+                <h3>Pennies in Vault</h3>
+                <p>Each one watched by our guardian eagle</p>
+            </div>
+            <div class="stat-card">
+                <div class="number">275%</div>
+                <h3>Metal Value</h3>
+                <p>Pre-1982 pennies built different</p>
+            </div>
+            <div class="stat-card">
+                <div class="number">24/7</div>
+                <h3>Eagle Watch</h3>
+                <p>Our guardian never sleeps</p>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Live Vault Section -->
-    <div id="vault" class="bg-gray-900 py-16">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12">
-                <span class="bg-gradient-to-r from-copper to-amber-300 bg-clip-text text-transparent">The Eagle's Nest</span>
-            </h2>
-            <div class="aspect-w-16 aspect-h-9">
-                <div class="flex items-center justify-center h-96 bg-gray-800 rounded-lg border border-copper">
-                    <p class="text-copper text-xl">Live vault feed launching soon...</p>
-                </div>
+    <section class="vault">
+        <div class="vault-container">
+            <h2>The Eagle's Nest</h2>
+            <p>Watch our guardian protect your pennies in real-time</p>
+            <div class="vault-feed">
+                Eagle cam launching soon...
             </div>
-            <div class="mt-8 text-center">
-                <div class="inline-flex items-center space-x-2 text-copper">
-                    <i class="fas fa-circle-check"></i>
-                    <span>Last verified: <span id="lastVerified">Loading...</span></span>
-                </div>
-            </div>
+            <p>Last inspection: <span id="lastVerified">Loading...</span></p>
         </div>
-    </div>
+    </section>
 
-    <!-- Features -->
-    <div id="features" class="bg-gray-800 py-16">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12">
-                <span class="bg-gradient-to-r from-copper to-amber-300 bg-clip-text text-transparent">Why CENT?</span>
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-gray-900 p-6 rounded-lg border border-copper">
-                    <div class="text-copper text-2xl mb-4">
-                        <i class="fas fa-lock"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-4">Real Backing</h3>
-                    <p class="text-gray-400">Each token = one physical penny in our vault. Simple as.</p>
-                </div>
-                <div class="bg-gray-900 p-6 rounded-lg border border-copper">
-                    <div class="text-copper text-2xl mb-4">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-4">Metal Value</h3>
-                    <p class="text-gray-400">Pre-1982 pennies contain copper worth 275% of face value. Bullish.</p>
-                </div>
-                <div class="bg-gray-900 p-6 rounded-lg border border-copper">
-                    <div class="text-copper text-2xl mb-4">
-                        <i class="fas fa-eye"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-4">Transparency</h3>
-                    <p class="text-gray-400">24/7 live vault feed. Watch the eagle guard your pennies.</p>
-                </div>
+    <footer>
+        <div class="footer-container">
+            <div>
+                <h3>¢ENT</h3>
+                <p>Building the bridge between pennies and the future.</p>
+                <p class="tagline">Protected by eagles since 2025 🦅</p>
             </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 py-12 border-t border-copper">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-4 md:mb-0">
-                    <span class="font-mono text-2xl text-copper">¢ENT</span>
-                </div>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-copper transition duration-300">
-                        <i class="fab fa-twitter text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-copper transition duration-300">
-                        <i class="fab fa-discord text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-copper transition duration-300">
-                        <i class="fab fa-github text-xl"></i>
-                    </a>
-                </div>
+            <div>
+                <h3>Quick Links</h3>
+                <a href="#about">About</a>
+                <a href="#features">Features</a>
+                <a href="#vault">Eagle's Nest</a>
             </div>
-            <div class="mt-8 text-center text-gray-400">
-                <p>© 2025 CENT. Backed by real pennies. Protected by eagles.</p>
+            <div>
+                <h3>Join The Nest</h3>
+                <a href="#">Twitter</a>
+                <a href="#">Discord</a>
+                <a href="#">GitHub</a>
             </div>
         </div>
     </footer>
-
-    <style>
-        .text-copper {
-            color: #b87333;
-        }
-        .bg-copper {
-            background-color: #b87333;
-        }
-        .border-copper {
-            border-color: #b87333;
-        }
-        .hover\:bg-copper-dark:hover {
-            background-color: #a66a2e;
-        }
-        .from-copper {
-            --tw-gradient-from: #b87333;
-        }
-    </style>
 
     <script>
         function updateLastVerified() {
