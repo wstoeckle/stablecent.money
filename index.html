@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CENT - Based on Real Pennies</title>
+    <meta name="description" content="CENT is a revolutionary stablecoin backed 1:1 by physical US pennies with inherent over-collateralization through metal value.">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Navigation -->
+    <nav class="bg-gray-800 border-b border-copper">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between">
+                <div class="flex space-x-7">
+                    <div class="flex items-center py-4">
+                        <span class="font-mono text-3xl text-copper">¢ENT</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="#about" class="py-4 px-2 text-gray-300 hover:text-copper transition duration-300">About</a>
+                    <a href="#features" class="py-4 px-2 text-gray-300 hover:text-copper transition duration-300">Features</a>
+                    <a href="#vault" class="py-4 px-2 text-gray-300 hover:text-copper transition duration-300">Vault</a>
+                    <a href="#whitepaper" class="py-4 px-2 text-gray-300 hover:text-copper transition duration-300">Docs</a>
+                    <a href="#" class="bg-copper text-white px-4 py-2 rounded-lg hover:bg-copper-dark transition duration-300">Launch App</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative overflow-hidden bg-gray-900">
+        <div class="max-w-6xl mx-auto px-4 py-24">
+            <div class="text-center">
+                <h1 class="text-6xl font-bold mb-6 bg-gradient-to-r from-copper to-amber-300 bg-clip-text text-transparent">
+                    The Most Based Stablecoin
+                </h1>
+                <p class="text-2xl text-gray-400 mb-8">
+                    1 CENT = 1 PENNY
+                    <br>
+                    <span class="text-copper">Always has been. 🦅</span>
+                </p>
+                <div class="space-x-4">
+                    <a href="#vault" class="bg-copper text-white px-8 py-4 rounded-lg hover:bg-copper-dark transition duration-300 inline-flex items-center">
+                        <i class="fas fa-vault mr-2"></i>View The Vault
+                    </a>
+                    <a href="#whitepaper" class="bg-gray-800 text-white px-8 py-4 rounded-lg hover:bg-gray-700 transition duration-300 inline-flex items-center">
+                        <i class="fas fa-book mr-2"></i>Read The Docs
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="bg-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="p-6">
+                    <p class="text-4xl font-bold text-copper">1,000,000</p>
+                    <p class="text-gray-400">Pennies in Vault</p>
+                </div>
+                <div class="p-6">
+                    <p class="text-4xl font-bold text-copper">275%</p>
+                    <p class="text-gray-400">Metal Value (Pre-1982)</p>
+                </div>
+                <div class="p-6">
+                    <p class="text-4xl font-bold text-copper">∞</p>
+                    <p class="text-gray-400">Meme Potential</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Vault Section -->
+    <div id="vault" class="bg-gray-900 py-16">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">
+                <span class="bg-gradient-to-r from-copper to-amber-300 bg-clip-text text-transparent">The Eagle's Nest</span>
+            </h2>
+            <div class="aspect-w-16 aspect-h-9">
+                <div class="flex items-center justify-center h-96 bg-gray-800 rounded-lg border border-copper">
+                    <p class="text-copper text-xl">Live vault feed launching soon...</p>
+                </div>
+            </div>
+            <div class="mt-8 text-center">
+                <div class="inline-flex items-center space-x-2 text-copper">
+                    <i class="fas fa-circle-check"></i>
+                    <span>Last verified: <span id="lastVerified">Loading...</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div id="features" class="bg-gray-800 py-16">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">
+                <span class="bg-gradient-to-r from-copper to-amber-300 bg-clip-text text-transparent">Why CENT?</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-900 p-6 rounded-lg border border-copper">
+                    <div class="text-copper text-2xl mb-4">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Real Backing</h3>
+                    <p class="text-gray-400">Each token = one physical penny in our vault. Simple as.</p>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-lg border border-copper">
+                    <div class="text-copper text-2xl mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Metal Value</h3>
+                    <p class="text-gray-400">Pre-1982 pennies contain copper worth 275% of face value. Bullish.</p>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-lg border border-copper">
+                    <div class="text-copper text-2xl mb-4">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Transparency</h3>
+                    <p class="text-gray-400">24/7 live vault feed. Watch the eagle guard your pennies.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12 border-t border-copper">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <span class="font-mono text-2xl text-copper">¢ENT</span>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-copper transition duration-300">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-copper transition duration-300">
+                        <i class="fab fa-discord text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-copper transition duration-300">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-gray-400">
+                <p>© 2025 CENT. Backed by real pennies. Protected by eagles.</p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .text-copper {
+            color: #b87333;
+        }
+        .bg-copper {
+            background-color: #b87333;
+        }
+        .border-copper {
+            border-color: #b87333;
+        }
+        .hover\:bg-copper-dark:hover {
+            background-color: #a66a2e;
+        }
+        .from-copper {
+            --tw-gradient-from: #b87333;
+        }
+    </style>
+
+    <script>
+        function updateLastVerified() {
+            const now = new Date();
+            document.getElementById('lastVerified').textContent = now.toLocaleString();
+        }
+        updateLastVerified();
+        setInterval(updateLastVerified, 60000);
+    </script>
+</body>
+</html>
