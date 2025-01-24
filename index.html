@@ -3,170 +3,326 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CENT - Based on Real Pennies</title>
-    <meta name="description" content="CENT is a revolutionary stablecoin backed 1:1 by physical US pennies with inherent over-collateralization through metal value.">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>CENT - The Penny-Backed Stablecoin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #eee;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #1a73e8;
+        }
+
+        .button {
+            background: #1a73e8;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .button:hover {
+            background: #1557b0;
+        }
+
+        /* Hero section */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(to bottom, #f8faff, #fff);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            max-width: 800px;
+            margin: 0 auto 1rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Stats section */
+        .stats {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .stat-card h3 {
+            font-size: 0.875rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1a1a1a;
+        }
+
+        .stat-card p {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        /* Vault section */
+        .vault {
+            background: #f8faff;
+            padding: 4rem 2rem;
+        }
+
+        .vault-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .vault-feed {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem 0;
+            color: #666;
+        }
+
+        /* Features section */
+        .features {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid #eee;
+        }
+
+        .feature-card h3 {
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 4rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-links h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .stats,
+            .feature-grid,
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
-<body class="bg-gray-900 text-white">
-    <!-- Navigation -->
-    <nav class="bg-gray-800 border-b border-copper">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="flex justify-between">
-                <div class="flex space-x-7">
-                    <div class="flex items-center py-4">
-                        <span class="font-mono text-3xl text-copper">¢ENT</span>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-6">
-                    <a href="#about" class="py-4 px-2 text-gray-300 hover:text-copper transition duration-300">About</a>
-                    <a href="#features" class="py-4 px-2 text-gray-300 hover:text-copper transition duration-300">Features</a>
-                    <a href="#vault" class="py-4 px-2 text-gray-300 hover:text-copper transition duration-300">Vault</a>
-                    <a href="#whitepaper" class="py-4 px-2 text-gray-300 hover:text-copper transition duration-300">Docs</a>
-                    <a href="#" class="bg-copper text-white px-4 py-2 rounded-lg hover:bg-copper-dark transition duration-300">Launch App</a>
-                </div>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">CENT</div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#features">Features</a>
+                <a href="#vault">Live Vault</a>
+                <a href="#whitepaper">Documentation</a>
+                <a href="#" class="button">Launch App</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <div class="relative overflow-hidden bg-gray-900">
-        <div class="max-w-6xl mx-auto px-4 py-24">
-            <div class="text-center">
-                <h1 class="text-6xl font-bold mb-6 bg-gradient-to-r from-copper to-amber-300 bg-clip-text text-transparent">
-                    The Most Based Stablecoin
-                </h1>
-                <p class="text-2xl text-gray-400 mb-8">
-                    1 CENT = 1 PENNY
-                    <br>
-                    <span class="text-copper">Always has been. 🦅</span>
-                </p>
-                <div class="space-x-4">
-                    <a href="#vault" class="bg-copper text-white px-8 py-4 rounded-lg hover:bg-copper-dark transition duration-300 inline-flex items-center">
-                        <i class="fas fa-vault mr-2"></i>View The Vault
-                    </a>
-                    <a href="#whitepaper" class="bg-gray-800 text-white px-8 py-4 rounded-lg hover:bg-gray-700 transition duration-300 inline-flex items-center">
-                        <i class="fas fa-book mr-2"></i>Read The Docs
-                    </a>
-                </div>
+    <section class="hero">
+        <h1>The First Physical Penny-Backed Stablecoin</h1>
+        <p>A transparent, auditable stablecoin backed by real U.S. pennies, combining traditional value with digital innovation.</p>
+        <div class="button-group">
+            <a href="#market" class="button">View Market Data</a>
+            <a href="#vault" class="button" style="background: white; color: #1a73e8; border: 1px solid #1a73e8; margin-left: 1rem;">Watch Live Vault</a>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stat-card">
+            <h3>Total Supply</h3>
+            <div class="number">1,000,000 CENT</div>
+            <p>$10,000 USD equivalent</p>
+        </div>
+        <div class="stat-card">
+            <h3>Metal Value Coverage</h3>
+            <div class="number">275%</div>
+            <p>Pre-1982 penny copper value</p>
+        </div>
+        <div class="stat-card">
+            <h3>Backing Verification</h3>
+            <div class="number">24/7</div>
+            <p>Live vault monitoring</p>
+        </div>
+    </section>
+
+    <section class="vault">
+        <div class="vault-container">
+            <h2>Live Vault Monitor</h2>
+            <p>Watch our secure vault in real-time, guarded by state-of-the-art security systems</p>
+            <div class="vault-feed">
+                Live feed launching soon
+            </div>
+            <p>Last verification: <span id="lastVerified">Loading...</span></p>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2>Why Choose CENT?</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>Physical Backing</h3>
+                <p>Every CENT token is backed by one real U.S. penny, stored in our secure vault</p>
+            </div>
+            <div class="feature-card">
+                <h3>Metal Value Protection</h3>
+                <p>Inherent over-collateralization through copper content in pre-1982 pennies</p>
+            </div>
+            <div class="feature-card">
+                <h3>Complete Transparency</h3>
+                <p>24/7 live vault feed and real-time blockchain verification</p>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Stats Section -->
-    <div class="bg-gray-800">
-        <div class="max-w-6xl mx-auto px-4 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="p-6">
-                    <p class="text-4xl font-bold text-copper">1,000,000</p>
-                    <p class="text-gray-400">Pennies in Vault</p>
-                </div>
-                <div class="p-6">
-                    <p class="text-4xl font-bold text-copper">275%</p>
-                    <p class="text-gray-400">Metal Value (Pre-1982)</p>
-                </div>
-                <div class="p-6">
-                    <p class="text-4xl font-bold text-copper">∞</p>
-                    <p class="text-gray-400">Meme Potential</p>
-                </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>CENT</h3>
+                <p>Building the bridge between physical and digital assets.</p>
             </div>
-        </div>
-    </div>
-
-    <!-- Live Vault Section -->
-    <div id="vault" class="bg-gray-900 py-16">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12">
-                <span class="bg-gradient-to-r from-copper to-amber-300 bg-clip-text text-transparent">The Eagle's Nest</span>
-            </h2>
-            <div class="aspect-w-16 aspect-h-9">
-                <div class="flex items-center justify-center h-96 bg-gray-800 rounded-lg border border-copper">
-                    <p class="text-copper text-xl">Live vault feed launching soon...</p>
-                </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <a href="#about">About</a>
+                <a href="#features">Features</a>
+                <a href="#vault">Live Vault</a>
+                <a href="#whitepaper">Documentation</a>
             </div>
-            <div class="mt-8 text-center">
-                <div class="inline-flex items-center space-x-2 text-copper">
-                    <i class="fas fa-circle-check"></i>
-                    <span>Last verified: <span id="lastVerified">Loading...</span></span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Features -->
-    <div id="features" class="bg-gray-800 py-16">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12">
-                <span class="bg-gradient-to-r from-copper to-amber-300 bg-clip-text text-transparent">Why CENT?</span>
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-gray-900 p-6 rounded-lg border border-copper">
-                    <div class="text-copper text-2xl mb-4">
-                        <i class="fas fa-lock"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-4">Real Backing</h3>
-                    <p class="text-gray-400">Each token = one physical penny in our vault. Simple as.</p>
-                </div>
-                <div class="bg-gray-900 p-6 rounded-lg border border-copper">
-                    <div class="text-copper text-2xl mb-4">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-4">Metal Value</h3>
-                    <p class="text-gray-400">Pre-1982 pennies contain copper worth 275% of face value. Bullish.</p>
-                </div>
-                <div class="bg-gray-900 p-6 rounded-lg border border-copper">
-                    <div class="text-copper text-2xl mb-4">
-                        <i class="fas fa-eye"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-4">Transparency</h3>
-                    <p class="text-gray-400">24/7 live vault feed. Watch the eagle guard your pennies.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 py-12 border-t border-copper">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-4 md:mb-0">
-                    <span class="font-mono text-2xl text-copper">¢ENT</span>
-                </div>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-copper transition duration-300">
-                        <i class="fab fa-twitter text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-copper transition duration-300">
-                        <i class="fab fa-discord text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-copper transition duration-300">
-                        <i class="fab fa-github text-xl"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="mt-8 text-center text-gray-400">
-                <p>© 2025 CENT. Backed by real pennies. Protected by eagles.</p>
+            <div class="footer-links">
+                <h3>Connect</h3>
+                <a href="#">Twitter</a>
+                <a href="#">Discord</a>
+                <a href="#">GitHub</a>
             </div>
         </div>
     </footer>
-
-    <style>
-        .text-copper {
-            color: #b87333;
-        }
-        .bg-copper {
-            background-color: #b87333;
-        }
-        .border-copper {
-            border-color: #b87333;
-        }
-        .hover\:bg-copper-dark:hover {
-            background-color: #a66a2e;
-        }
-        .from-copper {
-            --tw-gradient-from: #b87333;
-        }
-    </style>
 
     <script>
         function updateLastVerified() {
