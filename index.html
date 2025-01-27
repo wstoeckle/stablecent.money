@@ -6,30 +6,31 @@
     <title>CENT - Protected By Eagles</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Existing CSS rules */
         :root {
             --copper: #b87333;
             --copper-dark: #8b4513;
             --copper-light: #dba36d;
         }
-
+    
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+    
         body {
             font-family: 'Space Grotesk', sans-serif;
             background: #1a1a1a;
             color: white;
             line-height: 1.5;
         }
-
+    
         /* Glowing text effect */
         .glow {
             text-shadow: 0 0 10px var(--copper-light);
         }
-
+    
         /* Navigation */
         nav {
             position: fixed;
@@ -40,7 +41,7 @@
             border-bottom: 1px solid var(--copper);
             z-index: 1000;
         }
-
+    
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -49,29 +50,29 @@
             justify-content: space-between;
             align-items: center;
         }
-
+    
         .logo {
             font-size: 2rem;
             font-weight: bold;
             color: var(--copper);
         }
-
+    
         .nav-links {
             display: flex;
             gap: 2rem;
             align-items: center;
         }
-
+    
         .nav-links a {
             color: #fff;
             text-decoration: none;
             transition: color 0.2s;
         }
-
+    
         .nav-links a:hover {
             color: var(--copper);
         }
-
+    
         /* Hero section */
         .hero {
             min-height: 100vh;
@@ -82,7 +83,7 @@
             position: relative;
             overflow: hidden;
         }
-
+    
         .hero::before {
             content: '';
             position: absolute;
@@ -95,12 +96,12 @@
             animation: fadeInOut 3s infinite;
             pointer-events: none;
         }
-
+    
         @keyframes fadeInOut {
             0%, 100% { opacity: 0.1; }
             50% { opacity: 0.2; }
         }
-
+    
         .hero-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -108,7 +109,7 @@
             position: relative;
             z-index: 1;
         }
-
+    
         .hero h1 {
             font-size: 4rem;
             margin-bottom: 1.5rem;
@@ -118,13 +119,13 @@
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 20px rgba(184, 115, 51, 0.3);
         }
-
+    
         .hero p {
             font-size: 1.5rem;
             color: #ccc;
             margin-bottom: 2rem;
         }
-
+    
         /* Button styles */
         .button {
             background: var(--copper);
@@ -138,20 +139,20 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-
+    
         .button:hover {
             background: transparent;
             border-color: var(--copper);
             transform: translateY(-2px);
             box-shadow: 0 0 20px var(--copper-light);
         }
-
+    
         /* Stats section */
         .stats {
             padding: 4rem 2rem;
             background: #2a2a2a;
         }
-
+    
         .stats-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -159,7 +160,7 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
         }
-
+    
         .stat-card {
             background: #1a1a1a;
             padding: 2rem;
@@ -168,30 +169,30 @@
             text-align: center;
             transition: transform 0.3s;
         }
-
+    
         .stat-card:hover {
             transform: translateY(-5px);
         }
-
+    
         .stat-card .number {
             font-size: 3rem;
             color: var(--copper);
             font-weight: bold;
             margin-bottom: 0.5rem;
         }
-
+    
         /* Vault section */
         .vault {
             padding: 4rem 2rem;
             background: #1a1a1a;
         }
-
+    
         .vault-container {
             max-width: 1200px;
             margin: 0 auto;
             text-align: center;
         }
-
+    
         .vault-feed {
             background: #2a2a2a;
             border: 2px solid var(--copper);
@@ -206,7 +207,7 @@
             position: relative;
             overflow: hidden;
         }
-
+    
         .vault-feed::before {
             content: '';
             position: absolute;
@@ -219,19 +220,19 @@
             opacity: 0.1;
             animation: slide 20s linear infinite;
         }
-
+    
         @keyframes slide {
             0% { background-position: 0 0; }
             100% { background-position: 50px 50px; }
         }
-
+    
         /* Footer */
         footer {
             background: #2a2a2a;
             padding: 4rem 2rem;
             border-top: 1px solid var(--copper);
         }
-
+    
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -239,12 +240,12 @@
             grid-template-columns: 2fr 1fr 1fr;
             gap: 4rem;
         }
-
+    
         .footer-container h3 {
             color: var(--copper);
             margin-bottom: 1rem;
         }
-
+    
         .footer-container a {
             color: #ccc;
             text-decoration: none;
@@ -252,54 +253,64 @@
             margin-bottom: 0.5rem;
             transition: color 0.2s;
         }
-
+    
         .footer-container a:hover {
             color: var(--copper);
         }
-
+    
         .tagline {
             color: var(--copper);
             font-style: italic;
             margin-top: 1rem;
         }
-
+    
         @media (max-width: 768px) {
             .stats-container,
             .footer-container {
                 grid-template-columns: 1fr;
             }
-
+    
             .nav-links {
                 display: none;
             }
-
+    
             .hero h1 {
                 font-size: 2.5rem;
             }
-
+    
             .hero p {
                 font-size: 1.2rem;
             }
-
+    
             .hero {
                 padding: 6rem 1rem 2rem;
             }
-
+    
             .stats, .vault, .minting {
                 padding: 2rem 1rem;
             }
-
+    
             .vault-feed {
                 height: 300px;
             }
-
+    
             .minting div[style*="grid-template-columns"] {
                 grid-template-columns: 1fr;
             }
-
+    
             .footer-container {
                 gap: 2rem;
             }
+        }
+    
+        /* Add the new CSS rules here */
+        #eagle-image {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+    
+        #eagle-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px var(--copper);
         }
     </style>
 </head>
@@ -327,13 +338,18 @@
         </div>
     </section>
 
-    <!-- Eagle Image Section -->
-    <section style="padding: 4rem 2rem 0; background: #1a1a1a; text-align: center;">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <img src="/assets/images/guardian-eagle.jpg" alt="Guardian Eagle watching over CENT pennies" 
-                 style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 0 30px var(--copper);">
-        </div>
-    </section>
+   <!-- Eagle Image Section -->
+<section style="padding: 4rem 2rem 0; background: #1a1a1a; text-align: center;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+        <img id="eagle-image" src="/assets/images/guardian-eagle.jpg" alt="Guardian Eagle watching over CENT pennies" 
+             style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 0 30px var(--copper);">
+    </div>
+</section>
+
+<!-- Audio Elements -->
+<audio id="eagle-scream" src="/assets/sounds/eagle-scream.mp3"></audio>
+<audio id="coins-clanking" src="/assets/sounds/coins-clanking.mp3"></audio>
+
 
     <!-- DEX Section -->
     <section id="trade-cent" style="padding: 4rem 2rem; background: #1a1a1a;">
@@ -461,5 +477,29 @@
         updateLastVerified();
         setInterval(updateLastVerified, 60000);
     </script>
+
+<script>
+    const eagleImage = document.getElementById('eagle-image');
+    const eagleScream = document.getElementById('eagle-scream');
+    const coinsClanking = document.getElementById('coins-clanking');
+    const kaChing = document.getElementById('ka-ching');
+    const applause = document.getElementById('applause');
+
+    function playSoundSequence() {
+        eagleScream.play();
+        eagleScream.onended = () => {
+            coinsClanking.play();
+            coinsClanking.onended = () => {
+                kaChing.play();
+                kaChing.onended = () => {
+                    applause.play();
+                };
+            };
+        };
+    }
+
+    eagleImage.addEventListener('mouseenter', playSoundSequence);
+</script>
+
 </body>
 </html>
