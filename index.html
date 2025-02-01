@@ -312,6 +312,88 @@
             transform: scale(1.05);
             box-shadow: 0 0 50px var(--copper);
         }
+         /* Add new treasury styles */
+         .treasury {
+            padding: 4rem 2rem;
+            background: #1a1a1a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .treasury-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-bar {
+            background: #2a2a2a;
+            height: 40px;
+            border-radius: 20px;
+            border: 2px solid var(--copper);
+            margin: 2rem auto;
+            position: relative;
+            overflow: hidden;
+            max-width: 800px;
+            box-shadow: 0 0 15px rgba(184, 115, 51, 0.2);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--copper-dark), var(--copper-light));
+            border-radius: 18px;
+            position: relative;
+            transition: width 1s ease-in-out;
+            width: 10%;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1));
+            animation: progress-glow 2s infinite;
+        }
+
+        @keyframes progress-glow {
+            0% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.5; }
+        }
+
+        .counter {
+            font-size: 2.5rem;
+            color: var(--copper-light);
+            margin: 1rem 0;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(184, 115, 51, 0.5);
+        }
+
+        .progress-text {
+            color: var(--copper);
+            font-style: italic;
+            margin-top: 1rem;
+        }
+
+        .eagle-progress {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            opacity: 0.8;
+            animation: eagle-float 3s ease-in-out infinite;
+        }
+
+        @keyframes eagle-float {
+            0%, 100% { transform: translateY(-50%) rotate(-5deg); }
+            50% { transform: translateY(-55%) rotate(5deg); }
+        }
     </style>
 </head>
 <body>
@@ -402,6 +484,21 @@
                 <h3>Eagle Watch</h3>
                 <p>Our guardian never sleeps</p>
             </div>
+        </div>
+    </section>
+
+     <!-- New Treasury Progress Section -->
+     <section class="treasury">
+        <div class="treasury-container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; background: linear-gradient(to right, var(--copper), var(--copper-light)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+                1 Million Penny Treasury
+            </h2>
+            <div class="eagle-progress">🦅</div>
+            <p class="counter">100,000 Pennies Deposited</p>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 10%;"></div>
+            </div>
+            <p class="progress-text">Eagles are guarding the path to greatness...</p>
         </div>
     </section>
 
