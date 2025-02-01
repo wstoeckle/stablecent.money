@@ -64,13 +64,13 @@
         }
     
         .nav-links a {
-            color: #fff;
+            color: #4a9eff;
             text-decoration: none;
-            transition: color 0.2s;
+            transition: color 0.3s ease;
         }
     
         .nav-links a:hover {
-            color: var(--copper);
+            color: #66b1ff;
         }
     
         /* Hero section */
@@ -247,15 +247,15 @@
         }
     
         .footer-container a {
-            color: #ccc;
+            color: #4a9eff;
             text-decoration: none;
             display: block;
             margin-bottom: 0.5rem;
-            transition: color 0.2s;
+            transition: color 0.3s ease;
         }
     
         .footer-container a:hover {
-            color: var(--copper);
+            color: #66b1ff;
         }
     
         .tagline {
@@ -672,6 +672,29 @@
             background-color: var(--copper);
             margin: 5px 0;
             transition: all 0.3s ease;
+        }
+
+        /* Update link colors for better legibility */
+        a {
+            color: #4a9eff; /* Brighter, more legible blue */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #66b1ff; /* Slightly lighter on hover */
+        }
+
+        /* Specific adjustments for the feature descriptions */
+        .feature-description {
+            color: #7eb3ff; /* More visible blue for feature text */
+            font-weight: 500; /* Slightly bolder */
+            text-shadow: 0 0 10px rgba(126, 179, 255, 0.3); /* Subtle glow effect */
+        }
+
+        /* Ensure contrast for dark background */
+        .dark-bg a {
+            color: #8ebfff; /* Even brighter blue for dark backgrounds */
         }
     </style>
 </head>
