@@ -859,10 +859,8 @@
             <h2 style="font-size: 2.5rem; margin-bottom: 1rem; background: linear-gradient(to right, var(--copper), var(--copper-light)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
                 1 Million Penny Treasury
             </h2>
-            <div class="eagle-progress">🦅</div>
-            <p class="counter">100,000 Pennies Deposited</p>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 10%;"></div>
+            <div class="penny-counter" style="font-size: 3rem; font-weight: bold; color: var(--copper-light); text-shadow: 0 0 10px rgba(184,115,51,0.5);">
+                <span id="penny-counter">0</span> Pennies Deposited
             </div>
             <p class="progress-text">Eagles are guarding the path to greatness...</p>
         </div>
@@ -1000,6 +998,27 @@
             }
         });
     });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const counterElement = document.getElementById("penny-counter");
+  let currentCount = 0;
+  const targetCount = 1000000; // Target number of pennies
+  const duration = 5000; // Animation duration in milliseconds (5 seconds)
+  const frameRate = 30; // Frames per second
+  const totalFrames = Math.round((duration / 1000) * frameRate);
+  const increment = targetCount / totalFrames;
+  
+  const timer = setInterval(() => {
+    currentCount += increment;
+    if (currentCount >= targetCount) {
+      currentCount = targetCount;
+      clearInterval(timer);
+    }
+    counterElement.textContent = Math.floor(currentCount).toLocaleString();
+  }, 1000 / frameRate);
+});
 </script>
 
 </body>
