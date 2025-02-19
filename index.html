@@ -862,15 +862,43 @@
      <!-- New Penny Counter Section with Floating Eagle -->
      <section class="treasury">
         <div class="treasury-container">
-            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; background: linear-gradient(to right, var(--copper), var(--copper-light)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+            <!-- Heading -->
+            <h2
+                style="
+                    font-size: 2.5rem;
+                    margin-bottom: 1rem;
+                    background: linear-gradient(to right, var(--copper), var(--copper-light));
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                "
+            >
                 1 Million Penny Treasury
             </h2>
-            <!-- Floating Eagle -->
-            <div class="eagle-progress">🦅</div>
-            <!-- Penny Counter -->
-            <div class="penny-counter" style="font-size: 3rem; font-weight: bold; color: var(--copper-light); text-shadow: 0 0 10px rgba(184,115,51,0.5);">
-                <span id="penny-counter">0</span> Pennies Deposited
+
+            <!-- Progress Bar Wrapper -->
+            <div class="progress-bar">
+                <!-- Filled portion of the bar -->
+                <div class="progress-fill" id="treasury-fill">
+                    <!-- Keep the eagle floating above the fill -->
+                    <div class="eagle-progress">🦅</div>
+                </div>
             </div>
+
+            <!-- Text to show how many pennies have been deposited -->
+            <p
+                style="
+                    font-size: 2rem;
+                    font-weight: bold;
+                    color: var(--copper-light);
+                    text-shadow: 0 0 10px rgba(184, 115, 51, 0.5);
+                    margin-top: 1rem;
+                "
+                id="treasury-text"
+            >
+                100,000 Pennies Deposited
+            </p>
+
             <p class="progress-text">Eagles are guarding the path to greatness...</p>
         </div>
     </section>
@@ -1032,6 +1060,28 @@ document.addEventListener("DOMContentLoaded", function() {
     counterElement.textContent = Math.floor(currentCount).toLocaleString();
   }, 1000 / frameRate);
 });
+</script>
+
+<script>
+    // Simple fill animation: from 0% to 10% over 2 seconds
+    document.addEventListener("DOMContentLoaded", function() {
+        const progressFill = document.getElementById("treasury-fill");
+        let currentWidth = 0;
+        const targetWidth = 10; // 10% = 100k of 1M
+        const duration = 2000; // total animation time (ms)
+        const frameRate = 30;
+        const totalFrames = Math.round((duration / 1000) * frameRate);
+        const increment = targetWidth / totalFrames;
+
+        const timer = setInterval(() => {
+            currentWidth += increment;
+            if (currentWidth >= targetWidth) {
+                currentWidth = targetWidth;
+                clearInterval(timer);
+            }
+            progressFill.style.width = currentWidth + "%";
+        }, 1000 / frameRate);
+    });
 </script>
 
 </body>
