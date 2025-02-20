@@ -78,8 +78,8 @@
 <body>
   <div class="container">
     <h1>Mint New CENT</h1>
-    <!-- Note: The form action should point to your form processing endpoint -->
-    <form action="/submit-mint-request" method="POST" enctype="multipart/form-data">
+    <!-- Update the form action with your Formspree endpoint -->
+    <form action="https://formspree.io/f/xdkayqvw" method="POST" enctype="multipart/form-data">
       <!-- Number of pennies to deposit -->
       <label for="pennies">Number of Pennies to Deposit:</label>
       <input type="number" id="pennies" name="pennies" min="1" required>
@@ -99,7 +99,6 @@
       <!-- KYC Process Section -->
       <div class="kyc-container">
         <p class="instructions">Complete KYC Process:</p>
-        <!-- Placeholder: Here you can integrate with a KYC provider like Civic or Persona -->
         <button type="button" id="startKYC">Start KYC Verification</button>
         <!-- Hidden input to store the returned KYC token -->
         <input type="hidden" id="kycToken" name="kycToken">
@@ -110,15 +109,24 @@
     </form>
   </div>
 
+  <!-- Include Persona's SDK -->
+  <script src="https://assets.withpersona.com/sdk/sdk.js"></script>
   <script>
-    // KYC integration placeholder
-    // When integrating a real KYC service, replace this with the appropriate widget/API call.
+    // Replace the placeholder with Persona integration code
     document.getElementById('startKYC').addEventListener('click', function() {
-      alert('KYC integration placeholder. Integrate with your chosen provider (e.g., Civic) here.');
-      // Simulate receiving a KYC token from the provider:
-      document.getElementById('kycToken').value = 'sample-kyc-token';
+      Persona.start({
+        templateId: 'your-template-id', // Replace with your actual Persona template ID
+        onComplete: function(response) {
+          // Assume response.verificationId contains the token
+          document.getElementById('kycToken').value = response.verificationId;
+          alert('KYC completed successfully!');
+        },
+        onError: function(error) {
+          console.error('Persona verification error:', error);
+          alert('There was an error with the KYC process. Please try again.');
+        }
+      });
     });
   </script>
 </body>
 </html>
-
