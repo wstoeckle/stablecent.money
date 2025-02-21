@@ -902,7 +902,32 @@
             <p class="progress-text">Eagles are guarding the path to greatness...</p>
         </div>
     </section>
+<!--Code ready for when we have Eagle camera up and running
 
+<div class="vault-feed">
+  <video id="liveVideo" controls autoplay muted playsinline style="width: 100%; height: 100%;">
+    <source src="https://your-stream-url/path/to/stream.m3u8" type="application/x-mpegURL">
+    Your browser does not support HLS streaming.
+  </video>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+  var video = document.getElementById('liveVideo');
+  if (Hls.isSupported()) {
+    var hls = new Hls();
+    hls.loadSource('https://your-stream-url/path/to/stream.m3u8');
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED, function() {
+      video.play();
+    });
+  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = 'https://your-stream-url/path/to/stream.m3u8';
+    video.addEventListener('loadedmetadata', function() {
+      video.play();
+    });
+  }
+</script>
+-->
     <section id="eagles-vault" class="vault">
         <div class="vault-container">
             <h2>The Eagle's Vault</h2>
