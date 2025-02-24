@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Ni: Coming Soon!</title>
+  <!-- Eagle Favicon (for brand consistency) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Ctext%20y='14'%20font-size='16'%3E%F0%9F%A6%85%3C/text%3E%3C/svg%3E">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --copper: #b87333;
+      --copper-dark: #8b4513;
+      --copper-light: #dba36d;
+      --nickel: #9ea7ad; /* Subtle grayish color for nickel theme */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: #1a1a1a;
+      color: white;
+      line-height: 1.5;
+    }
+
+    /* Navigation (optional minimal version) */
+    nav {
+      width: 100%;
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--copper);
+      padding: 1rem 2rem;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--copper);
+    }
+    .nav-links a {
+      color: #4a9eff;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      transition: color 0.3s ease;
+    }
+    .nav-links a:hover {
+      color: #66b1ff;
+    }
+    .nav-links {
+      display: none; /* Hide for minimal preview page */
+    }
+
+    /* Hero / Coming Soon Section */
+    .hero {
+      min-height: 100vh;
+      padding: 6rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(to bottom, #1a1a1a, #2a2a2a);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, var(--nickel), #e2e2e2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(158, 167, 173, 0.3);
+    }
+    .hero p {
+      font-size: 1.3rem;
+      color: #ccc;
+      margin-bottom: 2rem;
+      max-width: 700px;
+    }
+    .hero img {
+      max-width: 300px;
+      width: 80%;
+      height: auto;
+      margin-top: 2rem;
+      box-shadow: 0 0 20px rgba(158, 167, 173, 0.5);
+      border-radius: 50%;
+    }
+
+    /* Minimal footer */
+    footer {
+      background: #2a2a2a;
+      padding: 2rem;
+      text-align: center;
+      border-top: 1px solid var(--copper);
+    }
+    footer p {
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #4a9eff;
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .hero p {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+      }
+    }
+    @media (max-width: 400px) {
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-container">
+      <div class="logo">¢ENT</div>
+      <!-- Minimal nav-links hidden for preview page -->
+      <div class="nav-links"></div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>Nickels in a Vault?</h1>
+    <p>
+      <strong>Coming Soon...</strong><br><br>
+      “Nickel in a warehouse – Yikes! (Google it)”<br>
+      “Nickel in a warehouse – on a blockchain... LFG!”<br><br>
+      After proving pennies belong on-chain, we’re previewing our next big thing: real nickels tokenized as <em>Ni</em>.
+      Because yes, even nickels cost more to mint than their face value.<br><br>
+      Stay tuned for more details on how you can <strong>rock</strong> this new coin. (Yes, we love Nickelback puns. Don’t judge.)
+    </p>
+    <!-- Ni Coin image -->
+    <img src="/assets/images/Ni Coin.png" alt="Ni Coin preview">
+  </section>
+
+  <footer>
+    <p>
+      &copy; 2025 ¢ENT. All rights reserved.<br>
+      <em>“Look at this photograph...” – Actually, it's just nickel in a vault. Soon: Ni on a blockchain!</em><br>
+      <a href="https://stablecent.money/">Return to Main Site</a>
+    </p>
+  </footer>
+</body
