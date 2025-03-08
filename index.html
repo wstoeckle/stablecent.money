@@ -1,1023 +1,809 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>CENT - Protected By Eagles</title>
-    <!-- Eagle Favicon -->
-    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Ctext%20y='14'%20font-size='16'%3E%F0%9F%A6%85%3C/text%3E%3C/svg%3E">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* Existing CSS rules */
-        :root {
-            --copper: #b87333;
-            --copper-dark: #8b4513;
-            --copper-light: #dba36d;
-        }
-    
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-    
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: #1a1a1a;
-            color: white;
-            line-height: 1.5;
-        }
-    
-        /* Glowing text effect */
-        .glow {
-            text-shadow: 0 0 10px var(--copper-light);
-        }
-    
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--copper);
-            z-index: 1000;
-        }
-    
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-    
-        .logo {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--copper);
-        }
-    
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-    
-        .nav-links a {
-            color: #4a9eff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-    
-        .nav-links a:hover {
-            color: #66b1ff;
-        }
-    
-        /* Hero section */
-        .hero {
-            min-height: 100vh;
-            padding: 8rem 2rem 4rem;
-            background: linear-gradient(to bottom, #1a1a1a, #2a2a2a);
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-    
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%23b87333" opacity="0.1"/></svg>');
-            background-size: 30px 30px;
-            animation: fadeInOut 3s infinite;
-            pointer-events: none;
-        }
-    
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0.1; }
-            50% { opacity: 0.2; }
-        }
-    
-        .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-    
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(to right, var(--copper), var(--copper-light));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(184, 115, 51, 0.3);
-        }
-    
-        .hero p {
-            font-size: 1.5rem;
-            color: #ccc;
-            margin-bottom: 2rem;
-        }
-    
-        /* Button styles */
-        .button {
-            background: var(--copper);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: all 0.3s;
-            border: 2px solid var(--copper);
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-    
-        .button:hover {
-            background: transparent;
-            border-color: var(--copper);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px var(--copper-light);
-        }
-    
-        /* Stats section */
-        .stats {
-            padding: 4rem 2rem;
-            background: #2a2a2a;
-        }
-    
-        .stats-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-    
-        .stat-card {
-            background: #1a1a1a;
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid var(--copper);
-            text-align: center;
-            transition: transform 0.3s;
-        }
-    
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-    
-        .stat-card .number {
-            font-size: 3rem;
-            color: var(--copper);
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-    
-        /* Vault section */
-        .vault {
-            padding: 4rem 2rem;
-            background: #1a1a1a;
-        }
-    
-        .vault-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-    
-        .vault-feed {
-            background: #2a2a2a;
-            border: 2px solid var(--copper);
-            border-radius: 12px;
-            height: 400px;
-            margin: 2rem 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--copper);
-            font-size: 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-    
-        .vault-feed::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent 48%, var(--copper) 49%, var(--copper) 51%, transparent 52%);
-            background-size: 10px 10px;
-            opacity: 0.1;
-            animation: slide 20s linear infinite;
-        }
-    
-        @keyframes slide {
-            0% { background-position: 0 0; }
-            100% { background-position: 50px 50px; }
-        }
-    
-        /* Footer */
-        footer {
-            background: #2a2a2a;
-            padding: 4rem 2rem;
-            border-top: 1px solid var(--copper);
-        }
-    
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 4rem;
-        }
-    
-        .footer-container h3 {
-            color: var(--copper);
-            margin-bottom: 1rem;
-        }
-    
-        .footer-container a {
-            color: #4a9eff;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 0.5rem;
-            transition: color 0.3s ease;
-        }
-    
-        .footer-container a:hover {
-            color: #66b1ff;
-        }
-    
-        .tagline {
-            color: var(--copper);
-            font-style: italic;
-            margin-top: 1rem;
-        }
-    
-        /* Add this in the <style> section, replacing the existing @media queries */
-        @media (max-width: 768px) {
-            .stats-container,
-            .footer-container {
-                grid-template-columns: 1fr !important;
-            }
-    
-            /* Fix for Welcome to CENT grid */
-            .header-commentary div[style*="grid-template-columns"] {
-                grid-template-columns: 1fr !important;
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 1.5rem;
-            }
-    
-            /* Header commentary mobile spacing */
-            .header-commentary {
-                padding: 2rem 1rem !important;
-            }
-    
-            .header-commentary h2 {
-                font-size: 2rem !important;
-                padding: 0 1rem !important;
-            }
-    
-            .header-commentary p {
-                padding: 0 1rem !important;
-            }
-    
-            .header-commentary .stat-card {
-                margin-bottom: 1rem;
-            }
-    
-            .nav-links {
-                display: none;
-            }
-    
-            /* Hero section fixes */
-            .hero {
-                min-height: auto;
-                padding: 6rem 1rem 2rem;
-            }
-    
-            .hero h1 {
-                font-size: 2.2rem;
-                line-height: 1.2;
-                padding: 0 1rem;
-                margin-bottom: 1rem;
-            }
-    
-            .hero p {
-                font-size: 1.1rem;
-                padding: 0 1rem;
-                margin-bottom: 1.5rem;
-            }
-    
-            /* Improved touch targets */
-            .nav-links a,
-            .footer-container a {
-                padding: 0.5rem;
-                display: block;
-            }
-    
-            /* Enhanced button styles */
-            .button {
-                padding: 0.8rem 1.5rem;
-                font-size: 0.9rem;
-                width: 100%;
-                min-width: 140px;
-                max-width: 300px;
-                margin: 0 auto;
-                display: block;
-            }
-    
-            /* Navigation improvements */
-            .nav-links {
-                padding: 1rem;
-            }
-    
-            .nav-links a {
-                width: 100%;
-                text-align: center;
-            }
-    
-            /* Footer link improvements */
-            .footer-container a {
-                padding: 0.5rem 0;
-            }
-    
-            /* Fix for the DEX section grid */
-            #trade-cent div[style*="grid-template-columns"] {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 1.5rem;
-            }
-    
-            /* Minting section fixes */
-            .minting {
-                padding: 2rem 1rem;
-            }
-    
-            /* Fix for the minting section grid */
-            .minting div[style*="grid-template-columns"] {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 1.5rem;
-            }
-    
-            .stat-card {
-                width: 100%;
-                margin: 0;
-                margin-bottom: 1rem;
-                padding: 1.5rem;
-                height: auto;
-            }
-    
-            .stat-card p {
-                font-size: 1rem;
-                line-height: 1.4;
-                margin: 0;
-            }
-    
-            .stats, .vault, .minting, .treasury {
-                padding: 2rem 1rem;
-            }
-    
-            .vault-feed {
-                height: 250px;
-            }
-    
-            /* Progress bar adjustments */
-            .progress-bar {
-                width: 90%;
-                height: 30px;
-                margin: 1.5rem auto;
-            }
-    
-            .counter {
-                font-size: 1.8rem;
-                padding: 0 1rem;
-            }
-    
-            .eagle-progress {
-                font-size: 1.5rem;
-                right: 5%;
-            }
-    
-            /* DEX section improvements */
-            #trade-cent .stat-card {
-                padding: 1.5rem 1rem;
-            }
-    
-            #trade-cent h2 {
-                font-size: 2rem;
-                padding: 0 1rem;
-            }
-    
-            /* Footer improvements */
-            footer {
-                padding: 2rem 1rem;
-            }
-    
-            .footer-container {
-                text-align: center;
-                padding: 0 1rem;
-                gap: 2rem;
-            }
-    
-            .footer-container > div {
-                margin-bottom: 2rem;
-            }
-    
-            .footer-container h3 {
-                margin-bottom: 1rem;
-            }
-    
-            .footer-container a {
-                padding: 0.5rem 0;
-            }
-    
-            .tagline {
-                margin-top: 1rem;
-                font-size: 0.9rem;
-            }
-    
-            /* Updated navigation styles */
-            .logo {
-                font-size: 1.5rem; /* Smaller logo */
-            }
-            
-            /* Add mobile menu button */
-            .nav-container {
-                padding: 1rem;
-            }
-    
-            .nav-links {
-                display: none; /* Hide nav links by default on mobile */
-            }
-    
-            /* Adjust other mobile nav styles */
-            .nav-container {
-                position: relative;
-            }
-    
-            /* Eagle image section adjustment */
-            #eagle-image {
-                margin: 1rem auto;
-                max-width: 90%;
-            }
-    
-            .hamburger {
-                display: block;
-            }
-    
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(26, 26, 26, 0.95);
-                backdrop-filter: blur(10px);
-                padding: 1rem;
-                flex-direction: column;
-                gap: 1rem;
-                border-bottom: 1px solid var(--copper);
-            }
-    
-            .nav-links.active {
-                display: flex;
-            }
-    
-            /* Hamburger animation classes */
-            .hamburger.active span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 6px);
-            }
-    
-            .hamburger.active span:nth-child(2) {
-                opacity: 0;
-            }
-    
-            .hamburger.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(5px, -6px);
-            }
-    
-            /* Adjust eagle image padding */
-            section[style*="padding: 4rem 2rem 0"] {
-                padding: 2rem 1rem 0 !important;
-            }
-    
-            /* Adjust other section paddings for consistency */
-            section[style*="padding"] {
-                padding: 2rem 1rem !important;
-            }
-    
-            .vault-feed {
-                height: 250px;
-            }
-    
-            /* Progress bar adjustments */
-            .progress-bar {
-                width: 90%;
-                height: 30px;
-                margin: 1.5rem auto;
-            }
-    
-            .counter {
-                font-size: 1.8rem;
-                padding: 0 1rem;
-            }
-    
-            .eagle-progress {
-                font-size: 1.5rem;
-                right: 5%;
-            }
-    
-            /* Additional progress section adjustments */
-            .treasury {
-                padding: 2rem 1rem;
-            }
-    
-            .treasury h2 {
-                font-size: 2rem;
-                padding: 0 1rem;
-            }
-    
-            .progress-text {
-                padding: 0 1rem;
-                font-size: 0.9rem;
-            }
-        }
-    
-        @media (max-width: 380px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-    
-            .stat-card {
-                padding: 1rem;
-            }
-    
-            .minting h2, .treasury h2 {
-                font-size: 2rem !important;
-            }
-    
-            .counter {
-                font-size: 1.5rem;
-            }
-        }
-    
-        /* Add new breakpoint for very small devices */
-        @media (max-width: 320px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-    
-            .hero p {
-                font-size: 1rem;
-            }
-    
-            .stat-card .number {
-                font-size: 2rem;
-            }
-        }
-    
-        /* Add the new CSS rules here */
-        #eagle-image {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-    
-        #eagle-image:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 50px var(--copper);
-        }
-         /* Add new treasury styles */
-         .treasury {
-            padding: 4rem 2rem;
-            background: #1a1a1a;
-            position: relative;
-            overflow: hidden;
-        }
-    
-        .treasury-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-    
-        .progress-bar {
-            background: #2a2a2a;
-            height: 40px;
-            border-radius: 20px;
-            border: 2px solid var(--copper);
-            margin: 2rem auto;
-            position: relative;
-            overflow: hidden;
-            max-width: 800px;
-            box-shadow: 0 0 15px rgba(184, 115, 51, 0.2);
-        }
-    
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--copper-dark), var(--copper-light));
-            border-radius: 18px;
-            position: relative;
-            transition: width 1s ease-in-out;
-            width: 10%;
-        }
-    
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1));
-            animation: progress-glow 2s infinite;
-        }
-    
-        @keyframes progress-glow {
-            0% { opacity: 0.5; }
-            50% { opacity: 0.8; }
-            100% { opacity: 0.5; }
-        }
-    
-        .counter {
-            font-size: 2.5rem;
-            color: var(--copper-light);
-            margin: 1rem 0;
-            font-weight: bold;
-            text-shadow: 0 0 10px rgba(184, 115, 51, 0.5);
-        }
-    
-        .progress-text {
-            color: var(--copper);
-            font-style: italic;
-            margin-top: 1rem;
-        }
-    
-        .eagle-progress {
-            position: absolute;
-            right: 10%;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2rem;
-            opacity: 0.8;
-            animation: eagle-float 3s ease-in-out infinite;
-        }
-    
-        @keyframes eagle-float {
-            0%, 100% { transform: translateY(-50%) rotate(-5deg); }
-            50% { transform: translateY(-55%) rotate(5deg); }
-        }
-    
-        /* Hamburger menu styles */
-        .hamburger {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-            z-index: 1000;
-        }
-    
-        .hamburger span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background-color: var(--copper);
-            margin: 5px 0;
-            transition: all 0.3s ease;
-        }
-    
-        /* Update link colors for better legibility */
-        a {
-            color: #4a9eff; /* Brighter, more legible blue */
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-    
-        a:hover {
-            color: #66b1ff; /* Slightly lighter on hover */
-        }
-    
-        /* Specific adjustments for the feature descriptions */
-        .feature-description {
-            color: #7eb3ff; /* More visible blue for feature text */
-            font-weight: 500; /* Slightly bolder */
-            text-shadow: 0 0 10px rgba(126, 179, 255, 0.3); /* Subtle glow effect */
-        }
-    
-        /* Ensure contrast for dark background */
-        .dark-bg a {
-            color: #8ebfff; /* Even brighter blue for dark backgrounds */
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>CENT - Protected By Eagles</title>
+  <!-- Eagle Favicon -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Ctext%20y='14'%20font-size='16'%3E%F0%9F%A6%85%3C/text%3E%3C/svg%3E">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* CSS Variables */
+    :root {
+      --copper: #b87333;
+      --copper-dark: #8b4513;
+      --copper-light: #dba36d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: #1a1a1a;
+      color: white;
+      line-height: 1.5;
+    }
+
+    /* Glowing text effect */
+    .glow {
+      text-shadow: 0 0 10px var(--copper-light);
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--copper);
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--copper);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #4a9eff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #66b1ff;
+    }
+
+    /* Hero section */
+    .hero {
+      min-height: 100vh;
+      padding: 8rem 2rem 4rem;
+      background: linear-gradient(to bottom, #1a1a1a, #2a2a2a);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%23b87333" opacity="0.1"/></svg>');
+      background-size: 30px 30px;
+      animation: fadeInOut 3s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes fadeInOut {
+      0%, 100% { opacity: 0.1; }
+      50% { opacity: 0.2; }
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(to right, var(--copper), var(--copper-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(184, 115, 51, 0.3);
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      color: #ccc;
+      margin-bottom: 2rem;
+    }
+
+    /* Button styles */
+    .button {
+      background: var(--copper);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.3s;
+      border: 2px solid var(--copper);
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .button:hover {
+      background: transparent;
+      border-color: var(--copper);
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px var(--copper-light);
+    }
+
+    /* Stats section */
+    .stats {
+      padding: 4rem 2rem;
+      background: #2a2a2a;
+    }
+
+    .stats-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .stat-card {
+      background: #1a1a1a;
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid var(--copper);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-card .number {
+      font-size: 3rem;
+      color: var(--copper);
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Vault section */
+    .vault {
+      padding: 4rem 2rem;
+      background: #1a1a1a;
+    }
+
+    .vault-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .vault-feed {
+      background: #2a2a2a;
+      border: 2px solid var(--copper);
+      border-radius: 12px;
+      height: 400px;
+      margin: 2rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--copper);
+      font-size: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vault-feed::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent 48%, var(--copper) 49%, var(--copper) 51%, transparent 52%);
+      background-size: 10px 10px;
+      opacity: 0.1;
+      animation: slide 20s linear infinite;
+    }
+
+    @keyframes slide {
+      0% { background-position: 0 0; }
+      100% { background-position: 50px 50px; }
+    }
+
+    /* Footer */
+    footer {
+      background: #2a2a2a;
+      padding: 4rem 2rem;
+      border-top: 1px solid var(--copper);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .footer-container h3 {
+      color: var(--copper);
+      margin-bottom: 1rem;
+    }
+
+    .footer-container a {
+      color: #4a9eff;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-container a:hover {
+      color: #66b1ff;
+    }
+
+    .tagline {
+      color: var(--copper);
+      font-style: italic;
+      margin-top: 1rem;
+    }
+
+    /* Treasury section */
+    .treasury {
+      padding: 4rem 2rem;
+      background: #1a1a1a;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .treasury-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .progress-bar {
+      background: #2a2a2a;
+      height: 40px;
+      border-radius: 20px;
+      border: 2px solid var(--copper);
+      margin: 2rem auto;
+      position: relative;
+      overflow: hidden;
+      max-width: 800px;
+      box-shadow: 0 0 15px rgba(184, 115, 51, 0.2);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--copper-dark), var(--copper-light));
+      border-radius: 18px;
+      position: relative;
+      transition: width 1s ease-in-out;
+      width: 10%;
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1));
+      animation: progress-glow 2s infinite;
+    }
+
+    @keyframes progress-glow {
+      0% { opacity: 0.5; }
+      50% { opacity: 0.8; }
+      100% { opacity: 0.5; }
+    }
+
+    .counter {
+      font-size: 2.5rem;
+      color: var(--copper-light);
+      margin: 1rem 0;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(184, 115, 51, 0.5);
+    }
+
+    .progress-text {
+      color: var(--copper);
+      font-style: italic;
+      margin-top: 1rem;
+    }
+
+    .eagle-progress {
+      position: absolute;
+      right: 10%;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      opacity: 0.8;
+      animation: eagle-float 3s ease-in-out infinite;
+    }
+
+    @keyframes eagle-float {
+      0%, 100% { transform: translateY(-50%) rotate(-5deg); }
+      50% { transform: translateY(-55%) rotate(5deg); }
+    }
+
+    /* Hamburger menu styles */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      z-index: 1000;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background-color: var(--copper);
+      margin: 5px 0;
+      transition: all 0.3s ease;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      /* Layout adjustments */
+      .stats-container,
+      .footer-container {
+        grid-template-columns: 1fr !important;
+      }
+
+      .header-commentary div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1.5rem;
+      }
+
+      .header-commentary {
+        padding: 2rem 1rem !important;
+      }
+
+      .header-commentary h2 {
+        font-size: 2rem !important;
+        padding: 0 1rem !important;
+      }
+
+      .header-commentary p {
+        padding: 0 1rem !important;
+      }
+
+      .header-commentary .stat-card {
+        margin-bottom: 1rem;
+      }
+
+      /* --- Mobile Navigation (Unified Block) --- */
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(26, 26, 26, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+        border-bottom: 1px solid var(--copper);
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+      /* --- End Mobile Navigation --- */
+
+      /* Additional mobile adjustments */
+      .hero {
+        min-height: auto;
+        padding: 6rem 1rem 2rem;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+        line-height: 1.2;
+        padding: 0 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .nav-links a,
+      .footer-container a {
+        padding: 0.5rem;
+        display: block;
+      }
+
+      .button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+        width: 100%;
+        min-width: 140px;
+        max-width: 300px;
+        margin: 0 auto;
+        display: block;
+      }
+
+      .nav-links {
+        padding: 1rem;
+      }
+
+      .nav-links a {
+        width: 100%;
+        text-align: center;
+      }
+
+      .footer-container a {
+        padding: 0.5rem 0;
+      }
+
+      #trade-cent div[style*="grid-template-columns"] {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1.5rem;
+      }
+
+      .minting {
+        padding: 2rem 1rem;
+      }
+
+      .minting div[style*="grid-template-columns"] {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1.5rem;
+      }
+
+      .stat-card {
+        width: 100%;
+        margin: 0;
+        margin-bottom: 1rem;
+        padding: 1.5rem;
+        height: auto;
+      }
+
+      .stat-card p {
+        font-size: 1rem;
+        line-height: 1.4;
+        margin: 0;
+      }
+
+      .stats, .vault, .minting, .treasury {
+        padding: 2rem 1rem;
+      }
+
+      .vault-feed {
+        height: 250px;
+      }
+
+      .progress-bar {
+        width: 90%;
+        height: 30px;
+        margin: 1.5rem auto;
+      }
+
+      .counter {
+        font-size: 1.8rem;
+        padding: 0 1rem;
+      }
+
+      .eagle-progress {
+        font-size: 1.5rem;
+        right: 5%;
+      }
+
+      #trade-cent .stat-card {
+        padding: 1.5rem 1rem;
+      }
+
+      #trade-cent h2 {
+        font-size: 2rem;
+        padding: 0 1rem;
+      }
+
+      footer {
+        padding: 2rem 1rem;
+      }
+
+      .footer-container {
+        text-align: center;
+        padding: 0 1rem;
+        gap: 2rem;
+      }
+
+      .footer-container > div {
+        margin-bottom: 2rem;
+      }
+
+      .footer-container h3 {
+        margin-bottom: 1rem;
+      }
+
+      .footer-container a {
+        padding: 0.5rem 0;
+      }
+
+      .tagline {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .stat-card {
+        padding: 1rem;
+      }
+
+      .minting h2, .treasury h2 {
+        font-size: 2rem !important;
+      }
+
+      .counter {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <a href="index.html">
-                    <img src="assets/logo.png" alt="Copper Coin Logo">
-                </a>
-            </div>
-            
-            <button class="hamburger" id="hamburger-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            
-            <nav>
-                <ul class="nav-links" id="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="minting.html">Minting</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <nav>
+    <div class="nav-container">
+      <div class="logo">¢ENT</div>
+      <button class="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links">
+        <a href="https://docs.google.com/document/d/1h2_8aPDMiynl9CUtNy9VQhjQKsw2lARKhognpmgTCY4/edit?usp=sharing">About</a>
+        <a href="#features">Features</a>
+        <a href="transparency.html">Transparency</a>
+        <a href="https://stablecent.money/merch">Merch</a>
+        <a href="#trade-cent" class="button">Buy CENT</a>
+      </div>
+    </div>
+  </nav>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>The Most Based Reserve Coin</h1>
-            
-            <p>
-                One penny in the vault, one token on the blockchain.<sup><a href="#footnote-1">*</a></sup>
-            </p>
-            
-            <p class="glow" style="margin-bottom: 1rem;">
-                Protected by eagles. 🦅
-            </p>
-            <div class="button-group">
-                <a href="#eagles-vault" class="button">Watch The Vault</a>
-            </div>
-        </div>
-    </section>
+  <section class="hero">
+    <div class="hero-content">
+      <h1>The Most Based Reserve Coin</h1>
+      <p>
+        One penny in the vault, one token on the blockchain.<sup><a href="#footnote-1">*</a></sup>
+      </p>
+      <p class="glow" style="margin-bottom: 1rem;">
+        Protected by eagles. 🦅
+      </p>
+      <div class="button-group">
+        <a href="#eagles-vault" class="button">Watch The Vault</a>
+      </div>
+    </div>
+  </section>
 
-<!-- Insert above the eagle image -->
-<section class="header-commentary" style="padding: 4rem 2rem; background: #1a1a1a;">
+  <!-- Insert above the eagle image -->
+  <section class="header-commentary" style="padding: 4rem 2rem; background: #1a1a1a;">
     <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
-        <h2 style="font-size: 2.5rem; margin-bottom: 2rem; background: linear-gradient(to right, var(--copper), var(--copper-light)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
-            Welcome to ¢ENT
-        </h2>
-        <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 3rem;">
-            The world's first token with physical U.S. pennies.
-        </p>
-        
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
-            <div class="stat-card">
-                <h3 style="color: var(--copper); margin-bottom: 1rem;">1. Deliver Pennies</h3>
-                <p>Deliver your physical pennies to our incredible vault. Pile them high!</p>
-            </div>
-            
-            <div class="stat-card">
-                <h3 style="color: var(--copper); margin-bottom: 1rem;">2. Mint CENT Tokens</h3>
-                <p>Watch your pennies transform into digital tokens! Our magnificent smart (nay, brilliant) contract issues CENT tokens to your wallet—1 penny delivered = 1 CENT issued.</p>
-            </div>
-            
-            <div class="stat-card">
-                <h3 style="color: var(--copper); margin-bottom: 1rem;">3. Fly Like An Eagle</h3>
-                <p>Live the penny lifestyle others can only dream of. Admired, respected, envied.</p>
-            </div>
+      <h2 style="font-size: 2.5rem; margin-bottom: 2rem; background: linear-gradient(to right, var(--copper), var(--copper-light)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+        Welcome to ¢ENT
+      </h2>
+      <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 3rem;">
+        The world's first token with physical U.S. pennies.
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+        <div class="stat-card">
+          <h3 style="color: var(--copper); margin-bottom: 1rem;">1. Deliver Pennies</h3>
+          <p>Deliver your physical pennies to our incredible vault. Pile them high!</p>
         </div>
+        <div class="stat-card">
+          <h3 style="color: var(--copper); margin-bottom: 1rem;">2. Mint CENT Tokens</h3>
+          <p>Watch your pennies transform into digital tokens! Our magnificent smart (nay, brilliant) contract issues CENT tokens to your wallet—1 penny delivered = 1 CENT issued.</p>
+        </div>
+        <div class="stat-card">
+          <h3 style="color: var(--copper); margin-bottom: 1rem;">3. Fly Like An Eagle</h3>
+          <p>Live the penny lifestyle others can only dream of. Admired, respected, envied.</p>
+        </div>
+      </div>
     </div>
-</section>
-<!-- End commentary -->
- 
+  </section>
+  <!-- End commentary -->
 
-   <!-- Eagle Image Section -->
-<section style="padding: 4rem 2rem 0; background: #1a1a1a; text-align: center;">
+  <!-- Eagle Image Section -->
+  <section style="padding: 4rem 2rem 0; background: #1a1a1a; text-align: center;">
     <div style="max-width: 1200px; margin: 0 auto;">
-        <img id="eagle-image" src="/assets/images/guardian-eagle.jpg" alt="Guardian Eagle watching over CENT pennies" 
-             style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 0 30px var(--copper);">
+      <img id="eagle-image" src="/assets/images/guardian-eagle.jpg" alt="Guardian Eagle watching over CENT pennies" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 0 30px var(--copper);">
     </div>
-</section>
+  </section>
 
-<!-- Audio Elements -->
-<audio id="eagle-scream" src="/assets/sounds/eagle-scream.mp3"></audio>
-<audio id="coins-clanking" src="/assets/sounds/coins-clanking.mp3"></audio>
+  <!-- Audio Elements -->
+  <audio id="eagle-scream" src="/assets/sounds/eagle-scream.mp3"></audio>
+  <audio id="coins-clanking" src="/assets/sounds/coins-clanking.mp3"></audio>
 
+  <!-- DEX Section -->
+  <section id="trade-cent" style="padding: 4rem 2rem; background: #1a1a1a;">
+    <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+      <h2 style="font-size: 2.5rem; margin-bottom: 2rem; background: linear-gradient(to right, var(--copper), var(--copper-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+        Trade CENT
+      </h2>
+      <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 3rem;">
+        Coming soon: Get your CENT tokens on these eagle-eyed exchanges
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+        <a href="#" class="stat-card" style="text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <h3 style="color: var(--copper); margin-bottom: 0.5rem;">Jupiter</h3>
+          <p>The top Solana aggregator</p>
+        </a>
+        <a href="#" class="stat-card" style="text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <h3 style="color: var(--copper); margin-bottom: 0.5rem;">Raydium</h3>
+          <p>Automated market maker</p>
+        </a>
+        <a href="#" class="stat-card" style="text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <h3 style="color: var(--copper); margin-bottom: 0.5rem;">Orca</h3>
+          <p>User-friendly DEX</p>
+        </a>
+        <a href="#" class="stat-card" style="text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <h3 style="color: var(--copper); margin-bottom: 0.5rem;">Phoenix</h3>
+          <p>Next-gen orderbook</p>
+        </a>
+      </div>
+    </div>
+  </section>
 
-    <!-- DEX Section -->
-    <section id="trade-cent" style="padding: 4rem 2rem; background: #1a1a1a;">
-        <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
-            <h2 style="font-size: 2.5rem; margin-bottom: 2rem; background: linear-gradient(to right, var(--copper), var(--copper-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                Trade CENT
-            </h2>
-            <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 3rem;">
-                Coming soon: Get your CENT tokens on these eagle-eyed exchanges
-            </p>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
-                <a href="#" class="stat-card" style="text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                    <h3 style="color: var(--copper); margin-bottom: 0.5rem;">Jupiter</h3>
-                    <p>The top Solana aggregator</p>
-                </a>
-                
-                <a href="#" class="stat-card" style="text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                    <h3 style="color: var(--copper); margin-bottom: 0.5rem;">Raydium</h3>
-                    <p>Automated market maker</p>
-                </a>
-                
-                <a href="#" class="stat-card" style="text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                    <h3 style="color: var(--copper); margin-bottom: 0.5rem;">Orca</h3>
-                    <p>User-friendly DEX</p>
-                </a>
-                
-                <a href="#" class="stat-card" style="text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                    <h3 style="color: var(--copper); margin-bottom: 0.5rem;">Phoenix</h3>
-                    <p>Next-gen orderbook</p>
-                </a>
-            </div>
+  <section id="features" class="stats">
+    <div class="stats-container">
+      <div class="stat-card">
+        <div class="number">1,000,000</div>
+        <h3>Pennies in Vault</h3>
+        <p>Each one watched by our guardian eagle</p>
+      </div>
+      <div class="stat-card">
+        <div class="number">~6 tons</div>
+        <h3>Metal Weight</h3>
+        <p>Fort Knox - coming for ya!</p>
+      </div>
+      <div class="stat-card">
+        <div class="number">24/7</div>
+        <h3>Eagle Watch</h3>
+        <p>Our guardian never sleeps</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Penny Counter Section with Floating Eagle -->
+  <section class="treasury">
+    <div class="treasury-container">
+      <h2 style="font-size: 2.5rem; margin-bottom: 1rem; background: linear-gradient(to right, var(--copper), var(--copper-light)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+        1 Million Penny Treasury
+      </h2>
+      <div class="progress-bar">
+        <div class="progress-fill" id="treasury-fill">
+          <div class="eagle-progress">🦅</div>
         </div>
-    </section>
+      </div>
+      <p style="font-size: 2rem; font-weight: bold; color: var(--copper-light); text-shadow: 0 0 10px rgba(184, 115, 51, 0.5); margin-top: 1rem;" id="treasury-text">
+        100,000 Pennies Deposited
+      </p>
+      <p class="progress-text">Eagles are guarding the path to greatness...</p>
+    </div>
+  </section>
 
-    <section id="features" class="stats">
-        <div class="stats-container">
-            <div class="stat-card">
-                <div class="number">1,000,000</div>
-                <h3>Pennies in Vault</h3>
-                <p>Each one watched by our guardian eagle</p>
-            </div>
-            <div class="stat-card">
-                <div class="number">~6 tons</div>
-                <h3>Metal Weight</h3>
-                <p>Fort Knox - coming for ya!</p>
-            </div>
-            <div class="stat-card">
-                <div class="number">24/7</div>
-                <h3>Eagle Watch</h3>
-                <p>Our guardian never sleeps</p>
-            </div>
+  <!-- Eagle's Vault Section -->
+  <section id="eagles-vault" class="vault">
+    <div class="vault-container">
+      <h2>The Eagle's Vault</h2>
+      <p>Watch our guardian protect your pennies in real-time</p>
+      <div class="vault-feed">
+        Live vault feed launching soon...
+      </div>
+      <p>Last inspection: <span id="lastVerified">Loading...</span></p>
+    </div>
+  </section>
+
+  <section class="minting" style="padding: 4rem 2rem; background: #2a2a2a;">
+    <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+      <h2 style="font-size: 2.5rem; margin-bottom: 2rem; background: linear-gradient(to right, var(--copper), var(--copper-light)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+        Mint New CENT
+      </h2>
+      <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 2rem;">
+        From penny to token in three eagle-approved steps
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+        <div class="stat-card">
+          <div style="font-size: 2rem; color: var(--copper); margin-bottom: 1rem;">🏦</div>
+          <h3 style="color: var(--copper); margin-bottom: 1rem;">Mint the Coins</h3>
+          <p>Deliver your pennies to our secure facility. Pre-1982 copper pennies especially welcome.</p>
         </div>
-    </section>
-
-     <!-- New Penny Counter Section with Floating Eagle -->
-     <section class="treasury">
-        <div class="treasury-container">
-            <!-- Heading -->
-            <h2
-                style="
-                    font-size: 2.5rem;
-                    margin-bottom: 1rem;
-                    background: linear-gradient(to right, var(--copper), var(--copper-light));
-                    -webkit-background-clip: text;
-                    background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                "
-            >
-                1 Million Penny Treasury
-            </h2>
-
-            <!-- Progress Bar Wrapper -->
-            <div class="progress-bar">
-                <!-- Filled portion of the bar -->
-                <div class="progress-fill" id="treasury-fill">
-                    <!-- Keep the eagle floating above the fill -->
-                    <div class="eagle-progress">🦅</div>
-                </div>
-            </div>
-
-            <!-- Text to show how many pennies have been deposited -->
-            <p
-                style="
-                    font-size: 2rem;
-                    font-weight: bold;
-                    color: var(--copper-light);
-                    text-shadow: 0 0 10px rgba(184, 115, 51, 0.5);
-                    margin-top: 1rem;
-                "
-                id="treasury-text"
-            >
-                100,000 Pennies Deposited
-            </p>
-
-            <p class="progress-text">Eagles are guarding the path to greatness...</p>
+        <div class="stat-card">
+          <div style="font-size: 2rem; color: var(--copper); margin-bottom: 1rem;">🦅</div>
+          <h3 style="color: var(--copper); margin-bottom: 1rem;">Eagle Inspection</h3>
+          <p>Our guardian eagle verifies each penny. Only the finest coins make it to the vault.</p>
         </div>
-    </section>
-<!--Code ready for when we have Eagle camera up and running
-
-<div class="vault-feed">
-  <video id="liveVideo" controls autoplay muted playsinline style="width: 100%; height: 100%;">
-    <source src="https://your-stream-url/path/to/stream.m3u8" type="application/x-mpegURL">
-    Your browser does not support HLS streaming.
-  </video>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script>
-  var video = document.getElementById('liveVideo');
-  if (Hls.isSupported()) {
-    var hls = new Hls();
-    hls.loadSource('https://your-stream-url/path/to/stream.m3u8');
-    hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED, function() {
-      video.play();
-    });
-  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.src = 'https://your-stream-url/path/to/stream.m3u8';
-    video.addEventListener('loadedmetadata', function() {
-      video.play();
-    });
-  }
-</script>
--->
-    <section id="eagles-vault" class="vault">
-        <div class="vault-container">
-            <h2>The Eagle's Vault</h2>
-            <p>Watch our guardian protect your pennies in real-time</p>
-            <div class="vault-feed">
-                Live vault feed launching soon...
-            </div>
-            <p>Last inspection: <span id="lastVerified">Loading...</span></p>
+        <div class="stat-card">
+          <div style="font-size: 2rem; color: var(--copper); margin-bottom: 1rem;">⚡</div>
+          <h3 style="color: var(--copper); margin-bottom: 1rem;">Receive CENT</h3>
+          <p>Fresh CENT tokens minted and sent to your wallet. 1 penny = 1 CENT, simple as.</p>
         </div>
-    </section>
+      </div>
+      <div style="margin-top: 2rem;">
+        <a href="https://stablecent.money/minting" class="button">Start Minting</a>
+      </div>
+    </div>
+  </section>
 
-    <section class="minting" style="padding: 4rem 2rem; background: #2a2a2a;">
-        <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
-            <h2 style="font-size: 2.5rem; margin-bottom: 2rem; background: linear-gradient(to right, var(--copper), var(--copper-light)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
-                Mint New CENT
-            </h2>
-            <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 2rem;">
-                From penny to token in three eagle-approved steps
-            </p>
-            
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
-                <div class="stat-card">
-                    <div style="font-size: 2rem; color: var(--copper); margin-bottom: 1rem;">🏦</div>
-                    <h3 style="color: var(--copper); margin-bottom: 1rem;">Mint the Coins</h3>
-                    <p>Deliver your pennies to our secure facility. Pre-1982 copper pennies especially welcome.</p>
-                </div>
-                
-                <div class="stat-card">
-                    <div style="font-size: 2rem; color: var(--copper); margin-bottom: 1rem;">🦅</div>
-                    <h3 style="color: var(--copper); margin-bottom: 1rem;">Eagle Inspection</h3>
-                    <p>Our guardian eagle verifies each penny. Only the finest coins make it to the vault.</p>
-                </div>
-                
-                <div class="stat-card">
-                    <div style="font-size: 2rem; color: var(--copper); margin-bottom: 1rem;">⚡</div>
-                    <h3 style="color: var(--copper); margin-bottom: 1rem;">Receive CENT</h3>
-                    <p>Fresh CENT tokens minted and sent to your wallet. 1 penny = 1 CENT, simple as.</p>
-                </div>
-            </div>
-    
-            <div style="margin-top: 2rem;">
-                <a href="https://stablecent.money/minting" class="button">Start Minting</a>
-            </div>
-        </div>
-    </section>
+  <footer>
+    <div class="footer-container">
+      <div>
+        <h3>¢ENT</h3>
+        <p>Building the bridge between pennies and the future.</p>
+        <p class="tagline">Protected by eagles since 2025 🦅</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <a href="https://docs.google.com/document/d/1h2_8aPDMiynl9CUtNy9VQhjQKsw2lARKhognpmgTCY4/edit?usp=sharing">About</a>
+        <a href="https://stablecent.money/next">Next...</a>
+        <a href="#eagles-vault">Eagle's Vault</a>
+      </div>
+      <div>
+        <h3>Join The Squad</h3>
+        <a href="https://x.com/stablecentmoney">X</a>
+        <a href="https://imgflip.com/memegenerator">Memes</a>
+        <a href="https://stablecent.money/merch.html">Merch</a>
+      </div>
+      <div>
+        <h3>Footnotes</h3>
+        <p id="footnote-1">
+          <sup>*</sup> The stablecoin market has traditionally relied on various backing mechanisms, including fiat deposits, treasury bills, and algorithmic solutions. CENT proposes a different approach by attempting to maintain a 1:1 backing with physical US pennies—at least, that is the target. We cannot, however, guarantee perpetual perfect alignment, or any alignment whatsoever, because that sort of promise opens a regulatory can of worms we'd rather avoid. But - come check out our penny vault camera or even better, swing by the vault in person to verify for yourself! See our whitepaper in the "About" section for more details.
+        </p>
+      </div>
+    </div>
+  </footer>
 
-    <footer>
-        <div class="footer-container">
-            <div>
-                <h3>¢ENT</h3>
-                <p>Building the bridge between pennies and the future.</p>
-                <p class="tagline">Protected by eagles since 2025 🦅</p>
-            </div>
-            <div>
-                <h3>Quick Links</h3>
-                <a href="https://docs.google.com/document/d/1h2_8aPDMiynl9CUtNy9VQhjQKsw2lARKhognpmgTCY4/edit?usp=sharing">About</a>
-                <a href="https://stablecent.money/next">Next...</a>
-                <a href="#eagles-vault">Eagle's Vault</a>
-            </div>
-            <div>
-                <h3>Join The Squad</h3>
-                <a href="https://x.com/stablecentmoney">X</a>
-                <a href="https://imgflip.com/memegenerator">Memes</a>
-                <a href="https://stablecent.money/merch.html">Merch</a>
-            </div>
-            <div>
-                <h3>Footnotes</h3>
-                <p id="footnote-1"><sup>*</sup> The stablecoin market has traditionally relied on various backing mechanisms, including fiat deposits, treasury bills, and algorithmic solutions. CENT proposes a different approach by attempting to maintain a 1:1 backing with physical US pennies—at least, that is the target. We cannot, however, guarantee perpetual perfect alignment, or any alignment whatsoever, because that sort of promise opens a regulatory can of worms we'd rather avoid. But - come check out our penny vault camera or even better, swing by the vault in person to verify for yourself! See our whitepaper in the "About" section for more details.</p>
-            </div>
-        </div>
-    </footer>
+  <script>
+    function updateLastVerified() {
+      const now = new Date();
+      document.getElementById('lastVerified').textContent = now.toLocaleString();
+    }
+    updateLastVerified();
+    setInterval(updateLastVerified, 60000);
+  </script>
 
-    <script>
-        function updateLastVerified() {
-            const now = new Date();
-            document.getElementById('lastVerified').textContent = now.toLocaleString();
-        }
-        updateLastVerified();
-        setInterval(updateLastVerified, 60000);
-    </script>
-
-<script>
+  <script>
     const eagleImage = document.getElementById('eagle-image');
     const eagleScream = document.getElementById('eagle-scream');
     const coinsClanking = document.getElementById('coins-clanking');
@@ -1025,103 +811,95 @@
     const applause = document.getElementById('applause');
 
     function playSoundSequence() {
-        eagleScream.play();
-        eagleScream.onended = () => {
-            coinsClanking.play();
-            coinsClanking.onended = () => {
-                kaChing.play();
-                kaChing.onended = () => {
-                    applause.play();
-                };
-            };
+      eagleScream.play();
+      eagleScream.onended = () => {
+        coinsClanking.play();
+        coinsClanking.onended = () => {
+          kaChing.play();
+          kaChing.onended = () => {
+            applause.play();
+          };
         };
+      };
     }
 
-    // Updated event listeners for both touch and mouse devices
     if ('ontouchstart' in window) {
-        eagleImage.addEventListener('touchstart', playSoundSequence);
+      eagleImage.addEventListener('touchstart', playSoundSequence);
     } else {
-        eagleImage.addEventListener('mouseenter', playSoundSequence);
+      eagleImage.addEventListener('mouseenter', playSoundSequence);
     }
-</script>
+  </script>
 
-<script>
-    // Add hamburger menu functionality
+  <script>
+    // Hamburger menu functionality
     document.addEventListener('DOMContentLoaded', function() {
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
+      const hamburger = document.querySelector('.hamburger');
+      const navLinks = document.querySelector('.nav-links');
 
-        hamburger.addEventListener('click', function() {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
+      hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+      });
 
-        // Close menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('active');
-            });
+      // Close menu when clicking a link
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          navLinks.classList.remove('active');
         });
+      });
 
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('active');
-            }
-        });
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+          hamburger.classList.remove('active');
+          navLinks.classList.remove('active');
+        }
+      });
     });
-</script>
+  </script>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const counterElement = document.getElementById("penny-counter");
-  let currentCount = 0;
-  const targetCount = 1000000; // Target number of pennies
-  const duration = 5000; // Animation duration in milliseconds (5 seconds)
-  const frameRate = 30; // Frames per second
-  const totalFrames = Math.round((duration / 1000) * frameRate);
-  const increment = targetCount / totalFrames;
-  
-  const timer = setInterval(() => {
-    currentCount += increment;
-    if (currentCount >= targetCount) {
-      currentCount = targetCount;
-      clearInterval(timer);
-    }
-    counterElement.textContent = Math.floor(currentCount).toLocaleString();
-  }, 1000 / frameRate);
-});
-</script>
-
-<script>
-    // Simple fill animation: from 0% to 10% over 2 seconds
+  <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const progressFill = document.getElementById("treasury-fill");
-        let currentWidth = 0;
-        const targetWidth = 10; // 10% = 100k of 1M
-        const duration = 2000; // total animation time (ms)
-        const frameRate = 30;
-        const totalFrames = Math.round((duration / 1000) * frameRate);
-        const increment = targetWidth / totalFrames;
-
-        const timer = setInterval(() => {
-            currentWidth += increment;
-            if (currentWidth >= targetWidth) {
-                currentWidth = targetWidth;
-                clearInterval(timer);
-            }
-            progressFill.style.width = currentWidth + "%";
-        }, 1000 / frameRate);
+      const counterElement = document.getElementById("penny-counter");
+      let currentCount = 0;
+      const targetCount = 1000000;
+      const duration = 5000;
+      const frameRate = 30;
+      const totalFrames = Math.round((duration / 1000) * frameRate);
+      const increment = targetCount / totalFrames;
+      
+      const timer = setInterval(() => {
+        currentCount += increment;
+        if (currentCount >= targetCount) {
+          currentCount = targetCount;
+          clearInterval(timer);
+        }
+        counterElement.textContent = Math.floor(currentCount).toLocaleString();
+      }, 1000 / frameRate);
     });
-</script>
+  </script>
 
-<script>
-    document.getElementById('hamburger-menu').addEventListener('click', function() {
-        document.getElementById('nav-links').classList.toggle('active');
+  <script>
+    // Simple fill animation for treasury progress bar
+    document.addEventListener("DOMContentLoaded", function() {
+      const progressFill = document.getElementById("treasury-fill");
+      let currentWidth = 0;
+      const targetWidth = 10;
+      const duration = 2000;
+      const frameRate = 30;
+      const totalFrames = Math.round((duration / 1000) * frameRate);
+      const increment = targetWidth / totalFrames;
+
+      const timer = setInterval(() => {
+        currentWidth += increment;
+        if (currentWidth >= targetWidth) {
+          currentWidth = targetWidth;
+          clearInterval(timer);
+        }
+        progressFill.style.width = currentWidth + "%";
+      }, 1000 / frameRate);
     });
-</script>
-
+  </script>
 </body>
 </html>
