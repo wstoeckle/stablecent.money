@@ -727,23 +727,30 @@
     </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-container">
-            <div class="logo">¢ENT</div>
-            <button class="hamburger" aria-label="Toggle menu">
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/logo.png" alt="Copper Coin Logo">
+                </a>
+            </div>
+            
+            <button class="hamburger" id="hamburger-menu">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            <div class="nav-links">
-                <a href="https://docs.google.com/document/d/1h2_8aPDMiynl9CUtNy9VQhjQKsw2lARKhognpmgTCY4/edit?usp=sharing">About</a>
-                <a href="#features">Features</a>
-                <a href="transparency.html">Transparency</a>
-                <a href="https://stablecent.money/merch">Merch</a>
-                <a href="#trade-cent" class="button">Buy CENT</a>
-            </div>
+            
+            <nav>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="minting.html">Minting</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
         </div>
-    </nav>
+    </header>
 
     <section class="hero">
         <div class="hero-content">
@@ -1107,6 +1114,12 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             progressFill.style.width = currentWidth + "%";
         }, 1000 / frameRate);
+    });
+</script>
+
+<script>
+    document.getElementById('hamburger-menu').addEventListener('click', function() {
+        document.getElementById('nav-links').classList.toggle('active');
     });
 </script>
 
