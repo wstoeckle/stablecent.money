@@ -611,6 +611,7 @@
       text-align: center;
       position: relative;
       z-index: 1;
+      padding-right: 4rem;
     }
     
     .launch-title {
@@ -653,9 +654,10 @@
       font-size: 2.5rem;
       position: absolute;
       top: 50%;
-      right: 5%;
+      right: -3rem;
       transform: translateY(-50%);
       animation: eagle-dance 3s infinite ease-in-out;
+      z-index: 2;
     }
     
     @keyframes eagle-dance {
@@ -675,8 +677,8 @@
     
     /* Mobile responsiveness */
     @media (max-width: 768px) {
-      .launch-banner {
-        padding: 1.5rem 1rem;
+      .launch-container {
+        padding-right: 3.5rem;
       }
       
       .launch-title {
@@ -690,7 +692,7 @@
       
       .eagle-animation {
         font-size: 2rem;
-        right: 10%;
+        right: -2.5rem;
       }
       
       .launch-button {
@@ -703,6 +705,10 @@
     }
     
     @media (max-width: 380px) {
+      .launch-container {
+        padding-right: 3rem;
+      }
+      
       .launch-title {
         font-size: 1.5rem;
       }
@@ -713,6 +719,7 @@
       
       .eagle-animation {
         font-size: 1.8rem;
+        right: -2rem;
       }
     }
   </style>
