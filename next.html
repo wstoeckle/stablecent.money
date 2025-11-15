@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>Ni: Coming Soon!</title>
+  <title>Ni Preview</title>
   <!-- Eagle Favicon (for brand consistency) -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Ctext%20y='14'%20font-size='16'%3E%F0%9F%A6%85%3C/text%3E%3C/svg%3E">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -22,6 +22,7 @@
     }
 
     body {
+      margin: 0;
       font-family: 'Space Grotesk', sans-serif;
       background: #1a1a1a;
       color: white;
@@ -34,7 +35,16 @@
       background: rgba(26, 26, 26, 0.95);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--copper);
-      padding: 1rem 2rem;
+      padding: clamp(0.85rem, 3vw, 1.25rem) clamp(1rem, 5vw, 2rem);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    @supports (padding-top: env(safe-area-inset-top)) {
+      nav {
+        padding-top: calc(env(safe-area-inset-top) + clamp(0.85rem, 3vw, 1.25rem));
+      }
     }
     .nav-container {
       max-width: 1200px;
@@ -61,10 +71,10 @@
       display: none; /* Hide for minimal preview page */
     }
 
-    /* Hero / Coming Soon Section */
+    /* Hero / Preview Section */
     .hero {
       min-height: 100vh;
-      padding: 6rem 2rem 2rem;
+      padding: clamp(4rem, 12vw, 6rem) clamp(1.25rem, 6vw, 2rem) clamp(2rem, 7vw, 3rem);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -75,7 +85,7 @@
       overflow: hidden;
     }
     .hero h1 {
-      font-size: 3rem;
+      font-size: clamp(2.4rem, 8vw, 3.2rem);
       margin-bottom: 1rem;
       background: linear-gradient(to right, var(--nickel), #e2e2e2);
       -webkit-background-clip: text;
@@ -84,14 +94,14 @@
       text-shadow: 0 0 20px rgba(158, 167, 173, 0.3);
     }
     .hero p {
-      font-size: 1.3rem;
+      font-size: clamp(1.05rem, 4vw, 1.25rem);
       color: #ccc;
       margin-bottom: 2rem;
       max-width: 700px;
     }
     .hero img {
-      max-width: 300px;
-      width: 80%;
+      max-width: min(320px, 70vw);
+      width: 100%;
       height: auto;
       margin-top: 2rem;
       /* Remove or comment out the next line if you don't want a circular crop: */
@@ -102,7 +112,7 @@
     /* Minimal footer */
     footer {
       background: #2a2a2a;
-      padding: 2rem;
+      padding: clamp(1.5rem, 6vw, 2.5rem) clamp(1.25rem, 6vw, 2rem);
       text-align: center;
       border-top: 1px solid var(--copper);
     }
@@ -118,20 +128,29 @@
 
     /* Mobile responsiveness */
     @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2.2rem;
+      body {
+        font-size: 0.95rem;
       }
+
+      .hero {
+        min-height: auto;
+        padding-top: clamp(3.5rem, 12vw, 5rem);
+      }
+
       .hero p {
-        font-size: 1.1rem;
         margin-bottom: 1.5rem;
       }
     }
     @media (max-width: 400px) {
       .hero h1 {
-        font-size: 1.8rem;
+        font-size: 1.85rem;
       }
       .hero p {
-        font-size: 1rem;
+        font-size: 0.95rem;
+      }
+
+      footer p {
+        font-size: 0.85rem;
       }
     }
   </style>
@@ -146,15 +165,15 @@
   </nav>
 
   <section class="hero">
-    <h1>Ni...</h1>
+    <h1>Ni Preview</h1>
     <!-- Ni Coin image -->
     <img src="/assets/images/Ni Coin.png" alt="Ni Coin preview"><br>
     <p>
-      <strong>Coming Soon...</strong><br><br>
+      <strong>Currently in development...</strong><br><br>
       Nickel in a warehouse – Yikes! (Google it)<br>
       Nickels in a warehouse – on a blockchain... LFG!<br><br>
-      
-      Stay tuned for more details on how you can <strong>rock</strong> this new coin.
+
+      Keep an eye on this space for how you can <strong>rock</strong> this new coin.
     </p>
     
   </section>

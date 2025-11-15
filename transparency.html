@@ -22,10 +22,15 @@
         }
     
         body {
+            margin: 0;
             font-family: 'Space Grotesk', sans-serif;
             background: #1a1a1a;
             color: white;
             line-height: 1.5;
+        }
+
+        body.menu-open {
+            overflow: hidden;
         }
     
         /* Glowing text effect */
@@ -42,17 +47,25 @@
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--copper);
             z-index: 1000;
+            padding: clamp(0.85rem, 3vw, 1.25rem) clamp(1rem, 5vw, 2rem);
+            box-shadow: 0 12px 28px -22px rgba(0, 0, 0, 0.6);
         }
-    
+
+        @supports (padding-top: env(safe-area-inset-top)) {
+            nav {
+                padding-top: calc(env(safe-area-inset-top) + clamp(0.85rem, 3vw, 1.25rem));
+            }
+        }
+
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1.5rem;
         }
-    
+
         .logo {
             font-size: 2rem;
             font-weight: bold;
@@ -61,18 +74,41 @@
     
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.75rem;
             align-items: center;
         }
-    
+
         .nav-links a {
             color: #4a9eff;
             text-decoration: none;
             transition: color 0.3s ease;
+            font-weight: 500;
         }
-    
+
         .nav-links a:hover {
             color: #66b1ff;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.65rem 1.4rem;
+            border-radius: 999px;
+            border: 1px solid rgba(184, 115, 51, 0.35);
+            background: linear-gradient(135deg, rgba(184, 115, 51, 0.28), rgba(219, 163, 109, 0.35));
+            color: white !important;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .button:hover,
+        .button:focus-visible {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 40px -32px rgba(184, 115, 51, 0.8);
+            outline: none;
         }
     
         /* Content styles */
@@ -130,10 +166,10 @@
     
         /* Main content section */
         .content-section {
-            padding: 4rem 2rem;
+            padding: clamp(3rem, 9vw, 4rem) clamp(1.25rem, 6vw, 2rem);
             background: #1a1a1a;
         }
-    
+
         .content-container {
             max-width: 1000px;
             margin: 0 auto;
@@ -300,7 +336,7 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
-            gap: 4rem;
+            gap: clamp(2.5rem, 8vw, 4rem);
         }
     
         .footer-container h3 {
@@ -333,9 +369,9 @@
             border: none;
             cursor: pointer;
             padding: 0.5rem;
-            z-index: 1000;
+            z-index: 1001;
         }
-    
+
         .hamburger span {
             display: block;
             width: 25px;
@@ -348,25 +384,39 @@
         /* Responsive design */
         @media (max-width: 768px) {
             .nav-links {
-                display: none;
+                display: grid;
+                gap: 1rem;
+                position: fixed;
+                top: 64px;
+                left: 50%;
+                transform: translate(-50%, -12px);
+                width: min(420px, calc(100% - 2rem));
+                background: rgba(26, 26, 26, 0.96);
+                padding: 1.35rem;
+                border-radius: 18px;
+                border: 1px solid rgba(184, 115, 51, 0.4);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.2s ease, transform 0.2s ease;
+                box-shadow: 0 35px 70px -35px rgba(0, 0, 0, 0.85);
             }
-    
+
+            @supports (top: calc(64px + env(safe-area-inset-top))) {
+                .nav-links {
+                    top: calc(64px + env(safe-area-inset-top));
+                }
+            }
+
             .hamburger {
                 display: block;
             }
-    
+
             .nav-links.active {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(26, 26, 26, 0.95);
-                padding: 1rem;
-                border-bottom: 1px solid var(--copper);
+                opacity: 1;
+                pointer-events: auto;
+                transform: translate(-50%, 0);
             }
-    
+
             /* Hero section fixes */
             .transparency-hero {
                 min-height: auto;
@@ -458,13 +508,9 @@
     
             /* Navigation improvements */
             .nav-container {
-                padding: 1rem;
+                padding: 0;
             }
-    
-            .nav-links {
-                padding: 1rem;
-            }
-    
+
             .nav-links a {
                 width: 100%;
                 text-align: center;
@@ -529,7 +575,7 @@
     <nav>
         <div class="nav-container">
             <div class="logo">¢ENT</div>
-            <button class="hamburger" aria-label="Toggle menu">
+            <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -583,7 +629,7 @@
                     <img src="/assets/images/vault-camera.jpg" alt="Our penny vault with eagle security camera" width="400" height="300">
                     <ul>
                         <li>Physical pennies in a real vault</li>
-                        <li>24/7 livestream (coming soon)</li>
+                        <li>24/7 livestream (in development)</li>
                         <li>Continuous visibility, not point-in-time snapshots</li>
                         <li>Simple 1:1 backing approach*</li>
                         <li>Eagles watching everything (they never sleep)</li>
@@ -654,25 +700,48 @@
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.querySelector('.hamburger');
             const navLinks = document.querySelector('.nav-links');
+            const body = document.body;
 
-            hamburger.addEventListener('click', function() {
-                hamburger.classList.toggle('active');
-                navLinks.classList.toggle('active');
+            if (!hamburger || !navLinks) {
+                return;
+            }
+
+            const setMenuState = (isOpen) => {
+                hamburger.classList.toggle('active', isOpen);
+                navLinks.classList.toggle('active', isOpen);
+                body.classList.toggle('menu-open', isOpen);
+                hamburger.setAttribute('aria-expanded', String(isOpen));
+            };
+
+            hamburger.setAttribute('aria-expanded', 'false');
+
+            hamburger.addEventListener('click', (event) => {
+                event.stopPropagation();
+                const isOpen = !hamburger.classList.contains('active');
+                setMenuState(isOpen);
             });
 
             // Close menu when clicking a link
             document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    hamburger.classList.remove('active');
-                    navLinks.classList.remove('active');
-                });
+                link.addEventListener('click', () => setMenuState(false));
             });
 
             // Close menu when clicking outside
             document.addEventListener('click', (e) => {
                 if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-                    hamburger.classList.remove('active');
-                    navLinks.classList.remove('active');
+                    setMenuState(false);
+                }
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    setMenuState(false);
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    setMenuState(false);
                 }
             });
         });

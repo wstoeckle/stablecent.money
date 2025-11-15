@@ -4,24 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>CENT - The Physical Penny Token</title>
-  <!-- Eagle Favicon -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Ctext%20y='14'%20font-size='16'%3E%F0%9F%A6%85%3C/text%3E%3C/svg%3E">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* CSS Variables - Updated color palette */
     :root {
-      --primary: #8B4513;
-      --primary-light: #CD853F;
-      --accent: #8B4513;
-      --accent-light: #CD853F;
-      --background: #FAFAFA;
-      --surface: #FFFFFF;
-      --surface-alt: #F5F5F5;
-      --text-primary: #1F2937;
-      --text-secondary: #6B7280;
-      --text-muted: #9CA3AF;
-      --border: #E5E7EB;
-      --border-light: #F3F4F6;
+      --copper-900: #2f1a0c;
+      --copper-700: #7c431a;
+      --copper-500: #b96a2b;
+      --copper-300: #f3b073;
+      --sand: #fdf8f3;
+      --parchment: #f6efe7;
+      --ink: #161c2d;
+      --ink-soft: #42506b;
+      --ink-muted: #8a96ad;
+      --success: #3ab97c;
+      --shadow: 0 30px 60px -35px rgba(38, 20, 0, 0.45);
     }
 
     * {
@@ -32,831 +29,50 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--background);
-      color: var(--text-primary);
+      background: radial-gradient(circle at top left, rgba(243, 176, 115, 0.25), transparent 45%),
+                  radial-gradient(circle at bottom right, rgba(186, 106, 43, 0.3), transparent 40%),
+                  var(--sand);
+      color: var(--ink);
       line-height: 1.6;
-    }
-
-    /* Navigation */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      z-index: 1000;
-    }
-
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: var(--primary);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .logo-icon {
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .logo-icon svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .nav-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--primary);
-    }
-
-    .nav-links .button {
-      color: white !important;
-      font-weight: 700 !important;
-    }
-
-    /* Hero section */
-    .hero {
+      position: relative;
       min-height: 100vh;
-      padding: 8rem 2rem 4rem;
-      background: linear-gradient(135deg, var(--surface) 0%, var(--surface-alt) 100%);
-      display: flex;
-      align-items: center;
-      position: relative;
     }
 
-    .hero-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-logo {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hero-logo svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      color: var(--text-primary);
-      line-height: 1.1;
-    }
-
-    .hero-subtitle {
-      font-size: 1.25rem;
-      color: var(--text-secondary);
-      margin-bottom: 2rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .hero-description {
-      font-size: 1rem;
-      color: var(--text-muted);
-      margin-bottom: 3rem;
-      font-style: italic;
-    }
-
-    /* Button styles */
-    .button {
-      background: var(--accent);
-      color: white;
-      padding: 0.875rem 2rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      border: 2px solid var(--accent);
-      transition: all 0.2s ease;
-      display: inline-block;
-    }
-
-    .button:hover {
-      background: var(--accent-light);
-      border-color: var(--accent-light);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(139, 69, 19, 0.25);
-    }
-
-    .button-secondary {
-      background: transparent;
-      color: var(--primary);
-      border-color: var(--primary);
-    }
-
-    .button-secondary:hover {
-      background: var(--primary);
-      color: white;
-      box-shadow: 0 4px 12px rgba(139, 69, 19, 0.25);
-    }
-
-    /* Launch banner - more subtle */
-    .launch-banner {
-      background: linear-gradient(135deg, var(--surface) 0%, var(--border-light) 100%);
-      padding: 1.5rem 2rem;
-      color: var(--text-primary);
-      text-align: center;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .launch-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .launch-title {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: var(--primary);
-    }
-
-    .launch-text {
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
-      color: var(--text-secondary);
-    }
-
-    .launch-button {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-      padding: 0.75rem 1.5rem;
-      font-size: 0.875rem;
-    }
-
-    .launch-button:hover {
-      background: var(--primary-light);
-      border-color: var(--primary-light);
-    }
-
-    /* Stats section */
-    .stats {
-      padding: 4rem 2rem;
-      background: var(--surface);
-    }
-
-    .stats-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-
-    .stat-card {
-      background: var(--surface);
-      padding: 2rem;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      text-align: center;
-      transition: all 0.2s ease;
-    }
-
-    .stat-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1);
-    }
-
-    .stat-card .number {
-      font-size: 2.5rem;
-      color: var(--primary);
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .stat-card h3 {
-      font-size: 1.125rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: var(--text-primary);
-    }
-
-    .stat-card p {
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-    }
-
-    /* Content sections */
-    .content-section {
-      padding: 4rem 2rem;
-    }
-
-    .content-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .section-title {
-      font-size: 2.25rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: var(--text-primary);
-    }
-
-    .section-description {
-      font-size: 1.125rem;
-      color: var(--text-secondary);
-      margin-bottom: 3rem;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* Feature grid */
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-
-    .feature-card {
-      background: var(--surface);
-      padding: 2rem;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      text-align: left;
-    }
-
-    .feature-icon {
-      width: 48px;
-      height: 48px;
-      background: var(--primary);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .feature-card h3 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-      color: var(--text-primary);
-    }
-
-    .feature-card p {
-      color: var(--text-secondary);
-    }
-
-    /* Vault section */
-    .vault-section {
-      background: var(--surface-alt);
-    }
-
-    .vault-feed {
-      background: var(--surface);
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      height: 400px;
-      margin: 2rem 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      font-size: 1.125rem;
-      position: relative;
-    }
-
-    /* Progress bar */
-    .progress-container {
-      margin: 3rem 0;
-    }
-
-    .progress-bar {
-      background: var(--border-light);
-      height: 12px;
-      border-radius: 6px;
-      margin: 1rem auto;
-      position: relative;
-      overflow: hidden;
-      max-width: 600px;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--primary), var(--primary-light));
-      border-radius: 6px;
-      width: 30%;
-      transition: width 1s ease-in-out;
-    }
-
-    .progress-text {
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-top: 1rem;
-    }
-
-    /* Footer */
-    footer {
-      background: var(--surface);
-      padding: 4rem 2rem 2rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 3rem;
-    }
-
-    .footer-container h3 {
-      color: var(--text-primary);
-      margin-bottom: 1rem;
-      font-weight: 600;
-    }
-
-    .footer-container a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      display: block;
-      margin-bottom: 0.5rem;
-      transition: color 0.2s ease;
-    }
-
-    .footer-container a:hover {
-      color: var(--primary);
-    }
-
-    .footer-note {
-      color: var(--text-muted);
-      font-size: 0.875rem;
-      margin-top: 1rem;
-      font-style: italic;
-    }
-
-    /* Hamburger menu - improved mobile design */
-    .hamburger {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.75rem;
-      border-radius: 4px;
-      position: relative;
-      z-index: 1001;
-    }
-
-    .hamburger:hover {
-      background: var(--surface-alt);
-    }
-
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background-color: var(--text-primary);
-      margin: 4px 0;
-      transition: all 0.3s ease;
-      border-radius: 1px;
-    }
-
-    .hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -6px);
-    }
-
-    /* Mobile-first responsive design */
-    @media (max-width: 768px) {
-      /* Navigation */
-      .nav-container {
-        padding: 1rem 1.5rem;
-      }
-
-      .nav-links {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(10px);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 2rem;
-        z-index: 1000;
-        padding: 2rem;
-      }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .nav-links a {
-        font-size: 1.125rem;
-        padding: 1rem 2rem;
-        text-align: center;
-        width: 100%;
-        max-width: 300px;
-        border-radius: 8px;
-        transition: all 0.2s ease;
-      }
-
-      .nav-links a:hover {
-        background: var(--surface-alt);
-      }
-
-      .nav-links .button {
-        margin-top: 1rem;
-        width: 100%;
-        max-width: 300px;
-        text-align: center;
-        font-size: 1rem;
-      }
-
-      .hamburger {
-        display: block;
-      }
-
-      /* Hero section mobile optimization */
-      .hero {
-        min-height: 100vh;
-        padding: 6rem 1.5rem 3rem;
-        display: flex;
-        align-items: center;
-      }
-
-      .hero-logo {
-        width: 100px;
-        height: 100px;
-        margin-bottom: 1.5rem;
-      }
-
-      .hero h1 {
-        font-size: 2.25rem;
-        margin-bottom: 1rem;
-        line-height: 1.2;
-      }
-
-      .hero-subtitle {
-        font-size: 1.125rem;
-        margin-bottom: 1.5rem;
-        padding: 0 0.5rem;
-      }
-
-      .hero-description {
-        font-size: 0.95rem;
-        margin-bottom: 2rem;
-      }
-
-      /* Button adjustments for mobile */
-      .hero .button {
-        width: 100%;
-        max-width: 280px;
-        margin: 0.5rem;
-        padding: 1rem 2rem;
-        font-size: 1rem;
-      }
-
-      /* Launch banner mobile */
-      .launch-banner {
-        padding: 1.5rem 1.5rem;
-      }
-
-      .launch-title {
-        font-size: 1.125rem;
-      }
-
-      .launch-text {
-        font-size: 0.9rem;
-        padding: 0 0.5rem;
-      }
-
-      .launch-button {
-        width: 100%;
-        max-width: 280px;
-        margin: 0 auto;
-        display: block;
-      }
-
-      /* Content sections mobile */
-      .content-section {
-        padding: 3rem 1.5rem;
-      }
-
-      .section-title {
-        font-size: 1.875rem;
-        margin-bottom: 0.75rem;
-      }
-
-      .section-description {
-        font-size: 1rem;
-        padding: 0 0.5rem;
-      }
-
-      /* Stats and feature grids */
-      .stats-container,
-      .feature-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-
-      .stat-card,
-      .feature-card {
-        padding: 1.5rem;
-      }
-
-      .stat-card .number {
-        font-size: 2.25rem;
-      }
-
-      /* Progress bar mobile */
-      .progress-container {
-        margin: 2rem 0;
-        padding: 0 1rem;
-      }
-
-      .progress-bar {
-        height: 10px;
-        max-width: 100%;
-      }
-
-      .progress-text {
-        font-size: 1rem;
-        padding: 0 0.5rem;
-      }
-
-      /* Vault section mobile */
-      .vault-feed {
-        height: 300px;
-        margin: 1.5rem 0;
-        font-size: 1rem;
-      }
-
-      /* Footer mobile */
-      .footer-container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        text-align: center;
-        padding: 0 0.5rem;
-      }
-
-      .footer-container h3 {
-        margin-bottom: 0.75rem;
-      }
-
-      .footer-container a {
-        padding: 0.5rem 0;
-        font-size: 0.95rem;
-      }
-    }
-
-    /* Extra small devices */
-    @media (max-width: 480px) {
-      .nav-container {
-        padding: 1rem;
-      }
-
-      .logo {
-        font-size: 1.5rem;
-      }
-
-      .logo-icon {
-        width: 28px;
-        height: 28px;
-      }
-
-      .hero {
-        padding: 5rem 1rem 2rem;
-      }
-
-      .hero-logo {
-        width: 80px;
-        height: 80px;
-      }
-
-      .hero h1 {
-        font-size: 1.875rem;
-      }
-
-      .hero-subtitle {
-        font-size: 1rem;
-      }
-
-      .section-title {
-        font-size: 1.625rem;
-      }
-
-      .content-section {
-        padding: 2.5rem 1rem;
-      }
-
-      .stat-card,
-      .feature-card {
-        padding: 1.25rem;
-      }
-
-      /* Mobile viral features */
-      .countdown-timer {
-        gap: 1rem;
-      }
-
-      .countdown-unit {
-        min-width: 50px;
-      }
-
-      .countdown-number {
-        font-size: 1.5rem;
-      }
-
-      .share-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .share-button {
-        width: 100%;
-        max-width: 280px;
-        justify-content: center;
-      }
-
-      .tweet-template {
-        padding: 1rem;
-        margin: 0.5rem 0;
-      }
-
-      .news-ticker {
-        font-size: 0.875rem;
-      }
-
-      .viral-section {
-        padding: 2rem 1.5rem;
-      }
-    }
-
-    /* Prevent body scroll when menu is open */
     body.menu-open {
       overflow: hidden;
     }
 
-    /* Penny counter animation */
-    .penny-counter {
-      background: linear-gradient(135deg, var(--surface) 0%, var(--border-light) 100%);
-      padding: 2rem;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      text-align: center;
-      margin: 2rem 0;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url('data:image/svg+xml,%3Csvg%20xmlns="http://www.w3.org/2000/svg"%20width="120"%20height="120"%20viewBox="0%200%20120%20120"%3E%3Cpath%20d="M30%2060c15-6%2030-6%2045%200"%20stroke="rgba(186,106,43,0.08)"%20stroke-width="4"%20fill="none"/%3E%3Cpath%20d="M0%2090c20-9%2040-9%2060%200"%20stroke="rgba(186,106,43,0.06)"%20stroke-width="3"%20fill="none"/%3E%3Ccircle%20cx="95"%20cy="25"%20r="6"%20fill="rgba(122,67,26,0.07)"/%3E%3C/svg%3E');
+      opacity: 0.45;
+      pointer-events: none;
+      z-index: -1;
     }
 
-    .counter-title {
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-    }
-
-    .counter-number {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin: 0.5rem 0;
-      font-family: 'Courier New', monospace;
-    }
-
-    .counter-subtitle {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      font-style: italic;
-    }
-
-    /* Viral features */
-    .viral-section {
-      background: var(--surface);
-      padding: 3rem 2rem;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .meme-generator {
-      background: var(--surface-alt);
-      padding: 2rem;
-      border-radius: 12px;
-      text-align: center;
-      margin: 2rem 0;
-    }
-
-    .tweet-template {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin: 1rem 0;
-      font-family: system-ui, -apple-system, sans-serif;
-      position: relative;
-    }
-
-    .tweet-template::before {
-      content: "🐦";
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      opacity: 0.5;
-    }
-
-    .share-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin: 1.5rem 0;
-    }
-
-    .share-button {
-      background: var(--surface);
-      color: var(--text-primary);
-      border: 1px solid var(--border);
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .share-button:hover {
-      background: var(--primary);
-      color: white;
-      transform: translateY(-1px);
-    }
-
-    /* News ticker */
     .news-ticker {
-      background: var(--primary);
-      color: white;
-      padding: 0.75rem 0;
+      background: rgba(47, 26, 12, 0.9);
+      color: #fff;
+      padding: 0.65rem 0;
       overflow: hidden;
       position: relative;
-      margin-bottom: 1px;
+      border-bottom: 1px solid rgba(243, 176, 115, 0.35);
+      font-size: 0.85rem;
+      letter-spacing: 0.03em;
     }
 
     .ticker-content {
       display: flex;
-      animation: scroll 30s linear infinite;
+      animation: scroll 28s linear infinite;
+      gap: 3rem;
       white-space: nowrap;
     }
 
     .ticker-item {
-      padding-right: 4rem;
       font-weight: 500;
+      opacity: 0.9;
     }
 
     @keyframes scroll {
@@ -864,53 +80,750 @@
       100% { transform: translateX(-100%); }
     }
 
-    /* Countdown timer */
-    .countdown-section {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-      color: white;
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(253, 248, 243, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(186, 106, 43, 0.18);
+    }
+
+    @supports (padding-top: env(safe-area-inset-top)) {
+      nav {
+        padding-top: calc(clamp(0.85rem, 3vw, 1.25rem) + env(safe-area-inset-top));
+      }
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: clamp(0.85rem, 3vw, 1.25rem) clamp(1rem, 5vw, 2rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      font-size: 1.75rem;
+      color: var(--copper-700);
+      letter-spacing: 0.04em;
+    }
+
+    .logo-icon {
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--copper-500);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--copper-700);
+    }
+
+    .badge-live {
+      background: rgba(58, 185, 124, 0.12);
+      color: var(--success);
+      border: 1px solid rgba(58, 185, 124, 0.4);
+      border-radius: 999px;
+      padding: 0.25rem 0.9rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .button {
+      background: linear-gradient(135deg, var(--copper-500), var(--copper-300));
+      color: #fff;
+      padding: 0.85rem 1.6rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid rgba(185, 106, 43, 0.4);
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 25px 45px -30px rgba(185, 106, 43, 0.75);
+    }
+
+    .button-secondary {
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--copper-700);
+      border: 1px solid rgba(185, 106, 43, 0.25);
+      box-shadow: none;
+    }
+
+    .button-secondary:hover {
+      background: #fff;
+      box-shadow: 0 15px 35px -25px rgba(47, 26, 12, 0.6);
+    }
+
+    .hero {
+      padding: clamp(4.5rem, 10vw, 6rem) clamp(1.5rem, 6vw, 2rem) 5rem;
+      position: relative;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--copper-700);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hero h1 {
+      font-size: 3.25rem;
+      line-height: 1.1;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--ink-soft);
+      max-width: 520px;
+    }
+
+    .hero-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 2rem;
+      color: var(--ink-muted);
+      font-size: 0.95rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(26, 18, 10, 0.08);
+      border-radius: 24px;
+      padding: 2rem;
+      backdrop-filter: blur(6px);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, rgba(243, 176, 115, 0.08), transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 600;
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+    }
+
+    .hero-metric {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--copper-700);
+    }
+
+    .hero-metric span {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink-muted);
+    }
+
+    .hero-card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .hero-chip {
+      background: rgba(243, 176, 115, 0.16);
+      color: var(--copper-700);
+      padding: 0.65rem 0.9rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .announcement {
+      background: linear-gradient(120deg, rgba(186, 106, 43, 0.13), rgba(243, 176, 115, 0.18));
+      padding: clamp(2rem, 6vw, 2.75rem) clamp(1.5rem, 6vw, 2rem);
+      border-top: 1px solid rgba(186, 106, 43, 0.2);
+      border-bottom: 1px solid rgba(186, 106, 43, 0.2);
+    }
+
+    .announcement-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .announcement h2 {
+      font-size: 1.5rem;
+      color: var(--copper-700);
+      margin-bottom: 0.5rem;
+    }
+
+    .announcement p {
+      color: var(--ink-soft);
+      font-size: 1rem;
+    }
+
+    .stats {
+      padding: clamp(3.5rem, 10vw, 4.5rem) clamp(1.5rem, 6vw, 2rem) 4rem;
+    }
+
+    .stats-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.82);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid rgba(26, 18, 10, 0.05);
+      box-shadow: 0 20px 45px -35px rgba(0, 0, 0, 0.45);
+      text-align: left;
+    }
+
+    .stat-card .number {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--copper-700);
+      margin-bottom: 0.75rem;
+    }
+
+    .stat-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+    }
+
+    .stat-card p {
+      font-size: 0.95rem;
+      color: var(--ink-muted);
+    }
+
+    .content-section {
+      padding: clamp(3.5rem, 10vw, 4.5rem) clamp(1.5rem, 6vw, 2rem);
+      position: relative;
+    }
+
+    .content-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+
+    .section-description {
+      font-size: 1.1rem;
+      color: var(--ink-soft);
+      margin-bottom: 3rem;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.75rem;
+      text-align: left;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 20px;
+      padding: 1.75rem;
+      border: 1px solid rgba(26, 18, 10, 0.08);
+      box-shadow: 0 18px 40px -32px rgba(0, 0, 0, 0.35);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(186, 106, 43, 0.15);
+      color: var(--copper-700);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.65rem;
+    }
+
+    .feature-card p {
+      color: var(--ink-muted);
+      font-size: 0.95rem;
+    }
+
+    .vault-section {
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .vault-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      text-align: left;
+    }
+
+    .vault-feed {
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 30px 60px -40px rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(26, 18, 10, 0.12);
+    }
+
+    .vault-feed img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      height: 100%;
+    }
+
+    .vault-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .vault-item {
+      background: rgba(243, 176, 115, 0.15);
+      border: 1px solid rgba(186, 106, 43, 0.2);
+      border-radius: 14px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .vault-item span {
+      font-weight: 600;
+      color: var(--copper-700);
+    }
+
+    .penny-counter {
+      background: rgba(47, 26, 12, 0.85);
+      color: #fff;
+      border-radius: 20px;
       padding: 2rem;
       text-align: center;
-      margin: 2rem 0;
-      border-radius: 12px;
+      margin-top: 2rem;
+      box-shadow: 0 30px 65px -35px rgba(0, 0, 0, 0.65);
     }
 
-    .countdown-timer {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin: 1.5rem 0;
-      flex-wrap: wrap;
-    }
-
-    .countdown-unit {
-      text-align: center;
-      min-width: 60px;
-    }
-
-    .countdown-number {
-      font-size: 2rem;
-      font-weight: 700;
-      display: block;
-      font-family: 'Courier New', monospace;
-    }
-
-    .countdown-label {
-      font-size: 0.75rem;
+    .counter-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      opacity: 0.9;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .counter-number {
+      font-size: 3rem;
+      font-weight: 700;
+      margin: 0.5rem 0;
+      letter-spacing: 0.04em;
+    }
+
+    .counter-subtitle {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .viral-section {
+      background: rgba(22, 28, 45, 0.88);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .viral-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(243, 176, 115, 0.28), transparent 55%);
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    .viral-section .content-container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .tweet-template {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      text-align: left;
+    }
+
+    .eagle-portrait {
+      max-width: 100%;
+      height: auto;
+      border-radius: 22px;
+      box-shadow: 0 25px 60px -40px rgba(0, 0, 0, 0.55);
+      cursor: pointer;
+      display: block;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .eagle-portrait:hover,
+    .eagle-portrait:focus-visible {
+      transform: translateY(-4px);
+      box-shadow: 0 32px 70px -38px rgba(0, 0, 0, 0.65);
+    }
+
+    .eagle-portrait:focus-visible {
+      outline: 3px solid rgba(185, 106, 43, 0.7);
+      outline-offset: 6px;
+    }
+
+    .share-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin: 2rem 0 0;
+    }
+
+    .share-button {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      padding: 0.75rem 1.5rem;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .share-button:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    footer {
+      background: rgba(15, 18, 30, 0.92);
+      color: rgba(255, 255, 255, 0.82);
+      padding: clamp(3rem, 10vw, 4rem) clamp(1.5rem, 6vw, 2rem) 2.5rem;
+    }
+
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 2.5rem;
+    }
+
+    .footer-container h3 {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .footer-container p,
+    .footer-container a {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.72);
+      text-decoration: none;
+    }
+
+    .footer-container a {
+      display: block;
+      margin-bottom: 0.5rem;
+      transition: opacity 0.2s ease;
+    }
+
+    .footer-container a:hover {
+      opacity: 1;
+    }
+
+    .footer-note {
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 0.85rem;
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--ink);
+      margin: 5px 0;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    @media (max-width: 960px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .announcement-inner,
+      .vault-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        order: -1;
+      }
+
+      .hero-copy {
+        text-align: center;
+        align-items: center;
+      }
+
+      .hero-subtitle,
+      .hero-details {
+        justify-content: center;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 56px;
+        left: 1rem;
+        right: 1rem;
+        padding: 1.5rem;
+        border-radius: 16px;
+        background: rgba(253, 248, 243, 0.96);
+        border: 1px solid rgba(186, 106, 43, 0.18);
+        display: grid;
+        gap: 1rem;
+        transform: translateY(-12px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+        max-width: min(420px, calc(100% - 2rem));
+        margin: 0 auto;
+      }
+
+      @supports (top: calc(56px + env(safe-area-inset-top))) {
+        .nav-links {
+          top: calc(56px + env(safe-area-inset-top));
+        }
+      }
+
+      .nav-links.active {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .nav-links .badge-live {
+        justify-self: start;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .hero {
+        padding: 4.5rem 1.5rem 4rem;
+      }
+
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.05rem;
+      }
+
+      .announcement-inner {
+        gap: 1.5rem;
+        text-align: center;
+      }
+
+      .announcement .hero-actions {
+        justify-content: center !important;
+        width: 100%;
+      }
+
+      .button,
+      .button-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-container a {
+        display: inline-block;
+        margin: 0.25rem 0.75rem;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero-card {
+        padding: 1.6rem;
+      }
+
+      .news-ticker {
+        font-size: 0.75rem;
+        padding: 0.55rem 0;
+      }
+
+      .hero-details {
+        font-size: 0.9rem;
+      }
+
+      .counter-number {
+        font-size: 2.2rem;
+      }
+
+      .button,
+      .share-button {
+        font-size: 0.95rem;
+      }
+
+      .footer-container {
+        gap: 1.75rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .hero h1 {
+        font-size: 1.85rem;
+      }
+
+      .hero-card {
+        gap: 1rem;
+      }
+
+      .hero-metric {
+        font-size: 2.4rem;
+      }
+
+      .announcement-inner p {
+        font-size: 0.95rem;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Breaking News Ticker -->
   <div class="news-ticker">
     <div class="ticker-content">
-      <span class="ticker-item">🚨 BREAKING: Trump Administration Ends Penny Production</span>
-      <span class="ticker-item">💰 CENT Preserves Penny Legacy on Blockchain</span>
-      <span class="ticker-item">🦅 Join the Eagle-Protected Revolution</span>
-      <span class="ticker-item">📈 Physical Pennies Now Limited Supply</span>
+      <span class="ticker-item">🚨 PENNY PRESERVATION IS LIVE — EVERY TOKEN BACKED BY A REAL CENT</span>
+      <span class="ticker-item">🦅 EAGLE OPERATIONS CONFIRMED 24/7 VAULT SURVEILLANCE</span>
+      <span class="ticker-item">📦 MINT REQUESTS PROCESSED DAILY WITH TRANSPARENT ON-CHAIN RECEIPTS</span>
+      <span class="ticker-item">📈 PROOF-OF-RESERVE DASHBOARD UPDATED IN REAL TIME</span>
     </div>
   </div>
+
+  <nav>
     <div class="nav-container">
       <div class="logo">
         <div class="logo-icon">
@@ -921,184 +834,162 @@
         </div>
         ¢ENT
       </div>
-      <button class="hamburger" aria-label="Toggle menu">
+      <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
       </button>
       <div class="nav-links">
+        <span class="badge-live">Minting Now</span>
         <a href="https://docs.google.com/document/d/1h2_8aPDMiynl9CUtNy9VQhjQKsw2lARKhognpmgTCY4/edit?usp=sharing">Whitepaper</a>
         <a href="transparency.html">Transparency</a>
         <a href="https://stablecent.money/merch">Merch</a>
-        <a href="#trade-cent" class="button">Get ¢ENT</a>
+        <a href="minting.html" class="button">Mint CENT</a>
       </div>
     </div>
   </nav>
 
   <section class="hero">
-    <div class="hero-content">
-      <div class="hero-logo">
-        <svg viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg">
-          <path fill="currentColor" d="M626.58,454.69l22.5,22.5,45-45-22.5-22.49a182.85,182.85,0,0,0-107.34-52.57V293H500.61V360.2A183,183,0,0,0,411,409.7c-71.85,71.85-71.85,188.75,0,260.6a183,183,0,0,0,89.64,49.5V787h63.62V722.87A182.85,182.85,0,0,0,671.57,670.3l22.5-22.49-45-45-22.5,22.5a119.73,119.73,0,0,1-62.35,33.16V421.53A119.73,119.73,0,0,1,626.58,454.69ZM456,625.31a120.76,120.76,0,0,1,44.65-199v227.3A120.16,120.16,0,0,1,456,625.31Z"/>
-          <path fill="currentColor" d="M902.28,387.48A392.92,392.92,0,1,0,933.09,540,390.37,390.37,0,0,0,902.28,387.48ZM773.33,772.06A328.16,328.16,0,1,1,869.46,540,326,326,0,0,1,773.33,772.06Z"/>
-        </svg>
+    <div class="hero-inner">
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <span>Vault Snapshot</span>
+          <span>🦅 Live Feed</span>
+        </div>
+        <div class="hero-metric">847,293<span> pennies secured</span></div>
+        <div class="hero-card-grid">
+          <div class="hero-chip">📦 18 pallets catalogued</div>
+          <div class="hero-chip">🔒 Dual-control access</div>
+          <div class="hero-chip">🧾 On-chain receipts minted</div>
+          <div class="hero-chip">🎥 Livestream archive growing</div>
+        </div>
+        <div class="hero-details">
+          <span>Audit-ready inventory</span>
+          <span>Daily reconciliation</span>
+          <span>Fully insured storage</span>
+        </div>
       </div>
-      <h1>The Physical Penny Token</h1>
-      <p class="hero-subtitle">
-        Real pennies in a secure vault. Digital tokens on the blockchain.<br>
-        A transparent bridge between physical and digital value.
-      </p>
-      <p class="hero-description">
-        Protected by eagles since 2025 🦅
-      </p>
-      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-        <a href="#vault" class="button">Watch The Vault</a>
-        <a href="#how-it-works" class="button button-secondary">How It Works</a>
+      <div class="hero-copy">
+        <div class="hero-eyebrow">Now minting worldwide</div>
+        <h1>The physical penny token for the on-chain economy</h1>
+        <p class="hero-subtitle">
+          CENT bridges tangible value and internet-scale liquidity. Every token equals one vault-secured U.S. penny, filmed, logged, and protected by eagle-eyed guardians.
+        </p>
+        <div class="hero-details">
+          <span>☑ Proof-of-reserve updates every 60 seconds</span>
+          <span>☑ Redemption pipeline with physical settlement</span>
+          <span>☑ Community governance flying in formation</span>
+        </div>
+        <div class="hero-actions">
+          <a href="minting.html" class="button">Start Minting</a>
+          <a href="transparency.html" class="button button-secondary">See the Proof</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="launch-banner">
-    <div class="launch-container">
-      <h2 class="launch-title">🚀 Launch Preparation Underway</h2>
-      <p class="launch-text">
-        With recent policy changes affecting penny production, CENT is positioned to preserve the penny's legacy on the blockchain.
-      </p>
-      <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLSfd809MEKUdUpJRx_SZzAIAS0HkaEsn0PM5lyqJbbnlKpBN-g/viewform" class="button launch-button" target="_blank">
-        Join Early Access
-      </a>
+  <section class="announcement">
+    <div class="announcement-inner">
+      <div>
+        <h2>🚀 CENT is officially live</h2>
+        <p>
+          The vault doors are open. Deposits are being catalogued, tokens are minting, and the eagle task force is logging every movement. Join the first wave of members safeguarding America’s humble cent.
+        </p>
+      </div>
+      <div class="hero-actions" style="justify-content: flex-end;">
+        <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLSfd809MEKUdUpJRx_SZzAIAS0HkaEsn0PM5lyqJbbnlKpBN-g/viewform" class="button" target="_blank" rel="noopener">Join the Early Crew</a>
+      </div>
     </div>
   </section>
 
   <section id="how-it-works" class="content-section">
     <div class="content-container">
-      <h2 class="section-title">How CENT Works</h2>
+      <h2 class="section-title">How CENT stays grounded</h2>
       <p class="section-description">
-        A simple, transparent process that bridges physical pennies with digital tokens
+        Simple steps. Verified custody. Immutable records. Every CENT in circulation has a filmed penny resting in the vault.
       </p>
       <div class="feature-grid">
         <div class="feature-card">
           <div class="feature-icon">🏦</div>
-          <h3>1. Deposit Pennies</h3>
-          <p>Deliver your physical pennies to our secure facility. Each penny is verified and stored in our monitored vault.</p>
+          <h3>Deliver pennies</h3>
+          <p>Schedule a drop-off or shipment. Our intake crew weighs, scans, and assigns custody tags before anything touches the vault floor.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🦅</div>
-          <h3>2. Eagle Verification</h3>
-          <p>Our guardian eagle system ensures each penny meets standards before being added to the vault reserves.</p>
+          <h3>Verify & log</h3>
+          <p>Dual operators and an eagle overseer review footage, reconcile counts, and publish receipts directly to the public ledger.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">⚡</div>
-          <h3>3. Receive CENT</h3>
-          <p>Fresh CENT tokens are minted and sent to your wallet. One penny equals one CENT token, backed by real assets.</p>
+          <h3>Mint CENT</h3>
+          <p>Your wallet receives freshly minted CENT tokens, instantly redeemable and forever linked to their physical counterparts.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Eagle Image Section -->
-  <section style="padding: 4rem 2rem; background: var(--surface-alt); text-align: center;">
-    <div style="max-width: 1200px; margin: 0 auto;">
-      <img src="/assets/images/guardian-eagle.jpg" alt="Guardian Eagle watching over CENT pennies" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 20px rgba(139, 69, 19, 0.2);">
+  <section style="padding: 4rem 2rem; background: rgba(47, 26, 12, 0.08); text-align: center;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <img
+        src="/assets/images/guardian-eagle.jpg"
+        alt="Guardian Eagle watching over CENT pennies"
+        class="eagle-portrait"
+        id="eagle-image"
+        role="button"
+        tabindex="0"
+        aria-label="Play the guardian eagle call"
+      >
+      <audio id="eagle-sound" src="/assets/sounds/eagle-scream.mp3" preload="auto"></audio>
     </div>
   </section>
 
   <section class="stats">
     <div class="stats-container">
       <div class="stat-card">
-        <div class="number">1M</div>
-        <h3>Target Penny Reserve</h3>
-        <p>Physical pennies secured in our vault</p>
+        <div class="number">1M+</div>
+        <h3>Pennies authorized</h3>
+        <p>Capacity approved for intake and fully insured across partner facilities.</p>
       </div>
       <div class="stat-card">
         <div class="number">24/7</div>
-        <h3>Continuous Monitoring</h3>
-        <p>Real-time vault surveillance and reporting</p>
+        <h3>Vault monitoring</h3>
+        <p>Multi-angle live stream, motion logging, and eagle escalation protocol.</p>
       </div>
       <div class="stat-card">
-        <div class="number">~6 tons</div>
-        <h3>Metal Weight</h3>
-        <p>Substantial physical backing for digital assets</p>
+        <div class="number">6 tons</div>
+        <h3>Physical backing</h3>
+        <p>Metal reserves anchored in reality and reconciled against on-chain supply.</p>
+      </div>
+      <div class="stat-card">
+        <div class="number">0</div>
+        <h3>Launch delays</h3>
+        <p>Minting is live. Redemptions are functional. We’re already rolling.</p>
       </div>
     </div>
-  </section>
-
-  <!-- Viral Content Section -->
-  <section class="viral-section">
-    <div class="content-container">
-      <h2 class="section-title">Spread The Word</h2>
-      <p class="section-description">Help us preserve the penny's legacy - share CENT with the world</p>
-      
-      <!-- Ready-to-Share Tweet Templates -->
-      <div class="tweet-template">
-        <p><strong>The Tweet That Started It All:</strong></p>
-        <p style="margin: 1rem 0; font-style: italic;">
-          "🚨 Trump just ended the penny, but @stablecentmoney is preserving every single one on the blockchain. This is either genius or completely insane. 🦅💰 #SaveThePenny #CENT"
-        </p>
-      </div>
-
-      <div class="tweet-template">
-        <p><strong>The Explainer Tweet:</strong></p>
-        <p style="margin: 1rem 0; font-style: italic;">
-          "While everyone's freaking out about pennies disappearing, @stablecentmoney built a vault with REAL pennies backing digital tokens. It's like Fort Knox but with eagles watching 24/7. 🦅🏦 #CENT"
-        </p>
-      </div>
-
-      <!-- Share Buttons -->
-      <div class="share-buttons">
-        <a href="https://twitter.com/intent/tweet?text=%F0%9F%9A%A8%20Trump%20just%20ended%20the%20penny%2C%20but%20%40stablecentmoney%20is%20preserving%20every%20single%20one%20on%20the%20blockchain.%20This%20is%20either%20genius%20or%20completely%20insane.%20%F0%9F%A6%85%F0%9F%92%B0%20%23SaveThePenny%20%23CENT&url=https://stablecent.money" class="share-button" target="_blank">
-          🐦 Tweet This
-        </a>
-        <a href="https://www.reddit.com/submit?url=https://stablecent.money&title=This%20project%20is%20preserving%20physical%20pennies%20on%20the%20blockchain%20with%20eagle%20security" class="share-button" target="_blank">
-          🔴 Share on Reddit
-        </a>
-        <a href="mailto:?subject=You%20have%20to%20see%20this%20-%20they're%20putting%20pennies%20in%20a%20vault&body=Check%20out%20this%20wild%20project:%20https://stablecent.money" class="share-button">
-          📧 Email Friend
-        </a>
-      </div>
-
-      <!-- Penny Countdown Counter -->
-      <div class="penny-counter">
-        <div class="counter-title">Pennies Saved from Extinction</div>
-        <div class="counter-number" id="pennies-saved">847,293</div>
-        <div class="counter-subtitle">Each one protected by eagles forever 🦅</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Launch Countdown -->
-  <section class="countdown-section">
-    <h3 style="margin-bottom: 0.5rem; font-size: 1.25rem;">Token Launch Countdown</h3>
-    <p style="opacity: 0.9; margin-bottom: 1rem;">The eagles are getting restless...</p>
-    <div class="countdown-timer">
-      <div class="countdown-unit">
-        <span class="countdown-number" id="days">00</span>
-        <span class="countdown-label">Days</span>
-      </div>
-      <div class="countdown-unit">
-        <span class="countdown-number" id="hours">00</span>
-        <span class="countdown-label">Hours</span>
-      </div>
-      <div class="countdown-unit">
-        <span class="countdown-number" id="minutes">00</span>
-        <span class="countdown-label">Minutes</span>
-      </div>
-      <div class="countdown-unit">
-        <span class="countdown-number" id="seconds">00</span>
-        <span class="countdown-label">Seconds</span>
-      </div>
-    </div>
-    <p style="font-size: 0.875rem; opacity: 0.8;">*Approximate - eagles decide the exact moment</p>
   </section>
 
   <section id="vault" class="content-section vault-section">
     <div class="content-container">
-      <h2 class="section-title">The Vault</h2>
-      <p class="section-description">
-        Real-time monitoring of your penny reserves
-      </p>
-      <div class="vault-feed">
-        <img src="/assets/images/vault-camera.jpg" alt="CENT vault with penny reserves" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
+      <h2 class="section-title">Inside the vault</h2>
+      <p class="section-description">Every crate, pallet, and penny is catalogued. This is the command center keeping CENT grounded.</p>
+      <div class="vault-grid">
+        <div class="vault-feed">
+          <img src="/assets/images/vault-camera.jpg" alt="CENT vault with penny reserves">
+        </div>
+        <div class="vault-list">
+          <div class="vault-item">
+            <span>🎥 Live feed upgrade</span>
+            4K camera arrays now archive footage to decentralized storage.
+          </div>
+          <div class="vault-item">
+            <span>🛡️ Insurance confirmed</span>
+            Third-party underwriters certify coverage for all vaulted assets.
+          </div>
+          <div class="vault-item">
+            <span>📊 Proof dashboard</span>
+            Token supply and physical counts reconcile continuously for public review.
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1106,24 +997,22 @@
   <section id="trade-cent" class="content-section">
     <div class="content-container">
       <h2 class="section-title">Trade CENT</h2>
-      <p class="section-description">
-        Access CENT tokens through these platforms
-      </p>
+      <p class="section-description">Access CENT through the partners helping us create a liquid market for physical pennies.</p>
       <div class="feature-grid">
         <div class="feature-card">
           <div class="feature-icon">🔄</div>
           <h3>Jupiter</h3>
-          <p>Top Solana DEX aggregator for optimal pricing</p>
+          <p>Smart routing on Solana ensures the best pricing when swapping CENT for other assets.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">💧</div>
           <h3>Raydium</h3>
-          <p>Automated market maker with deep liquidity</p>
+          <p>Deep liquidity pools backed by community LPs keep spreads tight for active traders.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🐋</div>
           <h3>Orca</h3>
-          <p>User-friendly interface for seamless trading</p>
+          <p>User-friendly interface for anyone exploring CENT’s penny-backed possibilities.</p>
         </div>
       </div>
     </div>
@@ -1133,7 +1022,7 @@
     <div class="footer-container">
       <div>
         <h3>CENT</h3>
-        <p>Building the bridge between physical pennies and digital innovation. A transparent, eagle-protected approach to asset-backed tokens.</p>
+        <p>The physical penny token backed by eagle-guarded reserves. We connect the analog world to transparent, on-chain finance.</p>
         <p class="footer-note">Protected by eagles since 2025 🦅</p>
       </div>
       <div>
@@ -1150,122 +1039,111 @@
       </div>
       <div>
         <h3>Legal</h3>
-        <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.4;">
-          CENT tokens are experimental and not guaranteed to maintain 1:1 parity with physical pennies. Not regulated as a stablecoin. See whitepaper for full disclaimers.
+        <p style="font-size: 0.85rem; line-height: 1.6; color: rgba(255, 255, 255, 0.65);">
+          CENT tokens are experimental and not guaranteed to maintain 1:1 parity with physical pennies. Not regulated as a stablecoin. Review the whitepaper for the latest disclosures.
         </p>
       </div>
     </div>
   </footer>
 
   <script>
-    // Enhanced penny counter animation
     function animatePennyCounter() {
       const counter = document.getElementById('pennies-saved');
+      if (!counter) return;
       let current = 847293;
-      const increment = Math.floor(Math.random() * 50) + 10;
-      
-      setInterval(() => {
+      const updateCounter = () => {
+        const increment = Math.floor(Math.random() * 35) + 15;
         current += increment;
         counter.textContent = current.toLocaleString();
-      }, 3000 + Math.random() * 2000); // Random intervals for organic feel
+      };
+      setInterval(updateCounter, 3200 + Math.random() * 1800);
     }
 
-    // Countdown timer
-    function startCountdown() {
-      // Set launch date to 30 days from now
-      const launchDate = new Date();
-      launchDate.setDate(launchDate.getDate() + 30);
-      launchDate.setHours(15, 0, 0, 0); // 3 PM launch time
+    document.addEventListener('DOMContentLoaded', () => {
+      animatePennyCounter();
+      const eagleImage = document.getElementById('eagle-image');
+      const eagleSound = document.getElementById('eagle-sound');
 
-      function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = launchDate.getTime() - now;
+      if (eagleImage && eagleSound) {
+        let lastPlayedAt = 0;
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        const playEagleSound = () => {
+          const now = performance.now();
+          if (now - lastPlayedAt < 250) {
+            return;
+          }
+          lastPlayedAt = now;
+          eagleSound.currentTime = 0;
+          const playPromise = eagleSound.play();
+          if (playPromise && typeof playPromise.catch === 'function') {
+            playPromise.catch(() => {
+              /* Swallow autoplay prevention errors silently */
+            });
+          }
+        };
 
-        document.getElementById('days').textContent = days.toString().padStart(2, '0');
-        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        ['mouseenter', 'focus'].forEach((eventName) => {
+          eagleImage.addEventListener(eventName, playEagleSound);
+        });
 
-        if (distance < 0) {
-          document.querySelector('.countdown-section').innerHTML = 
-            '<h3>🚀 LIVE NOW! 🚀</h3><p>The eagles have landed!</p>';
-        }
+        eagleImage.addEventListener('touchstart', playEagleSound, { passive: true });
+        eagleImage.addEventListener('click', playEagleSound);
+        eagleImage.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            playEagleSound();
+          }
+        });
       }
 
-      updateCountdown();
-      setInterval(updateCountdown, 1000);
-    }
-
-    // Initialize animations
-    document.addEventListener('DOMContentLoaded', function() {
-      animatePennyCounter();
-      startCountdown();
-    });
-  </script>
-
-  <script>
-    // Enhanced hamburger menu functionality with better mobile handling
-    document.addEventListener('DOMContentLoaded', function() {
       const hamburger = document.querySelector('.hamburger');
       const navLinks = document.querySelector('.nav-links');
       const body = document.body;
 
-      function toggleMenu() {
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('active');
-        body.classList.toggle('menu-open');
-      }
+      if (!hamburger || !navLinks) return;
 
-      function closeMenu() {
+      hamburger.setAttribute('aria-expanded', 'false');
+
+      const toggleMenu = () => {
+        const isActive = !hamburger.classList.contains('active');
+        hamburger.classList.toggle('active', isActive);
+        navLinks.classList.toggle('active', isActive);
+        body.classList.toggle('menu-open', isActive);
+        hamburger.setAttribute('aria-expanded', String(isActive));
+      };
+
+      const closeMenu = () => {
         hamburger.classList.remove('active');
         navLinks.classList.remove('active');
         body.classList.remove('menu-open');
-      }
+        hamburger.setAttribute('aria-expanded', 'false');
+      };
 
-      // Toggle menu on hamburger click
-      hamburger.addEventListener('click', function(e) {
-        e.stopPropagation();
+      hamburger.addEventListener('click', (event) => {
+        event.stopPropagation();
         toggleMenu();
       });
 
-      // Close menu when clicking a link
-      document.querySelectorAll('.nav-links a').forEach(link => {
+      document.querySelectorAll('.nav-links a').forEach((link) => {
         link.addEventListener('click', closeMenu);
       });
 
-      // Close menu when clicking outside (but not on hamburger)
-      document.addEventListener('click', function(e) {
-        if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+      document.addEventListener('click', (event) => {
+        if (!navLinks.contains(event.target) && !hamburger.contains(event.target)) {
           closeMenu();
         }
       });
 
-      // Close menu on escape key
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
           closeMenu();
         }
       });
 
-      // Handle window resize
-      window.addEventListener('resize', function() {
+      window.addEventListener('resize', () => {
         if (window.innerWidth > 768) {
           closeMenu();
         }
-      });
-
-      // Prevent menu from staying open when rotating device
-      window.addEventListener('orientationchange', function() {
-        setTimeout(function() {
-          if (window.innerWidth > 768) {
-            closeMenu();
-          }
-        }, 100);
       });
     });
   </script>

@@ -5,22 +5,126 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Shop Merchandise</title>
   <style>
-    body { 
-      font-family: 'Space Grotesk', sans-serif; 
-      background: #1a1a1a; 
-      color: white; 
-      padding: 2rem; 
+    :root {
+      --copper: #b87333;
+      --ink: #ffffff;
+      --ink-muted: rgba(255, 255, 255, 0.72);
+      --surface: rgba(26, 26, 26, 0.75);
     }
-    h1 { 
-      text-align: center; 
-      margin-bottom: 2rem; 
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      background: radial-gradient(circle at top, rgba(184, 115, 51, 0.18), transparent 60%), #0f0f0f;
+      color: var(--ink);
+      min-height: 100vh;
+      --page-padding: clamp(1.5rem, 6vw, 3rem);
+      padding: var(--page-padding);
+    }
+
+    @supports (padding-top: env(safe-area-inset-top)) {
+      body {
+        padding-top: calc(env(safe-area-inset-top) + var(--page-padding));
+        padding-right: calc(env(safe-area-inset-right) + var(--page-padding));
+        padding-bottom: calc(env(safe-area-inset-bottom) + var(--page-padding));
+        padding-left: calc(env(safe-area-inset-left) + var(--page-padding));
+      }
+    }
+
+    .page-shell {
+      max-width: 960px;
+      margin: 0 auto;
+      background: var(--surface);
+      border-radius: 24px;
+      border: 1px solid rgba(184, 115, 51, 0.35);
+      padding: clamp(1.75rem, 4vw, 2.5rem);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 35px 65px -40px rgba(0, 0, 0, 0.7);
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
+    }
+
+    .page-header h1 {
+      font-size: clamp(2rem, 8vw, 3rem);
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.04em;
+    }
+
+    .page-tagline {
+      color: var(--ink-muted);
+      font-size: clamp(1rem, 3.5vw, 1.2rem);
+      margin: 0 auto;
+      max-width: 560px;
+    }
+
+    .store-container {
+      background: rgba(15, 15, 15, 0.45);
+      border-radius: 18px;
+      padding: clamp(1rem, 4vw, 1.75rem);
+      border: 1px solid rgba(184, 115, 51, 0.25);
+    }
+
+    #my-store-112462508 {
+      width: 100%;
+      min-height: 480px;
+    }
+
+    .store-note {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--ink-muted);
+    }
+
+    @media (max-width: 600px) {
+      body {
+        --page-padding: clamp(1rem, 5vw, 1.5rem);
+        padding: var(--page-padding);
+      }
+
+      .page-shell {
+        border-radius: 18px;
+      }
+
+      .store-container {
+        padding: clamp(0.75rem, 4vw, 1.25rem);
+      }
+
+      #my-store-112462508 {
+        min-height: 420px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .page-tagline {
+        font-size: 0.95rem;
+      }
+
+      .store-note {
+        font-size: 0.85rem;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Shop Our Merchandise</h1>
-  <!-- Ecwid Embed Code -->
-  <div id="my-store-112462508"></div>
+  <div class="page-shell">
+    <header class="page-header">
+      <h1>Shop Our Merchandise</h1>
+      <p class="page-tagline">Official CENT gear, prepped for every mobile squadron member and eagle enthusiast.</p>
+    </header>
+    <main class="store-container">
+      <!-- Ecwid Embed Code -->
+      <div id="my-store-112462508" role="region" aria-label="CENT merchandise store"></div>
+    </main>
+    <p class="store-note">Tip: Rotate your device for additional product columns when browsing larger collections.</p>
+  </div>
   <script data-cfasync="false" type="text/javascript" 
           src="https://app.ecwid.com/script.js?112462508&data_platform=code&data_date=2025-02-12" 
           charset="utf-8">
