@@ -1,750 +1,784 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>CENT - Transparency Like You've Never Seen Before</title>
-    <!-- Eagle Favicon -->
-    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Ctext%20y='14'%20font-size='16'%3E%F0%9F%A6%85%3C/text%3E%3C/svg%3E">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* CSS Variables */
-        :root {
-            --copper: #b87333;
-            --copper-dark: #8b4513;
-            --copper-light: #dba36d;
-        }
-    
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-    
-        body {
-            margin: 0;
-            font-family: 'Space Grotesk', sans-serif;
-            background: #1a1a1a;
-            color: white;
-            line-height: 1.5;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>CENT - Radical Transparency</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Ctext%20y='14'%20font-size='16'%3E%F0%9F%A6%85%3C/text%3E%3C/svg%3E">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --copper-900: #2f1a0c;
+      --copper-700: #7c431a;
+      --copper-500: #b96a2b;
+      --copper-300: #f3b073;
+      --sand: #fdf8f3;
+      --parchment: #f6efe7;
+      --ink: #161c2d;
+      --ink-soft: #42506b;
+      --ink-muted: #6c7792;
+      --success: #3ab97c;
+      --shadow: 0 30px 60px -35px rgba(38, 20, 0, 0.45);
+    }
 
-        body.menu-open {
-            overflow: hidden;
-        }
-    
-        /* Glowing text effect */
-        .glow {
-            text-shadow: 0 0 10px var(--copper-light);
-        }
-    
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--copper);
-            z-index: 1000;
-            padding: clamp(0.85rem, 3vw, 1.25rem) clamp(1rem, 5vw, 2rem);
-            box-shadow: 0 12px 28px -22px rgba(0, 0, 0, 0.6);
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        @supports (padding-top: env(safe-area-inset-top)) {
-            nav {
-                padding-top: calc(env(safe-area-inset-top) + clamp(0.85rem, 3vw, 1.25rem));
-            }
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top left, rgba(243, 176, 115, 0.25), transparent 45%),
+                  radial-gradient(circle at bottom right, rgba(186, 106, 43, 0.3), transparent 40%),
+                  var(--sand);
+      color: var(--ink);
+      line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+    }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1.5rem;
-        }
+    body.menu-open {
+      overflow: hidden;
+    }
 
-        .logo {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--copper);
-        }
-    
-        .nav-links {
-            display: flex;
-            gap: 1.75rem;
-            align-items: center;
-        }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url('data:image/svg+xml,%3Csvg%20xmlns="http://www.w3.org/2000/svg"%20width="120"%20height="120"%20viewBox="0%200%20120%20120"%3E%3Cpath%20d="M30%2060c15-6%2030-6%2045%200"%20stroke="rgba(186,106,43,0.08)"%20stroke-width="4"%20fill="none"/%3E%3Cpath%20d="M0%2090c20-9%2040-9%2060%200"%20stroke="rgba(186,106,43,0.06)"%20stroke-width="3"%20fill="none"/%3E%3Ccircle%20cx="95"%20cy="25"%20r="6"%20fill="rgba(122,67,26,0.07)"/%3E%3C/svg%3E');
+      opacity: 0.45;
+      pointer-events: none;
+      z-index: -1;
+    }
 
-        .nav-links a {
-            color: #4a9eff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-weight: 500;
-        }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(253, 248, 243, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(186, 106, 43, 0.18);
+      padding: clamp(0.85rem, 3vw, 1.25rem) clamp(1rem, 5vw, 2rem);
+      box-shadow: 0 12px 28px -22px rgba(47, 26, 12, 0.35);
+    }
 
-        .nav-links a:hover {
-            color: #66b1ff;
-        }
+    @supports (padding-top: env(safe-area-inset-top)) {
+      nav {
+        padding-top: calc(env(safe-area-inset-top) + clamp(0.85rem, 3vw, 1.25rem));
+      }
+    }
 
-        .button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.65rem 1.4rem;
-            border-radius: 999px;
-            border: 1px solid rgba(184, 115, 51, 0.35);
-            background: linear-gradient(135deg, rgba(184, 115, 51, 0.28), rgba(219, 163, 109, 0.35));
-            color: white !important;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
 
-        .button:hover,
-        .button:focus-visible {
-            transform: translateY(-2px);
-            box-shadow: 0 18px 40px -32px rgba(184, 115, 51, 0.8);
-            outline: none;
-        }
-    
-        /* Content styles */
-        .transparency-hero {
-            min-height: 40vh;
-            padding: 8rem 2rem 4rem;
-            background: linear-gradient(to bottom, #1a1a1a, #2a2a2a);
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-    
-        .transparency-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%23b87333" opacity="0.1"/></svg>');
-            background-size: 30px 30px;
-            animation: fadeInOut 3s infinite;
-            pointer-events: none;
-        }
-    
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0.1; }
-            50% { opacity: 0.2; }
-        }
-    
-        .transparency-hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-    
-        .transparency-hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(to right, var(--copper), var(--copper-light));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(184, 115, 51, 0.3);
-        }
-    
-        .transparency-hero p {
-            font-size: 1.5rem;
-            color: #ccc;
-            margin-bottom: 2rem;
-        }
-    
-        /* Main content section */
-        .content-section {
-            padding: clamp(3rem, 9vw, 4rem) clamp(1.25rem, 6vw, 2rem);
-            background: #1a1a1a;
-        }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: var(--copper-700);
+      letter-spacing: 0.04em;
+    }
 
-        .content-container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-    
-        .content-container h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--copper);
-        }
-    
-        .content-container p {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            color: #e0e0e0;
-        }
-    
-        /* Comparison section */
-        .comparison {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-    
-        .comparison-card {
-            background: #2a2a2a;
-            border-radius: 12px;
-            padding: 2rem;
-            border: 1px solid;
-            transition: transform 0.3s ease;
-        }
-    
-        .comparison-card:hover {
-            transform: translateY(-5px);
-        }
-    
-        .them-card {
-            border-color: #ff6b6b;
-        }
-    
-        .us-card {
-            border-color: var(--copper);
-        }
-    
-        .comparison-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-    
-        .them-card h3 {
-            color: #ff6b6b;
-        }
-    
-        .us-card h3 {
-            color: var(--copper);
-        }
-    
-        .comparison-card img {
-            width: 100%;
-            height: auto;
-            margin: 1rem 0;
-            border-radius: 8px;
-            display: block;
-        }
-    
-        .comparison-card ul {
-            margin: 1rem 0;
-            padding-left: 1.5rem;
-        }
-    
-        .comparison-card li {
-            margin-bottom: 0.5rem;
-        }
-    
-        /* Tweet embed */
-        .tweet-container {
-            margin: 3rem 0;
-            background: #2a2a2a;
-            border-radius: 12px;
-            padding: 2rem;
-            border: 1px solid var(--copper);
-        }
-    
-        .tweet-comment {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: rgba(184, 115, 51, 0.1);
-            border-radius: 8px;
-            border-left: 4px solid var(--copper);
-        }
-    
-        .tweet-comment p {
-            font-size: 1.2rem;
-            font-style: italic;
-        }
-    
-        /* The CENT Fort Section */
-        .cent-fort {
-            margin: 3rem 0;
-            text-align: center;
-        }
-    
-        .cent-fort h2 {
-            font-size: 3rem;
-            color: var(--copper);
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-    
-        .cent-fort p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-    
-        .visit-vault {
-            background: var(--copper);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            border: 2px solid var(--copper);
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-    
-        .visit-vault:hover {
-            background: transparent;
-            color: var(--copper);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(184, 115, 51, 0.3);
-        }
-    
-        /* Eagle certification */
-        .eagle-certification {
-            margin: 4rem 0;
-            text-align: center;
-        }
-    
-        .eagle-seal {
-            font-size: 5rem;
-            margin-bottom: 1rem;
-        }
-    
-        .eagle-certification p {
-            font-style: italic;
-            color: var(--copper-light);
-        }
-    
-        /* Footer */
-        footer {
-            background: #2a2a2a;
-            padding: 4rem 2rem;
-            border-top: 1px solid var(--copper);
-        }
-    
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: clamp(2.5rem, 8vw, 4rem);
-        }
-    
-        .footer-container h3 {
-            color: var(--copper);
-            margin-bottom: 1rem;
-        }
-    
-        .footer-container a {
-            color: #4a9eff;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 0.5rem;
-            transition: color 0.3s ease;
-        }
-    
-        .footer-container a:hover {
-            color: #66b1ff;
-        }
-    
-        .tagline {
-            color: var(--copper);
-            font-style: italic;
-            margin-top: 1rem;
-        }
-    
-        /* Hamburger menu styles */
-        .hamburger {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-            z-index: 1001;
-        }
+    .logo span {
+      display: inline-flex;
+      width: 34px;
+      height: 34px;
+      align-items: center;
+      justify-content: center;
+      color: var(--copper-500);
+    }
 
-        .hamburger span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background-color: var(--copper);
-            margin: 5px 0;
-            transition: all 0.3s ease;
-        }
-    
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: grid;
-                gap: 1rem;
-                position: fixed;
-                top: 64px;
-                left: 50%;
-                transform: translate(-50%, -12px);
-                width: min(420px, calc(100% - 2rem));
-                background: rgba(26, 26, 26, 0.96);
-                padding: 1.35rem;
-                border-radius: 18px;
-                border: 1px solid rgba(184, 115, 51, 0.4);
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity 0.2s ease, transform 0.2s ease;
-                box-shadow: 0 35px 70px -35px rgba(0, 0, 0, 0.85);
-            }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
 
-            @supports (top: calc(64px + env(safe-area-inset-top))) {
-                .nav-links {
-                    top: calc(64px + env(safe-area-inset-top));
-                }
-            }
+    .nav-links a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
 
-            .hamburger {
-                display: block;
-            }
+    .nav-links a:hover {
+      color: var(--copper-700);
+    }
 
-            .nav-links.active {
-                opacity: 1;
-                pointer-events: auto;
-                transform: translate(-50%, 0);
-            }
+    .button {
+      background: linear-gradient(135deg, var(--copper-500), var(--copper-300));
+      color: #fff;
+      padding: 0.85rem 1.6rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid rgba(185, 106, 43, 0.4);
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
-            /* Hero section fixes */
-            .transparency-hero {
-                min-height: auto;
-                padding: 6rem 1rem 2rem;
-            }
-    
-            .transparency-hero h1 {
-                font-size: 2.2rem;
-                line-height: 1.2;
-                padding: 0 1rem;
-                margin-bottom: 1rem;
-            }
-    
-            .transparency-hero p {
-                font-size: 1.1rem;
-                padding: 0 1rem;
-                margin-bottom: 1.5rem;
-            }
-    
-            /* Layout adjustments */
-            .comparison {
-                grid-template-columns: 1fr;
-            }
-    
-            .content-section {
-                padding: 2rem 1rem !important;
-            }
-    
-            .content-container h2 {
-                font-size: 2rem;
-                padding: 0 1rem;
-            }
-    
-            .content-container p {
-                padding: 0 1rem;
-                font-size: 1rem;
-            }
-    
-            /* Card adjustments */
-            .comparison-card {
-                padding: 1.5rem;
-                margin-bottom: 1rem;
-            }
-    
-            .comparison-card h3 {
-                font-size: 1.5rem;
-            }
-    
-            .comparison-card ul {
-                font-size: 0.9rem;
-            }
-    
-            /* Fort CENT section */
-            .cent-fort h2 {
-                font-size: 2rem;
-            }
-    
-            .cent-fort p {
-                font-size: 1.1rem;
-                padding: 0 1rem;
-            }
-    
-            .tweet-container {
-                padding: 1.5rem;
-            }
-    
-            .tweet-comment {
-                padding: 1rem;
-            }
-    
-            .tweet-comment p {
-                font-size: 1rem;
-            }
-    
-            .visit-vault {
-                padding: 0.8rem 1.5rem;
-                font-size: 0.9rem;
-                width: 80%;
-                margin: 0 auto;
-                display: block;
-            }
-    
-            /* Improved touch targets */
-            .nav-links a,
-            .footer-container a {
-                padding: 0.5rem;
-                display: block;
-            }
-    
-            /* Navigation improvements */
-            .nav-container {
-                padding: 0;
-            }
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 25px 45px -30px rgba(185, 106, 43, 0.75);
+    }
 
-            .nav-links a {
-                width: 100%;
-                text-align: center;
-            }
-    
-            /* Footer improvements */
-            .footer-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                text-align: center;
-                padding: 0 1rem;
-            }
-    
-            .footer-container > div {
-                margin-bottom: 2rem;
-            }
-    
-            .footer-container a {
-                padding: 0.5rem 0;
-            }
-    
-            .tagline {
-                margin-top: 1rem;
-                font-size: 0.9rem;
-            }
-    
-            /* Eagle certification */
-            .eagle-certification {
-                margin: 2rem 0;
-            }
-    
-            .eagle-seal {
-                font-size: 4rem;
-            }
-    
-            footer {
-                padding: 2rem 1rem;
-            }
-        }
-    
-        /* Add new breakpoint for very small devices */
-        @media (max-width: 380px) {
-            .transparency-hero h1 {
-                font-size: 1.8rem;
-            }
-    
-            .comparison-card {
-                padding: 1rem;
-            }
-    
-            .comparison-card h3 {
-                font-size: 1.3rem;
-            }
-    
-            .cent-fort h2 {
-                font-size: 1.8rem;
-            }
-        }
-    </style>
+    .button-secondary {
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--copper-700);
+      border: 1px solid rgba(185, 106, 43, 0.25);
+      box-shadow: none;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.95rem;
+      border-radius: 999px;
+      background: rgba(185, 106, 43, 0.12);
+      color: var(--copper-700);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      font-size: 0.92rem;
+      border: 1px solid rgba(185, 106, 43, 0.35);
+    }
+
+    .hero {
+      padding: clamp(4rem, 10vw, 6rem) clamp(1.5rem, 6vw, 2rem) 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(185, 106, 43, 0.19), transparent 60%);
+      filter: blur(24px);
+      top: -140px;
+      right: -120px;
+      z-index: -1;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 3.4rem);
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      color: var(--ink-soft);
+      font-size: 1.15rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(185, 106, 43, 0.25);
+      border-radius: 18px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .signal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .signal-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      color: var(--ink-soft);
+      font-weight: 600;
+    }
+
+    .signal-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: rgba(185, 106, 43, 0.1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--copper-700);
+      font-weight: 700;
+      border: 1px solid rgba(185, 106, 43, 0.25);
+    }
+
+    section {
+      padding: clamp(3.5rem, 9vw, 5rem) clamp(1.5rem, 6vw, 2rem);
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.25rem;
+      color: var(--ink);
+    }
+
+    .section-header p {
+      color: var(--ink-soft);
+      max-width: 560px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(185, 106, 43, 0.2);
+      border-radius: 16px;
+      padding: 1.35rem;
+      box-shadow: 0 20px 40px -34px rgba(47, 26, 12, 0.65);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .card h3 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 1.15rem;
+    }
+
+    .card p {
+      color: var(--ink-soft);
+      font-size: 0.98rem;
+    }
+
+    .microtext {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+    }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    .comparison-card {
+      border-radius: 16px;
+      padding: 1.5rem;
+      background: #fff;
+      border: 1px solid rgba(185, 106, 43, 0.22);
+      box-shadow: 0 12px 28px -24px rgba(47, 26, 12, 0.45);
+    }
+
+    .comparison-card img {
+      width: 100%;
+      border-radius: 12px;
+      margin: 1rem 0;
+    }
+
+    .comparison-card ul {
+      padding-left: 1.1rem;
+      color: var(--ink-soft);
+    }
+
+    .comparison-card li {
+      margin-bottom: 0.5rem;
+    }
+
+    .comparison-badge {
+      display: inline-block;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+    }
+
+    .them {
+      border-color: rgba(255, 107, 107, 0.5);
+    }
+
+    .them .comparison-badge {
+      background: rgba(255, 107, 107, 0.12);
+      color: #c23636;
+      border: 1px solid rgba(255, 107, 107, 0.4);
+    }
+
+    .us {
+      border-color: rgba(185, 106, 43, 0.4);
+    }
+
+    .us .comparison-badge {
+      background: rgba(185, 106, 43, 0.12);
+      color: var(--copper-700);
+      border: 1px solid rgba(185, 106, 43, 0.35);
+    }
+
+    .tweet-card {
+      margin-top: 2rem;
+      padding: 1.35rem;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 16px;
+      border: 1px solid rgba(185, 106, 43, 0.25);
+      box-shadow: 0 18px 38px -30px rgba(47, 26, 12, 0.55);
+    }
+
+    .tweet-comment {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-left: 4px solid var(--copper-500);
+      background: rgba(185, 106, 43, 0.08);
+      border-radius: 12px;
+      color: var(--ink);
+    }
+
+    .share-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .share-card {
+      border-radius: 14px;
+      border: 1px solid rgba(185, 106, 43, 0.22);
+      background: #fff;
+      padding: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      box-shadow: 0 14px 34px -28px rgba(47, 26, 12, 0.5);
+    }
+
+    .share-card button,
+    .share-card a.button,
+    .share-card .button-secondary {
+      width: 100%;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .vault-invite {
+      text-align: center;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(246, 239, 231, 0.9));
+      border: 1px solid rgba(185, 106, 43, 0.22);
+      border-radius: 18px;
+      padding: 2.5rem 2rem;
+      margin-top: 2rem;
+      box-shadow: 0 16px 38px -30px rgba(47, 26, 12, 0.55);
+    }
+
+    footer {
+      background: #fff;
+      border-top: 1px solid rgba(185, 106, 43, 0.25);
+      padding: 3rem 1.75rem;
+    }
+
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+
+    footer h3 {
+      color: var(--copper-700);
+      margin-bottom: 0.75rem;
+    }
+
+    footer a {
+      display: block;
+      color: var(--ink-soft);
+      text-decoration: none;
+      margin-bottom: 0.5rem;
+      transition: color 0.2s ease;
+    }
+
+    footer a:hover {
+      color: var(--copper-700);
+    }
+
+    .tagline {
+      color: var(--copper-700);
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.4rem;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 3px;
+      background: var(--copper-700);
+      margin: 5px 0;
+      border-radius: 10px;
+      transition: all 0.2s ease;
+    }
+
+    @media (max-width: 1000px) {
+      .hero-inner, .cards-grid, .comparison, .share-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 3.5rem;
+      }
+    }
+
+    @media (max-width: 840px) {
+      .nav-links {
+        position: fixed;
+        top: 76px;
+        left: 50%;
+        transform: translate(-50%, -15px);
+        width: min(420px, calc(100% - 2rem));
+        background: rgba(253, 248, 243, 0.97);
+        padding: 1.35rem;
+        border-radius: 16px;
+        border: 1px solid rgba(185, 106, 43, 0.3);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.18s ease, transform 0.18s ease;
+        box-shadow: 0 28px 70px -35px rgba(47, 26, 12, 0.8);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.85rem;
+      }
+
+      .nav-links.active {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translate(-50%, 0);
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      nav {
+        position: fixed;
+        width: 100%;
+      }
+
+      body.menu-open {
+        overflow: hidden;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-inner {
+        gap: 1.5rem;
+      }
+
+      .section-header h2 {
+        font-size: 1.9rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-container">
-            <div class="logo">¢ENT</div>
-            <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <div class="nav-links">
-                <a href="https://docs.google.com/document/d/1h2_8aPDMiynl9CUtNy9VQhjQKsw2lARKhognpmgTCY4/edit?usp=sharing">About</a>
-                <a href="index.html#features">Features</a>
-                <a href="transparency.html">Transparency</a>
-                <a href="merch.html">Merch</a>
-                <a href="index.html#trade-cent" class="button">Buy CENT</a>
-            </div>
+  <nav>
+    <div class="nav-container">
+      <div class="logo"><span>🦅</span>¢ENT</div>
+      <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links">
+        <a href="index.html#features">Features</a>
+        <a href="transparency.html">Transparency</a>
+        <a href="merch.html">Merch</a>
+        <a href="next.html">Next...</a>
+        <a href="index.html#trade-cent" class="button">Buy CENT</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="pill">Radical transparency · No mystery meat reserves</div>
+        <h1>Receipts you can meme about, backing you can touch.</h1>
+        <p>Other coins wave around PDFs. CENT shows you copper. See the vault, watch the stack grow, and blast the receipts to your feed.</p>
+        <div class="hero-actions">
+          <a class="button" href="index.html#eagles-vault">See the vault</a>
+          <a class="button button-secondary" href="https://twitter.com/intent/tweet?text=CENT%20puts%20actual%20pennies%20in%20a%20vault%20and%20lets%20you%20watch.%20No%20mystery%20reserves%20%E2%80%94%20just%20memecoins%20with%20receipts.%20%F0%9F%A6%85%E2%9A%99%EF%B8%8F%20%23CENT" target="_blank" rel="noopener">Share the receipts</a>
         </div>
-    </nav>
-
-    <section class="transparency-hero">
-        <div class="transparency-hero-content">
-            <h1>REAL Transparency</h1>
-            <p class="glow">
-                No sketchy attestations. No hidden assets.<br>
-                Just pennies in a vault, protected by eagles. 🦅
-            </p>
-        </div>
-    </section>
-
-    <section class="content-section">
-        <div class="content-container">
-            <h2>How We're Different</h2>
-            <p>
-                In the wild west of crypto, some projects love to play shell games with their backing assets. They'll show you a piece of paper from "TrustMeBroAudit LLC" claiming they had money on a specific day at a specific time. What happened before or after that moment? Who knows!
-            </p>
-            <p>
-                But here at CENT, we believe in <strong>REAL</strong> transparency – the kind you can see with your own eyes.
-            </p>
-
-            <div class="comparison">
-                <div class="comparison-card them-card">
-                    <h3>THEM</h3>
-                    <img src="/assets/images/shady-attestation.jpg" alt="A child's drawing of an attestation document" width="400" height="300">
-                    <ul>
-                        <li>Mysterious "offshore" backing</li>
-                        <li>"Trust me bro" attestations</li>
-                        <li>Point-in-time audits (convenient timing)</li>
-                        <li>Vague asset breakdowns</li>
-                        <li>No way to verify with your own eyes</li>
-                        <li>Fly-by-night accountants from islands you've never heard of</li>
-                    </ul>
-                </div>
-
-                <div class="comparison-card us-card">
-                    <h3>CENT</h3>
-                    <img src="/assets/images/vault-camera.jpg" alt="Our penny vault with eagle security camera" width="400" height="300">
-                    <ul>
-                        <li>Physical pennies in a real vault</li>
-                        <li>24/7 livestream (in development)</li>
-                        <li>Continuous visibility, not point-in-time snapshots</li>
-                        <li>Simple 1:1 backing approach*</li>
-                        <li>Eagles watching everything (they never sleep)</li>
-                        <li>Visit the vault in person – see for yourself!</li>
-                    </ul>
-                    <p style="font-size: 0.8rem; color: #ccc; font-style: italic;">* While we aspire to maintain physical penny backing, CENT is a memecoin experiment, not a regulated stablecoin. See our whitepaper for details.</p>
-                </div>
-            </div>
-
-            <div class="tweet-container">
-                <h3 style="margin-bottom: 1.5rem;">Even The Big Players Are Questioning Traditional Reserves</h3>
-                
-                <!-- Twitter embed -->
-                <blockquote class="twitter-tweet" data-dnt="true">
-                    <p lang="en" dir="ltr">The US Government hasn&#39;t done a proper audit of Fort Knox gold in almost 70 years!<br><br>Our <a href="https://twitter.com/DOGE_usa?ref_src=twsrc%5Etfw">@DOGE_usa</a> team is looking into how much this would cost &amp; what would be required.<br><br>Should we do the first proper audit of Fort Knox gold since the 1950s?</p>&mdash; Elon Musk (@elonmusk) <a href="https://twitter.com/elonmusk/status/1891555910218097122?ref_src=twsrc%5Etfw">August 18, 2024</a>
-                </blockquote>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                
-                <div class="tweet-comment">
-                    <p>
-                        Unlike Fort Knox – which hasn't been properly audited in 70 YEARS folks, it's TERRIBLE! – our vault is ALWAYS open for inspection. We have the most BEAUTIFUL pennies. The shiniest pennies you've ever seen! Everyone is saying they're the most impressive pennies, maybe ever. No secrets here, just TREMENDOUS transparency! You'll get tired of all the transparency, believe me!
-                    </p>
-                </div>
-            </div>
-
-            <div class="cent-fort">
-                <h2>Welcome to Fort CENT</h2>
-                <p>
-                    Unlike Fort Knox with its secrets and mysteries, Fort CENT is a beacon of transparency. Our fortress of pennies doesn't hide from scrutiny – it welcomes it!
-                </p>
-                <p>
-                    Come visit our beautiful vault, protected by the most vigilant eagles. It's going to be HUGE!
-                </p>
-                <a href="index.html#eagles-vault" class="visit-vault">Visit The Vault</a>
-            </div>
-
-            <div class="eagle-certification">
-                <div class="eagle-seal">🦅</div>
-                <p>This page has been certified authentic by Guardian Eagle #42</p>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-container">
+      </div>
+      <div class="glass-card">
+        <div class="microtext" style="margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.04em;">How we prove it</div>
+        <div class="signal-grid">
+          <div class="signal-item">
+            <div class="signal-icon">1:1</div>
             <div>
-                <h3>¢ENT</h3>
-                <p>Pennies in a vault - and on the blockchain. Simple as.</p>
-                <p class="tagline">Protected by eagles since 2025 🦅</p>
+              <strong>Physical pennies, tokenized.</strong><br>
+              Minted only when copper enters the vault.
             </div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-icon">24/7</div>
             <div>
-                <h3>Quick Links</h3>
-                <a href="https://docs.google.com/document/d/1h2_8aPDMiynl9CUtNy9VQhjQKsw2lARKhognpmgTCY4/edit?usp=sharing">About</a>
-                <a href="next.html">Next...</a>
-                <a href="index.html#eagles-vault">Eagle's Vault</a>
+              <strong>Eyes on the stash.</strong><br>
+              Livestream in progress + periodic drops.
             </div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-icon">🧾</div>
             <div>
-                <h3>Join The Squad</h3>
-                <a href="https://x.com/stablecentmoney">X</a>
-                <a href="https://imgflip.com/memegenerator">Memes</a>
-                <a href="merch.html">Merch</a>
+              <strong>Public receipts.</strong><br>
+              Photos, counts, and on-chain mints match.
             </div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-icon">🦅</div>
+            <div>
+              <strong>Eagle-certified.</strong><br>
+              Guardians that actually bite (ask the pennies).
+            </div>
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // Hamburger menu functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const hamburger = document.querySelector('.hamburger');
-            const navLinks = document.querySelector('.nav-links');
-            const body = document.body;
+  <section>
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>TRANSPARENCY > ATTESTATIONS</h2>
+        <p>Skip the mystery PDFs. We ship open receipts, side-by-side with on-chain supply, so anyone can dunk on shady reserves in real time.</p>
+      </div>
 
-            if (!hamburger || !navLinks) {
-                return;
-            }
+      <div class="cards-grid">
+        <div class="card">
+          <h3>Proof of Pennies</h3>
+          <p>Every minted CENT maps to copper sitting in the vault. Additions and burns are posted with photos + counts.</p>
+          <span class="microtext">Current goal: full 1:1 backing. CENT is still a memecoin experiment—not a regulated stablecoin.</span>
+        </div>
+        <div class="card">
+          <h3>See It Yourself</h3>
+          <p>Pop in to the Eagle's Vault, book a visit, or camp the stream once it's live. No appointments for the memes.</p>
+        </div>
+        <div class="card">
+          <h3>Public Math</h3>
+          <p>Live supply dashboard + vault receipts let anyone reconcile what was minted vs. what is stacked.</p>
+          <a class="button button-secondary" href="index.html#trade-cent">Check supply math</a>
+        </div>
+      </div>
 
-            const setMenuState = (isOpen) => {
-                hamburger.classList.toggle('active', isOpen);
-                navLinks.classList.toggle('active', isOpen);
-                body.classList.toggle('menu-open', isOpen);
-                hamburger.setAttribute('aria-expanded', String(isOpen));
-            };
+      <div class="comparison">
+        <div class="comparison-card them">
+          <div class="comparison-badge">Them</div>
+          <img src="/assets/images/shady-attestation.jpg" alt="A child's drawing of an attestation document" width="400" height="300">
+          <ul>
+            <li>Point-in-time attestations</li>
+            <li>Mystery offshore reserves</li>
+            <li>Fine print that vibes like glitter glue</li>
+            <li>Zero memes, zero receipts</li>
+          </ul>
+        </div>
+        <div class="comparison-card us">
+          <div class="comparison-badge">CENT</div>
+          <img src="/assets/images/vault-camera.jpg" alt="Our penny vault with eagle security camera" width="400" height="300">
+          <ul>
+            <li>Physical pennies in a real vault</li>
+            <li>Receipts you can quote-tweet</li>
+            <li>Backed supply that updates alongside mints</li>
+            <li>Eagles guarding the stack (they never sleep)</li>
+          </ul>
+          <span class="microtext">Receipts are public; jokes are optional. Bring both.</span>
+        </div>
+      </div>
 
-            hamburger.setAttribute('aria-expanded', 'false');
+      <div class="tweet-card">
+        <h3 style="margin-bottom: 0.5rem;">Even the big guys want real audits</h3>
+        <blockquote class="twitter-tweet" data-dnt="true">
+          <p lang="en" dir="ltr">The US Government hasn&#39;t done a proper audit of Fort Knox gold in almost 70 years!<br><br>Our <a href="https://twitter.com/DOGE_usa?ref_src=twsrc%5Etfw">@DOGE_usa</a> team is looking into how much this would cost &amp; what would be required.<br><br>Should we do the first proper audit of Fort Knox gold since the 1950s?</p>&mdash; Elon Musk (@elonmusk) <a href="https://twitter.com/elonmusk/status/1891555910218097122?ref_src=twsrc%5Etfw">August 18, 2024</a>
+        </blockquote>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <div class="tweet-comment">
+          Unlike Fort Knox (no receipts in 70 years!), our vault flexes receipts constantly. The pennies are shiny, the eagles are chatty, and everything matches the chain.
+        </div>
+      </div>
 
-            hamburger.addEventListener('click', (event) => {
-                event.stopPropagation();
-                const isOpen = !hamburger.classList.contains('active');
-                setMenuState(isOpen);
-            });
+      <div class="section-header" style="margin-top: 3rem;">
+        <h2>Boost the signal</h2>
+        <p>Receipts spread faster when they fit in a screenshot. Steal these blurbs and tag us.</p>
+      </div>
 
-            // Close menu when clicking a link
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => setMenuState(false));
-            });
+      <div class="share-grid">
+        <div class="share-card">
+          <h3>Tweet it</h3>
+          <p class="microtext">Pre-loaded with receipts and hashtags.</p>
+          <a class="button" href="https://twitter.com/intent/tweet?text=CENT%20puts%20actual%20pennies%20in%20a%20vault%20and%20lets%20you%20watch.%20Memecoin%20with%20receipts%2C%20backed%20by%20eagles.%20%23CENT%20%23memecoins%20%F0%9F%A6%85" target="_blank" rel="noopener">Launch tweet</a>
+        </div>
+        <div class="share-card">
+          <h3>Copy the clapback</h3>
+          <p class="microtext">For any project flaunting mystery reserves.</p>
+          <button class="button button-secondary" type="button" data-copy="Show us the vault. CENT posts receipts and lets you watch the pennies stack. Where are yours? #CENT">Copy text</button>
+        </div>
+        <div class="share-card">
+          <h3>Invite a friend</h3>
+          <p class="microtext">Bring a buddy to the Eagle's Vault stream.</p>
+          <button class="button button-secondary" type="button" data-copy="Join me watching the CENT penny vault. Real copper, meme energy, eagles on duty. https://stablecent.money">Copy invite</button>
+        </div>
+      </div>
 
-            // Close menu when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-                    setMenuState(false);
-                }
-            });
+      <div class="vault-invite">
+        <div class="pill" style="margin-bottom: 0.75rem;">Fort ¢ENT</div>
+        <h2 style="margin-bottom: 0.5rem;">Come touch the supply</h2>
+        <p style="max-width: 720px; margin: 0 auto 1.4rem; color: var(--ink-soft);">
+          Unlike secretive forts, our doors stay meme-open. Visit the vault, verify the pennies, and record your own content. Transparency is a spectator sport.
+        </p>
+        <div class="hero-actions" style="justify-content: center;">
+          <a class="button" href="index.html#eagles-vault">Book a visit</a>
+          <a class="button button-secondary" href="mailto:hello@stablecent.money?subject=Vault%20visit">Email the eagles</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            document.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape') {
-                    setMenuState(false);
-                }
-            });
+  <footer>
+    <div class="footer-container">
+      <div>
+        <h3>¢ENT</h3>
+        <p>Memecoin with physical receipts. Pennies in a vault, guarded by eagles.</p>
+        <p class="tagline">Protected by eagles since 2025 🦅</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#eagles-vault">Eagle's Vault</a>
+        <a href="merch.html">Merch</a>
+      </div>
+      <div>
+        <h3>Join The Squad</h3>
+        <a href="https://x.com/stablecentmoney" target="_blank" rel="noopener">X</a>
+        <a href="https://imgflip.com/memegenerator" target="_blank" rel="noopener">Memes</a>
+        <a href="https://docs.google.com/document/d/1h2_8aPDMiynl9CUtNy9VQhjQKsw2lARKhognpmgTCY4/edit?usp=sharing" target="_blank" rel="noopener">About/Whitepaper</a>
+      </div>
+    </div>
+  </footer>
 
-            window.addEventListener('resize', () => {
-                if (window.innerWidth > 768) {
-                    setMenuState(false);
-                }
-            });
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.querySelector('.hamburger');
+      const navLinks = document.querySelector('.nav-links');
+      const body = document.body;
+
+      if (hamburger && navLinks) {
+        const setMenuState = (isOpen) => {
+          hamburger.classList.toggle('active', isOpen);
+          navLinks.classList.toggle('active', isOpen);
+          body.classList.toggle('menu-open', isOpen);
+          hamburger.setAttribute('aria-expanded', String(isOpen));
+        };
+
+        hamburger.addEventListener('click', (event) => {
+          event.stopPropagation();
+          const isOpen = !hamburger.classList.contains('active');
+          setMenuState(isOpen);
         });
-    </script>
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+          link.addEventListener('click', () => setMenuState(false));
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+            setMenuState(false);
+          }
+        });
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') {
+            setMenuState(false);
+          }
+        });
+
+        window.addEventListener('resize', () => {
+          if (window.innerWidth > 840) {
+            setMenuState(false);
+          }
+        });
+      }
+
+      const copyButtons = document.querySelectorAll('[data-copy]');
+      copyButtons.forEach((btn) => {
+        const defaultLabel = btn.textContent;
+
+        btn.addEventListener('click', async () => {
+          const text = btn.getAttribute('data-copy');
+          if (!text) return;
+
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = 'Copied!';
+            btn.blur();
+            setTimeout(() => { btn.textContent = defaultLabel; }, 1400);
+          } catch (err) {
+            btn.textContent = 'Copy failed';
+            setTimeout(() => { btn.textContent = defaultLabel; }, 1400);
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
