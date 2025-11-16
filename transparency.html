@@ -88,7 +88,14 @@
       letter-spacing: 0.04em;
     }
 
-    .logo span {
+    .logo .cent-mark {
+      font-size: 1.25em;
+      line-height: 1;
+      display: inline-block;
+      transform: translateY(0.02em);
+    }
+
+    .logo .logo-icon {
       display: inline-flex;
       width: 34px;
       height: 34px;
@@ -509,7 +516,7 @@
 <body>
   <nav>
     <div class="nav-container">
-      <div class="logo"><span>🦅</span>¢ENT</div>
+      <div class="logo"><span class="logo-icon">🦅</span><span class="cent-mark">¢</span>ENT</div>
       <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
         <span></span>
         <span></span>
