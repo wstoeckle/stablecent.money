@@ -376,32 +376,6 @@
       color: var(--ink);
     }
 
-    .share-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-      margin-top: 1.25rem;
-    }
-
-    .share-card {
-      border-radius: 14px;
-      border: 1px solid rgba(185, 106, 43, 0.22);
-      background: #fff;
-      padding: 1.1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.65rem;
-      box-shadow: 0 14px 34px -28px rgba(47, 26, 12, 0.5);
-    }
-
-    .share-card button,
-    .share-card a.button,
-    .share-card .button-secondary {
-      width: 100%;
-      justify-content: center;
-      text-align: center;
-    }
-
     .vault-invite {
       text-align: center;
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(246, 239, 231, 0.9));
@@ -554,7 +528,7 @@
   <section class="hero">
     <div class="hero-inner">
       <div>
-        <div class="pill">Radical transparency · No mystery meat reserves</div>
+        <div class="pill">Radical transparency · No hidden reserves</div>
         <h1>Receipts you can meme about, backing you can touch.</h1>
         <p>Other coins wave around PDFs. CENT shows you copper. See the vault, watch the stack grow, and blast the receipts to your feed.</p>
         <div class="hero-actions">
@@ -657,29 +631,6 @@
         </div>
       </div>
 
-      <div class="section-header" style="margin-top: 3rem;">
-        <h2>Boost the signal</h2>
-        <p>Receipts spread faster when they fit in a screenshot. Steal these blurbs and tag us.</p>
-      </div>
-
-      <div class="share-grid">
-        <div class="share-card">
-          <h3>Tweet it</h3>
-          <p class="microtext">Pre-loaded with receipts and hashtags.</p>
-          <a class="button" href="https://twitter.com/intent/tweet?text=CENT%20puts%20actual%20pennies%20in%20a%20vault%20and%20lets%20you%20watch.%20Memecoin%20with%20receipts%2C%20backed%20by%20eagles.%20%23CENT%20%23memecoins%20%F0%9F%A6%85" target="_blank" rel="noopener">Launch tweet</a>
-        </div>
-        <div class="share-card">
-          <h3>Copy the clapback</h3>
-          <p class="microtext">For any project flaunting mystery reserves.</p>
-          <button class="button button-secondary" type="button" data-copy="Show us the vault. CENT posts receipts and lets you watch the pennies stack. Where are yours? #CENT">Copy text</button>
-        </div>
-        <div class="share-card">
-          <h3>Invite a friend</h3>
-          <p class="microtext">Bring a buddy to the Eagle's Vault stream.</p>
-          <button class="button button-secondary" type="button" data-copy="Join me watching the CENT penny vault. Real copper, meme energy, eagles on duty. https://stablecent.money">Copy invite</button>
-        </div>
-      </div>
-
       <div class="vault-invite">
         <div class="pill" style="margin-bottom: 0.75rem;">Fort ¢ENT</div>
         <h2 style="margin-bottom: 0.5rem;">Come touch the supply</h2>
@@ -759,25 +710,6 @@
         });
       }
 
-      const copyButtons = document.querySelectorAll('[data-copy]');
-      copyButtons.forEach((btn) => {
-        const defaultLabel = btn.textContent;
-
-        btn.addEventListener('click', async () => {
-          const text = btn.getAttribute('data-copy');
-          if (!text) return;
-
-          try {
-            await navigator.clipboard.writeText(text);
-            btn.textContent = 'Copied!';
-            btn.blur();
-            setTimeout(() => { btn.textContent = defaultLabel; }, 1400);
-          } catch (err) {
-            btn.textContent = 'Copy failed';
-            setTimeout(() => { btn.textContent = defaultLabel; }, 1400);
-          }
-        });
-      });
     });
   </script>
 </body>
