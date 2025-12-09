@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>OPERATION: COPPER STORM - CENT Launch</title>
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Ctext%20y='14'%20font-size='16'%3E%F0%9F%A6%85%3C/text%3E%3C/svg%3E">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --night-bg: #0a0a0a;
+            --night-surface: #111;
+            --night-border: #333;
+            --terminal-green: #00ff41;
+            --terminal-dim: #008f11;
+            --copper-accent: #b96a2b;
+            --text-main: #e0e0e0;
+            --text-muted: #888;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--night-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Noise Texture Overlay */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.4;
+        }
+
+        /* Penny Rain Canvas */
+        #penny-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            border-bottom: 1px solid var(--night-border);
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            color: var(--terminal-green);
+            text-decoration: none;
+            font-size: 1.25rem;
+            letter-spacing: -0.05em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: ">";
+            color: var(--terminal-dim);
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            margin-left: 2rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--terminal-green);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .status-badge {
+            display: inline-block;
+            border: 1px solid var(--terminal-green);
+            color: var(--terminal-green);
+            padding: 0.25rem 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            background: rgba(0, 255, 65, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+        }
+
+        .blink {
+            animation: blinker 1s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            background: linear-gradient(180deg, #fff, #888);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--terminal-green);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            border-left: 2px solid var(--terminal-dim);
+            padding-left: 1rem;
+            text-align: left;
+        }
+
+        /* Truck Visual */
+        .truck-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            border: 1px solid var(--night-border);
+            background: var(--night-surface);
+            padding: 0.5rem;
+        }
+
+        .truck-container::before,
+        .truck-container::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--terminal-green);
+            transition: all 0.3s;
+        }
+
+        .truck-container::before {
+            top: -2px;
+            left: -2px;
+            border-right: 0;
+            border-bottom: 0;
+        }
+
+        .truck-container::after {
+            bottom: -2px;
+            right: -2px;
+            border-left: 0;
+            border-top: 0;
+        }
+
+        .truck-visual {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .truck-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.2) brightness(0.8);
+            opacity: 0.8;
+        }
+
+        /* Night Vision Overlay */
+        .truck-visual::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, transparent 40%, rgba(0, 0, 0, 0.8)),
+                linear-gradient(rgba(0, 255, 65, 0.05), rgba(0, 255, 65, 0.05));
+            pointer-events: none;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Driver Log */
+        .driver-log {
+            background: #000;
+            border: 1px solid var(--terminal-dim);
+            font-family: 'JetBrains Mono', monospace;
+            padding: 1rem;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+            text-align: left;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .log-header {
+            color: var(--terminal-dim);
+            border-bottom: 1px solid var(--terminal-dim);
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .log-content {
+            height: 60px;
+            /* Fixed height for ticker */
+            overflow: hidden;
+            position: relative;
+        }
+
+        .log-entry {
+            color: var(--terminal-green);
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s, transform 0.3s;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .log-entry.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .log-entry .timestamp {
+            color: var(--terminal-dim);
+            margin-right: 0.5rem;
+        }
+
+        /* Heavy Scale */
+        .heavy-scale {
+            margin: 0 auto 4rem;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .scale-title {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+        }
+
+        .scale-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .scale-item {
+            background: var(--night-surface);
+            border: 1px solid var(--night-border);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .scale-icon {
+            font-size: 2.5rem;
+            color: var(--text-muted);
+        }
+
+        .scale-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .scale-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--terminal-green);
+        }
+
+        .scale-item.highlight {
+            border-color: var(--terminal-green);
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        .scale-item.highlight .scale-icon {
+            color: var(--copper-accent);
+        }
+
+        .scale-item.highlight .scale-value {
+            color: var(--terminal-green);
+        }
+
+        /* CTA */
+        .cta-button {
+            background: var(--terminal-green);
+            color: #000;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            padding: 1.25rem 3rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.2s;
+            border: 2px solid var(--terminal-green);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--terminal-green);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+        }
+
+        footer {
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            border-top: 1px solid var(--night-border);
+            width: 100%;
+            background: #000;
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="penny-rain"></canvas>
+
+    <nav>
+        <a href="index.html" class="logo">CENT_PROTOCOL</a>
+        <div class="nav-links">
+            <a href="index.html">HOME</a>
+            <a href="merch.html">MERCH</a>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+
+        <section class="hero-section">
+            <div class="status-badge"><span class="blink">●</span> LIVE TRACKING ACTIVE</div>
+            <h1>Operation: Copper Storm</h1>
+            <div class="subtitle">
+                > TARGET: 7,000 LBS LIQUIDITY<br>
+                > STATUS: IN TRANSIT<br>
+                > SECURITY: MAX
+            </div>
+
+            <div class="truck-container">
+                <div class="truck-visual">
+                    <img src="assets/brinks_truck.png" alt="Secure Transport">
+                </div>
+            </div>
+
+            <div class="driver-log">
+                <div class="log-header">
+                    <span>DRIVER_COMMS_LINK</span>
+                    <span>CH-14</span>
+                </div>
+                <div class="log-content" id="log-ticker">
+                    <!-- JS will populate this -->
+                </div>
+            </div>
+
+            <div class="heavy-scale">
+                <div class="scale-title">MASS COMPARISON PROTOCOL</div>
+                <div class="scale-grid">
+                    <div class="scale-item">
+                        <div class="scale-icon">🚙</div>
+                        <div class="scale-value">1.5x</div>
+                        <div class="scale-label">FORD F-150s</div>
+                    </div>
+                    <div class="scale-item highlight">
+                        <div class="scale-icon">🪙</div>
+                        <div class="scale-value">7,000</div>
+                        <div class="scale-label">LBS OF PENNIES</div>
+                    </div>
+                    <div class="scale-item">
+                        <div class="scale-icon">🎹</div>
+                        <div class="scale-value">7x</div>
+                        <div class="scale-label">GRAND PIANOS</div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="minting.html" class="cta-button">INITIATE RECEIPT</a>
+        </section>
+
+        <footer>
+            SECURE TRANSMISSION // CENT TOKEN 2025
+        </footer>
+    </div>
+
+    <script>
+        // --- Penny Rain Effect ---
+        const canvas = document.getElementById('penny-rain');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let pennies = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Penny {
+            constructor() {
+                this.reset(true);
+            }
+
+            reset(initial = false) {
+                this.x = Math.random() * width;
+                this.y = initial ? Math.random() * height : -50;
+                this.z = Math.random() * 0.5 + 0.5; // Depth/Scale
+                this.vy = (Math.random() * 2 + 2) * this.z;
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.2;
+                this.color = Math.random() > 0.8 ? '#b96a2b' : '#7c431a'; // Copper variations
+            }
+
+            update() {
+                this.y += this.vy;
+                this.rotation += this.rotationSpeed;
+                if (this.y > height + 50) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                ctx.scale(this.z, this.z);
+
+                ctx.beginPath();
+                ctx.arc(0, 0, 10, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+
+                // Shine
+                ctx.beginPath();
+                ctx.arc(-3, -3, 3, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255,255,255,0.2)';
+                ctx.fill();
+
+                ctx.restore();
+            }
+        }
+
+        function initRain() {
+            for (let i = 0; i < 50; i++) {
+                pennies.push(new Penny());
+            }
+        }
+
+        function animateRain() {
+            ctx.clearRect(0, 0, width, height);
+            pennies.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateRain);
+        }
+
+        initRain();
+        animateRain();
+
+
+        // --- Driver Log Ticker ---
+        const logContainer = document.getElementById('log-ticker');
+        const messages = [
+            "Suspension is groaning... this load is HEAVY.",
+            "Passed a weigh station. They didn't believe the manifest.",
+            "Guard dog is alert. No one is touching this copper.",
+            "ETA updated. Traffic is clearing.",
+            "Coffee break over. Wheels rolling.",
+            "Just felt a pothole. The whole truck shook.",
+            "Radio check... all clear.",
+            "Approaching the drop zone."
+        ];
+
+        let msgIndex = 0;
+
+        function addLogEntry() {
+            // Remove old active
+            const old = logContainer.querySelector('.active');
+            if (old) {
+                old.classList.remove('active');
+                setTimeout(() => old.remove(), 300);
+            }
+
+            // Create new
+            const div = document.createElement('div');
+            div.className = 'log-entry';
+
+            const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: "numeric", minute: "numeric", second: "numeric" });
+            div.innerHTML = `<span class="timestamp">[${time}]</span> ${messages[msgIndex]}`;
+
+            logContainer.appendChild(div);
+
+            // Trigger reflow
+            void div.offsetWidth;
+            div.classList.add('active');
+
+            msgIndex = (msgIndex + 1) % messages.length;
+        }
+
+        addLogEntry();
+        setInterval(addLogEntry, 4000);
+
+    </script>
+</body>
+
+</html>
