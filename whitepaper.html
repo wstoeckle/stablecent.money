@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CENT Token Whitepaper - Technical Documentation</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Ctext%20y='14'%20font-size='16'%3E%F0%9F%AA%99%3C/text%3E%3C/svg%3E">
+  <link href="https://fonts.googleapis.com/css2?family=Georgia&family=Courier+New&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Georgia, serif;
+      background: #f5f5f5;
+      color: #1a1a1a;
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+
+    .document-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 4rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .header {
+      text-align: center;
+      padding-bottom: 2rem;
+      border-bottom: 3px solid #2c3e50;
+      margin-bottom: 3rem;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      font-weight: normal;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .header .subtitle {
+      font-size: 1.1rem;
+      color: #555;
+      font-style: italic;
+      margin-top: 1rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: #2c3e50;
+      text-decoration: none;
+      margin-bottom: 2rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid #2c3e50;
+      transition: all 0.2s;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+
+    .back-link:hover {
+      background: #2c3e50;
+      color: #fff;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: #2c3e50;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e0e0e0;
+      font-weight: normal;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: #34495e;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    p {
+      margin-bottom: 1.2rem;
+      text-align: justify;
+    }
+
+    .abstract {
+      background: #ecf0f1;
+      padding: 2rem;
+      margin: 2rem 0;
+      border-left: 4px solid #2c3e50;
+      font-size: 1.05rem;
+    }
+
+    .hero-image {
+      width: 100%;
+      max-width: 600px;
+      margin: 2rem auto;
+      display: block;
+      border: 1px solid #ddd;
+    }
+
+    ul, ol {
+      margin-left: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.7rem;
+    }
+
+    .legal-notice {
+      background: #fff9e6;
+      border: 2px solid #f39c12;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .legal-notice h3 {
+      color: #f39c12;
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+
+    .highlight {
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .disclaimer {
+      background: #f8f9fa;
+      padding: 2rem;
+      margin-top: 3rem;
+      border-top: 3px solid #2c3e50;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ddd;
+      margin: 2rem 0;
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .faq-question {
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-answer {
+      margin-left: 1.5rem;
+      margin-bottom: 0;
+    }
+
+    .contact {
+      text-align: center;
+      padding: 2rem;
+      background: #ecf0f1;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .document-container {
+        padding: 2rem 1.5rem;
+      }
+
+      .header h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      h3 {
+        font-size: 1.2rem;
+      }
+
+      p {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div style="max-width: 900px; margin: 0 auto 1rem;">
+    <a href="index.html" class="back-link">← Return to Main Site</a>
+  </div>
+
+  <div class="document-container">
+    <div class="header">
+      <h1>CENT</h1>
+      <div class="subtitle">A Physically-Collateralized Digital Coin Experiment (Yes, Really)</div>
+      <div class="subtitle" style="margin-top: 1.5rem; font-style: normal; font-size: 1.5rem; font-weight: 600;">Whitepaper</div>
+    </div>
+
+    <img src="CENT whitepaper/images/image1.jpg" alt="Physical pennies in vault" class="hero-image">
+
+    <h2>Abstract</h2>
+    <div class="abstract">
+      <p>CENT is a digital token experiment exploring whether the physical grounding of traditional money can be reimagined through crypto. Each CENT token is <span class="highlight">intended</span>, on a best-efforts basis, to correspond to one physical United States penny held in a monitored vault. CENT is not a regulated stablecoin, does not guarantee redemption, and is not designed for payments. Instead, it serves as a transparency-first, community-driven experiment in bridging the physical and digital worlds through the lowest-denomination U.S. currency.</p>
+      <p style="margin-bottom: 0;">CENT combines memetic energy with verifiable physical infrastructure, creating something unusual in crypto: a token whose backing is visible, countable, and intentionally humble.</p>
+    </div>
+
+    <hr>
+
+    <h2>1. Introduction</h2>
+    <p>Stablecoins today are backed by opaque bank accounts, treasury bills, algorithms, optimism, or in rare cases—nothing at all. CENT proposes something simpler and more tangible: <span class="highlight">pennies</span>.</p>
+
+    <p><strong>Why pennies?</strong></p>
+    <ul>
+      <li>Pennies are physical, verifiable, and hilariously abundant.</li>
+      <li>Pennies are neglected by modern finance, making them the perfect memetic substrate.</li>
+      <li>Pennies embody the idea that money's value is ultimately social—and sometimes, zinc-based.</li>
+    </ul>
+
+    <p>CENT aims to match the supply of CENT tokens with physical pennies stored in a secure facility. This matching is an <span class="highlight">aspiration</span>, not a guarantee. There is no contractual promise of convertibility, parity, or redemption. CENT is not a method of payment, not a stablecoin in the regulated sense, and not financial advice. It is a transparency experiment and a community project, backed by a livestream pointed at thousands of real pennies.</p>
+
+    <div class="legal-notice">
+      <h3>Legal Reality Check (Important)</h3>
+      <ul style="margin-bottom: 0;">
+        <li><span class="highlight">No Guaranteed 1:1 Backing.</span> CENT intends—but does not promise—to hold one penny per token.</li>
+        <li><span class="highlight">Not Regulated.</span> CENT is not registered with FinCEN, the SEC, or any state regulator.</li>
+        <li><span class="highlight">No Redemption Rights.</span> Holding CENT does not entitle you to receive a penny.</li>
+      </ul>
+    </div>
+
+    <p>Put simply: CENT uses pennies. It tries to track pennies. It livestreams pennies. But it makes <strong>no legally binding promises about pennies.</strong></p>
+
+    <hr>
+
+    <h2>2. Technical Overview</h2>
+
+    <h3>2.1 Blockchain Platform</h3>
+    <p>CENT is implemented on the <span class="highlight">Solana blockchain</span>, chosen for:</p>
+    <ul>
+      <li>High throughput (65,000+ TPS)</li>
+      <li>Low transaction fees (&lt;$0.01)</li>
+      <li>Mature SPL token standards</li>
+      <li>Strong developer tooling and open-source culture</li>
+    </ul>
+
+    <h3>2.2 Token Implementation</h3>
+    <p>CENT is an <span class="highlight">SPL token</span> to allow:</p>
+    <ul>
+      <li>Controlled minting and burning</li>
+      <li>Audited smart contract logic</li>
+      <li>Compatibility with Solana-native wallets and DeFi tools</li>
+      <li>Upgradeability through community-governed multisig</li>
+      <li>Public verifiability of token supply</li>
+    </ul>
+
+    <h3>2.3 Smart Contract Architecture</h3>
+    <p>CENT's smart contracts will:</p>
+    <ul>
+      <li>Manage minting when verified pennies enter the vault</li>
+      <li>Burn tokens upon redemption requests</li>
+      <li>Enforce multisignature approvals</li>
+      <li>Log all mint/burn events on-chain</li>
+      <li>Support emergency pause functionality in the event of a mismatch or anomaly</li>
+    </ul>
+    <p>All smart contract code will be open-source and independently auditable.</p>
+
+    <hr>
+
+    <h2>3. Physical Infrastructure ("The Penny Standard")</h2>
+    <p>While most digital assets rely on spreadsheets and trust, CENT maintains a real, physical supply chain.</p>
+
+    <h3>3.1 Vault System</h3>
+    <ul>
+      <li>Climate-controlled, secure facility</li>
+      <li>24/7 livestream for public view</li>
+      <li>Automated penny counting and sorting systems</li>
+      <li>Redundant camera monitoring</li>
+      <li>Physical access controls with multi-party authorization</li>
+      <li>Optional in-person verification for community members</li>
+    </ul>
+
+    <h3>3.2 Penny Intake & Management</h3>
+    <ul>
+      <li>Automated sorting differentiates pre-1982 and post-1982 pennies</li>
+      <li>Regular physical audits</li>
+      <li>Procedures to prevent degradation (zinc rot, handling damage)</li>
+      <li>Secure storage containers designed to optimize both humor and operational efficiency</li>
+    </ul>
+    <p>A single penny may not be worth much, but thousands of them demand real infrastructure.</p>
+
+    <hr>
+
+    <h2>4. Transparency Framework</h2>
+    <p>CENT is built around radical transparency—because transparency makes the meme stronger.</p>
+
+    <h3>4.1 Live Monitoring</h3>
+    <ul>
+      <li><span class="highlight">Public livestream</span> of the vault</li>
+      <li><span class="highlight">Real-time penny count</span> updated automatically</li>
+      <li><span class="highlight">On-chain token supply</span> shown beside physical supply</li>
+      <li><span class="highlight">Alerts</span> if counts diverge</li>
+    </ul>
+
+    <h3>4.2 Public Attestations</h3>
+    <p>CENT will publish:</p>
+    <ul>
+      <li>Regular attestations of physical penny count</li>
+      <li>Reports on deposits, withdrawals, and redemptions</li>
+      <li>Security and operational assessments</li>
+      <li>Independent audit summaries when available</li>
+    </ul>
+    <p>Everything except the taste of the pennies is disclosed.</p>
+
+    <hr>
+
+    <h2>5. Operational Procedures</h2>
+
+    <h3>5.1 Minting Process</h3>
+    <ol>
+      <li>User initiates a mint request via the CENT interface</li>
+      <li>User receives instructions for delivering pennies</li>
+      <li>User physically delivers pennies to the vault</li>
+      <li>Staff verify and count the pennies</li>
+      <li>Equivalent CENT tokens are minted on-chain</li>
+      <li>Tokens are sent to the user's wallet</li>
+      <li>A tasteful meme or celebratory GIF may be posted (optional but encouraged)</li>
+    </ol>
+
+    <h3>5.2 Redemption Process</h3>
+    <ol>
+      <li>User initiates a redemption request</li>
+      <li>Equivalent amount of CENT is burned</li>
+      <li>Physical pennies are retrieved from the vault</li>
+      <li>User receives pennies in person</li>
+      <li>Transaction is logged publicly</li>
+      <li>A redemption selfie may be taken (optional but recommended)</li>
+    </ol>
+
+    <hr>
+
+    <h2>6. Risk Management</h2>
+    <p>CENT incorporates both technical and physical safeguards.</p>
+
+    <h3>6.1 Security Architecture</h3>
+    <ul>
+      <li>Multisig authorization for key operations</li>
+      <li>Time-locked governance actions</li>
+      <li>Regular penetration testing</li>
+      <li>Separation of duties for vault staff</li>
+      <li>Monitoring for penny contamination, counterfeit coins, and loss</li>
+      <li>Redundant livestream servers</li>
+    </ul>
+
+    <h3>6.2 Identified Risks</h3>
+    <p>CENT acknowledges inherent risks, including:</p>
+    <ul>
+      <li>Penny miscounts</li>
+      <li>Camera outages</li>
+      <li>Solana network downtime</li>
+      <li>Supply chain issues in acquiring pennies</li>
+      <li>Unexpected community enthusiasm exceeding penny availability</li>
+      <li>Legal or regulatory reinterpretations</li>
+      <li>Zinc's well-known tendency toward corrosion</li>
+    </ul>
+    <p>Risks will be communicated transparently.</p>
+
+    <hr>
+
+    <h2>7. Legal & Compliance</h2>
+    <p>CENT is not:</p>
+    <ul>
+      <li>A stablecoin</li>
+      <li>A security or commodity</li>
+      <li>A stored-value instrument</li>
+      <li>A money transmission product</li>
+      <li>Legal tender</li>
+      <li>Endorsed by the U.S. Mint, Treasury, or any zinc lobby</li>
+    </ul>
+    <p>Primary purchasers will undergo KYC to comply with applicable laws. CENT will adapt to changing regulatory landscapes while maintaining its experimental status.</p>
+
+    <hr>
+
+    <h2>8. Economic Model</h2>
+
+    <h3>8.1 Fees</h3>
+    <p>CENT may charge modest operational fees to cover:</p>
+    <ul>
+      <li>Vault storage</li>
+      <li>Security</li>
+      <li>Livestream infrastructure</li>
+      <li>Penny acquisition, sorting, and handling</li>
+    </ul>
+
+    <h3>8.2 Theoretical Over-Collateralization</h3>
+    <p>Because pennies contain physical metal, CENT's collateral may (theoretically, incidentally) exceed face value.</p>
+    <ul>
+      <li><span class="highlight">Pre-1982 pennies (95% copper):</span> melt value ≈ $0.0275</li>
+      <li><span class="highlight">Post-1982 pennies (97.5% zinc):</span> melt value ≈ $0.0077</li>
+      <li>Melting pennies is illegal in the United States</li>
+    </ul>
+    <p>CENT makes no claim of capturing or passing through melt value; it is noted only for completeness and for the enjoyment of metal-value enthusiasts.</p>
+
+    <hr>
+
+    <h2>9. Community Wishlist</h2>
+    <p>These are not commitments—just things that would be delightful:</p>
+    <ul>
+      <li>Integration with DeFi protocols</li>
+      <li>Wrapped penny cross-chain bridging</li>
+      <li>Governance memes</li>
+      <li>Partnership with Charles Schwab for <span class="highlight">SCENT</span>, the hypothetical CENT ETF</li>
+      <li>CoinStar partnerships</li>
+      <li>Penny robotics automation</li>
+      <li>Expansion to nickels ("NICKEL: Coming soon-ish?")</li>
+    </ul>
+    <p>Open-source contributors are welcome.</p>
+
+    <hr>
+
+    <h2>10. Are They Actually Doing This? (FAQ)</h2>
+
+    <div class="faq-item">
+      <div class="faq-question">Q: Is CENT a joke?</div>
+      <div class="faq-answer">A: Not exactly. CENT runs on real infrastructure, real code, and real pennies.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Q: Are the pennies real?</div>
+      <div class="faq-answer">A: Yes. You can watch them live, 24/7.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Q: Why pennies?</div>
+      <div class="faq-answer">A: Because they are physical, abundant, amusing, and symbolize the gap between monetary systems and reality.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Q: Can I redeem CENT for pennies?</div>
+      <div class="faq-answer">A: Maybe. On a best-efforts basis. No guarantees. No legal rights. No promises.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Q: Why does this exist?</div>
+      <div class="faq-answer">A: Because bridging physical and digital value should be fun, transparent, and slightly unhinged.</div>
+    </div>
+
+    <hr>
+
+    <h2>11. Conclusion</h2>
+    <p>CENT is an experiment at the intersection of physical reality, digital assets, and community-driven transparency. By anchoring a token to a humble U.S. penny—and allowing the world to watch that backing at all times—CENT challenges assumptions about what money is, how value is represented, and how memes can inspire serious systems.</p>
+    <p>It is both a playful commentary on modern finance and a fully operational project. Whether CENT becomes a footnote, a movement, or a museum exhibit remains to be seen.</p>
+
+    <hr>
+
+    <div class="contact">
+      <h2 style="margin-top: 0;">Contact</h2>
+      <p style="margin-bottom: 0;"><span class="highlight">ambition@stablecent.com</span><br>
+      For inquiries, collabs, or penny donations.</p>
+    </div>
+
+    <div class="disclaimer">
+      <h2>Legal Disclaimer</h2>
+      <p>This whitepaper is for informational purposes only and does not constitute an offer to sell or the solicitation of an offer to purchase any tokens. No statements herein should be interpreted as a promise of redemption, profit, return, or stability. CENT is not intended as a payment instrument or financial product. Any token sale, if conducted, will rely solely on definitive offering documents.</p>
+      <p style="margin-bottom: 0;">By holding or interacting with CENT, you acknowledge that CENT may or may not track the value of one U.S. penny, and that any physical pennies associated with the project remain under the custody and discretion of the project operators. Please check your couch cushions responsibly.</p>
+    </div>
+  </div>
+</body>
+</html>
