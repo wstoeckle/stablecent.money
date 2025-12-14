@@ -2,25 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>CENT - The Physical Penny Token</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Ctext%20y='14'%20font-size='16'%3E%F0%9F%A6%85%3C/text%3E%3C/svg%3E">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+  <meta name="theme-color" content="#0a0e0a">
+  <title>CENT DEFENSE MONITORING STATION - CLASSIFIED</title>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --copper-900: #2f1a0c;
-      --copper-700: #7c431a;
-      --copper-500: #b96a2b;
-      --copper-300: #f3b073;
-      --sand: #fdf8f3;
-      --parchment: #f6efe7;
-      --ink: #161c2d;
-      --ink-soft: #42506b;
-      --ink-muted: #8a96ad;
-      --success: #3ab97c;
-      --shadow: 0 30px 60px -35px rgba(38, 20, 0, 0.45);
-    }
-
     * {
       margin: 0;
       padding: 0;
@@ -28,1124 +14,726 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at top left, rgba(243, 176, 115, 0.25), transparent 45%),
-                  radial-gradient(circle at bottom right, rgba(186, 106, 43, 0.3), transparent 40%),
-                  var(--sand);
-      color: var(--ink);
-      line-height: 1.6;
-      position: relative;
-      min-height: 100vh;
+      font-family: 'Courier Prime', monospace;
+      background: #0a0e0a;
+      color: #00ff41;
+      line-height: 1.4;
+      overflow-x: hidden;
     }
 
-    body.menu-open {
-      overflow: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: url('data:image/svg+xml,%3Csvg%20xmlns="http://www.w3.org/2000/svg"%20width="120"%20height="120"%20viewBox="0%200%20120%20120"%3E%3Cpath%20d="M30%2060c15-6%2030-6%2045%200"%20stroke="rgba(186,106,43,0.08)"%20stroke-width="4"%20fill="none"/%3E%3Cpath%20d="M0%2090c20-9%2040-9%2060%200"%20stroke="rgba(186,106,43,0.06)"%20stroke-width="3"%20fill="none"/%3E%3Ccircle%20cx="95"%20cy="25"%20r="6"%20fill="rgba(122,67,26,0.07)"/%3E%3C/svg%3E');
-      opacity: 0.45;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .news-ticker {
-      background: rgba(47, 26, 12, 0.9);
-      color: #fff;
-      padding: 0.65rem 0;
-      overflow: hidden;
-      position: relative;
-      border-bottom: 1px solid rgba(243, 176, 115, 0.35);
-      font-size: 0.85rem;
-      letter-spacing: 0.03em;
-    }
-
-    .ticker-content {
+    .classified-header {
+      background: #000;
+      border-bottom: 2px solid #00ff41;
+      padding: 0.5rem 2rem;
       display: flex;
-      animation: scroll 28s linear infinite;
-      gap: 3rem;
-      white-space: nowrap;
-    }
-
-    .ticker-item {
-      font-weight: 500;
-      opacity: 0.9;
-    }
-
-    @keyframes scroll {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
-
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(253, 248, 243, 0.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(186, 106, 43, 0.18);
-    }
-
-    @supports (padding-top: env(safe-area-inset-top)) {
-      nav {
-        padding-top: calc(clamp(0.85rem, 3vw, 1.25rem) + env(safe-area-inset-top));
-      }
-    }
-
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: clamp(0.85rem, 3vw, 1.25rem) clamp(1rem, 5vw, 2rem);
-      display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 2rem;
-    }
-
-    .logo {
-      display: flex;
       align-items: center;
-      gap: 0.75rem;
-      font-weight: 700;
-      font-size: 1.75rem;
-      color: var(--copper-700);
-      letter-spacing: 0.04em;
-    }
-
-    .logo-icon {
-      width: 34px;
-      height: 34px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--copper-500);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    .nav-links a {
-      color: var(--ink-soft);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--copper-700);
-    }
-
-    .badge-live {
-      background: rgba(58, 185, 124, 0.12);
-      color: var(--success);
-      border: 1px solid rgba(58, 185, 124, 0.4);
-      border-radius: 999px;
-      padding: 0.25rem 0.9rem;
+      font-family: 'Share Tech Mono', monospace;
+      text-transform: uppercase;
       font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
 
-    .button {
-      background: linear-gradient(135deg, var(--copper-500), var(--copper-300));
-      color: #fff;
-      padding: 0.85rem 1.6rem;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 600;
-      border: 1px solid rgba(185, 106, 43, 0.4);
-      box-shadow: var(--shadow);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
+    .blink {
+      animation: blink 1s infinite;
     }
 
-    .button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 25px 45px -30px rgba(185, 106, 43, 0.75);
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
     }
 
-    .button-secondary {
-      background: rgba(255, 255, 255, 0.8);
-      color: var(--copper-700);
-      border: 1px solid rgba(185, 106, 43, 0.25);
-      box-shadow: none;
+    @keyframes scan {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100vh); }
     }
 
-    .button-secondary:hover {
-      background: #fff;
-      box-shadow: 0 15px 35px -25px rgba(47, 26, 12, 0.6);
-    }
-
-    .hero {
-      padding: clamp(4.5rem, 10vw, 6rem) clamp(1.5rem, 6vw, 2rem) 5rem;
-      position: relative;
-    }
-
-    .hero-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 3rem;
-      align-items: center;
-    }
-
-    .hero-copy {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-
-    .hero-eyebrow {
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--copper-700);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .hero h1 {
-      font-size: 3.25rem;
-      line-height: 1.1;
-      font-weight: 700;
-      color: var(--ink);
-    }
-
-    .hero-subtitle {
-      font-size: 1.2rem;
-      color: var(--ink-soft);
-      max-width: 520px;
-    }
-
-    .hero-details {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem 2rem;
-      color: var(--ink-muted);
-      font-size: 0.95rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .hero-card {
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid rgba(26, 18, 10, 0.08);
-      border-radius: 24px;
-      padding: 2rem;
-      backdrop-filter: blur(6px);
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(145deg, rgba(243, 176, 115, 0.08), transparent 60%);
-      pointer-events: none;
-    }
-
-    .hero-card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-weight: 600;
-      color: var(--ink-soft);
-      font-size: 0.95rem;
-    }
-
-    .hero-metric {
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--copper-700);
-    }
-
-    .hero-metric span {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--ink-muted);
-    }
-
-    .hero-card-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .hero-chip {
-      background: rgba(243, 176, 115, 0.16);
-      color: var(--copper-700);
-      padding: 0.65rem 0.9rem;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 0.85rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .announcement {
-      background: linear-gradient(120deg, rgba(186, 106, 43, 0.13), rgba(243, 176, 115, 0.18));
-      padding: clamp(2rem, 6vw, 2.75rem) clamp(1.5rem, 6vw, 2rem);
-      border-top: 1px solid rgba(186, 106, 43, 0.2);
-      border-bottom: 1px solid rgba(186, 106, 43, 0.2);
-    }
-
-    .announcement-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .announcement h2 {
-      font-size: 1.5rem;
-      color: var(--copper-700);
-      margin-bottom: 0.5rem;
-    }
-
-    .announcement p {
-      color: var(--ink-soft);
-      font-size: 1rem;
-    }
-
-    .stats {
-      padding: clamp(3.5rem, 10vw, 4.5rem) clamp(1.5rem, 6vw, 2rem) 4rem;
-    }
-
-    .stats-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.75rem;
-    }
-
-    .stat-card {
-      background: rgba(255, 255, 255, 0.82);
-      border-radius: 20px;
-      padding: 2rem;
-      border: 1px solid rgba(26, 18, 10, 0.05);
-      box-shadow: 0 20px 45px -35px rgba(0, 0, 0, 0.45);
-      text-align: left;
-    }
-
-    .stat-card .number {
-      font-size: 2.4rem;
-      font-weight: 700;
-      color: var(--copper-700);
-      margin-bottom: 0.75rem;
-    }
-
-    .stat-card h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 0.35rem;
-    }
-
-    .stat-card p {
-      font-size: 0.95rem;
-      color: var(--ink-muted);
-    }
-
-    .content-section {
-      padding: clamp(3.5rem, 10vw, 4.5rem) clamp(1.5rem, 6vw, 2rem);
-      position: relative;
-    }
-
-    .content-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .section-title {
-      font-size: 2.4rem;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 1rem;
-    }
-
-    .section-description {
-      font-size: 1.1rem;
-      color: var(--ink-soft);
-      margin-bottom: 3rem;
-      max-width: 680px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.75rem;
-      text-align: left;
-    }
-
-    .feature-card {
-      background: rgba(255, 255, 255, 0.85);
-      border-radius: 20px;
-      padding: 1.75rem;
-      border: 1px solid rgba(26, 18, 10, 0.08);
-      box-shadow: 0 18px 40px -32px rgba(0, 0, 0, 0.35);
-    }
-
-    .feature-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      background: rgba(186, 106, 43, 0.15);
-      color: var(--copper-700);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .feature-card h3 {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 0.65rem;
-    }
-
-    .feature-card p {
-      color: var(--ink-muted);
-      font-size: 0.95rem;
-    }
-
-    .vault-section {
-      background: rgba(255, 255, 255, 0.72);
-    }
-
-    .vault-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 2rem;
-      align-items: center;
-      text-align: left;
-    }
-
-    .vault-feed {
-      border-radius: 22px;
-      overflow: hidden;
-      box-shadow: 0 30px 60px -40px rgba(0, 0, 0, 0.55);
-      border: 1px solid rgba(26, 18, 10, 0.12);
-    }
-
-    .vault-feed img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-      height: 100%;
-    }
-
-    .vault-list {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .vault-item {
-      background: rgba(243, 176, 115, 0.15);
-      border: 1px solid rgba(186, 106, 43, 0.2);
-      border-radius: 14px;
-      padding: 1rem 1.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .vault-item span {
-      font-weight: 600;
-      color: var(--copper-700);
-    }
-
-    .penny-counter {
-      background: rgba(47, 26, 12, 0.85);
-      color: #fff;
-      border-radius: 20px;
-      padding: 2rem;
-      text-align: center;
-      margin-top: 2rem;
-      box-shadow: 0 30px 65px -35px rgba(0, 0, 0, 0.65);
-    }
-
-    .counter-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.75);
-    }
-
-    .counter-number {
-      font-size: 3rem;
-      font-weight: 700;
-      margin: 0.5rem 0;
-      letter-spacing: 0.04em;
-    }
-
-    .counter-subtitle {
-      font-size: 0.95rem;
-      color: rgba(255, 255, 255, 0.7);
-    }
-
-    .viral-section {
-      background: rgba(22, 28, 45, 0.88);
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .viral-section::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top right, rgba(243, 176, 115, 0.28), transparent 55%);
-      opacity: 0.85;
-      pointer-events: none;
-    }
-
-    .viral-section .content-container {
-      position: relative;
-      z-index: 1;
-    }
-
-    .tweet-template {
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      text-align: left;
-    }
-
-    .eagle-portrait {
-      max-width: 100%;
-      height: auto;
-      border-radius: 22px;
-      box-shadow: 0 25px 60px -40px rgba(0, 0, 0, 0.55);
-      cursor: pointer;
-      display: block;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .eagle-portrait:hover,
-    .eagle-portrait:focus-visible {
-      transform: translateY(-4px);
-      box-shadow: 0 32px 70px -38px rgba(0, 0, 0, 0.65);
-    }
-
-    .eagle-portrait:focus-visible {
-      outline: 3px solid rgba(185, 106, 43, 0.7);
-      outline-offset: 6px;
-    }
-
-    .share-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-      margin: 2rem 0 0;
-    }
-
-    .share-button {
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 999px;
-      padding: 0.75rem 1.5rem;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    .share-button:hover {
-      transform: translateY(-2px);
-      background: rgba(255, 255, 255, 0.22);
-    }
-
-    footer {
-      background: rgba(15, 18, 30, 0.92);
-      color: rgba(255, 255, 255, 0.82);
-      padding: clamp(3rem, 10vw, 4rem) clamp(1.5rem, 6vw, 2rem) 2.5rem;
-    }
-
-    .footer-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
-      gap: 2.5rem;
-    }
-
-    .footer-container h3 {
-      margin-bottom: 1rem;
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.75);
-    }
-
-    .footer-container p,
-    .footer-container a {
-      font-size: 0.95rem;
-      color: rgba(255, 255, 255, 0.72);
-      text-decoration: none;
-    }
-
-    .footer-container a {
-      display: block;
-      margin-bottom: 0.5rem;
-      transition: opacity 0.2s ease;
-    }
-
-    .footer-container a:hover {
-      opacity: 1;
-    }
-
-    .footer-note {
-      color: rgba(255, 255, 255, 0.55);
-      font-size: 0.85rem;
-      margin-top: 1rem;
-      font-style: italic;
-    }
-
-    .hamburger {
-      display: none;
-      background: none;
-      border: none;
-      padding: 0.5rem;
-      cursor: pointer;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 22px;
+    .scan-line {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
       height: 2px;
-      background: var(--ink);
-      margin: 5px 0;
-      transition: transform 0.2s ease, opacity 0.2s ease;
+      background: linear-gradient(to bottom, transparent, #00ff41, transparent);
+      animation: scan 3s linear infinite;
+      pointer-events: none;
+      z-index: 9999;
     }
 
-    @media (max-width: 960px) {
-      .hero-inner {
-        grid-template-columns: 1fr;
-      }
+    .terminal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
 
-      .announcement-inner,
-      .vault-grid {
-        grid-template-columns: 1fr;
-      }
+    .terminal-window {
+      background: rgba(0, 20, 0, 0.9);
+      border: 2px solid #00ff41;
+      padding: 0;
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+      position: relative;
+    }
 
-      .hero-card {
-        order: -1;
-      }
+    .terminal-header {
+      background: #00ff41;
+      color: #000;
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-      .hero-copy {
-        text-align: center;
-        align-items: center;
-      }
+    .terminal-body {
+      padding: 1.5rem;
+      min-height: 200px;
+      font-size: 0.9rem;
+    }
 
-      .hero-subtitle,
-      .hero-details {
-        justify-content: center;
-        text-align: center;
-      }
+    .stat-line {
+      display: flex;
+      justify-content: space-between;
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      border-left: 3px solid #00ff41;
+      background: rgba(0, 255, 65, 0.05);
+    }
+
+    .stat-value {
+      color: #ffff00;
+      font-weight: bold;
+    }
+
+    .alert-critical {
+      color: #ff0000;
+      animation: blink 0.5s infinite;
+    }
+
+    .alert-secure {
+      color: #00ff41;
+    }
+
+    .hero-terminal {
+      grid-column: 1 / -1;
+      background: rgba(0, 40, 0, 0.95);
+    }
+
+    .big-stat {
+      font-size: 3rem;
+      font-weight: bold;
+      text-align: center;
+      color: #ffff00;
+      text-shadow: 0 0 10px #ffff00;
+      margin: 1rem 0;
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    .surveillance-feed {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .feed-box {
+      border: 1px solid #00ff41;
+      padding: 0.5rem;
+      background: #000;
+      text-align: center;
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .feed-label {
+      font-size: 0.7rem;
+      margin-bottom: 0.5rem;
+      opacity: 0.7;
+    }
+
+    .threat-level {
+      background: #000;
+      border: 3px solid #ffff00;
+      padding: 2rem;
+      text-align: center;
+      margin: 2rem;
+      position: relative;
+    }
+
+    .threat-level::before,
+    .threat-level::after {
+      content: '⚠️';
+      position: absolute;
+      font-size: 2rem;
+      animation: blink 0.8s infinite;
+    }
+
+    .threat-level::before {
+      top: 1rem;
+      left: 1rem;
+    }
+
+    .threat-level::after {
+      top: 1rem;
+      right: 1rem;
+    }
+
+    .access-button {
+      background: #00ff41;
+      color: #000;
+      border: none;
+      padding: 1rem 2rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+      transition: all 0.2s;
+      min-height: 44px; /* Minimum touch target size */
+      display: inline-block;
+      text-align: center;
+    }
+
+    .access-button:hover {
+      background: #ffff00;
+      box-shadow: 0 0 30px rgba(255, 255, 0, 0.8);
+    }
+
+    .access-button:active {
+      transform: scale(0.98);
+    }
+
+    .timestamp {
+      font-size: 0.7rem;
+      opacity: 0.6;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .footer-terminal {
+      background: #000;
+      border-top: 2px solid #00ff41;
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.75rem;
+      margin-top: 2rem;
     }
 
     @media (max-width: 768px) {
-      .nav-links {
-        position: fixed;
-        top: 56px;
-        left: 1rem;
-        right: 1rem;
-        padding: 1.5rem;
-        border-radius: 16px;
-        background: rgba(253, 248, 243, 0.96);
-        border: 1px solid rgba(186, 106, 43, 0.18);
-        display: grid;
-        gap: 1rem;
-        transform: translateY(-12px);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s ease;
-        max-width: min(420px, calc(100% - 2rem));
-        margin: 0 auto;
-      }
-
-      @supports (top: calc(56px + env(safe-area-inset-top))) {
-        .nav-links {
-          top: calc(56px + env(safe-area-inset-top));
-        }
-      }
-
-      .nav-links.active {
-        opacity: 1;
-        pointer-events: auto;
-        transform: translateY(0);
-      }
-
-      .nav-links .badge-live {
-        justify-self: start;
-      }
-
-      .hamburger {
-        display: block;
-      }
-
-      .hero {
-        padding: 4.5rem 1.5rem 4rem;
-      }
-
-      .hero h1 {
-        font-size: 2.4rem;
-      }
-
-      .hero-subtitle {
-        font-size: 1.05rem;
-      }
-
-      .announcement-inner {
-        gap: 1.5rem;
+      .classified-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+        font-size: 0.65rem;
         text-align: center;
       }
 
-      .announcement .hero-actions {
-        justify-content: center !important;
-        width: 100%;
+      .threat-level {
+        padding: 1.5rem 1rem;
       }
 
-      .button,
-      .button-secondary {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .footer-container {
+      .terminal-grid {
         grid-template-columns: 1fr;
+        padding: 1rem 0.75rem;
+        gap: 1rem;
+      }
+
+      .terminal-window {
+        border-width: 1px;
+      }
+
+      .terminal-header {
+        padding: 0.65rem 1rem;
+        font-size: 0.75rem;
+        flex-direction: column;
+        gap: 0.25rem;
         text-align: center;
       }
 
-      .footer-container a {
-        display: inline-block;
-        margin: 0.25rem 0.75rem;
+      .terminal-body {
+        padding: 1rem;
+        font-size: 0.85rem;
       }
-    }
 
-    @media (max-width: 520px) {
-      .hero h1 {
+      .big-stat {
         font-size: 2rem;
       }
 
-      .hero-card {
-        padding: 1.6rem;
+      .surveillance-feed {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
       }
 
-      .news-ticker {
-        font-size: 0.75rem;
-        padding: 0.55rem 0;
+      .feed-box {
+        min-height: 80px;
+        padding: 0.5rem;
       }
 
-      .hero-details {
-        font-size: 0.9rem;
+      .stat-line {
+        font-size: 0.8rem;
+        padding: 0.4rem;
+        flex-direction: column;
+        gap: 0.25rem;
+        align-items: flex-start;
       }
 
-      .counter-number {
-        font-size: 2.2rem;
+      .stat-value {
+        font-size: 0.85rem;
       }
 
-      .button,
-      .share-button {
-        font-size: 0.95rem;
+      /* Comparison grid - stack on mobile */
+      .terminal-body > div[style*="grid-template-columns: 1fr 1fr"] {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
       }
 
-      .footer-container {
-        gap: 1.75rem;
+      .access-button {
+        padding: 0.85rem 1.5rem;
+        font-size: 0.85rem;
+        width: 100%;
+        margin: 0.5rem 0;
       }
     }
 
-    @media (max-width: 400px) {
-      .hero h1 {
-        font-size: 1.85rem;
+    @media (max-width: 480px) {
+      .classified-header {
+        font-size: 0.6rem;
+        padding: 0.5rem;
       }
 
-      .hero-card {
-        gap: 1rem;
+      .threat-level {
+        padding: 1rem 0.5rem;
       }
 
-      .hero-metric {
-        font-size: 2.4rem;
+      .threat-level div:first-child {
+        font-size: 0.7rem;
       }
 
-      .announcement-inner p {
-        font-size: 0.95rem;
+      .threat-level div:nth-child(2) {
+        font-size: 2rem;
+      }
+
+      .terminal-grid {
+        padding: 0.75rem 0.5rem;
+      }
+
+      .terminal-body {
+        padding: 0.75rem;
+        font-size: 0.8rem;
+        min-height: auto;
+      }
+
+      .big-stat {
+        font-size: 1.75rem;
+      }
+
+      .surveillance-feed {
+        grid-template-columns: 1fr;
+      }
+
+      .feed-box {
+        min-height: 70px;
+      }
+
+      .access-button {
+        padding: 0.75rem 1rem;
+        font-size: 0.8rem;
+      }
+
+      /* FAQ section mobile optimizations */
+      .terminal-body div[style*="display: grid; gap: 1.5rem"] > div {
+        padding: 0.5rem 0;
+      }
+
+      .terminal-body div[style*="color: #ffff00"] {
+        font-size: 0.75rem !important;
+        word-break: break-word;
+      }
+
+      .terminal-body div[style*="border-left: 3px solid #00ff41"] {
+        padding: 0.5rem !important;
+        font-size: 0.75rem !important;
+        line-height: 1.5 !important;
+      }
+
+      /* Critical intelligence summary mobile */
+      .terminal-body div[style*="background: rgba(255, 255, 0, 0.1)"] {
+        padding: 1rem !important;
+      }
+
+      .terminal-body div[style*="background: rgba(255, 255, 0, 0.1)"] div:first-child {
+        font-size: 0.9rem !important;
+      }
+
+      .terminal-body div[style*="background: rgba(255, 255, 0, 0.1)"] div:last-child {
+        font-size: 0.75rem !important;
+        line-height: 1.6 !important;
+      }
+
+      /* Operations log mobile */
+      #operations-log {
+        font-size: 0.65rem !important;
+      }
+
+      #operations-log > div {
+        word-break: break-all;
+        line-height: 1.4;
+      }
+
+      /* Access panel mobile */
+      .terminal-body div[style*="font-size: 1.2rem"] {
+        font-size: 0.9rem !important;
+      }
+
+      .terminal-body div[style*="font-size: 0.9rem"] {
+        font-size: 0.75rem !important;
+      }
+
+      /* Make buttons stack in single column on small screens */
+      .terminal-body div[style*="display: flex"] {
+        flex-direction: column !important;
+      }
+
+      /* Ensure touch-friendly spacing */
+      * {
+        -webkit-tap-highlight-color: rgba(0, 255, 65, 0.2);
       }
     }
   </style>
 </head>
 <body>
-  <div class="news-ticker">
-    <div class="ticker-content">
-      <span class="ticker-item">🚨 PENNY PRESERVATION IS LIVE — EVERY TOKEN BACKED BY A REAL CENT</span>
-      <span class="ticker-item">🦅 EAGLE OPERATIONS CONFIRMED 24/7 VAULT SURVEILLANCE</span>
-      <span class="ticker-item">📦 MINT REQUESTS PROCESSED DAILY WITH TRANSPARENT ON-CHAIN RECEIPTS</span>
-      <span class="ticker-item">📈 PROOF-OF-RESERVE DASHBOARD UPDATED IN REAL TIME</span>
+  <div class="scan-line"></div>
+
+  <div class="classified-header">
+    <span>CLASSIFIED - LEVEL 5 CLEARANCE REQUIRED</span>
+    <span class="timestamp" id="timestamp"></span>
+    <span class="blink">● REC</span>
+  </div>
+
+  <div class="threat-level">
+    <div style="font-size: 0.8rem; margin-bottom: 1rem;">NATIONAL PENNY THREAT LEVEL</div>
+    <div style="font-size: 2.5rem; font-weight: bold; color: #00ff41;">SECURE</div>
+    <div style="font-size: 0.75rem; margin-top: 1rem; opacity: 0.8;">ALL COPPER ASSETS NOMINAL</div>
+  </div>
+
+  <div class="terminal-grid">
+    <!-- Main Status -->
+    <div class="terminal-window hero-terminal">
+      <div class="terminal-header">
+        <span>🛡️ PENNY DEFENSE MONITORING STATION</span>
+        <span class="alert-secure">● ACTIVE</span>
+      </div>
+      <div class="terminal-body">
+        <div style="text-align: center;">
+          <div style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem;">VERIFIED COPPER ASSETS</div>
+          <div class="big-stat">1,000,000</div>
+          <div style="font-size: 0.85rem; opacity: 0.7;">PHYSICAL PENNY UNITS SECURED</div>
+        </div>
+        <div class="surveillance-feed">
+          <div class="feed-box">
+            <div class="feed-label">CAMERA ALPHA-1</div>
+            <div style="font-size: 1.5rem;">📹</div>
+            <div style="font-size: 0.7rem; color: #00ff41;">ACTIVE</div>
+          </div>
+          <div class="feed-box">
+            <div class="feed-label">CAMERA BETA-2</div>
+            <div style="font-size: 1.5rem;">📹</div>
+            <div style="font-size: 0.7rem; color: #00ff41;">ACTIVE</div>
+          </div>
+          <div class="feed-box">
+            <div class="feed-label">EAGLE SQUADRON</div>
+            <div style="font-size: 1.5rem;">🦅</div>
+            <div style="font-size: 0.7rem; color: #00ff41;">PATROLLING</div>
+          </div>
+          <div class="feed-box">
+            <div class="feed-label">VAULT INTEGRITY</div>
+            <div style="font-size: 1.5rem;">🔒</div>
+            <div style="font-size: 0.7rem; color: #00ff41;">100%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Critical Intelligence Summary -->
+    <div class="terminal-window full-width">
+      <div class="terminal-header">
+        <span>📋 CRITICAL INTELLIGENCE SUMMARY</span>
+        <span>PRIORITY: HIGH</span>
+      </div>
+      <div class="terminal-body" style="text-align: center; padding: 2rem;">
+        <div style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+          The first memecoin you can physically touch.
+          Every CENT token is backed by an actual penny in an actual vault.
+        </div>
+        <div style="padding: 1.5rem; background: rgba(255, 255, 0, 0.1); border: 2px solid #ffff00;">
+          <span style="color: #00ff41; font-weight: bold; font-size: 1.2rem;">1 CENT = 1 PENNY. ALWAYS. FOREVER. LIVESTREAMED.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparison -->
+    <div class="terminal-window full-width" style="border-color: #ffff00;">
+      <div class="terminal-header" style="background: #ffff00;">
+        <span>⚠️ COMPARATIVE THREAT ANALYSIS</span>
+        <span>CLASSIFIED</span>
+      </div>
+      <div class="terminal-body">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem;">
+          <div>
+            <div style="font-weight: bold; margin-bottom: 1rem; color: #ffff00;">OTHER STABLECOINS:</div>
+            <div class="stat-line" style="border-color: #ff0000;">
+              <span>TREASURY TRANSPARENCY:</span>
+              <span style="color: #ff0000;">UNKNOWN</span>
+            </div>
+            <div class="stat-line" style="border-color: #ff0000;">
+              <span>PHYSICAL VERIFICATION:</span>
+              <span style="color: #ff0000;">NONE</span>
+            </div>
+            <div class="stat-line" style="border-color: #ff0000;">
+              <span>LIVE SURVEILLANCE:</span>
+              <span style="color: #ff0000;">UNAVAILABLE</span>
+            </div>
+            <div class="stat-line" style="border-color: #ff0000;">
+              <span>EAGLE GUARDIANS:</span>
+              <span style="color: #ff0000;">ZERO</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-weight: bold; margin-bottom: 1rem; color: #00ff41;">CENT PROTOCOL:</div>
+            <div class="stat-line">
+              <span>TREASURY TRANSPARENCY:</span>
+              <span class="stat-value">100% PUBLIC</span>
+            </div>
+            <div class="stat-line">
+              <span>PHYSICAL VERIFICATION:</span>
+              <span class="stat-value">CONTINUOUS</span>
+            </div>
+            <div class="stat-line">
+              <span>LIVE SURVEILLANCE:</span>
+              <span class="stat-value">24/7 FEEDS</span>
+            </div>
+            <div class="stat-line">
+              <span>EAGLE GUARDIANS:</span>
+              <span class="stat-value">DEPLOYED</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Asset Tracking -->
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <span>ASSET TRACKING SYSTEM</span>
+        <span>●●●</span>
+      </div>
+      <div class="terminal-body">
+        <div class="stat-line">
+          <span>TOTAL MASS:</span>
+          <span class="stat-value">6.0 TONS</span>
+        </div>
+        <div class="stat-line">
+          <span>PALLETS CATALOGUED:</span>
+          <span class="stat-value">18 UNITS</span>
+        </div>
+        <div class="stat-line">
+          <span>COPPER PURITY:</span>
+          <span class="stat-value">95% (PRE-1982)</span>
+        </div>
+        <div class="stat-line">
+          <span>VAULT TEMP:</span>
+          <span class="stat-value">68°F OPTIMAL</span>
+        </div>
+        <div class="stat-line">
+          <span>HUMIDITY:</span>
+          <span class="stat-value">45% NOMINAL</span>
+        </div>
+        <div class="stat-line">
+          <span>LAST AUDIT:</span>
+          <span class="stat-value">00:47 AGO</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Security Status -->
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <span>SECURITY PROTOCOLS</span>
+        <span class="alert-secure">● ENGAGED</span>
+      </div>
+      <div class="terminal-body">
+        <div class="stat-line">
+          <span>DUAL-CONTROL ACCESS:</span>
+          <span class="stat-value alert-secure">ENABLED</span>
+        </div>
+        <div class="stat-line">
+          <span>MOTION SENSORS:</span>
+          <span class="stat-value alert-secure">ACTIVE (24)</span>
+        </div>
+        <div class="stat-line">
+          <span>EAGLE PATROLS:</span>
+          <span class="stat-value alert-secure">DEPLOYED (3)</span>
+        </div>
+        <div class="stat-line">
+          <span>PERIMETER STATUS:</span>
+          <span class="stat-value alert-secure">INTACT</span>
+        </div>
+        <div class="stat-line">
+          <span>UNAUTHORIZED ACCESS:</span>
+          <span class="stat-value alert-secure">ZERO ATTEMPTS</span>
+        </div>
+        <div class="stat-line">
+          <span>INSURANCE COVERAGE:</span>
+          <span class="stat-value alert-secure">FULL</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blockchain Status -->
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <span>BLOCKCHAIN VERIFICATION</span>
+        <span>⛓️</span>
+      </div>
+      <div class="terminal-body">
+        <div class="stat-line">
+          <span>TOKENS MINTED:</span>
+          <span class="stat-value">1,000,000 CENT</span>
+        </div>
+        <div class="stat-line">
+          <span>PHYSICAL:DIGITAL RATIO:</span>
+          <span class="stat-value alert-secure">1:1 PERFECT</span>
+        </div>
+        <div class="stat-line">
+          <span>ON-CHAIN RECEIPTS:</span>
+          <span class="stat-value">IMMUTABLE</span>
+        </div>
+        <div class="stat-line">
+          <span>PROOF-OF-RESERVE:</span>
+          <span class="stat-value alert-secure">VERIFIED</span>
+        </div>
+        <div class="stat-line">
+          <span>NETWORK:</span>
+          <span class="stat-value">SOLANA MAINNET</span>
+        </div>
+        <div class="stat-line">
+          <span>AUDIT TRANSPARENCY:</span>
+          <span class="stat-value alert-secure">PUBLIC</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Feed -->
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <span>FACILITY SURVEILLANCE FEED</span>
+        <span class="blink">● LIVE</span>
+      </div>
+      <div class="terminal-body">
+        <div style="border: 2px solid #00ff41; padding: 2rem; text-align: center; background: #000;">
+          <div style="font-size: 3rem; margin: 1rem 0;">🦅</div>
+          <div style="font-size: 0.8rem; opacity: 0.8;">EAGLE-CAM ALPHA</div>
+          <div style="font-size: 0.7rem; margin-top: 1rem; color: #ffff00;">
+            [FEED ACTIVE - 4K RESOLUTION]<br>
+            ARCHIVE: DECENTRALIZED STORAGE
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Operations Log -->
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <span>RECENT OPERATIONS LOG</span>
+        <span>📋</span>
+      </div>
+      <div class="terminal-body" style="font-size: 0.75rem;" id="operations-log">
+        <!-- Operations log will be dynamically populated -->
+      </div>
+    </div>
+
+    <!-- Access Panel -->
+    <div class="terminal-window full-width">
+      <div class="terminal-header">
+        <span>AUTHORIZED PERSONNEL ACCESS</span>
+        <span>🔐</span>
+      </div>
+      <div class="terminal-body" style="text-align: center; padding: 2rem;">
+        <div style="font-size: 1.2rem; margin-bottom: 1rem;">REQUEST CLEARANCE TO INTERACT WITH PENNY RESERVES</div>
+        <div style="margin: 2rem 0; opacity: 0.7; font-size: 0.9rem;">
+          Unlike other crypto treasuries operating in shadows,<br>
+          CENT maintains military-grade transparency on all copper assets.
+        </div>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <button class="access-button" onclick="window.location.href='minting.html'">🪙 MINT TOKENS</button>
+          <button class="access-button" onclick="window.location.href='transparency.html'">📊 VIEW PROOF</button>
+          <button class="access-button" onclick="alert('EAGLE SCREAM AUTHORIZED')">🦅 EAGLE STATUS</button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <nav>
-    <div class="nav-container">
-      <div class="logo">
-        <div class="logo-icon">
-          <svg viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg">
-            <path fill="currentColor" d="M626.58,454.69l22.5,22.5,45-45-22.5-22.49a182.85,182.85,0,0,0-107.34-52.57V293H500.61V360.2A183,183,0,0,0,411,409.7c-71.85,71.85-71.85,188.75,0,260.6a183,183,0,0,0,89.64,49.5V787h63.62V722.87A182.85,182.85,0,0,0,671.57,670.3l22.5-22.49-45-45-22.5,22.5a119.73,119.73,0,0,1-62.35,33.16V421.53A119.73,119.73,0,0,1,626.58,454.69ZM456,625.31a120.76,120.76,0,0,1,44.65-199v227.3A120.16,120.16,0,0,1,456,625.31Z"/>
-            <path fill="currentColor" d="M902.28,387.48A392.92,392.92,0,1,0,933.09,540,390.37,390.37,0,0,0,902.28,387.48ZM773.33,772.06A328.16,328.16,0,1,1,869.46,540,326,326,0,0,1,773.33,772.06Z"/>
-          </svg>
-        </div>
-        ¢ENT
-      </div>
-      <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div class="nav-links">
-        <span class="badge-live">Minting Now</span>
-        <a href="https://docs.google.com/document/d/1h2_8aPDMiynl9CUtNy9VQhjQKsw2lARKhognpmgTCY4/edit?usp=sharing">Whitepaper</a>
-        <a href="transparency.html">Transparency</a>
-        <a href="https://stablecent.money/merch">Merch</a>
-        <a href="minting.html" class="button">Mint CENT</a>
-      </div>
+  <div class="footer-terminal">
+    <div>CENT DEFENSE MONITORING STATION - PROTECTING AMERICA'S PENNIES SINCE 2025</div>
+    <div style="margin-top: 1rem; opacity: 0.5;">
+      THIS SYSTEM IS FOR AUTHORIZED PENNY ENTHUSIASTS ONLY<br>
+      UNAUTHORIZED ACCESS WILL BE MET WITH EAGLE DEPLOYMENT
     </div>
-  </nav>
-
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-card">
-        <div class="hero-card-header">
-          <span>Vault Snapshot</span>
-          <span>🦅 Live Feed</span>
-        </div>
-        <div class="hero-metric">1,000,000<span> pennies secured</span></div>
-        <div class="hero-card-grid">
-          <div class="hero-chip">📦 18 pallets catalogued</div>
-          <div class="hero-chip">🔒 Dual-control access</div>
-          <div class="hero-chip">🧾 On-chain receipts minted</div>
-          <div class="hero-chip">🎥 Livestream archive growing</div>
-        </div>
-        <div class="hero-details">
-          <span>Audit-ready inventory</span>
-          <span>Daily reconciliation</span>
-          <span>Fully insured storage</span>
-        </div>
-      </div>
-      <div class="hero-copy">
-        <div class="hero-eyebrow">Now minting worldwide</div>
-        <h1>The physical penny token for the on-chain economy</h1>
-        <p class="hero-subtitle">
-          CENT bridges tangible value and internet-scale liquidity. Every token equals one vault-secured U.S. penny, filmed, logged, and protected by eagle-eyed guardians.
-        </p>
-        <div class="hero-details">
-          <span>☑ Proof-of-reserve updates every 60 seconds</span>
-          <span>☑ Redemption pipeline with physical settlement</span>
-          <span>☑ Community governance flying in formation</span>
-        </div>
-        <div class="hero-actions">
-          <a href="minting.html" class="button">Start Minting</a>
-          <a href="transparency.html" class="button button-secondary">See the Proof</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="announcement">
-    <div class="announcement-inner">
-      <div>
-        <h2>🚀 CENT is officially live</h2>
-        <p>
-          The vault doors are open. Deposits are being catalogued, tokens are minting, and the eagle task force is logging every movement. Join the first wave of members safeguarding America’s humble cent.
-        </p>
-      </div>
-      <div class="hero-actions" style="justify-content: flex-end;">
-        <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLSfd809MEKUdUpJRx_SZzAIAS0HkaEsn0PM5lyqJbbnlKpBN-g/viewform" class="button" target="_blank" rel="noopener">Join the Early Crew</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="how-it-works" class="content-section">
-    <div class="content-container">
-      <h2 class="section-title">How CENT stays grounded</h2>
-      <p class="section-description">
-        Simple steps. Verified custody. Immutable records. Every CENT in circulation has a filmed penny resting in the vault.
-      </p>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🏦</div>
-          <h3>Deliver pennies</h3>
-          <p>Schedule a drop-off or shipment. Our intake crew weighs, scans, and assigns custody tags before anything touches the vault floor.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🦅</div>
-          <h3>Verify & log</h3>
-          <p>Dual operators and an eagle overseer review footage, reconcile counts, and publish receipts directly to the public ledger.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <h3>Mint CENT</h3>
-          <p>Your wallet receives freshly minted CENT tokens, instantly redeemable and forever linked to their physical counterparts.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section style="padding: 4rem 2rem; background: rgba(47, 26, 12, 0.08); text-align: center;">
-    <div style="max-width: 1100px; margin: 0 auto;">
-      <img
-        src="/assets/images/guardian-eagle.jpg"
-        alt="Guardian Eagle watching over CENT pennies"
-        class="eagle-portrait"
-        id="eagle-image"
-        role="button"
-        tabindex="0"
-        aria-label="Play the guardian eagle call"
-      >
-      <audio id="eagle-sound" src="/assets/sounds/eagle-scream.mp3" preload="auto"></audio>
-    </div>
-  </section>
-
-  <section class="stats">
-    <div class="stats-container">
-      <div class="stat-card">
-        <div class="number">1M+</div>
-        <h3>Pennies authorized</h3>
-        <p>Capacity approved for intake and fully insured across partner facilities.</p>
-      </div>
-      <div class="stat-card">
-        <div class="number">24/7</div>
-        <h3>Vault monitoring</h3>
-        <p>Multi-angle live stream, motion logging, and eagle escalation protocol.</p>
-      </div>
-      <div class="stat-card">
-        <div class="number">6 tons</div>
-        <h3>Physical backing</h3>
-        <p>Metal reserves anchored in reality and reconciled against on-chain supply.</p>
-      </div>
-      <div class="stat-card">
-        <div class="number">0</div>
-        <h3>Launch delays</h3>
-        <p>Minting is live. Redemptions are functional. We’re already rolling.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="vault" class="content-section vault-section">
-    <div class="content-container">
-      <h2 class="section-title">Inside the vault</h2>
-      <p class="section-description">Every crate, pallet, and penny is catalogued. This is the command center keeping CENT grounded.</p>
-      <div class="vault-grid">
-        <div class="vault-feed">
-          <img src="/assets/images/vault-camera.jpg" alt="CENT vault with penny reserves">
-        </div>
-        <div class="vault-list">
-          <div class="vault-item">
-            <span>🎥 Live feed upgrade</span>
-            4K camera arrays now archive footage to decentralized storage.
-          </div>
-          <div class="vault-item">
-            <span>🛡️ Insurance confirmed</span>
-            Third-party underwriters certify coverage for all vaulted assets.
-          </div>
-          <div class="vault-item">
-            <span>📊 Proof dashboard</span>
-            Token supply and physical counts reconcile continuously for public review.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="trade-cent" class="content-section">
-    <div class="content-container">
-      <h2 class="section-title">Trade CENT</h2>
-      <p class="section-description">Access CENT through the partners helping us create a liquid market for physical pennies.</p>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🔄</div>
-          <h3>Jupiter</h3>
-          <p>Smart routing on Solana ensures the best pricing when swapping CENT for other assets.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">💧</div>
-          <h3>Raydium</h3>
-          <p>Deep liquidity pools backed by community LPs keep spreads tight for active traders.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🐋</div>
-          <h3>Orca</h3>
-          <p>User-friendly interface for anyone exploring CENT’s penny-backed possibilities.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="footer-container">
-      <div>
-        <h3>CENT</h3>
-        <p>The physical penny token backed by eagle-guarded reserves. We connect the analog world to transparent, on-chain finance.</p>
-        <p class="footer-note">Protected by eagles since 2025 🦅</p>
-      </div>
-      <div>
-        <h3>Resources</h3>
-        <a href="https://docs.google.com/document/d/1h2_8aPDMiynl9CUtNy9VQhjQKsw2lARKhognpmgTCY4/edit?usp=sharing">Whitepaper</a>
-        <a href="transparency.html">Transparency</a>
-        <a href="next.html">Roadmap</a>
-      </div>
-      <div>
-        <h3>Community</h3>
-        <a href="https://x.com/stablecentmoney">Twitter</a>
-        <a href="https://imgflip.com/memegenerator">Memes</a>
-        <a href="merch.html">Merchandise</a>
-      </div>
-      <div>
-        <h3>Legal</h3>
-        <p style="font-size: 0.85rem; line-height: 1.6; color: rgba(255, 255, 255, 0.65);">
-          CENT tokens are experimental and not guaranteed to maintain 1:1 parity with physical pennies. Not regulated as a stablecoin. Review the whitepaper for the latest disclosures.
-        </p>
-      </div>
-    </div>
-  </footer>
+  </div>
 
   <script>
-    function animatePennyCounter() {
-      const counter = document.getElementById('pennies-saved');
-      if (!counter) return;
-      let current = 847293;
-      const updateCounter = () => {
-        const increment = Math.floor(Math.random() * 35) + 15;
-        current += increment;
-        counter.textContent = current.toLocaleString();
-      };
-      setInterval(updateCounter, 3200 + Math.random() * 1800);
+    function updateTimestamp() {
+      const now = new Date();
+      const timestamp = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+      document.getElementById('timestamp').textContent = timestamp;
+    }
+    updateTimestamp();
+    setInterval(updateTimestamp, 1000);
+
+    function updateOperationsLog() {
+      const now = new Date();
+      const logContainer = document.getElementById('operations-log');
+      if (!logContainer) return;
+
+      // Create array of recent operations with time offsets (in minutes)
+      const operations = [
+        { offset: 8, message: 'EAGLE PATROL COMMENCED' },
+        { offset: 15, message: 'VAULT RECONCILIATION COMPLETE' },
+        { offset: 30, message: 'HOURLY CENSUS: 1,000,000 UNITS' },
+        { offset: 45, message: 'TEMPERATURE CHECK: NOMINAL' },
+        { offset: 62, message: 'SECURITY SWEEP: CLEAR' },
+        { offset: 90, message: 'BLOCKCHAIN SYNC: SUCCESS' },
+        { offset: 127, message: 'EAGLE ROTATION: SHIFT CHANGE' }
+      ];
+
+      // Generate log entries
+      let html = '';
+      operations.forEach(op => {
+        const logTime = new Date(now.getTime() - (op.offset * 60 * 1000));
+        const formattedTime = logTime.toISOString().replace('T', ' ').substring(0, 19);
+        html += `<div>> ${formattedTime} | ${op.message}</div>`;
+      });
+
+      // Add waiting message
+      html += '<div style="margin-top: 1rem; color: #ffff00;">> AWAITING NEXT OPERATION...</div>';
+
+      logContainer.innerHTML = html;
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      animatePennyCounter();
-      const eagleImage = document.getElementById('eagle-image');
-      const eagleSound = document.getElementById('eagle-sound');
-
-      if (eagleImage && eagleSound) {
-        let lastPlayedAt = 0;
-
-        const playEagleSound = () => {
-          const now = performance.now();
-          if (now - lastPlayedAt < 250) {
-            return;
-          }
-          lastPlayedAt = now;
-          eagleSound.currentTime = 0;
-          const playPromise = eagleSound.play();
-          if (playPromise && typeof playPromise.catch === 'function') {
-            playPromise.catch(() => {
-              /* Swallow autoplay prevention errors silently */
-            });
-          }
-        };
-
-        ['mouseenter', 'focus'].forEach((eventName) => {
-          eagleImage.addEventListener(eventName, playEagleSound);
-        });
-
-        eagleImage.addEventListener('touchstart', playEagleSound, { passive: true });
-        eagleImage.addEventListener('click', playEagleSound);
-        eagleImage.addEventListener('keydown', (event) => {
-          if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            playEagleSound();
-          }
-        });
-      }
-
-      const hamburger = document.querySelector('.hamburger');
-      const navLinks = document.querySelector('.nav-links');
-      const body = document.body;
-
-      if (!hamburger || !navLinks) return;
-
-      hamburger.setAttribute('aria-expanded', 'false');
-
-      const toggleMenu = () => {
-        const isActive = !hamburger.classList.contains('active');
-        hamburger.classList.toggle('active', isActive);
-        navLinks.classList.toggle('active', isActive);
-        body.classList.toggle('menu-open', isActive);
-        hamburger.setAttribute('aria-expanded', String(isActive));
-      };
-
-      const closeMenu = () => {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-        body.classList.remove('menu-open');
-        hamburger.setAttribute('aria-expanded', 'false');
-      };
-
-      hamburger.addEventListener('click', (event) => {
-        event.stopPropagation();
-        toggleMenu();
-      });
-
-      document.querySelectorAll('.nav-links a').forEach((link) => {
-        link.addEventListener('click', closeMenu);
-      });
-
-      document.addEventListener('click', (event) => {
-        if (!navLinks.contains(event.target) && !hamburger.contains(event.target)) {
-          closeMenu();
-        }
-      });
-
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          closeMenu();
-        }
-      });
-
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-          closeMenu();
-        }
-      });
-    });
+    // Update operations log on page load
+    updateOperationsLog();
+    // Refresh operations log every minute to keep times current
+    setInterval(updateOperationsLog, 60000);
   </script>
 </body>
 </html>

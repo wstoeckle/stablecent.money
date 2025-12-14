@@ -2,25 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>CENT - Radical Transparency</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Ctext%20y='14'%20font-size='16'%3E%F0%9F%A6%85%3C/text%3E%3C/svg%3E">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TRANSPARENCY PROTOCOLS - CENT DEFENSE MONITORING</title>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --copper-900: #2f1a0c;
-      --copper-700: #7c431a;
-      --copper-500: #b96a2b;
-      --copper-300: #f3b073;
-      --sand: #fdf8f3;
-      --parchment: #f6efe7;
-      --ink: #161c2d;
-      --ink-soft: #42506b;
-      --ink-muted: #6c7792;
-      --success: #3ab97c;
-      --shadow: 0 30px 60px -35px rgba(38, 20, 0, 0.45);
-    }
-
     * {
       margin: 0;
       padding: 0;
@@ -28,689 +13,476 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at top left, rgba(243, 176, 115, 0.25), transparent 45%),
-                  radial-gradient(circle at bottom right, rgba(186, 106, 43, 0.3), transparent 40%),
-                  var(--sand);
-      color: var(--ink);
-      line-height: 1.6;
-      min-height: 100vh;
-      position: relative;
+      font-family: 'Courier Prime', monospace;
+      background: #0a0e0a;
+      color: #00ff41;
+      line-height: 1.4;
+      overflow-x: hidden;
     }
 
-    body.menu-open {
-      overflow: hidden;
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
     }
 
-    body::before {
-      content: "";
+    @keyframes scan {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100vh); }
+    }
+
+    .scan-line {
       position: fixed;
-      inset: 0;
-      background-image: url('data:image/svg+xml,%3Csvg%20xmlns="http://www.w3.org/2000/svg"%20width="120"%20height="120"%20viewBox="0%200%20120%20120"%3E%3Cpath%20d="M30%2060c15-6%2030-6%2045%200"%20stroke="rgba(186,106,43,0.08)"%20stroke-width="4"%20fill="none"/%3E%3Cpath%20d="M0%2090c20-9%2040-9%2060%200"%20stroke="rgba(186,106,43,0.06)"%20stroke-width="3"%20fill="none"/%3E%3Ccircle%20cx="95"%20cy="25"%20r="6"%20fill="rgba(122,67,26,0.07)"/%3E%3C/svg%3E');
-      opacity: 0.45;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    nav {
-      position: sticky;
       top: 0;
-      z-index: 1000;
-      background: rgba(253, 248, 243, 0.94);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(186, 106, 43, 0.18);
-      padding: clamp(0.85rem, 3vw, 1.25rem) clamp(1rem, 5vw, 2rem);
-      box-shadow: 0 12px 28px -22px rgba(47, 26, 12, 0.35);
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(to bottom, transparent, #00ff41, transparent);
+      animation: scan 3s linear infinite;
+      pointer-events: none;
+      z-index: 9999;
     }
 
-    @supports (padding-top: env(safe-area-inset-top)) {
-      nav {
-        padding-top: calc(env(safe-area-inset-top) + clamp(0.85rem, 3vw, 1.25rem));
-      }
-    }
-
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
+    .classified-header {
+      background: #000;
+      border-bottom: 2px solid #00ff41;
+      padding: 0.5rem 2rem;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 1.5rem;
-    }
-
-    .logo {
-      display: flex;
       align-items: center;
-      gap: 0.5rem;
-      font-weight: 700;
-      font-size: 1.6rem;
-      color: var(--copper-700);
-      letter-spacing: 0.04em;
+      font-family: 'Share Tech Mono', monospace;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
     }
 
-    .logo .logo-icon {
-      display: inline-flex;
-      width: 34px;
-      height: 34px;
-      align-items: center;
-      justify-content: center;
-      color: var(--copper-500);
+    .terminal-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
     }
 
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-    }
-
-    .nav-links a {
-      color: var(--ink-soft);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--copper-700);
-    }
-
-    .button {
-      background: linear-gradient(135deg, var(--copper-500), var(--copper-300));
-      color: #fff;
-      padding: 0.85rem 1.6rem;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 600;
-      border: 1px solid rgba(185, 106, 43, 0.4);
-      box-shadow: var(--shadow);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 25px 45px -30px rgba(185, 106, 43, 0.75);
-    }
-
-    .button-secondary {
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--copper-700);
-      border: 1px solid rgba(185, 106, 43, 0.25);
-      box-shadow: none;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 0.95rem;
-      border-radius: 999px;
-      background: rgba(185, 106, 43, 0.12);
-      color: var(--copper-700);
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      font-size: 0.92rem;
-      border: 1px solid rgba(185, 106, 43, 0.35);
-    }
-
-    .hero {
-      padding: clamp(4rem, 10vw, 6rem) clamp(1.5rem, 6vw, 2rem) 4rem;
+    .terminal-window {
+      background: rgba(0, 20, 0, 0.9);
+      border: 2px solid #00ff41;
+      padding: 0;
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
       position: relative;
-      overflow: hidden;
     }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 480px;
-      height: 480px;
-      background: radial-gradient(circle, rgba(185, 106, 43, 0.19), transparent 60%);
-      filter: blur(24px);
-      top: -140px;
-      right: -120px;
-      z-index: -1;
-    }
-
-    .hero-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 3rem;
-      align-items: center;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.5rem, 5vw, 3.4rem);
-      line-height: 1.1;
-      color: var(--ink);
-      margin-bottom: 1rem;
-    }
-
-    .hero p {
-      color: var(--ink-soft);
-      font-size: 1.15rem;
-      margin-bottom: 1.6rem;
-    }
-
-    .hero-actions {
+    .terminal-header {
+      background: #00ff41;
+      color: #000;
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      font-size: 0.85rem;
       display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
-
-    .glass-card {
-      background: rgba(255, 255, 255, 0.82);
-      border: 1px solid rgba(185, 106, 43, 0.25);
-      border-radius: 18px;
-      padding: 1.5rem;
-      box-shadow: var(--shadow);
-    }
-
-    .signal-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .signal-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.85rem;
-      color: var(--ink-soft);
-      font-weight: 600;
-    }
-
-    .signal-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      background: rgba(185, 106, 43, 0.1);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--copper-700);
-      font-weight: 700;
-      border: 1px solid rgba(185, 106, 43, 0.25);
-    }
-
-    section {
-      padding: clamp(3.5rem, 9vw, 5rem) clamp(1.5rem, 6vw, 2rem);
-    }
-
-    .section-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
+      align-items: center;
     }
 
-    .section-header h2 {
-      font-size: 2.25rem;
-      color: var(--ink);
-    }
-
-    .section-header p {
-      color: var(--ink-soft);
-      max-width: 560px;
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.25rem;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(185, 106, 43, 0.2);
-      border-radius: 16px;
-      padding: 1.35rem;
-      box-shadow: 0 20px 40px -34px rgba(47, 26, 12, 0.65);
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .card h3 {
-      margin: 0;
-      color: var(--ink);
-      font-size: 1.15rem;
-    }
-
-    .card p {
-      color: var(--ink-soft);
-      font-size: 0.98rem;
-    }
-
-    .microtext {
-      font-size: 0.9rem;
-      color: var(--ink-muted);
-    }
-
-    .comparison {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.2rem;
-      margin-top: 1.5rem;
-    }
-
-    .comparison-card {
-      border-radius: 16px;
+    .terminal-body {
       padding: 1.5rem;
-      background: #fff;
-      border: 1px solid rgba(185, 106, 43, 0.22);
-      box-shadow: 0 12px 28px -24px rgba(47, 26, 12, 0.45);
+      font-size: 0.9rem;
     }
 
-    .comparison-card img {
-      width: 100%;
-      border-radius: 12px;
-      margin: 1rem 0;
-    }
-
-    .comparison-card ul {
-      padding-left: 1.1rem;
-      color: var(--ink-soft);
-    }
-
-    .comparison-card li {
-      margin-bottom: 0.5rem;
-    }
-
-    .comparison-badge {
-      display: inline-block;
-      padding: 0.35rem 0.8rem;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 0.82rem;
-      letter-spacing: 0.04em;
-    }
-
-    .them {
-      border-color: rgba(255, 107, 107, 0.5);
-    }
-
-    .them .comparison-badge {
-      background: rgba(255, 107, 107, 0.12);
-      color: #c23636;
-      border: 1px solid rgba(255, 107, 107, 0.4);
-    }
-
-    .us {
-      border-color: rgba(185, 106, 43, 0.4);
-    }
-
-    .us .comparison-badge {
-      background: rgba(185, 106, 43, 0.12);
-      color: var(--copper-700);
-      border: 1px solid rgba(185, 106, 43, 0.35);
-    }
-
-    .tweet-card {
-      margin-top: 2rem;
-      padding: 1.35rem;
-      background: rgba(255, 255, 255, 0.92);
-      border-radius: 16px;
-      border: 1px solid rgba(185, 106, 43, 0.25);
-      box-shadow: 0 18px 38px -30px rgba(47, 26, 12, 0.55);
-    }
-
-    .tweet-comment {
-      margin-top: 1rem;
-      padding: 1rem;
-      border-left: 4px solid var(--copper-500);
-      background: rgba(185, 106, 43, 0.08);
-      border-radius: 12px;
-      color: var(--ink);
-    }
-
-    .vault-invite {
-      text-align: center;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(246, 239, 231, 0.9));
-      border: 1px solid rgba(185, 106, 43, 0.22);
-      border-radius: 18px;
-      padding: 2.5rem 2rem;
-      margin-top: 2rem;
-      box-shadow: 0 16px 38px -30px rgba(47, 26, 12, 0.55);
-    }
-
-    footer {
-      background: #fff;
-      border-top: 1px solid rgba(185, 106, 43, 0.25);
-      padding: 3rem 1.75rem;
-    }
-
-    .footer-container {
-      max-width: 1100px;
-      margin: 0 auto;
+    .comparison-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: 1fr 1fr;
       gap: 2rem;
+      margin-top: 2rem;
     }
 
-    footer h3 {
-      color: var(--copper-700);
-      margin-bottom: 0.75rem;
+    .comparison-box {
+      border: 2px solid #00ff41;
+      padding: 1.5rem;
+      background: rgba(0, 0, 0, 0.5);
     }
 
-    footer a {
-      display: block;
-      color: var(--ink-soft);
-      text-decoration: none;
-      margin-bottom: 0.5rem;
-      transition: color 0.2s ease;
+    .comparison-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: #ffff00;
+      text-align: center;
     }
 
-    footer a:hover {
-      color: var(--copper-700);
+    .comparison-item {
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      background: rgba(0, 255, 65, 0.05);
+      border-left: 3px solid #00ff41;
     }
 
-    .tagline {
-      color: var(--copper-700);
-      font-weight: 600;
-      margin-top: 0.5rem;
+    .bad-comparison-box {
+      border-color: #ff0000;
     }
 
-    .hamburger {
-      display: none;
-      background: none;
+    .bad-comparison-item {
+      border-left-color: #ff0000;
+      background: rgba(255, 0, 0, 0.05);
+    }
+
+    .bad-comparison-title {
+      color: #ff0000;
+    }
+
+    .access-button {
+      background: #00ff41;
+      color: #000;
       border: none;
+      padding: 1rem 2rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1rem;
+      font-weight: bold;
       cursor: pointer;
-      padding: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      margin: 0.5rem;
     }
 
-    .hamburger span {
-      display: block;
-      width: 26px;
-      height: 3px;
-      background: var(--copper-700);
-      margin: 5px 0;
-      border-radius: 10px;
-      transition: all 0.2s ease;
+    .access-button:hover {
+      background: #ffff00;
+      box-shadow: 0 0 30px rgba(255, 255, 0, 0.8);
     }
 
-    @media (max-width: 1000px) {
-      .hero-inner, .cards-grid, .comparison, .share-grid {
+    .timestamp {
+      font-size: 0.7rem;
+      opacity: 0.6;
+    }
+
+    .alert-secure {
+      color: #00ff41;
+    }
+
+    .stat-line {
+      display: flex;
+      justify-content: space-between;
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      border-left: 3px solid #00ff41;
+      background: rgba(0, 255, 65, 0.05);
+    }
+
+    .stat-value {
+      color: #ffff00;
+      font-weight: bold;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .proof-card {
+      background: rgba(0, 40, 0, 0.7);
+      border: 1px solid #00ff41;
+      padding: 1.5rem;
+    }
+
+    .proof-card h3 {
+      color: #ffff00;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .proof-card p {
+      line-height: 1.6;
+    }
+
+    .footer-terminal {
+      background: #000;
+      border-top: 2px solid #00ff41;
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .comparison-grid {
         grid-template-columns: 1fr;
-      }
-
-      .hero {
-        padding-top: 3.5rem;
-      }
-    }
-
-    @media (max-width: 840px) {
-      .nav-links {
-        position: fixed;
-        top: 76px;
-        left: 50%;
-        transform: translate(-50%, -15px);
-        width: min(420px, calc(100% - 2rem));
-        background: rgba(253, 248, 243, 0.97);
-        padding: 1.35rem;
-        border-radius: 16px;
-        border: 1px solid rgba(185, 106, 43, 0.3);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.18s ease, transform 0.18s ease;
-        box-shadow: 0 28px 70px -35px rgba(47, 26, 12, 0.8);
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.85rem;
-      }
-
-      .nav-links.active {
-        opacity: 1;
-        pointer-events: auto;
-        transform: translate(-50%, 0);
-      }
-
-      .hamburger {
-        display: block;
-      }
-
-      nav {
-        position: fixed;
-        width: 100%;
-      }
-
-      body.menu-open {
-        overflow: hidden;
-      }
-    }
-
-    @media (max-width: 540px) {
-      .hero h1 {
-        font-size: 2.2rem;
-      }
-
-      .hero-inner {
-        gap: 1.5rem;
-      }
-
-      .section-header h2 {
-        font-size: 1.9rem;
       }
     }
   </style>
 </head>
 <body>
-  <nav>
-    <div class="nav-container">
-      <div class="logo"><span class="logo-icon">🦅</span>¢ENT</div>
-      <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div class="nav-links">
-        <a href="index.html#features">Features</a>
-        <a href="transparency.html">Transparency</a>
-        <a href="merch.html">Merch</a>
-        <a href="next.html">Next...</a>
-        <a href="index.html#trade-cent" class="button">Buy CENT</a>
-      </div>
-    </div>
-  </nav>
+  <div class="scan-line"></div>
 
-  <section class="hero">
-    <div class="hero-inner">
-      <div>
-        <div class="pill">Radical transparency · No hidden reserves</div>
-        <h1>Receipts you can meme about, backing you can touch.</h1>
-        <p>Other coins wave around PDFs. CENT shows you copper. See the vault, watch the stack grow, and blast the receipts to your feed.</p>
-        <div class="hero-actions">
-          <a class="button" href="index.html#eagles-vault">See the vault</a>
-          <a class="button button-secondary" href="https://twitter.com/intent/tweet?text=CENT%20puts%20actual%20pennies%20in%20a%20vault%20and%20lets%20you%20watch.%20No%20mystery%20reserves%20%E2%80%94%20just%20memecoins%20with%20receipts.%20%F0%9F%A6%85%E2%9A%99%EF%B8%8F%20%23CENT" target="_blank" rel="noopener">Share the receipts</a>
-        </div>
-      </div>
-      <div class="glass-card">
-        <div class="microtext" style="margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.04em;">How we prove it</div>
-        <div class="signal-grid">
-          <div class="signal-item">
-            <div class="signal-icon">1:1</div>
-            <div>
-              <strong>Physical pennies, tokenized.</strong><br>
-              Minted only when copper enters the vault.
-            </div>
-          </div>
-          <div class="signal-item">
-            <div class="signal-icon">24/7</div>
-            <div>
-              <strong>Eyes on the stash.</strong><br>
-              Livestream in progress + periodic drops.
-            </div>
-          </div>
-          <div class="signal-item">
-            <div class="signal-icon">🧾</div>
-            <div>
-              <strong>Public receipts.</strong><br>
-              Photos, counts, and on-chain mints match.
-            </div>
-          </div>
-          <div class="signal-item">
-            <div class="signal-icon">🦅</div>
-            <div>
-              <strong>Eagle-certified.</strong><br>
-              Guardians that actually bite (ask the pennies).
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="classified-header">
+    <span>TRANSPARENCY PROTOCOLS - CLASSIFIED LEVEL 5</span>
+    <span class="timestamp" id="timestamp"></span>
+    <span class="blink">● REC</span>
+  </div>
 
-  <section>
-    <div class="section-inner">
-      <div class="section-header">
-        <h2>TRANSPARENCY > ATTESTATIONS</h2>
-        <p>Skip the mystery PDFs. We ship open receipts, side-by-side with on-chain supply, so anyone can dunk on shady reserves in real time.</p>
+  <div class="terminal-grid">
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <span>📋 TRANSPARENCY DIRECTIVE</span>
+        <span class="alert-secure">● ACTIVE</span>
       </div>
-
-      <div class="cards-grid">
-        <div class="card">
-          <h3>Proof of Pennies</h3>
-          <p>Every minted CENT maps to copper sitting in the vault. Additions and burns are posted with photos + counts.</p>
-          <span class="microtext">Current goal: full 1:1 backing. CENT is still a memecoin experiment—not a regulated stablecoin.</span>
+      <div class="terminal-body">
+        <div style="font-size: 1.2rem; margin-bottom: 1.5rem; color: #ffff00;">
+          OPERATIONAL MANDATE: TOTAL TRANSPARENCY
         </div>
-        <div class="card">
-          <h3>See It Yourself</h3>
-          <p>Pop in to the Eagle's Vault, book a visit, or camp the stream once it's live. No appointments for the memes.</p>
-        </div>
-        <div class="card">
-          <h3>Public Math</h3>
-          <p>Live supply dashboard + vault receipts let anyone reconcile what was minted vs. what is stacked.</p>
-          <a class="button button-secondary" href="index.html#trade-cent">Check supply math</a>
-        </div>
-      </div>
-
-      <div class="comparison">
-        <div class="comparison-card them">
-          <div class="comparison-badge">Them</div>
-          <img src="/assets/images/shady-attestation.jpg" alt="A child's drawing of an attestation document" width="400" height="300">
-          <ul>
-            <li>Point-in-time attestations</li>
-            <li>Mystery offshore reserves</li>
-            <li>Fine print that vibes like glitter glue</li>
-            <li>Zero memes, zero receipts</li>
-          </ul>
-        </div>
-        <div class="comparison-card us">
-          <div class="comparison-badge">CENT</div>
-          <img src="/assets/images/vault-camera.jpg" alt="Our penny vault with eagle security camera" width="400" height="300">
-          <ul>
-            <li>Physical pennies in a real vault</li>
-            <li>Receipts you can quote-tweet</li>
-            <li>Backed supply that updates alongside mints</li>
-            <li>Eagles guarding the stack (they never sleep)</li>
-          </ul>
-          <span class="microtext">Receipts are public; jokes are optional. Bring both.</span>
-        </div>
-      </div>
-
-      <div class="tweet-card">
-        <h3 style="margin-bottom: 0.5rem;">Even the big guys want real audits</h3>
-        <blockquote class="twitter-tweet" data-dnt="true">
-          <p lang="en" dir="ltr">The US Government hasn&#39;t done a proper audit of Fort Knox gold in almost 70 years!<br><br>Our <a href="https://twitter.com/DOGE_usa?ref_src=twsrc%5Etfw">@DOGE_usa</a> team is looking into how much this would cost &amp; what would be required.<br><br>Should we do the first proper audit of Fort Knox gold since the 1950s?</p>&mdash; Elon Musk (@elonmusk) <a href="https://twitter.com/elonmusk/status/1891555910218097122?ref_src=twsrc%5Etfw">August 18, 2024</a>
-        </blockquote>
-        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        <div class="tweet-comment">
-          Unlike Fort Knox (no receipts in 70 years!), our vault flexes receipts constantly. The pennies are shiny, the eagles are chatty, and everything matches the chain.
-        </div>
-      </div>
-
-      <div class="vault-invite">
-        <div class="pill" style="margin-bottom: 0.75rem;">Fort ¢ENT</div>
-        <h2 style="margin-bottom: 0.5rem;">Come touch the supply</h2>
-        <p style="max-width: 720px; margin: 0 auto 1.4rem; color: var(--ink-soft);">
-          Unlike secretive forts, our doors stay meme-open. Visit the vault, verify the pennies, and record your own content. Transparency is a spectator sport.
+        <p style="line-height: 1.8; margin-bottom: 1rem;">
+          Unlike conventional cryptocurrency operations that rely on opaque reserve mechanisms and quarterly attestations,
+          CENT Defense Monitoring Station maintains real-time, publicly verifiable transparency of all physical penny assets.
         </p>
-        <div class="hero-actions" style="justify-content: center;">
-          <a class="button" href="index.html#eagles-vault">Book a visit</a>
-          <a class="button button-secondary" href="mailto:hello@stablecent.money?subject=Vault%20visit">Email the eagles</a>
+        <p style="line-height: 1.8;">
+          Our mission: Provide continuous proof-of-reserve verification that exceeds all industry standards.
+          No mystery PDFs. No hidden offshore accounts. Just copper, cameras, and eagles.
+        </p>
+      </div>
+    </div>
+
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <span>🎯 PROOF-OF-RESERVE SYSTEMS</span>
+        <span>●●●</span>
+      </div>
+      <div class="terminal-body">
+        <div class="proof-grid">
+          <div class="proof-card">
+            <h3>🎥 24/7 SURVEILLANCE</h3>
+            <p>
+              Multi-angle 4K camera arrays provide continuous visual verification of vault contents.
+              All footage archived to decentralized storage for permanent public access.
+            </p>
+          </div>
+          <div class="proof-card">
+            <h3>🧾 ON-CHAIN RECEIPTS</h3>
+            <p>
+              Every mint operation is accompanied by physical documentation, photographic evidence,
+              and immutable blockchain records. Token supply matches physical penny count 1:1.
+            </p>
+          </div>
+          <div class="proof-card">
+            <h3>🦅 EAGLE VERIFICATION</h3>
+            <p>
+              Biological security layer provides redundant oversight. Eagles patrol vault perimeter
+              and verify penny integrity through direct observation protocols.
+            </p>
+          </div>
+          <div class="proof-card">
+            <h3>⚖️ PUBLIC RECONCILIATION</h3>
+            <p>
+              Live dashboard updates every 60 seconds. Compare on-chain token supply against
+              documented physical reserves. Math is public, verifiable, and permanent.
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <footer>
-    <div class="footer-container">
-      <div>
-        <h3>¢ENT</h3>
-        <p>Memecoin with physical receipts. Pennies in a vault, guarded by eagles.</p>
-        <p class="tagline">Protected by eagles since 2025 🦅</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <span>⚠️ COMPARATIVE THREAT ANALYSIS</span>
+        <span>CRITICAL</span>
       </div>
-      <div>
-        <h3>Quick Links</h3>
-        <a href="index.html#features">Features</a>
-        <a href="index.html#eagles-vault">Eagle's Vault</a>
-        <a href="merch.html">Merch</a>
-      </div>
-      <div>
-        <h3>Join The Squad</h3>
-        <a href="https://x.com/stablecentmoney" target="_blank" rel="noopener">X</a>
-        <a href="https://imgflip.com/memegenerator" target="_blank" rel="noopener">Memes</a>
-        <a href="https://docs.google.com/document/d/1h2_8aPDMiynl9CUtNy9VQhjQKsw2lARKhognpmgTCY4/edit?usp=sharing" target="_blank" rel="noopener">About/Whitepaper</a>
+      <div class="terminal-body">
+        <div style="font-size: 1rem; margin-bottom: 1.5rem; text-align: center; color: #ffff00;">
+          CENT TRANSPARENCY vs. INDUSTRY "STANDARDS"
+        </div>
+        <div class="comparison-grid">
+          <div class="comparison-box bad-comparison-box">
+            <div class="comparison-title bad-comparison-title">❌ CONVENTIONAL OPERATIONS</div>
+            <div class="comparison-item bad-comparison-item">
+              ❌ Quarterly attestation reports (outdated instantly)
+            </div>
+            <div class="comparison-item bad-comparison-item">
+              ❌ Treasury composition: "Various instruments" (translation: mystery)
+            </div>
+            <div class="comparison-item bad-comparison-item">
+              ❌ Physical verification: None or infrequent
+            </div>
+            <div class="comparison-item bad-comparison-item">
+              ❌ Public surveillance feeds: Unavailable
+            </div>
+            <div class="comparison-item bad-comparison-item">
+              ❌ Real-time proof-of-reserve: Not provided
+            </div>
+            <div class="comparison-item bad-comparison-item">
+              ❌ Eagle-based security: Zero implementations
+            </div>
+            <div style="margin-top: 1.5rem; text-align: center; color: #ff0000; font-size: 2rem;">
+              TRANSPARENCY RATING: COMPROMISED
+            </div>
+          </div>
+
+          <div class="comparison-box">
+            <div class="comparison-title">✅ CENT PROTOCOL</div>
+            <div class="comparison-item">
+              ✅ Continuous 60-second update cycles
+            </div>
+            <div class="comparison-item">
+              ✅ Treasury composition: 100% physical U.S. pennies (no mystery)
+            </div>
+            <div class="comparison-item">
+              ✅ Physical verification: 24/7 livestream + archive
+            </div>
+            <div class="comparison-item">
+              ✅ Public surveillance feeds: 4K multi-angle coverage
+            </div>
+            <div class="comparison-item">
+              ✅ Real-time proof-of-reserve: Always current
+            </div>
+            <div class="comparison-item">
+              ✅ Eagle-based security: Three (3) active units
+            </div>
+            <div style="margin-top: 1.5rem; text-align: center; color: #00ff41; font-size: 2rem;">
+              TRANSPARENCY RATING: MAXIMUM
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </footer>
+
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <span>📊 CURRENT RESERVE STATUS</span>
+        <span class="alert-secure">● VERIFIED</span>
+      </div>
+      <div class="terminal-body">
+        <div class="stat-line">
+          <span>TOTAL PHYSICAL PENNIES:</span>
+          <span class="stat-value">1,000,000 UNITS</span>
+        </div>
+        <div class="stat-line">
+          <span>TOTAL MINTED TOKENS:</span>
+          <span class="stat-value">1,000,000 CENT</span>
+        </div>
+        <div class="stat-line">
+          <span>BACKING RATIO:</span>
+          <span class="stat-value alert-secure">1:1 PERFECT</span>
+        </div>
+        <div class="stat-line">
+          <span>LAST VERIFICATION:</span>
+          <span class="stat-value">00:47 AGO</span>
+        </div>
+        <div class="stat-line">
+          <span>DISCREPANCIES DETECTED:</span>
+          <span class="stat-value alert-secure">ZERO</span>
+        </div>
+        <div class="stat-line">
+          <span>TRANSPARENCY SCORE:</span>
+          <span class="stat-value alert-secure">100/100</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <span>🏛️ FORT KNOX COMPARISON</span>
+        <span>📈</span>
+      </div>
+      <div class="terminal-body">
+        <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(255, 255, 0, 0.1); border: 1px solid #ffff00;">
+          <div style="font-weight: bold; color: #ffff00; margin-bottom: 0.5rem;">INTELLIGENCE BRIEF:</div>
+          <div style="line-height: 1.8;">
+            Fort Knox, the most famous secure facility in the United States, has not conducted a comprehensive
+            public audit of its gold reserves since the 1950s. Nearly 70 years without transparent verification.
+          </div>
+        </div>
+
+        <div class="comparison-grid">
+          <div>
+            <div style="font-weight: bold; margin-bottom: 1rem; color: #ff9900;">FORT KNOX TRANSPARENCY:</div>
+            <div class="stat-line" style="border-color: #ff9900;">
+              <span>Last full audit:</span>
+              <span style="color: #ff9900;">~70 years ago</span>
+            </div>
+            <div class="stat-line" style="border-color: #ff9900;">
+              <span>Public surveillance:</span>
+              <span style="color: #ff9900;">None</span>
+            </div>
+            <div class="stat-line" style="border-color: #ff9900;">
+              <span>Real-time verification:</span>
+              <span style="color: #ff9900;">Unavailable</span>
+            </div>
+            <div class="stat-line" style="border-color: #ff9900;">
+              <span>Public access:</span>
+              <span style="color: #ff9900;">Restricted</span>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-weight: bold; margin-bottom: 1rem; color: #00ff41;">FORT ¢ENT TRANSPARENCY:</div>
+            <div class="stat-line">
+              <span>Continuous verification:</span>
+              <span class="stat-value">24/7/365</span>
+            </div>
+            <div class="stat-line">
+              <span>Public surveillance:</span>
+              <span class="stat-value">4K livestream</span>
+            </div>
+            <div class="stat-line">
+              <span>Real-time verification:</span>
+              <span class="stat-value">60-second cycles</span>
+            </div>
+            <div class="stat-line">
+              <span>Public access:</span>
+              <span class="stat-value">Visit anytime</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(0, 255, 65, 0.1); border: 1px solid #00ff41; text-align: center;">
+          <div style="font-weight: bold; color: #00ff41; margin-bottom: 0.5rem;">CONCLUSION:</div>
+          <div>
+            Fort ¢ENT provides more transparency for $10,000 in pennies than Fort Knox provides for
+            $400 billion in gold. This is not a comparison. This is a statement.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <span>🚪 VAULT ACCESS PROTOCOLS</span>
+        <span>🔐</span>
+      </div>
+      <div class="terminal-body" style="text-align: center; padding: 2rem;">
+        <div style="font-size: 1.2rem; margin-bottom: 1rem; color: #ffff00;">
+          UNLIKE SECRETIVE FACILITIES, FORT ¢ENT WELCOMES VERIFICATION
+        </div>
+        <div style="margin: 2rem 0; opacity: 0.9; font-size: 0.95rem; line-height: 1.8;">
+          Visit the vault. Count the pennies. Record content. Verify livestream accuracy.<br>
+          Transparency is not a marketing slogan. It's an operational requirement.
+        </div>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a class="access-button" href="index.html">← MAIN TERMINAL</a>
+          <a class="access-button" href="mailto:hello@stablecent.money">REQUEST VAULT ACCESS</a>
+          <a class="access-button" href="https://x.com/stablecentmoney" target="_blank">SHARE INTEL</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-terminal">
+    <div>CENT DEFENSE MONITORING STATION - TRANSPARENCY PROTOCOLS</div>
+    <div style="margin-top: 1rem; opacity: 0.5;">
+      More transparent than Fort Knox. More secure than mystery PDF attestations.<br>
+      Protected by eagles and public verification since 2025.
+    </div>
+  </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const hamburger = document.querySelector('.hamburger');
-      const navLinks = document.querySelector('.nav-links');
-      const body = document.body;
-
-      if (hamburger && navLinks) {
-        const setMenuState = (isOpen) => {
-          hamburger.classList.toggle('active', isOpen);
-          navLinks.classList.toggle('active', isOpen);
-          body.classList.toggle('menu-open', isOpen);
-          hamburger.setAttribute('aria-expanded', String(isOpen));
-        };
-
-        hamburger.addEventListener('click', (event) => {
-          event.stopPropagation();
-          const isOpen = !hamburger.classList.contains('active');
-          setMenuState(isOpen);
-        });
-
-        document.querySelectorAll('.nav-links a').forEach(link => {
-          link.addEventListener('click', () => setMenuState(false));
-        });
-
-        document.addEventListener('click', (e) => {
-          if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-            setMenuState(false);
-          }
-        });
-
-        document.addEventListener('keydown', (event) => {
-          if (event.key === 'Escape') {
-            setMenuState(false);
-          }
-        });
-
-        window.addEventListener('resize', () => {
-          if (window.innerWidth > 840) {
-            setMenuState(false);
-          }
-        });
-      }
-
-    });
+    function updateTimestamp() {
+      const now = new Date();
+      const timestamp = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+      document.getElementById('timestamp').textContent = timestamp;
+    }
+    updateTimestamp();
+    setInterval(updateTimestamp, 1000);
   </script>
 </body>
 </html>

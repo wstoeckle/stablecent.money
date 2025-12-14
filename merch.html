@@ -1,28 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>Shop Merchandise - CENT</title>
-  <link rel="icon"
-    href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Ctext%20y='14'%20font-size='16'%3E%F0%9F%A6%85%3C/text%3E%3C/svg%3E">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SUPPLY DEPOT - CENT DEFENSE MONITORING</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Ctext%20y='14'%20font-size='16'%3E%F0%9F%A6%85%3C/text%3E%3C/svg%3E">
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --copper-900: #2f1a0c;
-      --copper-700: #7c431a;
-      --copper-500: #b96a2b;
-      --copper-300: #f3b073;
-      --sand: #fdf8f3;
-      --parchment: #f6efe7;
-      --ink: #161c2d;
-      --ink-soft: #42506b;
-      --ink-muted: #8a96ad;
-      --success: #3ab97c;
-      --shadow: 0 30px 60px -35px rgba(38, 20, 0, 0.45);
-    }
-
     * {
       margin: 0;
       padding: 0;
@@ -30,415 +14,217 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at top left, rgba(243, 176, 115, 0.25), transparent 45%),
-        radial-gradient(circle at bottom right, rgba(186, 106, 43, 0.3), transparent 40%),
-        var(--sand);
-      color: var(--ink);
-      line-height: 1.6;
-      position: relative;
+      font-family: 'Courier Prime', monospace;
+      background: #0a0e0a;
+      color: #00ff41;
+      line-height: 1.4;
+      overflow-x: hidden;
       min-height: 100vh;
     }
 
-    body.menu-open {
-      overflow: hidden;
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
     }
 
-    body::before {
-      content: "";
+    @keyframes scan {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100vh); }
+    }
+
+    .scan-line {
       position: fixed;
-      inset: 0;
-      background-image: url('data:image/svg+xml,%3Csvg%20xmlns="http://www.w3.org/2000/svg"%20width="120"%20height="120"%20viewBox="0%200%20120%20120"%3E%3Cpath%20d="M30%2060c15-6%2030-6%2045%200"%20stroke="rgba(186,106,43,0.08)"%20stroke-width="4"%20fill="none"/%3E%3Cpath%20d="M0%2090c20-9%2040-9%2060%200"%20stroke="rgba(186,106,43,0.06)"%20stroke-width="3"%20fill="none"/%3E%3Ccircle%20cx="95"%20cy="25"%20r="6"%20fill="rgba(122,67,26,0.07)"/%3E%3C/svg%3E');
-      opacity: 0.45;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .news-ticker {
-      background: rgba(47, 26, 12, 0.9);
-      color: #fff;
-      padding: 0.65rem 0;
-      overflow: hidden;
-      position: relative;
-      border-bottom: 1px solid rgba(243, 176, 115, 0.35);
-      font-size: 0.85rem;
-      letter-spacing: 0.03em;
-    }
-
-    .ticker-content {
-      display: flex;
-      animation: scroll 28s linear infinite;
-      gap: 3rem;
-      white-space: nowrap;
-    }
-
-    .ticker-item {
-      font-weight: 500;
-      opacity: 0.9;
-    }
-
-    @keyframes scroll {
-      0% {
-        transform: translateX(100%);
-      }
-
-      100% {
-        transform: translateX(-100%);
-      }
-    }
-
-    nav {
-      position: sticky;
       top: 0;
-      z-index: 1000;
-      background: rgba(253, 248, 243, 0.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(186, 106, 43, 0.18);
-    }
-
-    @supports (padding-top: env(safe-area-inset-top)) {
-      nav {
-        padding-top: calc(clamp(0.85rem, 3vw, 1.25rem) + env(safe-area-inset-top));
-      }
-    }
-
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: clamp(0.85rem, 3vw, 1.25rem) clamp(1rem, 5vw, 2rem);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 2rem;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-weight: 700;
-      font-size: 1.75rem;
-      color: var(--copper-700);
-      letter-spacing: 0.04em;
-    }
-
-    .logo-icon {
-      width: 34px;
-      height: 34px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--copper-500);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    .nav-links a {
-      color: var(--ink-soft);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--copper-700);
-    }
-
-    .badge-live {
-      background: rgba(58, 185, 124, 0.12);
-      color: var(--success);
-      border: 1px solid rgba(58, 185, 124, 0.4);
-      border-radius: 999px;
-      padding: 0.25rem 0.9rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .button {
-      background: linear-gradient(135deg, var(--copper-500), var(--copper-300));
-      color: #fff;
-      padding: 0.85rem 1.6rem;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 600;
-      border: 1px solid rgba(185, 106, 43, 0.4);
-      box-shadow: var(--shadow);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 25px 45px -30px rgba(185, 106, 43, 0.75);
-    }
-
-    .hamburger {
-      display: none;
-      background: none;
-      border: none;
-      padding: 0.5rem;
-      cursor: pointer;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 22px;
+      left: 0;
+      right: 0;
       height: 2px;
-      background: var(--ink);
-      margin: 5px 0;
-      transition: transform 0.2s ease, opacity 0.2s ease;
+      background: linear-gradient(to bottom, transparent, #00ff41, transparent);
+      animation: scan 3s linear infinite;
+      pointer-events: none;
+      z-index: 9999;
     }
 
-    /* Merch Specific Styles */
-    .merch-hero {
-      padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 6vw, 2rem) 2rem;
+    .classified-header {
+      background: #000;
+      border-bottom: 2px solid #00ff41;
+      padding: 0.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Share Tech Mono', monospace;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+    }
+
+    .terminal-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .terminal-window {
+      background: rgba(0, 20, 0, 0.9);
+      border: 2px solid #00ff41;
+      padding: 0;
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+      margin-bottom: 2rem;
+    }
+
+    .terminal-header {
+      background: #00ff41;
+      color: #000;
+      padding: 1rem 2rem;
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
       text-align: center;
     }
 
-    .merch-hero h1 {
-      font-size: clamp(2.5rem, 6vw, 3.5rem);
-      font-weight: 700;
-      color: var(--ink);
+    .terminal-body {
+      padding: 2rem;
+    }
+
+    .supply-info {
+      background: rgba(255, 255, 0, 0.1);
+      border: 1px solid #ffff00;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .supply-info p {
+      line-height: 1.8;
       margin-bottom: 1rem;
-      line-height: 1.1;
     }
 
-    .merch-hero p {
-      font-size: 1.2rem;
-      color: var(--ink-soft);
-      max-width: 600px;
-      margin: 0 auto;
+    .supply-info p:last-child {
+      margin-bottom: 0;
     }
 
-    .store-wrapper {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 clamp(1.5rem, 6vw, 2rem) 5rem;
+    /* Override Ecwid styles for terminal aesthetic */
+    #my-store-112462508 {
+      background: transparent !important;
+      color: #00ff41 !important;
     }
 
-    .store-card {
-      background: rgba(255, 255, 255, 0.85);
-      border-radius: 24px;
-      padding: clamp(1.5rem, 4vw, 2.5rem);
-      border: 1px solid rgba(26, 18, 10, 0.08);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
+    /* Style Ecwid elements to match terminal */
+    #my-store-112462508 * {
+      font-family: 'Courier Prime', monospace !important;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: #00ff41;
+      text-decoration: none;
+      margin-bottom: 1rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid #00ff41;
+      transition: all 0.2s;
+    }
+
+    .back-link:hover {
+      background: #00ff41;
+      color: #000;
     }
 
     .store-note {
-      margin-top: 1.5rem;
-      text-align: center;
-      font-size: 0.9rem;
-      color: var(--ink-muted);
-      font-style: italic;
-    }
-
-    footer {
-      background: rgba(15, 18, 30, 0.92);
-      color: rgba(255, 255, 255, 0.82);
-      padding: clamp(3rem, 10vw, 4rem) clamp(1.5rem, 6vw, 2rem) 2.5rem;
-    }
-
-    .footer-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
-      gap: 2.5rem;
-    }
-
-    .footer-container h3 {
-      margin-bottom: 1rem;
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.75);
-    }
-
-    .footer-container p,
-    .footer-container a {
-      font-size: 0.95rem;
-      color: rgba(255, 255, 255, 0.72);
-      text-decoration: none;
-    }
-
-    .footer-container a {
-      display: block;
-      margin-bottom: 0.5rem;
-      transition: opacity 0.2s ease;
-    }
-
-    .footer-container a:hover {
-      opacity: 1;
-    }
-
-    .footer-note {
-      color: rgba(255, 255, 255, 0.55);
+      margin-top: 2rem;
+      padding: 1rem;
+      background: rgba(0, 255, 65, 0.1);
+      border-left: 3px solid #00ff41;
       font-size: 0.85rem;
-      margin-top: 1rem;
-      font-style: italic;
+      opacity: 0.8;
+    }
+
+    .footer-terminal {
+      background: #000;
+      border-top: 2px solid #00ff41;
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .timestamp {
+      font-size: 0.7rem;
+      opacity: 0.6;
     }
 
     @media (max-width: 768px) {
-      .nav-links {
-        position: fixed;
-        top: 56px;
-        left: 1rem;
-        right: 1rem;
-        padding: 1.5rem;
-        border-radius: 16px;
-        background: rgba(253, 248, 243, 0.96);
-        border: 1px solid rgba(186, 106, 43, 0.18);
-        display: grid;
-        gap: 1rem;
-        transform: translateY(-12px);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s ease;
-        max-width: min(420px, calc(100% - 2rem));
-        margin: 0 auto;
+      .terminal-container {
+        padding: 1rem 0.5rem;
       }
 
-      @supports (top: calc(56px + env(safe-area-inset-top))) {
-        .nav-links {
-          top: calc(56px + env(safe-area-inset-top));
-        }
+      .terminal-body {
+        padding: 1.5rem 1rem;
       }
 
-      .nav-links.active {
-        opacity: 1;
-        pointer-events: auto;
-        transform: translateY(0);
-      }
-
-      .nav-links .badge-live {
-        justify-self: start;
-      }
-
-      .hamburger {
-        display: block;
-      }
-
-      .footer-container {
-        grid-template-columns: 1fr;
+      .classified-header {
+        font-size: 0.65rem;
+        padding: 0.5rem 1rem;
+        flex-direction: column;
+        gap: 0.5rem;
         text-align: center;
-      }
-
-      .footer-container a {
-        display: inline-block;
-        margin: 0.25rem 0.75rem;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .news-ticker {
-        font-size: 0.75rem;
-        padding: 0.55rem 0;
-      }
-
-      .footer-container {
-        gap: 1.75rem;
       }
     }
   </style>
 </head>
-
 <body>
-  <div class="news-ticker">
-    <div class="ticker-content">
-      <span class="ticker-item">🚨 PENNY PRESERVATION IS LIVE — EVERY TOKEN BACKED BY A REAL CENT</span>
-      <span class="ticker-item">🦅 EAGLE OPERATIONS CONFIRMED 24/7 VAULT SURVEILLANCE</span>
-      <span class="ticker-item">📦 MINT REQUESTS PROCESSED DAILY WITH TRANSPARENT ON-CHAIN RECEIPTS</span>
-      <span class="ticker-item">📈 PROOF-OF-RESERVE DASHBOARD UPDATED IN REAL TIME</span>
+  <div class="scan-line"></div>
+
+  <div class="classified-header">
+    <span>SUPPLY DEPOT - AUTHORIZED PERSONNEL ONLY</span>
+    <span class="timestamp" id="timestamp"></span>
+    <span class="blink">● SECURE CONNECTION</span>
+  </div>
+
+  <div class="terminal-container">
+    <a href="index.html" class="back-link">← RETURN TO MAIN TERMINAL</a>
+
+    <div class="terminal-window">
+      <div class="terminal-header">
+        🛒 Official CENT Supply Depot
+      </div>
+      <div class="terminal-body">
+        <div class="supply-info">
+          <p style="font-weight: bold; color: #ffff00; margin-bottom: 1rem;">
+            MISSION: EQUIP PERSONNEL WITH OFFICIAL GEAR
+          </p>
+          <p>
+            The CENT Defense Monitoring Station Supply Depot provides official merchandise for all authorized
+            personnel and eagle enthusiasts. All proceeds support vault operations and eagle feeding programs.
+          </p>
+          <p style="margin-bottom: 0;">
+            Standard issue includes: T-shirts, hoodies, tactical pennywear, and eagle-approved accessories.
+            All items feature regulation CENT insignia and fort-grade quality.
+          </p>
+        </div>
+
+        <!-- Ecwid Embed Code -->
+        <div id="my-store-112462508" role="region" aria-label="CENT merchandise store"></div>
+
+        <div class="store-note">
+          📦 All orders processed securely through encrypted channels.<br>
+          🦅 Eagle delivery not available (yet). Standard shipping applies.<br>
+          💚 Revenue supports vault operations and eagle welfare programs.
+        </div>
+      </div>
     </div>
   </div>
 
-  <nav>
-    <div class="nav-container">
-      <div class="logo">
-        <div class="logo-icon">
-          <svg viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg">
-            <path fill="currentColor"
-              d="M626.58,454.69l22.5,22.5,45-45-22.5-22.49a182.85,182.85,0,0,0-107.34-52.57V293H500.61V360.2A183,183,0,0,0,411,409.7c-71.85,71.85-71.85,188.75,0,260.6a183,183,0,0,0,89.64,49.5V787h63.62V722.87A182.85,182.85,0,0,0,671.57,670.3l22.5-22.49-45-45-22.5,22.5a119.73,119.73,0,0,1-62.35,33.16V421.53A119.73,119.73,0,0,1,626.58,454.69ZM456,625.31a120.76,120.76,0,0,1,44.65-199v227.3A120.16,120.16,0,0,1,456,625.31Z" />
-            <path fill="currentColor"
-              d="M902.28,387.48A392.92,392.92,0,1,0,933.09,540,390.37,390.37,0,0,0,902.28,387.48ZM773.33,772.06A328.16,328.16,0,1,1,869.46,540,326,326,0,0,1,773.33,772.06Z" />
-          </svg>
-        </div>
-        ¢ENT
-      </div>
-      <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div class="nav-links">
-        <span class="badge-live">Minting Now</span>
-        <a
-          href="https://docs.google.com/document/d/1h2_8aPDMiynl9CUtNy9VQhjQKsw2lARKhognpmgTCY4/edit?usp=sharing">Whitepaper</a>
-        <a href="transparency.html">Transparency</a>
-        <a href="merch.html" style="color: var(--copper-700);">Merch</a>
-        <a href="minting.html" class="button">Mint CENT</a>
-      </div>
+  <div class="footer-terminal">
+    <div>CENT DEFENSE MONITORING STATION - SUPPLY DEPOT</div>
+    <div style="margin-top: 1rem; opacity: 0.5;">
+      Official merchandise authorized and distributed under military-grade security protocols.<br>
+      Protected by eagles and blockchain since 2025.
     </div>
-  </nav>
+  </div>
 
-  <section class="merch-hero">
-    <h1>Shop Our Merchandise</h1>
-    <p>Official CENT gear, prepped for every mobile squadron member and eagle enthusiast.</p>
-  </section>
-
-  <main class="store-wrapper">
-    <div class="store-card">
-      <!-- Ecwid Embed Code -->
-      <div id="my-store-112462508" role="region" aria-label="CENT merchandise store"></div>
-      <p class="store-note">Tip: Rotate your device for additional product columns when browsing larger collections.</p>
-    </div>
-  </main>
-
-  <footer>
-    <div class="footer-container">
-      <div>
-        <h3>CENT</h3>
-        <p>The physical penny token backed by eagle-guarded reserves. We connect the analog world to transparent,
-          on-chain finance.</p>
-        <p class="footer-note">Protected by eagles since 2025 🦅</p>
-      </div>
-      <div>
-        <h3>Resources</h3>
-        <a
-          href="https://docs.google.com/document/d/1h2_8aPDMiynl9CUtNy9VQhjQKsw2lARKhognpmgTCY4/edit?usp=sharing">Whitepaper</a>
-        <a href="transparency.html">Transparency</a>
-        <a href="next.html">Roadmap</a>
-      </div>
-      <div>
-        <h3>Community</h3>
-        <a href="https://x.com/stablecentmoney">Twitter</a>
-        <a href="https://imgflip.com/memegenerator">Memes</a>
-        <a href="merch.html">Merchandise</a>
-      </div>
-      <div>
-        <h3>Legal</h3>
-        <p style="font-size: 0.85rem; line-height: 1.6; color: rgba(255, 255, 255, 0.65);">
-          CENT tokens are experimental and not guaranteed to maintain 1:1 parity with physical pennies. Not regulated as
-          a stablecoin. Review the whitepaper for the latest disclosures.
-        </p>
-      </div>
-    </div>
-  </footer>
-
+  <!-- Ecwid Scripts -->
   <script data-cfasync="false" type="text/javascript"
     src="https://app.ecwid.com/script.js?112462508&data_platform=code&data_date=2025-02-12" charset="utf-8">
-    </script>
+  </script>
   <script type="text/javascript">
     xProductBrowser("categoriesPerRow=3",
       "views=grid(20,3) list(60) table(60)",
@@ -448,58 +234,13 @@
   </script>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const hamburger = document.querySelector('.hamburger');
-      const navLinks = document.querySelector('.nav-links');
-      const body = document.body;
-
-      if (!hamburger || !navLinks) return;
-
-      hamburger.setAttribute('aria-expanded', 'false');
-
-      const toggleMenu = () => {
-        const isActive = !hamburger.classList.contains('active');
-        hamburger.classList.toggle('active', isActive);
-        navLinks.classList.toggle('active', isActive);
-        body.classList.toggle('menu-open', isActive);
-        hamburger.setAttribute('aria-expanded', String(isActive));
-      };
-
-      const closeMenu = () => {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-        body.classList.remove('menu-open');
-        hamburger.setAttribute('aria-expanded', 'false');
-      };
-
-      hamburger.addEventListener('click', (event) => {
-        event.stopPropagation();
-        toggleMenu();
-      });
-
-      document.querySelectorAll('.nav-links a').forEach((link) => {
-        link.addEventListener('click', closeMenu);
-      });
-
-      document.addEventListener('click', (event) => {
-        if (!navLinks.contains(event.target) && !hamburger.contains(event.target)) {
-          closeMenu();
-        }
-      });
-
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          closeMenu();
-        }
-      });
-
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-          closeMenu();
-        }
-      });
-    });
+    function updateTimestamp() {
+      const now = new Date();
+      const timestamp = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+      document.getElementById('timestamp').textContent = timestamp;
+    }
+    updateTimestamp();
+    setInterval(updateTimestamp, 1000);
   </script>
 </body>
-
 </html>

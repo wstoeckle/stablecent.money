@@ -3,251 +3,438 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mint New CENT</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>MINT AUTHORIZATION REQUEST - CENT DEFENSE MONITORING</title>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --copper: #b87333;
-      --copper-light: #dba36d;
-      --ink: #ffffff;
-      --ink-muted: rgba(255, 255, 255, 0.72);
-      --surface: rgba(26, 26, 26, 0.82);
-      --surface-deep: rgba(17, 17, 17, 0.86);
-    }
-
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
     body {
-      margin: 0;
-      font-family: 'Space Grotesk', sans-serif;
-      background: radial-gradient(circle at top left, rgba(184, 115, 51, 0.24), transparent 55%), #0c0c0c;
-      color: var(--ink);
+      font-family: 'Courier Prime', monospace;
+      background: #0a0e0a;
+      color: #00ff41;
+      line-height: 1.4;
+      overflow-x: hidden;
       min-height: 100vh;
-      --page-padding: clamp(1.5rem, 6vw, 3rem);
-      padding: var(--page-padding);
-      display: flex;
-      align-items: stretch;
+      padding: 2rem 1rem;
     }
 
-    @supports (padding-top: env(safe-area-inset-top)) {
-      body {
-        padding-top: calc(env(safe-area-inset-top) + var(--page-padding));
-        padding-bottom: calc(env(safe-area-inset-bottom) + var(--page-padding));
-        padding-left: calc(env(safe-area-inset-left) + var(--page-padding));
-        padding-right: calc(env(safe-area-inset-right) + var(--page-padding));
-      }
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
     }
 
-    .container {
-      max-width: 760px;
-      margin: auto;
-      width: 100%;
-      background: var(--surface);
-      border-radius: 24px;
-      border: 1px solid rgba(184, 115, 51, 0.35);
-      padding: clamp(1.75rem, 5vw, 2.75rem);
-      box-shadow: 0 40px 90px -45px rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(8px);
+    @keyframes scan {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100vh); }
     }
 
-    h1 {
+    .scan-line {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(to bottom, transparent, #00ff41, transparent);
+      animation: scan 3s linear infinite;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .classified-header {
+      background: #000;
+      border: 2px solid #00ff41;
+      padding: 1rem 2rem;
+      margin-bottom: 2rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      font-family: 'Share Tech Mono', monospace;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
       text-align: center;
-      background: linear-gradient(to right, var(--copper), var(--copper-light));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-size: clamp(2.1rem, 7vw, 2.8rem);
-      margin-bottom: 1.75rem;
-      letter-spacing: 0.05em;
     }
 
-    form {
-      display: grid;
-      gap: 1.25rem;
+    .form-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(0, 20, 0, 0.9);
+      border: 2px solid #00ff41;
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+    }
+
+    .form-header {
+      background: #00ff41;
+      color: #000;
+      padding: 1rem 2rem;
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
+
+    .form-body {
+      padding: 2rem;
+    }
+
+    .form-section {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+    }
+
+    .form-section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      color: #ffff00;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: 'Share Tech Mono', monospace;
     }
 
     label {
-      font-weight: 600;
-      font-size: 1rem;
-      color: var(--ink);
-    }
-
-    input,
-    textarea,
-    button {
-      padding: 0.85rem 1rem;
-      border-radius: 10px;
-      border: none;
-      font-size: 1rem;
-      font-family: inherit;
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      font-size: 0.9rem;
+      color: #00ff41;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     input,
     textarea {
-      background: var(--surface-deep);
-      color: var(--ink);
-      border: 1px solid rgba(184, 115, 51, 0.28);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
       width: 100%;
+      padding: 0.75rem 1rem;
+      background: #000;
+      border: 1px solid #00ff41;
+      color: #00ff41;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
     }
 
     input:focus,
     textarea:focus {
       outline: none;
-      border-color: var(--copper-light);
-      box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.25);
+      border-color: #ffff00;
+      box-shadow: 0 0 10px rgba(255, 255, 0, 0.3);
     }
 
     input[type="file"] {
-      padding: 0.65rem 1rem;
+      padding: 0.5rem;
+      cursor: pointer;
     }
 
     textarea {
-      min-height: 140px;
+      min-height: 100px;
       resize: vertical;
     }
 
-    button {
-      background: linear-gradient(135deg, var(--copper), var(--copper-light));
-      color: white;
-      cursor: pointer;
-      border: 1px solid rgba(184, 115, 51, 0.35);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      width: 100%;
-    }
-
-    button:hover,
-    button:focus-visible {
-      transform: translateY(-2px);
-      box-shadow: 0 18px 40px -28px rgba(184, 115, 51, 0.8);
-      outline: none;
-    }
-
-    .kyc-container {
-      border: 1px solid rgba(184, 115, 51, 0.35);
-      padding: 1.25rem;
-      border-radius: 16px;
-      background: rgba(15, 15, 15, 0.6);
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    .instructions {
-      font-size: 0.95rem;
-      color: var(--ink-muted);
-      margin: 0;
-    }
-
     .helper-text {
-      font-size: 0.85rem;
-      color: var(--ink-muted);
+      font-size: 0.8rem;
+      color: rgba(0, 255, 65, 0.7);
+      margin-top: -1rem;
+      margin-bottom: 1.5rem;
       line-height: 1.4;
     }
 
-    @media (max-width: 640px) {
-      body {
-        --page-padding: clamp(1.1rem, 6vw, 1.5rem);
-        padding: var(--page-padding);
-      }
-
-      .container {
-        border-radius: 18px;
-        padding: clamp(1.35rem, 5vw, 2rem);
-      }
-
-      h1 {
-        font-size: clamp(1.9rem, 8vw, 2.3rem);
-      }
-
-      label {
-        font-size: 0.95rem;
-      }
-
-      button {
-        font-size: 0.95rem;
-        letter-spacing: 0.06em;
-      }
+    button {
+      background: #00ff41;
+      color: #000;
+      border: none;
+      padding: 1rem 2rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+      transition: all 0.2s;
+      width: 100%;
+      margin-top: 1rem;
     }
 
-    @media (max-width: 420px) {
-      .kyc-container {
-        padding: 1rem;
+    button:hover {
+      background: #ffff00;
+      box-shadow: 0 0 30px rgba(255, 255, 0, 0.8);
+    }
+
+    button:disabled {
+      background: #333;
+      color: #666;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .kyc-box {
+      background: rgba(0, 0, 0, 0.5);
+      border: 2px solid #ffff00;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .kyc-box p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .warning-box {
+      background: rgba(255, 255, 0, 0.1);
+      border: 2px solid #ffff00;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .warning-title {
+      color: #ffff00;
+      font-weight: bold;
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+
+    .warning-box p {
+      line-height: 1.6;
+      font-size: 0.9rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: #00ff41;
+      text-decoration: none;
+      margin-bottom: 1rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid #00ff41;
+      transition: all 0.2s;
+    }
+
+    .back-link:hover {
+      background: #00ff41;
+      color: #000;
+    }
+
+    .timestamp {
+      font-size: 0.7rem;
+      opacity: 0.6;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem 0.5rem;
       }
 
-      .instructions,
-      .helper-text {
-        font-size: 0.85rem;
+      .form-body {
+        padding: 1.5rem 1rem;
+      }
+
+      .classified-header {
+        font-size: 0.65rem;
+        padding: 0.75rem 1rem;
+      }
+
+      .form-header {
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Mint New CENT</h1>
-    <!-- Update the form action with your Formspree endpoint -->
-    <form action="https://usebasin.com/f/dd1c2c0d86db" method="POST" enctype="multipart/form-data">
-      <!-- Number of pennies to deposit -->
-      <label for="pennies">Number of Pennies to Deposit:</label>
-      <input type="number" id="pennies" name="pennies" min="1" required>
+  <div class="scan-line"></div>
 
-      <!-- Contact information -->
-      <label for="fullName">Full Name:</label>
-      <input type="text" id="fullName" name="fullName" placeholder="Your full name" required>
+  <div class="classified-header">
+    <div>TOKEN MINTING AUTHORIZATION REQUEST</div>
+    <div>CLASSIFICATION: RESTRICTED</div>
+    <div class="timestamp" id="timestamp"></div>
+    <div class="blink" style="margin-top: 0.5rem;">● SECURE CONNECTION ACTIVE</div>
+  </div>
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" placeholder="Your email" required>
+  <div style="max-width: 800px; margin: 0 auto 1rem;">
+    <a href="index.html" class="back-link">← RETURN TO MAIN TERMINAL</a>
+  </div>
 
-      <label for="phone">Phone:</label>
-      <input type="tel" id="phone" name="phone" placeholder="Your phone number" required>
-
-      <label for="username">X.com Username:</label>
-      <input type="text" id="username" name="username" placeholder="Your X.com username" required>
-
-      <!-- Upload proof of penny ownership -->
-      <label for="proof">Upload Proof of Pennies Ownership:</label>
-      <input type="file" id="proof" name="proof" accept="image/*,application/pdf" required>
-      <p class="helper-text">Images or PDFs up to 25 MB. Capture both the pennies and your handle for fastest approval.</p>
-
-      <!-- Link to tweet with a meme -->
-      <label for="tweet">Link to Your Meme Tweet (tag @stablecentmoney):</label>
-      <input type="url" id="tweet" name="tweet" placeholder="https://x.com/your-tweet" required>
-
-      <!-- KYC Process Section -->
-      <div class="kyc-container">
-        <p class="instructions">Complete KYC Process:</p>
-        <button type="button" id="startKYC">Start KYC Verification</button>
-        <p class="helper-text">We use Persona for identity checks. A secure modal will guide you through the steps.</p>
-        <!-- Hidden input to store the returned KYC token -->
-        <input type="hidden" id="kycToken" name="kycToken">
+  <div class="form-container">
+    <div class="form-header">
+      🛡️ Mint Authorization Request Form
+    </div>
+    <div class="form-body">
+      <div class="warning-box">
+        <div class="warning-title">⚠️ OPERATIONAL REQUIREMENTS</div>
+        <p>
+          All mint requests require comprehensive verification protocols including physical penny verification,
+          identity confirmation, and eagle oversight approval. Processing time: 24-72 hours pending verification.
+        </p>
       </div>
 
-      <!-- Submit button -->
-      <button type="submit">Submit Mint Request</button>
-    </form>
+      <form action="https://usebasin.com/f/dd1c2c0d86db" method="POST" enctype="multipart/form-data">
+        <!-- Asset Deposit Section -->
+        <div class="form-section">
+          <div class="section-title">📦 Section 1: Asset Deposit Information</div>
+
+          <label for="pennies">Number of Physical Pennies to Deposit:</label>
+          <input type="number" id="pennies" name="pennies" min="1" required placeholder="Enter quantity">
+          <p class="helper-text">
+            Minimum deposit: 1 penny. Maximum deposit: No limit (subject to vault capacity verification).
+            Each penny will be individually verified and logged.
+          </p>
+        </div>
+
+        <!-- Personnel Identification -->
+        <div class="form-section">
+          <div class="section-title">🔐 Section 2: Personnel Identification</div>
+
+          <label for="fullName">Full Legal Name:</label>
+          <input type="text" id="fullName" name="fullName" placeholder="First Middle Last" required>
+
+          <label for="email">Secure Email Address:</label>
+          <input type="email" id="email" name="email" placeholder="your.email@domain.com" required>
+
+          <label for="phone">Contact Phone Number:</label>
+          <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" required>
+
+          <label for="username">X.com (Twitter) Handle:</label>
+          <input type="text" id="username" name="username" placeholder="@yourusername" required>
+          <p class="helper-text">
+            Used for public mint verification and eagle patrol notification system.
+          </p>
+        </div>
+
+        <!-- Physical Verification -->
+        <div class="form-section">
+          <div class="section-title">📸 Section 3: Physical Asset Verification</div>
+
+          <label for="proof">Upload Proof of Penny Ownership:</label>
+          <input type="file" id="proof" name="proof" accept="image/*,application/pdf" required>
+          <p class="helper-text">
+            REQUIRED: Photo evidence showing pennies with your X.com handle visible in frame.
+            Accepted formats: JPG, PNG, PDF (max 25 MB). Higher resolution = faster approval.
+          </p>
+        </div>
+
+        <!-- Social Verification -->
+        <div class="form-section">
+          <div class="section-title">🐦 Section 4: Social Verification Protocol</div>
+
+          <label for="tweet">Link to Meme Tweet (must tag @stablecentmoney):</label>
+          <input type="url" id="tweet" name="tweet" placeholder="https://x.com/yourusername/status/..." required>
+          <p class="helper-text">
+            Post a CENT-related meme, tag @stablecentmoney, and paste the tweet link here.
+            This establishes social proof and contributes to the memecoin defense network.
+          </p>
+        </div>
+
+        <!-- KYC Verification -->
+        <div class="form-section">
+          <div class="section-title">🛂 Section 5: Identity Verification (KYC)</div>
+
+          <div class="kyc-box">
+            <p style="font-weight: bold; color: #ffff00;">MANDATORY SECURITY CLEARANCE</p>
+            <p>
+              All mint requests require identity verification through our secure Persona integration.
+              This process verifies your identity to military-grade standards and prevents unauthorized access.
+            </p>
+            <p style="font-size: 0.85rem; opacity: 0.8;">
+              Click "Start KYC Verification" to launch secure verification modal.
+              Your personal information is encrypted and never stored on our servers.
+            </p>
+            <button type="button" id="startKYC">Start KYC Verification</button>
+            <input type="hidden" id="kycToken" name="kycToken">
+            <p class="helper-text" id="kycStatus" style="margin-top: 1rem; color: #ffff00; display: none;">
+              ✅ KYC VERIFICATION COMPLETE - CLEARANCE GRANTED
+            </p>
+          </div>
+        </div>
+
+        <!-- Submission -->
+        <div class="form-section">
+          <div class="section-title">✅ Section 6: Final Submission</div>
+
+          <div class="warning-box">
+            <div class="warning-title">📋 SUBMISSION CHECKLIST</div>
+            <p style="margin-bottom: 0.5rem;">Verify all fields before submission:</p>
+            <p>☑ Penny quantity entered correctly</p>
+            <p>☑ Contact information accurate</p>
+            <p>☑ Photo proof uploaded (clear, with handle visible)</p>
+            <p>☑ Meme tweet posted and linked</p>
+            <p style="margin-bottom: 0;">☑ KYC verification completed</p>
+          </div>
+
+          <button type="submit">
+            🚀 Submit Mint Authorization Request
+          </button>
+
+          <p class="helper-text" style="text-align: center; margin-top: 1rem;">
+            Upon submission, you will receive confirmation via email within 24 hours.
+            Eagles will be dispatched to verify your penny deposit.
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div style="max-width: 800px; margin: 2rem auto; padding: 1.5rem; background: rgba(0, 20, 0, 0.9); border: 1px solid #00ff41; text-align: center; font-size: 0.8rem;">
+    <div style="color: #ffff00; font-weight: bold; margin-bottom: 0.5rem;">SECURITY NOTICE</div>
+    <div style="opacity: 0.9; line-height: 1.6;">
+      All submissions are encrypted and transmitted via secure protocols.
+      Your personal information is protected by eagle-grade encryption and never sold to third parties.
+      For questions, contact: hello@stablecent.money
+    </div>
   </div>
 
   <!-- Include Persona's SDK -->
   <script src="https://assets.withpersona.com/sdk/sdk.js"></script>
   <script>
-    // Replace the placeholder with Persona integration code
+    function updateTimestamp() {
+      const now = new Date();
+      const timestamp = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+      document.getElementById('timestamp').textContent = timestamp;
+    }
+    updateTimestamp();
+    setInterval(updateTimestamp, 1000);
+
+    // KYC Integration
     document.getElementById('startKYC').addEventListener('click', function() {
+      const button = this;
+      button.disabled = true;
+      button.textContent = 'LAUNCHING SECURE VERIFICATION...';
+
       Persona.start({
         templateId: 'your-template-id', // Replace with your actual Persona template ID
         onComplete: function(response) {
-          // Assume response.verificationId contains the token
           document.getElementById('kycToken').value = response.verificationId;
-          alert('KYC completed successfully!');
+          document.getElementById('kycStatus').style.display = 'block';
+          button.textContent = 'KYC VERIFICATION COMPLETE ✓';
+          button.style.background = '#00ff41';
         },
         onError: function(error) {
           console.error('Persona verification error:', error);
-          alert('There was an error with the KYC process. Please try again.');
+          alert('KYC VERIFICATION FAILED. Please retry or contact support.');
+          button.disabled = false;
+          button.textContent = 'Start KYC Verification';
         }
       });
+    });
+
+    // Form validation
+    document.querySelector('form').addEventListener('submit', function(e) {
+      const kycToken = document.getElementById('kycToken').value;
+      if (!kycToken) {
+        e.preventDefault();
+        alert('ERROR: KYC Verification required before submission. Please complete Section 5.');
+        document.getElementById('startKYC').scrollIntoView({ behavior: 'smooth' });
+      }
     });
   </script>
 </body>
