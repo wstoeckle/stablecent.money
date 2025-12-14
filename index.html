@@ -671,10 +671,10 @@
           CENT maintains military-grade transparency on all copper assets.
         </div>
         <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-          <button class="access-button" onclick="window.location.href='minting.html'">🪙 MINT TOKENS</button>
+          <button class="access-button" onclick="playEagleAndNavigate('minting.html')">🪙 MINT TOKENS</button>
           <button class="access-button" onclick="window.location.href='transparency.html'">📊 VIEW PROOF</button>
           <button class="access-button" onclick="window.location.href='whitepaper.html'">📄 WHITEPAPER</button>
-          <button class="access-button" onclick="alert('EAGLE SCREAM AUTHORIZED')">🦅 EAGLE STATUS</button>
+          <button class="access-button" onclick="playEagleScream()">🦅 EAGLE STATUS</button>
         </div>
       </div>
     </div>
@@ -688,7 +688,27 @@
     </div>
   </div>
 
+  <!-- Audio Elements -->
+  <audio id="eagleScream" src="assets/sounds/eagle-scream.mp3" preload="auto"></audio>
+
   <script>
+    // Audio functions
+    function playEagleScream() {
+      const eagle = document.getElementById('eagleScream');
+      eagle.currentTime = 0;
+      eagle.play().catch(e => console.log('Audio play failed:', e));
+    }
+
+    function playEagleAndNavigate(url) {
+      const eagle = document.getElementById('eagleScream');
+      eagle.currentTime = 0;
+      eagle.play().catch(e => console.log('Audio play failed:', e));
+      // Navigate after a short delay to let the eagle scream start
+      setTimeout(() => {
+        window.location.href = url;
+      }, 300);
+    }
+
     function updateTimestamp() {
       const now = new Date();
       const timestamp = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
