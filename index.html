@@ -297,6 +297,12 @@
         gap: 1.5rem !important;
       }
 
+      .terminal-body > div[style*="grid-template-columns: 1fr 1fr 1fr"] {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+      }
+
       .access-button {
         padding: 0.85rem 1.5rem;
         font-size: 0.85rem;
@@ -421,23 +427,23 @@
   </div>
 
   <div class="threat-level">
-    <div style="font-size: 0.8rem; margin-bottom: 1rem;">NATIONAL PENNY THREAT LEVEL</div>
-    <div style="font-size: 2.5rem; font-weight: bold; color: #00ff41;">SECURE</div>
-    <div style="font-size: 0.75rem; margin-top: 1rem; opacity: 0.8;">ALL COPPER ASSETS NOMINAL</div>
+    <div style="font-size: 0.8rem; margin-bottom: 1rem;">PENNY EXTINCTION ALERT</div>
+    <div style="font-size: 2.5rem; font-weight: bold; color: #ff0000;" class="blink">CRITICAL</div>
+    <div style="font-size: 0.75rem; margin-top: 1rem; opacity: 0.8;">U.S. MINT CEASED PENNY PRODUCTION</div>
   </div>
 
   <div class="terminal-grid">
     <!-- Main Status -->
     <div class="terminal-window hero-terminal">
       <div class="terminal-header">
-        <span>🛡️ PENNY DEFENSE MONITORING STATION</span>
+        <span>🚨 EMERGENCY PENNY PRESERVATION PROTOCOL</span>
         <span class="alert-secure">● ACTIVE</span>
       </div>
       <div class="terminal-body">
         <div style="text-align: center;">
-          <div style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem;">VERIFIED COPPER ASSETS</div>
+          <div style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem; color: #ff0000;">SECURED BEFORE EXTINCTION</div>
           <div class="big-stat">1,000,000</div>
-          <div style="font-size: 0.85rem; opacity: 0.7;">PHYSICAL PENNY UNITS SECURED</div>
+          <div style="font-size: 0.85rem; opacity: 0.7;">LAST PENNIES • LIVESTREAMED • ON-CHAIN</div>
         </div>
         <div class="surveillance-feed">
           <div class="feed-box">
@@ -464,19 +470,47 @@
       </div>
     </div>
 
+    <!-- Price Ticker (Hidden - Ready for Jupiter Integration) -->
+    <div class="terminal-window full-width" style="display: none;" id="price-ticker">
+      <div class="terminal-header">
+        <span>📈 MARKET STATUS</span>
+        <span id="price-status">● LIVE</span>
+      </div>
+      <div class="terminal-body" style="padding: 1.5rem;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; text-align: center;">
+          <div>
+            <div style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0.5rem;">CURRENT PRICE</div>
+            <div style="font-size: 2rem; font-weight: bold; color: #00ff41;" id="current-price">$0.0100</div>
+          </div>
+          <div>
+            <div style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0.5rem;">BACKING VALUE</div>
+            <div style="font-size: 2rem; font-weight: bold; color: #ffff00;">$0.0100</div>
+          </div>
+          <div>
+            <div style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0.5rem;">PREMIUM / DISCOUNT</div>
+            <div style="font-size: 2rem; font-weight: bold;" id="premium-value">0.0%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Critical Intelligence Summary -->
     <div class="terminal-window full-width">
       <div class="terminal-header">
-        <span>📋 CRITICAL INTELLIGENCE SUMMARY</span>
-        <span>PRIORITY: HIGH</span>
+        <span>📋 MISSION BRIEF</span>
+        <span>PRIORITY: MAXIMUM</span>
       </div>
       <div class="terminal-body" style="text-align: center; padding: 2rem;">
-        <div style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
-          The first memecoin you can physically touch.
-          Every CENT token is backed by an actual penny in an actual vault.
+        <div style="font-size: 1.3rem; line-height: 1.8; margin-bottom: 1.5rem; font-weight: bold; color: #ffff00;">
+          THE U.S. GOVERNMENT STOPPED MAKING PENNIES.<br>
+          WE SAVED 1,000,000 OF THE LAST ONES.
+        </div>
+        <div style="font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem; opacity: 0.9;">
+          Every CENT token is backed by an actual penny in an actual vault.<br>
+          Watch them 24/7 on livestream. Verify on-chain. Touch the memecoin.
         </div>
         <div style="padding: 1.5rem; background: rgba(255, 255, 0, 0.1); border: 2px solid #ffff00;">
-          <span style="color: #00ff41; font-weight: bold; font-size: 1.2rem;">1 CENT = 1 PENNY. ALWAYS. FOREVER. LIVESTREAMED.</span>
+          <span style="color: #00ff41; font-weight: bold; font-size: 1.2rem;">THE MOST BACKED MEMECOIN. THE MOST SCARCE STABLECOIN.</span>
         </div>
       </div>
     </div>
@@ -484,49 +518,73 @@
     <!-- Comparison -->
     <div class="terminal-window full-width" style="border-color: #ffff00;">
       <div class="terminal-header" style="background: #ffff00;">
-        <span>⚠️ COMPARATIVE THREAT ANALYSIS</span>
+        <span>⚠️ BACKING REALITY CHECK</span>
         <span>CLASSIFIED</span>
       </div>
       <div class="terminal-body">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-top: 1rem;">
           <div>
-            <div style="font-weight: bold; margin-bottom: 1rem; color: #ffff00;">OTHER STABLECOINS:</div>
+            <div style="font-weight: bold; margin-bottom: 1rem; color: #ff0000; text-align: center;">TETHER (USDT)</div>
             <div class="stat-line" style="border-color: #ff0000;">
-              <span>TREASURY TRANSPARENCY:</span>
-              <span style="color: #ff0000;">UNKNOWN</span>
+              <span>BACKING:</span>
+              <span style="color: #ff0000;">TRUST US</span>
             </div>
             <div class="stat-line" style="border-color: #ff0000;">
-              <span>PHYSICAL VERIFICATION:</span>
+              <span>LIVESTREAM:</span>
               <span style="color: #ff0000;">NONE</span>
             </div>
             <div class="stat-line" style="border-color: #ff0000;">
-              <span>LIVE SURVEILLANCE:</span>
-              <span style="color: #ff0000;">UNAVAILABLE</span>
+              <span>MAX SUPPLY:</span>
+              <span style="color: #ff0000;">INFINITE</span>
             </div>
             <div class="stat-line" style="border-color: #ff0000;">
-              <span>EAGLE GUARDIANS:</span>
-              <span style="color: #ff0000;">ZERO</span>
+              <span>TOUCHABLE:</span>
+              <span style="color: #ff0000;">NO</span>
             </div>
           </div>
           <div>
-            <div style="font-weight: bold; margin-bottom: 1rem; color: #00ff41;">CENT PROTOCOL:</div>
-            <div class="stat-line">
-              <span>TREASURY TRANSPARENCY:</span>
-              <span class="stat-value">100% PUBLIC</span>
+            <div style="font-weight: bold; margin-bottom: 1rem; color: #ff0000; text-align: center;">DOGECOIN</div>
+            <div class="stat-line" style="border-color: #ff0000;">
+              <span>BACKING:</span>
+              <span style="color: #ff0000;">LITERALLY $0</span>
             </div>
-            <div class="stat-line">
-              <span>PHYSICAL VERIFICATION:</span>
-              <span class="stat-value">CONTINUOUS</span>
+            <div class="stat-line" style="border-color: #ff0000;">
+              <span>LIVESTREAM:</span>
+              <span style="color: #ff0000;">NONE</span>
             </div>
-            <div class="stat-line">
-              <span>LIVE SURVEILLANCE:</span>
-              <span class="stat-value">24/7 FEEDS</span>
+            <div class="stat-line" style="border-color: #ff0000;">
+              <span>MAX SUPPLY:</span>
+              <span style="color: #ff0000;">INFINITE</span>
             </div>
-            <div class="stat-line">
-              <span>EAGLE GUARDIANS:</span>
-              <span class="stat-value">DEPLOYED</span>
+            <div class="stat-line" style="border-color: #ff0000;">
+              <span>TOUCHABLE:</span>
+              <span style="color: #ff0000;">NO</span>
             </div>
           </div>
+          <div>
+            <div style="font-weight: bold; margin-bottom: 1rem; color: #00ff41; text-align: center;">CENT</div>
+            <div class="stat-line">
+              <span>BACKING:</span>
+              <span class="stat-value">$0.01 EACH</span>
+            </div>
+            <div class="stat-line">
+              <span>LIVESTREAM:</span>
+              <span class="stat-value">24/7</span>
+            </div>
+            <div class="stat-line">
+              <span>MAX SUPPLY:</span>
+              <span class="stat-value">LIMITED</span>
+            </div>
+            <div class="stat-line">
+              <span>TOUCHABLE:</span>
+              <span class="stat-value">YES</span>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255, 0, 0, 0.1); border: 1px solid #ff0000; text-align: center;">
+          <span style="font-size: 0.9rem; opacity: 0.9;">
+            Government stopped making pennies. Can't print more backing. Fixed supply forever.
+          </span>
         </div>
       </div>
     </div>
@@ -751,6 +809,58 @@
     updateOperationsLog();
     // Refresh operations log every minute to keep times current
     setInterval(updateOperationsLog, 60000);
+
+    /* ========================================
+     * JUPITER PRICE TICKER INTEGRATION
+     * ========================================
+     * Uncomment this section when ready to display live price from Jupiter DEX
+     *
+     * To enable:
+     * 1. Uncomment the updatePrice() function below
+     * 2. Change display:none to display:block on #price-ticker element (line 468)
+     * 3. Replace 'YOUR_TOKEN_MINT_ADDRESS' with actual CENT token mint address
+     *
+     * This will fetch live price every 10 seconds and update the ticker
+     */
+
+    /*
+    async function updatePrice() {
+      try {
+        const CENT_MINT = 'YOUR_TOKEN_MINT_ADDRESS'; // Replace with actual mint address
+        const USDC_MINT = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'; // USDC mint address
+
+        // Fetch price from Jupiter Price API
+        const response = await fetch(`https://price.jup.ag/v4/price?ids=${CENT_MINT}`);
+        const data = await response.json();
+
+        if (data.data && data.data[CENT_MINT]) {
+          const price = data.data[CENT_MINT].price;
+          const backingValue = 0.01; // $0.01 per penny
+          const premium = ((price - backingValue) / backingValue * 100).toFixed(2);
+
+          // Update display
+          document.getElementById('current-price').textContent = `$${price.toFixed(4)}`;
+          document.getElementById('premium-value').textContent = `${premium > 0 ? '+' : ''}${premium}%`;
+
+          // Color code the premium
+          const premiumElement = document.getElementById('premium-value');
+          if (premium > 0) {
+            premiumElement.style.color = '#00ff41'; // Green for above peg
+          } else if (premium < 0) {
+            premiumElement.style.color = '#ff0000'; // Red for below peg
+          } else {
+            premiumElement.style.color = '#ffff00'; // Yellow for at peg
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching price:', error);
+      }
+    }
+
+    // Update price every 10 seconds
+    updatePrice();
+    setInterval(updatePrice, 10000);
+    */
   </script>
 </body>
 </html>
