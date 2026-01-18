@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MINT AUTHORIZATION REQUEST - CENT DEFENSE MONITORING</title>
-  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+  <meta name="theme-color" content="#f8f7f4">
+  <title>Deposit Pennies – CENT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -12,127 +13,208 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --bg: #f8f7f4;
+      --bg-card: #ffffff;
+      --text: #1c1c1c;
+      --text-secondary: #5c5c5c;
+      --text-tertiary: #8a8a8a;
+      --copper: #8b5a3c;
+      --copper-light: #a67c5b;
+      --border: #e5e3de;
+      --border-light: #eeece7;
+    }
+
     body {
-      font-family: 'Courier Prime', monospace;
-      background: #0a0e0a;
-      color: #00ff41;
-      line-height: 1.4;
-      overflow-x: hidden;
-      min-height: 100vh;
-      padding: 2rem 1rem;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-blend-mode: overlay;
+      background-size: 200px;
     }
 
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
+    .serif {
+      font-family: 'Source Serif 4', Georgia, serif;
     }
 
-    @keyframes scan {
-      0% { transform: translateY(-100%); }
-      100% { transform: translateY(100vh); }
-    }
-
-    .scan-line {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(to bottom, transparent, #00ff41, transparent);
-      animation: scan 3s linear infinite;
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-    .classified-header {
-      background: #000;
-      border: 2px solid #00ff41;
-      padding: 1rem 2rem;
-      margin-bottom: 2rem;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-      font-family: 'Share Tech Mono', monospace;
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-align: center;
-    }
-
-    .form-container {
-      max-width: 800px;
+    .container {
+      max-width: 1100px;
       margin: 0 auto;
-      background: rgba(0, 20, 0, 0.9);
-      border: 2px solid #00ff41;
-      box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+      padding: 0 24px;
     }
 
-    .form-header {
-      background: #00ff41;
-      color: #000;
-      padding: 1rem 2rem;
-      font-weight: bold;
-      font-size: 1.2rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      text-align: center;
+    /* Header */
+    header {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
     }
 
-    .form-body {
-      padding: 2rem;
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    nav {
+      display: flex;
+      gap: 36px;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .btn-primary:hover {
+      background: #333;
+    }
+
+    /* Page Header */
+    .page-header {
+      padding: 60px 0 40px;
+      max-width: 600px;
+    }
+
+    .page-header h1 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 2.4rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .page-header p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* Main Layout */
+    .page-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 60px;
+      padding-bottom: 80px;
+      align-items: start;
+    }
+
+    /* Form Styles */
+    .form-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 40px;
     }
 
     .form-section {
-      margin-bottom: 2rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border-light);
     }
 
     .form-section:last-of-type {
+      margin-bottom: 0;
+      padding-bottom: 0;
       border-bottom: none;
     }
 
-    .section-title {
+    .form-section-title {
+      font-family: 'Source Serif 4', Georgia, serif;
       font-size: 1.1rem;
-      color: #ffff00;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-family: 'Share Tech Mono', monospace;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--text);
     }
 
     label {
       display: block;
-      margin-bottom: 0.5rem;
-      font-weight: bold;
+      margin-bottom: 6px;
+      font-weight: 500;
       font-size: 0.9rem;
-      color: #00ff41;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      color: var(--text);
     }
 
     input,
     textarea {
       width: 100%;
-      padding: 0.75rem 1rem;
-      background: #000;
-      border: 1px solid #00ff41;
-      color: #00ff41;
-      font-family: 'Courier Prime', monospace;
-      font-size: 0.9rem;
-      margin-bottom: 1.5rem;
+      padding: 12px 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     input:focus,
     textarea:focus {
       outline: none;
-      border-color: #ffff00;
-      box-shadow: 0 0 10px rgba(255, 255, 0, 0.3);
+      border-color: var(--copper);
+      box-shadow: 0 0 0 3px rgba(139, 90, 60, 0.1);
     }
 
     input[type="file"] {
-      padding: 0.5rem;
+      padding: 10px;
       cursor: pointer;
+    }
+
+    input[type="file"]::file-selector-button {
+      background: var(--text);
+      color: var(--bg);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-right: 12px;
+      transition: background 0.2s;
+    }
+
+    input[type="file"]::file-selector-button:hover {
+      background: #333;
     }
 
     textarea {
@@ -141,301 +223,329 @@
     }
 
     .helper-text {
-      font-size: 0.8rem;
-      color: rgba(0, 255, 65, 0.7);
-      margin-top: -1rem;
-      margin-bottom: 1.5rem;
-      line-height: 1.4;
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      margin-top: -14px;
+      margin-bottom: 20px;
+      line-height: 1.5;
     }
 
-    button {
-      background: #00ff41;
-      color: #000;
-      border: none;
-      padding: 1rem 2rem;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
-      transition: all 0.2s;
+    .submit-button {
       width: 100%;
-      margin-top: 1rem;
-    }
-
-    button:hover {
-      background: #ffff00;
-      box-shadow: 0 0 30px rgba(255, 255, 0, 0.8);
-    }
-
-    button:disabled {
-      background: #333;
-      color: #666;
-      cursor: not-allowed;
-      box-shadow: none;
-    }
-
-    .kyc-box {
-      background: rgba(0, 0, 0, 0.5);
-      border: 2px solid #ffff00;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-    }
-
-    .kyc-box p {
-      margin-bottom: 1rem;
-      line-height: 1.6;
-    }
-
-    .warning-box {
-      background: rgba(255, 255, 0, 0.1);
-      border: 2px solid #ffff00;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-    }
-
-    .warning-title {
-      color: #ffff00;
-      font-weight: bold;
-      margin-bottom: 0.75rem;
+      background: var(--copper);
+      color: white;
+      border: none;
+      padding: 16px 24px;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
       font-size: 1rem;
-      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
     }
 
-    .warning-box p {
-      line-height: 1.6;
+    .submit-button:hover {
+      background: var(--copper-light);
+      transform: translateY(-1px);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: sticky;
+      top: 24px;
+    }
+
+    .sidebar-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-card h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .sidebar-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .sidebar-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .process-steps {
+      list-style: none;
+    }
+
+    .process-steps li {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .process-steps li:last-child {
+      margin-bottom: 0;
+    }
+
+    .step-number {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      background: var(--border-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* Callout box */
+    .callout {
+      background: linear-gradient(135deg, #f5f0e8 0%, var(--bg) 100%);
+      border-left: 3px solid var(--copper);
+      padding: 20px 24px;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .callout p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
       font-size: 0.9rem;
     }
 
-    .back-link {
-      display: inline-block;
-      color: #00ff41;
-      text-decoration: none;
-      margin-bottom: 1rem;
-      padding: 0.5rem 1rem;
-      border: 1px solid #00ff41;
-      transition: all 0.2s;
+    .footer-links a:hover {
+      color: var(--text);
     }
 
-    .back-link:hover {
-      background: #00ff41;
-      color: #000;
+    .footer-legal {
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      max-width: 400px;
+      text-align: right;
+      line-height: 1.6;
     }
 
-    .timestamp {
-      font-size: 0.7rem;
-      opacity: 0.6;
-      margin-top: 0.5rem;
+    /* Responsive */
+    @media (max-width: 900px) {
+      .page-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .sidebar {
+        position: static;
+        order: -1;
+      }
     }
 
     @media (max-width: 768px) {
-      body {
-        padding: 1rem 0.5rem;
+      nav {
+        display: none;
       }
 
-      .form-body {
-        padding: 1.5rem 1rem;
+      .page-header {
+        padding: 40px 0 32px;
       }
 
-      .classified-header {
-        font-size: 0.65rem;
-        padding: 0.75rem 1rem;
+      .page-header h1 {
+        font-size: 1.9rem;
       }
 
-      .form-header {
-        font-size: 1rem;
-        padding: 0.75rem 1rem;
+      .form-card {
+        padding: 24px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .footer-legal {
+        text-align: left;
+        max-width: none;
       }
     }
   </style>
 </head>
 <body>
-  <div class="scan-line"></div>
-
-  <div class="classified-header">
-    <div>TOKEN MINTING AUTHORIZATION REQUEST</div>
-    <div>CLASSIFICATION: RESTRICTED</div>
-    <div class="timestamp" id="timestamp"></div>
-    <div class="blink" style="margin-top: 0.5rem;">● SECURE CONNECTION ACTIVE</div>
-  </div>
-
-  <div style="max-width: 800px; margin: 0 auto 1rem;">
-    <a href="index.html" class="back-link">← RETURN TO MAIN TERMINAL</a>
-  </div>
-
-  <div class="form-container">
-    <div class="form-header">
-      🛡️ Mint Authorization Request Form
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">CENT</a>
+      <nav>
+        <a href="transparency.html">Transparency</a>
+        <a href="whitepaper.html">Whitepaper</a>
+        <a href="minting.html" class="btn btn-primary">Get Started</a>
+      </nav>
     </div>
-    <div class="form-body">
-      <div class="warning-box">
-        <div class="warning-title">⚠️ OPERATIONAL REQUIREMENTS</div>
-        <p>
-          All mint requests require comprehensive verification protocols including physical penny verification,
-          identity confirmation, and eagle oversight approval. Processing time: 24-72 hours pending verification.
-        </p>
+  </header>
+
+  <div class="container">
+    <div class="page-header">
+      <h1>Want to deposit pennies?</h1>
+      <p>
+        If you have physical pennies and want to mint CENT tokens against them,
+        you'll need to get them to our vault. This form starts that process.
+      </p>
+    </div>
+
+    <div class="page-layout">
+      <div class="form-card">
+        <form action="https://usebasin.com/f/dd1c2c0d86db" method="POST" enctype="multipart/form-data">
+
+          <div class="form-section">
+            <div class="form-section-title">The Pennies</div>
+
+            <label for="pennies">How many pennies do you have?</label>
+            <input type="number" id="pennies" name="pennies" min="1" required placeholder="e.g., 10000">
+            <p class="helper-text">
+              No minimum. No maximum (though we might need to talk logistics if you're showing up with a truckload).
+            </p>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-title">About You</div>
+
+            <label for="fullName">Your name</label>
+            <input type="text" id="fullName" name="fullName" placeholder="First and last" required>
+
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+            <label for="phone">Phone number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" required>
+
+            <label for="username">X (Twitter) handle</label>
+            <input type="text" id="username" name="username" placeholder="@yourusername" required>
+            <p class="helper-text">
+              We'll use this to publicly verify your deposit, which is good for everyone's trust.
+            </p>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-title">Proof of Pennies</div>
+
+            <label for="proof">Photo of your pennies</label>
+            <input type="file" id="proof" name="proof" accept="image/*,application/pdf" required>
+            <p class="helper-text">
+              Show us what you've got. Include a piece of paper with your X handle visible in the frame so we know it's really you. JPG, PNG, or PDF up to 25MB.
+            </p>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-title">One More Thing</div>
+
+            <label for="tweet">Link to your CENT meme tweet</label>
+            <input type="url" id="tweet" name="tweet" placeholder="https://x.com/you/status/..." required>
+            <p class="helper-text">
+              Post something about CENT (be creative), tag @stablecentmoney, and paste the link here.
+              Think of it as your application essay, but funnier.
+            </p>
+          </div>
+
+          <button type="submit" class="submit-button">
+            Submit Deposit Request
+          </button>
+        </form>
       </div>
 
-      <form action="https://usebasin.com/f/dd1c2c0d86db" method="POST" enctype="multipart/form-data">
-        <!-- Asset Deposit Section -->
-        <div class="form-section">
-          <div class="section-title">📦 Section 1: Asset Deposit Information</div>
+      <div class="sidebar">
+        <div class="sidebar-card">
+          <h3>What happens next?</h3>
+          <ul class="process-steps">
+            <li>
+              <span class="step-number">1</span>
+              <span>We verify your photo and review your submission</span>
+            </li>
+            <li>
+              <span class="step-number">2</span>
+              <span>If approved, we'll reach out to coordinate delivery logistics</span>
+            </li>
+            <li>
+              <span class="step-number">3</span>
+              <span>Your pennies arrive at the vault and get counted</span>
+            </li>
+            <li>
+              <span class="step-number">4</span>
+              <span>We mint CENT tokens to your Solana wallet</span>
+            </li>
+            <li>
+              <span class="step-number">4</span>
+              <span>You join the crowds of proud CENT holders</span>
+            </li>
+          </ul>
+        </div>
 
-          <label for="pennies">Number of Physical Pennies to Deposit:</label>
-          <input type="number" id="pennies" name="pennies" min="1" required placeholder="Enter quantity">
-          <p class="helper-text">
-            Minimum deposit: 1 penny. Maximum deposit: No limit (subject to vault capacity verification).
-            Each penny will be individually verified and logged.
+        <div class="sidebar-card">
+          <h3>A note on rare pennies</h3>
+          <p>
+            Got wheat pennies, steel pennies, or anything unusual?
+            Let us know in your tweet. We have a separate program for
+            rare and collectible coins that might be more interesting
+            than standard deposits.
           </p>
         </div>
 
-        <!-- Personnel Identification -->
-        <div class="form-section">
-          <div class="section-title">🔐 Section 2: Personnel Identification</div>
-
-          <label for="fullName">Full Legal Name:</label>
-          <input type="text" id="fullName" name="fullName" placeholder="First Middle Last" required>
-
-          <label for="email">Secure Email Address:</label>
-          <input type="email" id="email" name="email" placeholder="your.email@domain.com" required>
-
-          <label for="phone">Contact Phone Number:</label>
-          <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" required>
-
-          <label for="username">X.com (Twitter) Handle:</label>
-          <input type="text" id="username" name="username" placeholder="@yourusername" required>
-          <p class="helper-text">
-            Used for public mint verification and eagle patrol notification system.
+        <div class="callout">
+          <p>
+            Yes, we actually want you to deliver the pennies.
+            No, we're not joking. This is genuinely how this works.
           </p>
         </div>
-
-        <!-- Physical Verification -->
-        <div class="form-section">
-          <div class="section-title">📸 Section 3: Physical Asset Verification</div>
-
-          <label for="proof">Upload Proof of Penny Ownership:</label>
-          <input type="file" id="proof" name="proof" accept="image/*,application/pdf" required>
-          <p class="helper-text">
-            REQUIRED: Photo evidence showing pennies with your X.com handle visible in frame.
-            Accepted formats: JPG, PNG, PDF (max 25 MB). Higher resolution = faster approval.
-          </p>
-        </div>
-
-        <!-- Social Verification -->
-        <div class="form-section">
-          <div class="section-title">🐦 Section 4: Social Verification Protocol</div>
-
-          <label for="tweet">Link to Meme Tweet (must tag @stablecentmoney):</label>
-          <input type="url" id="tweet" name="tweet" placeholder="https://x.com/yourusername/status/..." required>
-          <p class="helper-text">
-            Post a CENT-related meme, tag @stablecentmoney, and paste the tweet link here.
-            This establishes social proof and contributes to the memecoin defense network.
-          </p>
-        </div>
-
-        <!-- KYC Verification -->
-        <div class="form-section">
-          <div class="section-title">🛂 Section 5: Identity Verification (KYC)</div>
-
-          <div class="kyc-box">
-            <p style="font-weight: bold; color: #ffff00;">MANDATORY SECURITY CLEARANCE</p>
-            <p>
-              All mint requests require identity verification through our secure Persona integration.
-              This process verifies your identity to military-grade standards and prevents unauthorized access.
-            </p>
-            <p style="font-size: 0.85rem; opacity: 0.8;">
-              Click "Start KYC Verification" to launch secure verification modal.
-              Your personal information is encrypted and never stored on our servers.
-            </p>
-            <button type="button" id="startKYC">Start KYC Verification</button>
-            <input type="hidden" id="kycToken" name="kycToken">
-            <p class="helper-text" id="kycStatus" style="margin-top: 1rem; color: #ffff00; display: none;">
-              ✅ KYC VERIFICATION COMPLETE - CLEARANCE GRANTED
-            </p>
-          </div>
-        </div>
-
-        <!-- Submission -->
-        <div class="form-section">
-          <div class="section-title">✅ Section 6: Final Submission</div>
-
-          <div class="warning-box">
-            <div class="warning-title">📋 SUBMISSION CHECKLIST</div>
-            <p style="margin-bottom: 0.5rem;">Verify all fields before submission:</p>
-            <p>☑ Penny quantity entered correctly</p>
-            <p>☑ Contact information accurate</p>
-            <p>☑ Photo proof uploaded (clear, with handle visible)</p>
-            <p>☑ Meme tweet posted and linked</p>
-            <p style="margin-bottom: 0;">☑ KYC verification completed</p>
-          </div>
-
-          <button type="submit">
-            🚀 Submit Mint Authorization Request
-          </button>
-
-          <p class="helper-text" style="text-align: center; margin-top: 1rem;">
-            Upon submission, you will receive confirmation via email within 24 hours.
-            Eagles will be dispatched to verify your penny deposit.
-          </p>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
 
-  <div style="max-width: 800px; margin: 2rem auto; padding: 1.5rem; background: rgba(0, 20, 0, 0.9); border: 1px solid #00ff41; text-align: center; font-size: 0.8rem;">
-    <div style="color: #ffff00; font-weight: bold; margin-bottom: 0.5rem;">SECURITY NOTICE</div>
-    <div style="opacity: 0.9; line-height: 1.6;">
-      All submissions are encrypted and transmitted via secure protocols.
-      Your personal information is protected by eagle-grade encryption and never sold to third parties.
-      For questions, contact: hello@stablecent.money
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="transparency.html">Transparency</a>
+          <a href="whitepaper.html">Whitepaper</a>
+          <a href="mailto:contact@fortcent.com">Contact</a>
+        </div>
+        <div class="footer-legal">
+          CENT is an experimental digital asset project.
+          This is not financial advice. Tokens may fluctuate in value.
+        </div>
+      </div>
     </div>
-  </div>
-
-  <!-- Include Persona's SDK -->
-  <script src="https://assets.withpersona.com/sdk/sdk.js"></script>
-  <script>
-    function updateTimestamp() {
-      const now = new Date();
-      const timestamp = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
-      document.getElementById('timestamp').textContent = timestamp;
-    }
-    updateTimestamp();
-    setInterval(updateTimestamp, 1000);
-
-    // KYC Integration
-    document.getElementById('startKYC').addEventListener('click', function() {
-      const button = this;
-      button.disabled = true;
-      button.textContent = 'LAUNCHING SECURE VERIFICATION...';
-
-      Persona.start({
-        templateId: 'your-template-id', // Replace with your actual Persona template ID
-        onComplete: function(response) {
-          document.getElementById('kycToken').value = response.verificationId;
-          document.getElementById('kycStatus').style.display = 'block';
-          button.textContent = 'KYC VERIFICATION COMPLETE ✓';
-          button.style.background = '#00ff41';
-        },
-        onError: function(error) {
-          console.error('Persona verification error:', error);
-          alert('KYC VERIFICATION FAILED. Please retry or contact support.');
-          button.disabled = false;
-          button.textContent = 'Start KYC Verification';
-        }
-      });
-    });
-
-    // Form validation
-    document.querySelector('form').addEventListener('submit', function(e) {
-      const kycToken = document.getElementById('kycToken').value;
-      if (!kycToken) {
-        e.preventDefault();
-        alert('ERROR: KYC Verification required before submission. Please complete Section 5.');
-        document.getElementById('startKYC').scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  </script>
+  </footer>
 </body>
 </html>

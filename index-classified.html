@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+  <meta name="theme-color" content="#0a0e0a">
+  <title>CENT DEFENSE MONITORING STATION - CLASSIFIED</title>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Courier Prime', monospace;
+      background: #0a0e0a;
+      color: #00ff41;
+      line-height: 1.4;
+      overflow-x: hidden;
+    }
+
+    .classified-header {
+      background: #000;
+      border-bottom: 2px solid #00ff41;
+      padding: 0.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Share Tech Mono', monospace;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+    }
+
+    .blink {
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    @keyframes scan {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100vh); }
+    }
+
+    .scan-line {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(to bottom, transparent, #00ff41, transparent);
+      animation: scan 3s linear infinite;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .nav-menu {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #000;
+      border-bottom: 2px solid #00ff41;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-button {
+      background: rgba(0, 255, 65, 0.1);
+      color: #00ff41;
+      border: 1px solid #00ff41;
+      padding: 0.75rem 1.5rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .nav-button:hover {
+      background: #00ff41;
+      color: #000;
+      box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+    }
+
+    .terminal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .terminal-window {
+      background: rgba(0, 20, 0, 0.9);
+      border: 2px solid #00ff41;
+      padding: 0;
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+      position: relative;
+    }
+
+    .terminal-header {
+      background: #00ff41;
+      color: #000;
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .terminal-body {
+      padding: 1.5rem;
+      min-height: 200px;
+      font-size: 0.9rem;
+    }
+
+    .stat-line {
+      display: flex;
+      justify-content: space-between;
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      border-left: 3px solid #00ff41;
+      background: rgba(0, 255, 65, 0.05);
+    }
+
+    .stat-value {
+      color: #ffff00;
+      font-weight: bold;
+    }
+
+    .alert-critical {
+      color: #ff0000;
+      animation: blink 0.5s infinite;
+    }
+
+    .alert-secure {
+      color: #00ff41;
+    }
+
+    .hero-terminal {
+      grid-column: 1 / -1;
+      background: rgba(0, 40, 0, 0.95);
+    }
+
+    .big-stat {
+      font-size: 3rem;
+      font-weight: bold;
+      text-align: center;
+      color: #ffff00;
+      text-shadow: 0 0 10px #ffff00;
+      margin: 1rem 0;
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    .surveillance-feed {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .feed-box {
+      border: 1px solid #00ff41;
+      padding: 0.5rem;
+      background: #000;
+      text-align: center;
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .feed-label {
+      font-size: 0.7rem;
+      margin-bottom: 0.5rem;
+      opacity: 0.7;
+    }
+
+    .threat-level {
+      background: #000;
+      border: 3px solid #ffff00;
+      padding: 2rem;
+      text-align: center;
+      margin: 2rem;
+      position: relative;
+    }
+
+    .threat-level::before,
+    .threat-level::after {
+      content: '⚠️';
+      position: absolute;
+      font-size: 2rem;
+      animation: blink 0.8s infinite;
+    }
+
+    .threat-level::before {
+      top: 1rem;
+      left: 1rem;
+    }
+
+    .threat-level::after {
+      top: 1rem;
+      right: 1rem;
+    }
+
+    .access-button {
+      background: #00ff41;
+      color: #000;
+      border: none;
+      padding: 1rem 2rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+      transition: all 0.2s;
+      min-height: 44px; /* Minimum touch target size */
+      display: inline-block;
+      text-align: center;
+    }
+
+    .access-button:hover {
+      background: #ffff00;
+      box-shadow: 0 0 30px rgba(255, 255, 0, 0.8);
+    }
+
+    .access-button:active {
+      transform: scale(0.98);
+    }
+
+    .timestamp {
+      font-size: 0.7rem;
+      opacity: 0.6;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .footer-terminal {
+      background: #000;
+      border-top: 2px solid #00ff41;
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .classified-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+        font-size: 0.65rem;
+        text-align: center;
+      }
+
+      .threat-level {
+        padding: 1.5rem 1rem;
+      }
+
+      .nav-menu {
+        padding: 0.75rem 1rem;
+        gap: 0.5rem;
+      }
+
+      .nav-button {
+        padding: 0.65rem 1rem;
+        font-size: 0.75rem;
+        width: 100%;
+      }
+
+      .terminal-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem 0.75rem;
+        gap: 1rem;
+      }
+
+      .terminal-window {
+        border-width: 1px;
+      }
+
+      .terminal-header {
+        padding: 0.65rem 1rem;
+        font-size: 0.75rem;
+        flex-direction: column;
+        gap: 0.25rem;
+        text-align: center;
+      }
+
+      .terminal-body {
+        padding: 1rem;
+        font-size: 0.85rem;
+      }
+
+      .big-stat {
+        font-size: 2rem;
+      }
+
+      .surveillance-feed {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+      }
+
+      .feed-box {
+        min-height: 80px;
+        padding: 0.5rem;
+      }
+
+      .stat-line {
+        font-size: 0.8rem;
+        padding: 0.4rem;
+        flex-direction: column;
+        gap: 0.25rem;
+        align-items: flex-start;
+      }
+
+      .stat-value {
+        font-size: 0.85rem;
+      }
+
+      /* Comparison grid - stack on mobile */
+      .terminal-body > div[style*="grid-template-columns: 1fr 1fr"] {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+      }
+
+      .terminal-body > div[style*="grid-template-columns: 1fr 1fr 1fr"] {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+      }
+
+      .access-button {
+        padding: 0.85rem 1.5rem;
+        font-size: 0.85rem;
+        width: 100%;
+        margin: 0.5rem 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .classified-header {
+        font-size: 0.6rem;
+        padding: 0.5rem;
+      }
+
+      .threat-level {
+        padding: 1rem 0.5rem;
+      }
+
+      .threat-level div:first-child {
+        font-size: 0.7rem;
+      }
+
+      .threat-level div:nth-child(2) {
+        font-size: 2rem;
+      }
+
+      .terminal-grid {
+        padding: 0.75rem 0.5rem;
+      }
+
+      .terminal-body {
+        padding: 0.75rem;
+        font-size: 0.8rem;
+        min-height: auto;
+      }
+
+      .big-stat {
+        font-size: 1.75rem;
+      }
+
+      .surveillance-feed {
+        grid-template-columns: 1fr;
+      }
+
+      .feed-box {
+        min-height: 70px;
+      }
+
+      .access-button {
+        padding: 0.75rem 1rem;
+        font-size: 0.8rem;
+      }
+
+      /* FAQ section mobile optimizations */
+      .terminal-body div[style*="display: grid; gap: 1.5rem"] > div {
+        padding: 0.5rem 0;
+      }
+
+      .terminal-body div[style*="color: #ffff00"] {
+        font-size: 0.75rem !important;
+        word-break: break-word;
+      }
+
+      .terminal-body div[style*="border-left: 3px solid #00ff41"] {
+        padding: 0.5rem !important;
+        font-size: 0.75rem !important;
+        line-height: 1.5 !important;
+      }
+
+      /* Critical intelligence summary mobile */
+      .terminal-body div[style*="background: rgba(255, 255, 0, 0.1)"] {
+        padding: 1rem !important;
+      }
+
+      .terminal-body div[style*="background: rgba(255, 255, 0, 0.1)"] div:first-child {
+        font-size: 0.9rem !important;
+      }
+
+      .terminal-body div[style*="background: rgba(255, 255, 0, 0.1)"] div:last-child {
+        font-size: 0.75rem !important;
+        line-height: 1.6 !important;
+      }
+
+      /* Operations log mobile */
+      #operations-log {
+        font-size: 0.65rem !important;
+      }
+
+      #operations-log > div {
+        word-break: break-all;
+        line-height: 1.4;
+      }
+
+      /* Access panel mobile */
+      .terminal-body div[style*="font-size: 1.2rem"] {
+        font-size: 0.9rem !important;
+      }
+
+      .terminal-body div[style*="font-size: 0.9rem"] {
+        font-size: 0.75rem !important;
+      }
+
+      /* Make buttons stack in single column on small screens */
+      .terminal-body div[style*="display: flex"] {
+        flex-direction: column !important;
+      }
+
+      /* Ensure touch-friendly spacing */
+      * {
+        -webkit-tap-highlight-color: rgba(0, 255, 65, 0.2);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="scan-line"></div>
+
+  <div class="classified-header">
+    <span>CLASSIFIED - LEVEL 5 CLEARANCE REQUIRED</span>
+    <span class="timestamp" id="timestamp"></span>
+    <span class="blink">● REC</span>
+  </div>
+
+  <div class="threat-level">
+    <div style="font-size: 0.8rem; margin-bottom: 1rem;">PENNY EXTINCTION ALERT</div>
+    <div style="font-size: 2.5rem; font-weight: bold; color: #ff0000;" class="blink">CRITICAL</div>
+    <div style="font-size: 0.75rem; margin-top: 1rem; opacity: 0.8;">U.S. MINT CEASED PENNY PRODUCTION</div>
+  </div>
+
+  <nav class="nav-menu">
+    <button class="nav-button" onclick="playEagleAndNavigate('minting.html')">🪙 MINT</button>
+    <a href="transparency.html" class="nav-button">📊 PROOF</a>
+    <a href="whitepaper.html" class="nav-button">📄 WHITEPAPER</a>
+    <a href="merch.html" class="nav-button">🛒 MERCH</a>
+    <button class="nav-button" onclick="playEagleScream()">🦅 EAGLE</button>
+  </nav>
+
+  <div class="terminal-grid">
+    <!-- Main Status -->
+    <div class="terminal-window hero-terminal">
+      <div class="terminal-header">
+        <span>🚨 EMERGENCY PENNY PRESERVATION PROTOCOL</span>
+        <span class="alert-secure">● ACTIVE</span>
+      </div>
+      <div class="terminal-body">
+        <div style="text-align: center;">
+          <div style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem; color: #ff0000;">SECURED BEFORE EXTINCTION</div>
+          <div class="big-stat">1,000,000</div>
+          <div style="font-size: 0.85rem; opacity: 0.7;">LAST PENNIES • LIVESTREAMED • ON-CHAIN</div>
+        </div>
+        <div class="surveillance-feed">
+          <div class="feed-box">
+            <div class="feed-label">CAMERA ALPHA-1</div>
+            <div style="font-size: 1.5rem;">📹</div>
+            <div style="font-size: 0.7rem; color: #00ff41;">ACTIVE</div>
+          </div>
+          <div class="feed-box">
+            <div class="feed-label">CAMERA BETA-2</div>
+            <div style="font-size: 1.5rem;">📹</div>
+            <div style="font-size: 0.7rem; color: #00ff41;">ACTIVE</div>
+          </div>
+          <div class="feed-box">
+            <div class="feed-label">EAGLE SQUADRON</div>
+            <div style="font-size: 1.5rem;">🦅</div>
+            <div style="font-size: 0.7rem; color: #00ff41;">PATROLLING</div>
+          </div>
+          <div class="feed-box">
+            <div class="feed-label">VAULT INTEGRITY</div>
+            <div style="font-size: 1.5rem;">🔒</div>
+            <div style="font-size: 0.7rem; color: #00ff41;">100%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Price Ticker (Hidden - Ready for Jupiter Integration) -->
+    <!-- TODO: After Orca launch, change style="display: none;" to style="display: block;" below -->
+    <div class="terminal-window full-width" style="display: none;" id="price-ticker">
+      <div class="terminal-header">
+        <span>📈 MARKET STATUS</span>
+        <span id="price-status">● LIVE</span>
+      </div>
+      <div class="terminal-body" style="padding: 1.5rem;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; text-align: center;">
+          <div>
+            <div style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0.5rem;">CURRENT PRICE</div>
+            <div style="font-size: 2rem; font-weight: bold; color: #00ff41;" id="current-price">$0.0100</div>
+          </div>
+          <div>
+            <div style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0.5rem;">BACKING VALUE</div>
+            <div style="font-size: 2rem; font-weight: bold; color: #ffff00;">$0.0100</div>
+          </div>
+          <div>
+            <div style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0.5rem;">PREMIUM / DISCOUNT</div>
+            <div style="font-size: 2rem; font-weight: bold;" id="premium-value">0.0%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Critical Intelligence Summary -->
+    <div class="terminal-window full-width">
+      <div class="terminal-header">
+        <span>📋 MISSION BRIEF</span>
+        <span>PRIORITY: MAXIMUM</span>
+      </div>
+      <div class="terminal-body" style="text-align: center; padding: 2rem;">
+        <div style="font-size: 1.3rem; line-height: 1.8; margin-bottom: 1.5rem; font-weight: bold; color: #ffff00;">
+          THE U.S. GOVERNMENT STOPPED MAKING PENNIES.<br>
+          WE SAVED 1,000,000 OF THE LAST ONES.
+        </div>
+        <div style="font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem; opacity: 0.9;">
+          Every CENT token is backed by an actual penny in an actual vault.<br>
+          Watch them 24/7 on livestream. Verify on-chain. Touch the memecoin.
+        </div>
+        <div style="padding: 1.5rem; background: rgba(255, 255, 0, 0.1); border: 2px solid #ffff00;">
+          <span style="color: #00ff41; font-weight: bold; font-size: 1.2rem;">THE MOST BACKED MEMECOIN. THE MOST SCARCE STABLECOIN.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparison -->
+    <div class="terminal-window full-width" style="border-color: #ffff00;">
+      <div class="terminal-header" style="background: #ffff00;">
+        <span>⚠️ BACKING REALITY CHECK</span>
+        <span>CLASSIFIED</span>
+      </div>
+      <div class="terminal-body">
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-top: 1rem;">
+          <div>
+            <div style="font-weight: bold; margin-bottom: 1rem; color: #ff0000; text-align: center;">TETHER (USDT)</div>
+            <div class="stat-line" style="border-color: #ff0000;">
+              <span>BACKING:</span>
+              <span style="color: #ff0000;">TRUST US</span>
+            </div>
+            <div class="stat-line" style="border-color: #ff0000;">
+              <span>LIVESTREAM:</span>
+              <span style="color: #ff0000;">NONE</span>
+            </div>
+            <div class="stat-line" style="border-color: #ff0000;">
+              <span>MAX SUPPLY:</span>
+              <span style="color: #ff0000;">INFINITE</span>
+            </div>
+            <div class="stat-line" style="border-color: #ff0000;">
+              <span>TOUCHABLE:</span>
+              <span style="color: #ff0000;">NO</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-weight: bold; margin-bottom: 1rem; color: #ff0000; text-align: center;">DOGECOIN</div>
+            <div class="stat-line" style="border-color: #ff0000;">
+              <span>BACKING:</span>
+              <span style="color: #ff0000;">LITERALLY $0</span>
+            </div>
+            <div class="stat-line" style="border-color: #ff0000;">
+              <span>LIVESTREAM:</span>
+              <span style="color: #ff0000;">NONE</span>
+            </div>
+            <div class="stat-line" style="border-color: #ff0000;">
+              <span>MAX SUPPLY:</span>
+              <span style="color: #ff0000;">INFINITE</span>
+            </div>
+            <div class="stat-line" style="border-color: #ff0000;">
+              <span>TOUCHABLE:</span>
+              <span style="color: #ff0000;">NO</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-weight: bold; margin-bottom: 1rem; color: #00ff41; text-align: center;">CENT</div>
+            <div class="stat-line">
+              <span>BACKING:</span>
+              <span class="stat-value">$0.01 EACH</span>
+            </div>
+            <div class="stat-line">
+              <span>LIVESTREAM:</span>
+              <span class="stat-value">24/7</span>
+            </div>
+            <div class="stat-line">
+              <span>MAX SUPPLY:</span>
+              <span class="stat-value">LIMITED</span>
+            </div>
+            <div class="stat-line">
+              <span>TOUCHABLE:</span>
+              <span class="stat-value">YES</span>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255, 0, 0, 0.1); border: 1px solid #ff0000; text-align: center;">
+          <span style="font-size: 0.9rem; opacity: 0.9;">
+            Government stopped making pennies. Can't print more backing. Fixed supply forever.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Asset Tracking -->
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <span>ASSET TRACKING SYSTEM</span>
+        <span>●●●</span>
+      </div>
+      <div class="terminal-body">
+        <div class="stat-line">
+          <span>TOTAL MASS:</span>
+          <span class="stat-value">3.0 TONS</span>
+        </div>
+        <div class="stat-line">
+          <span>PALLETS CATALOGUED:</span>
+          <span class="stat-value">18 UNITS</span>
+        </div>
+        <div class="stat-line">
+          <span>VAULT TEMP:</span>
+          <span class="stat-value">68°F OPTIMAL</span>
+        </div>
+        <div class="stat-line">
+          <span>HUMIDITY:</span>
+          <span class="stat-value">45% NOMINAL</span>
+        </div>
+        <div class="stat-line">
+          <span>LAST AUDIT:</span>
+          <span class="stat-value">00:47 AGO</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Security Status -->
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <span>SECURITY PROTOCOLS</span>
+        <span class="alert-secure">● ENGAGED</span>
+      </div>
+      <div class="terminal-body">
+        <div class="stat-line">
+          <span>DUAL-CONTROL ACCESS:</span>
+          <span class="stat-value alert-secure">ENABLED</span>
+        </div>
+        <div class="stat-line">
+          <span>MOTION SENSORS:</span>
+          <span class="stat-value alert-secure">ACTIVE (24)</span>
+        </div>
+        <div class="stat-line">
+          <span>EAGLE PATROLS:</span>
+          <span class="stat-value alert-secure">DEPLOYED (3)</span>
+        </div>
+        <div class="stat-line">
+          <span>PERIMETER STATUS:</span>
+          <span class="stat-value alert-secure">INTACT</span>
+        </div>
+        <div class="stat-line">
+          <span>UNAUTHORIZED ACCESS:</span>
+          <span class="stat-value alert-secure">ZERO ATTEMPTS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blockchain Status -->
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <span>BLOCKCHAIN VERIFICATION</span>
+        <span>⛓️</span>
+      </div>
+      <div class="terminal-body">
+        <div class="stat-line">
+          <span>TOKENS MINTED:</span>
+          <span class="stat-value">1,000,000 CENT</span>
+        </div>
+        <div class="stat-line">
+          <span>PHYSICAL:DIGITAL RATIO:</span>
+          <span class="stat-value alert-secure">1:1 PERFECT</span>
+        </div>
+        <div class="stat-line">
+          <span>ON-CHAIN RECEIPTS:</span>
+          <span class="stat-value">IMMUTABLE</span>
+        </div>
+        <div class="stat-line">
+          <span>PROOF-OF-RESERVE:</span>
+          <span class="stat-value alert-secure">VERIFIED</span>
+        </div>
+        <div class="stat-line">
+          <span>NETWORK:</span>
+          <span class="stat-value">SOLANA MAINNET</span>
+        </div>
+        <div class="stat-line">
+          <span>AUDIT TRANSPARENCY:</span>
+          <span class="stat-value alert-secure">PUBLIC</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Feed -->
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <span>FACILITY SURVEILLANCE FEED</span>
+        <span class="blink">● LIVE</span>
+      </div>
+      <div class="terminal-body">
+        <div style="border: 2px solid #00ff41; padding: 2rem; text-align: center; background: #000;">
+          <div style="font-size: 3rem; margin: 1rem 0;">🦅</div>
+          <div style="font-size: 0.8rem; opacity: 0.8;">EAGLE-CAM ALPHA</div>
+          <div style="font-size: 0.7rem; margin-top: 1rem; color: #ffff00;">
+            [FEED ACTIVE - 4K RESOLUTION]<br>
+            ARCHIVE: DECENTRALIZED STORAGE
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Operations Log -->
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <span>RECENT OPERATIONS LOG</span>
+        <span>📋</span>
+      </div>
+      <div class="terminal-body" style="font-size: 0.75rem;" id="operations-log">
+        <!-- Operations log will be dynamically populated -->
+      </div>
+    </div>
+
+    <!-- Access Panel -->
+    <div class="terminal-window full-width">
+      <div class="terminal-header">
+        <span>AUTHORIZED PERSONNEL ACCESS</span>
+        <span>🔐</span>
+      </div>
+      <div class="terminal-body" style="text-align: center; padding: 2rem;">
+        <div style="font-size: 1.2rem; margin-bottom: 1rem;">REQUEST CLEARANCE TO INTERACT WITH PENNY RESERVES</div>
+        <div style="margin: 2rem 0; opacity: 0.7; font-size: 0.9rem;">
+          Unlike other crypto treasuries operating in shadows,<br>
+          CENT maintains military-grade transparency on all copper assets.
+        </div>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <button class="access-button" onclick="playEagleAndNavigate('minting.html')">🪙 MINT TOKENS</button>
+          <button class="access-button" onclick="window.location.href='transparency.html'">📊 VIEW PROOF</button>
+          <button class="access-button" onclick="window.location.href='whitepaper.html'">📄 WHITEPAPER</button>
+          <button class="access-button" onclick="playEagleScream()">🦅 EAGLE STATUS</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-terminal">
+    <div>CENT DEFENSE MONITORING STATION - PROTECTING AMERICA'S PENNIES SINCE 2025</div>
+    <div style="margin-top: 1rem; opacity: 0.5;">
+      THIS SYSTEM IS FOR AUTHORIZED PENNY ENTHUSIASTS ONLY<br>
+      UNAUTHORIZED ACCESS WILL BE MET WITH EAGLE DEPLOYMENT
+    </div>
+  </div>
+
+  <!-- Audio Elements -->
+  <audio id="eagleScream" src="assets/sounds/eagle-scream.mp3" preload="auto"></audio>
+
+  <script>
+    // Audio functions
+    function playEagleScream() {
+      const eagle = document.getElementById('eagleScream');
+      eagle.currentTime = 0;
+      eagle.play().catch(e => console.log('Audio play failed:', e));
+    }
+
+    function playEagleAndNavigate(url) {
+      const eagle = document.getElementById('eagleScream');
+      eagle.currentTime = 0;
+      eagle.play().catch(e => console.log('Audio play failed:', e));
+      // Navigate after a short delay to let the eagle scream start
+      setTimeout(() => {
+        window.location.href = url;
+      }, 300);
+    }
+
+    function updateTimestamp() {
+      const now = new Date();
+      const timestamp = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+      document.getElementById('timestamp').textContent = timestamp;
+    }
+    updateTimestamp();
+    setInterval(updateTimestamp, 1000);
+
+    function updateOperationsLog() {
+      const now = new Date();
+      const logContainer = document.getElementById('operations-log');
+      if (!logContainer) return;
+
+      // Create array of recent operations with time offsets (in minutes)
+      const operations = [
+        { offset: 8, message: 'EAGLE PATROL COMMENCED' },
+        { offset: 15, message: 'VAULT RECONCILIATION COMPLETE' },
+        { offset: 30, message: 'HOURLY CENSUS: 1,000,000 UNITS' },
+        { offset: 45, message: 'TEMPERATURE CHECK: NOMINAL' },
+        { offset: 62, message: 'SECURITY SWEEP: CLEAR' },
+        { offset: 90, message: 'BLOCKCHAIN SYNC: SUCCESS' },
+        { offset: 127, message: 'EAGLE ROTATION: SHIFT CHANGE' }
+      ];
+
+      // Generate log entries
+      let html = '';
+      operations.forEach(op => {
+        const logTime = new Date(now.getTime() - (op.offset * 60 * 1000));
+        const formattedTime = logTime.toISOString().replace('T', ' ').substring(0, 19);
+        html += `<div>> ${formattedTime} | ${op.message}</div>`;
+      });
+
+      // Add waiting message
+      html += '<div style="margin-top: 1rem; color: #ffff00;">> AWAITING NEXT OPERATION...</div>';
+
+      logContainer.innerHTML = html;
+    }
+
+    // Update operations log on page load
+    updateOperationsLog();
+    // Refresh operations log every minute to keep times current
+    setInterval(updateOperationsLog, 60000);
+
+    /* ========================================
+     * JUPITER PRICE TICKER INTEGRATION
+     * ========================================
+     * TODO: ACTIVATE AFTER ORCA DEX LAUNCH - Live Price Integration
+     *
+     * When CENT launches on Orca DEX, enable live price ticker:
+     *
+     * 1. Get the actual CENT token mint address from Orca deployment
+     * 2. Replace 'YOUR_TOKEN_MINT_ADDRESS' on line 913 with real mint address
+     * 3. Uncomment the updatePrice() function below (lines 910-947)
+     * 4. Change display:none to display:block on #price-ticker element (line 529)
+     *
+     * This will fetch live Orca price via Jupiter API every 10 seconds
+     * and prominently display it at the top of the homepage.
+     */
+
+    /*
+    async function updatePrice() {
+      try {
+        const CENT_MINT = 'YOUR_TOKEN_MINT_ADDRESS'; // Replace with actual mint address
+        const USDC_MINT = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'; // USDC mint address
+
+        // Fetch price from Jupiter Price API
+        const response = await fetch(`https://price.jup.ag/v4/price?ids=${CENT_MINT}`);
+        const data = await response.json();
+
+        if (data.data && data.data[CENT_MINT]) {
+          const price = data.data[CENT_MINT].price;
+          const backingValue = 0.01; // $0.01 per penny
+          const premium = ((price - backingValue) / backingValue * 100).toFixed(2);
+
+          // Update display
+          document.getElementById('current-price').textContent = `$${price.toFixed(4)}`;
+          document.getElementById('premium-value').textContent = `${premium > 0 ? '+' : ''}${premium}%`;
+
+          // Color code the premium
+          const premiumElement = document.getElementById('premium-value');
+          if (premium > 0) {
+            premiumElement.style.color = '#00ff41'; // Green for above peg
+          } else if (premium < 0) {
+            premiumElement.style.color = '#ff0000'; // Red for below peg
+          } else {
+            premiumElement.style.color = '#ffff00'; // Yellow for at peg
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching price:', error);
+      }
+    }
+
+    // Update price every 10 seconds
+    updatePrice();
+    setInterval(updatePrice, 10000);
+    */
+  </script>
+</body>
+</html>
