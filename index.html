@@ -481,7 +481,6 @@
   <nav class="nav-menu">
     <button class="nav-button" onclick="playEagleAndNavigate('minting.html')">🪙 MINT</button>
     <a href="transparency.html" class="nav-button">📊 PROOF</a>
-    <a href="rare-vault.html" class="nav-button">🏆 RARE VAULT</a>
     <a href="whitepaper.html" class="nav-button">📄 WHITEPAPER</a>
     <a href="merch.html" class="nav-button">🛒 MERCH</a>
     <button class="nav-button" onclick="playEagleScream()">🦅 EAGLE</button>
@@ -526,6 +525,7 @@
     </div>
 
     <!-- Price Ticker (Hidden - Ready for Jupiter Integration) -->
+    <!-- TODO: After Orca launch, change style="display: none;" to style="display: block;" below -->
     <div class="terminal-window full-width" style="display: none;" id="price-ticker">
       <div class="terminal-header">
         <span>📈 MARKET STATUS</span>
@@ -738,39 +738,6 @@
       </div>
     </div>
 
-    <!-- Rare Penny Vault -->
-    <div class="terminal-window">
-      <div class="terminal-header" style="background: #ffff00; color: #000;">
-        <span>🏆 RARE PENNY VAULT</span>
-        <span>AUTHENTICATED</span>
-      </div>
-      <div class="terminal-body">
-        <div class="stat-line">
-          <span>SPECIMENS CATALOGUED:</span>
-          <span class="stat-value">6 NFTS</span>
-        </div>
-        <div class="stat-line">
-          <span>BLOCKCHAIN AUTHENTICATION:</span>
-          <span class="stat-value alert-secure">SOLANA</span>
-        </div>
-        <div class="stat-line">
-          <span>PERMANENT STORAGE:</span>
-          <span class="stat-value">ARWEAVE</span>
-        </div>
-        <div class="stat-line">
-          <span>BACKLOG STATUS:</span>
-          <span class="stat-value" style="color: #ffff00;">PROCESSING</span>
-        </div>
-        <div style="margin-top: 1rem; padding: 1rem; background: rgba(255, 255, 0, 0.1); border: 1px solid #ffff00; font-size: 0.85rem; line-height: 1.6;">
-          Collectors who add rare or unique pennies to the vault receive exclusive NFT digital replicas.
-          Currently processing backlog of authenticated specimens—additional NFTs deploying as cataloguing completes.
-        </div>
-        <button class="access-button" onclick="window.location.href='rare-vault.html'" style="width: 100%; margin-top: 1rem;">
-          ACCESS VAULT →
-        </button>
-      </div>
-    </div>
-
     <!-- Live Feed -->
     <div class="terminal-window">
       <div class="terminal-header">
@@ -897,14 +864,17 @@
     /* ========================================
      * JUPITER PRICE TICKER INTEGRATION
      * ========================================
-     * Uncomment this section when ready to display live price from Jupiter DEX
+     * TODO: ACTIVATE AFTER ORCA DEX LAUNCH - Live Price Integration
      *
-     * To enable:
-     * 1. Uncomment the updatePrice() function below
-     * 2. Change display:none to display:block on #price-ticker element (line 468)
-     * 3. Replace 'YOUR_TOKEN_MINT_ADDRESS' with actual CENT token mint address
+     * When CENT launches on Orca DEX, enable live price ticker:
      *
-     * This will fetch live price every 10 seconds and update the ticker
+     * 1. Get the actual CENT token mint address from Orca deployment
+     * 2. Replace 'YOUR_TOKEN_MINT_ADDRESS' on line 913 with real mint address
+     * 3. Uncomment the updatePrice() function below (lines 910-947)
+     * 4. Change display:none to display:block on #price-ticker element (line 529)
+     *
+     * This will fetch live Orca price via Jupiter API every 10 seconds
+     * and prominently display it at the top of the homepage.
      */
 
     /*

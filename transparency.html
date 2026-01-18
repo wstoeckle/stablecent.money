@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TRANSPARENCY PROTOCOLS - CENT DEFENSE MONITORING</title>
-  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+  <meta name="theme-color" content="#f8f7f4">
+  <title>Transparency – CENT</title>
+  <meta name="description" content="CENT reserve transparency and verification. View live reserves, schedule a vault visit, and verify backing on-chain.">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -12,477 +14,671 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --bg: #f8f7f4;
+      --bg-card: #ffffff;
+      --text: #1c1c1c;
+      --text-secondary: #5c5c5c;
+      --text-tertiary: #8a8a8a;
+      --copper: #8b5a3c;
+      --copper-light: #a67c5b;
+      --border: #e5e3de;
+      --border-light: #eeece7;
+    }
+
     body {
-      font-family: 'Courier Prime', monospace;
-      background: #0a0e0a;
-      color: #00ff41;
-      line-height: 1.4;
-      overflow-x: hidden;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      /* Subtle paper texture */
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-blend-mode: overlay;
+      background-size: 200px;
     }
 
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
-    }
-
-    @keyframes scan {
-      0% { transform: translateY(-100%); }
-      100% { transform: translateY(100vh); }
-    }
-
-    .scan-line {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(to bottom, transparent, #00ff41, transparent);
-      animation: scan 3s linear infinite;
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-    .classified-header {
-      background: #000;
-      border-bottom: 2px solid #00ff41;
-      padding: 0.5rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: 'Share Tech Mono', monospace;
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-    }
-
-    .terminal-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-      padding: 2rem;
-      max-width: 1400px;
+    .container {
+      max-width: 1100px;
       margin: 0 auto;
+      padding: 0 24px;
     }
 
-    .terminal-window {
-      background: rgba(0, 20, 0, 0.9);
-      border: 2px solid #00ff41;
-      padding: 0;
-      box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
-      position: relative;
+    /* Header */
+    header {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
     }
 
-    .terminal-header {
-      background: #00ff41;
-      color: #000;
-      padding: 0.5rem 1rem;
-      font-weight: bold;
-      font-size: 0.85rem;
+    header .container {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .terminal-body {
-      padding: 1.5rem;
+    .logo {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    nav {
+      display: flex;
+      gap: 36px;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--text);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .btn-primary:hover {
+      background: #333;
+    }
+
+    /* Page Header */
+    .page-header {
+      padding: 80px 0 60px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-header h1 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 2.8rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .page-header p {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      max-width: 640px;
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-header {
+      margin-bottom: 48px;
+    }
+
+    .section-header h2 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .section-header p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+    }
+
+    /* Live Status */
+    .live-status {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 32px;
+      margin-bottom: 48px;
+    }
+
+    .live-indicator {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .live-dot {
+      width: 10px;
+      height: 10px;
+      background: #16a34a;
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .live-indicator span {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #16a34a;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+
+    .status-item .label {
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .status-item .value {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    /* Verification Methods */
+    .methods-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .method-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 32px;
+    }
+
+    .method-card h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .method-card p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .method-card a {
+      color: var(--copper);
+      text-decoration: none;
+      font-weight: 500;
       font-size: 0.9rem;
     }
 
-    .comparison-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin-top: 2rem;
+    .method-card a:hover {
+      text-decoration: underline;
     }
 
-    .comparison-box {
-      border: 2px solid #00ff41;
-      padding: 1.5rem;
-      background: rgba(0, 0, 0, 0.5);
+    /* Comparison */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
     }
 
-    .comparison-title {
-      font-size: 1.2rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-      color: #ffff00;
+    .comparison-table th {
+      text-align: left;
+      padding: 16px 24px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+
+    .comparison-table th:last-child {
+      color: var(--copper);
+    }
+
+    .comparison-table td {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border-light);
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .comparison-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .comparison-table td:first-child {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .comparison-table td:last-child {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .check {
+      color: var(--copper);
+    }
+
+    /* Philosophy Section */
+    .philosophy-section {
+      background: linear-gradient(135deg, #f5f0e8 0%, var(--bg) 100%);
+    }
+
+    .philosophy-content {
+      max-width: 640px;
       text-align: center;
+      margin: 0 auto;
     }
 
-    .comparison-item {
-      padding: 0.75rem;
-      margin: 0.5rem 0;
-      background: rgba(0, 255, 65, 0.05);
-      border-left: 3px solid #00ff41;
-    }
-
-    .bad-comparison-box {
-      border-color: #ff0000;
-    }
-
-    .bad-comparison-item {
-      border-left-color: #ff0000;
-      background: rgba(255, 0, 0, 0.05);
-    }
-
-    .bad-comparison-title {
-      color: #ff0000;
-    }
-
-    .access-button {
-      background: #00ff41;
-      color: #000;
-      border: none;
-      padding: 1rem 2rem;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
-      transition: all 0.2s;
-      text-decoration: none;
-      display: inline-block;
-      margin: 0.5rem;
-    }
-
-    .access-button:hover {
-      background: #ffff00;
-      box-shadow: 0 0 30px rgba(255, 255, 0, 0.8);
-    }
-
-    .timestamp {
-      font-size: 0.7rem;
+    .philosophy-icon {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 3rem;
+      color: var(--copper);
+      margin-bottom: 24px;
       opacity: 0.6;
     }
 
-    .alert-secure {
-      color: #00ff41;
+    .philosophy-content h2 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 24px;
     }
 
-    .stat-line {
+    .philosophy-content p {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .philosophy-content p:last-child {
+      margin-bottom: 0;
+      font-style: italic;
+      color: var(--text-tertiary);
+    }
+
+    /* Visit CTA */
+    .visit-section {
+      background: var(--bg-card);
+      border: 2px solid var(--copper);
+      border-radius: 4px;
+      padding: 48px;
+      text-align: center;
+    }
+
+    .visit-section h2 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .visit-section p {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      margin-bottom: 24px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .visit-section .btn {
+      background: var(--copper);
+      color: white;
+    }
+
+    .visit-section .btn:hover {
+      background: var(--copper-light);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+    }
+
+    .footer-content {
       display: flex;
       justify-content: space-between;
-      margin: 0.5rem 0;
-      padding: 0.5rem;
-      border-left: 3px solid #00ff41;
-      background: rgba(0, 255, 65, 0.05);
+      align-items: flex-start;
     }
 
-    .stat-value {
-      color: #ffff00;
-      font-weight: bold;
+    .footer-links {
+      display: flex;
+      gap: 32px;
     }
 
-    .proof-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0;
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
     }
 
-    .proof-card {
-      background: rgba(0, 40, 0, 0.7);
-      border: 1px solid #00ff41;
-      padding: 1.5rem;
+    .footer-links a:hover {
+      color: var(--text);
     }
 
-    .proof-card h3 {
-      color: #ffff00;
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
-    }
-
-    .proof-card p {
+    .footer-legal {
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      max-width: 400px;
+      text-align: right;
       line-height: 1.6;
     }
 
-    .footer-terminal {
-      background: #000;
-      border-top: 2px solid #00ff41;
-      padding: 2rem;
-      text-align: center;
-      font-size: 0.75rem;
-      margin-top: 2rem;
+    /* Responsive */
+    @media (max-width: 900px) {
+      .methods-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .status-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     @media (max-width: 768px) {
-      .comparison-grid {
+      nav {
+        display: none;
+      }
+
+      .page-header {
+        padding: 60px 0 40px;
+      }
+
+      .page-header h1 {
+        font-size: 2rem;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+      .comparison-table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      .visit-section {
+        padding: 32px 24px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .footer-legal {
+        text-align: left;
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .status-grid {
         grid-template-columns: 1fr;
+        gap: 24px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="scan-line"></div>
+  <header>
+    <div class="container">
+      <a href="index-earnest.html" class="logo">CENT</a>
+      <nav>
+        <a href="transparency.html" class="active">Transparency</a>
+        <a href="whitepaper.html">Whitepaper</a>
+        <a href="index-earnest.html#buy" class="btn btn-primary">Buy CENT</a>
+      </nav>
+    </div>
+  </header>
 
-  <div class="classified-header">
-    <span>TRANSPARENCY PROTOCOLS - CLASSIFIED LEVEL 5</span>
-    <span class="timestamp" id="timestamp"></span>
-    <span class="blink">● REC</span>
+  <div class="page-header">
+    <div class="container">
+      <h1>Transparency</h1>
+      <p>
+        We think you should be able to see what backs this token.
+        Not a PDF. Not a promise. The actual thing.
+      </p>
+    </div>
   </div>
 
-  <div class="terminal-grid">
-    <div class="terminal-window">
-      <div class="terminal-header">
-        <span>📋 TRANSPARENCY DIRECTIVE</span>
-        <span class="alert-secure">● ACTIVE</span>
-      </div>
-      <div class="terminal-body">
-        <div style="font-size: 1.2rem; margin-bottom: 1.5rem; color: #ffff00;">
-          OPERATIONAL MANDATE: TOTAL TRANSPARENCY
+  <section>
+    <div class="container">
+      <div class="live-status">
+        <div class="live-indicator">
+          <div class="live-dot"></div>
+          <span>Live Reserve Status</span>
         </div>
-        <p style="line-height: 1.8; margin-bottom: 1rem;">
-          Unlike conventional cryptocurrency operations that rely on opaque reserve mechanisms and quarterly attestations,
-          Fort CENT maintains real-time, publicly verifiable transparency of all physical penny assets.
+        <div class="status-grid">
+          <div class="status-item">
+            <div class="label">Physical Pennies</div>
+            <div class="value">1,000,000</div>
+          </div>
+          <div class="status-item">
+            <div class="label">Tokens Issued</div>
+            <div class="value">1,000,000</div>
+          </div>
+          <div class="status-item">
+            <div class="label">Ratio</div>
+            <div class="value">1:1</div>
+          </div>
+          <div class="status-item">
+            <div class="label">Discrepancies</div>
+            <div class="value">0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <h2>Verification Methods</h2>
+        <p>Multiple independent ways to confirm reserve backing.</p>
+      </div>
+
+      <div class="methods-grid">
+        <div class="method-card">
+          <h3>Live Video Feed</h3>
+          <p>
+            24/7 surveillance of vault contents. Multiple camera angles,
+            4K resolution, archived to decentralized storage for permanent
+            public access.
+          </p>
+          <a href="#">Watch live feed →</a>
+        </div>
+        <div class="method-card">
+          <h3>On-Chain Records</h3>
+          <p>
+            Every mint and burn operation is recorded on the Solana blockchain.
+            Token supply is publicly verifiable and matches physical reserves 1:1.
+          </p>
+          <a href="#">View on Solscan →</a>
+        </div>
+        <div class="method-card">
+          <h3>Physical Verification</h3>
+          <p>
+            Schedule a vault visit. Touch the reserves. Count the pennies yourself.
+            We welcome independent verification by appointment.
+          </p>
+          <a href="vault-visit.html">Request visit →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2>How We Compare</h2>
+        <p>Transparency practices across reserve-backed assets.</p>
+      </div>
+
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th style="width: 30%;">Verification Method</th>
+            <th>USDT</th>
+            <th>USDC</th>
+            <th>Fort Knox</th>
+            <th>CENT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Audit frequency</td>
+            <td>Quarterly</td>
+            <td>Monthly</td>
+            <td>~70 years ago</td>
+            <td class="check">Continuous</td>
+          </tr>
+          <tr>
+            <td>Public video surveillance</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td class="check">24/7 live feed</td>
+          </tr>
+          <tr>
+            <td>Physical visit allowed</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No</td>
+            <td class="check">By appointment</td>
+          </tr>
+          <tr>
+            <td>Reserve composition</td>
+            <td>Various instruments</td>
+            <td>Cash + treasuries</td>
+            <td>Gold (claimed)</td>
+            <td class="check">100% physical pennies</td>
+          </tr>
+          <tr>
+            <td>On-chain verification</td>
+            <td>Supply only</td>
+            <td>Supply only</td>
+            <td>None</td>
+            <td class="check">Full transparency</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="philosophy-section">
+    <div class="container">
+      <div class="philosophy-content">
+        <div class="philosophy-icon">¢</div>
+        <h2>Why We Do This</h2>
+        <p>
+          Here's a funny thing about money: most of it is invisible. The dollars in your bank
+          are entries in a database. The reserves backing your stablecoins are described in
+          PDFs you'll never read, audited by firms you've never heard of, stored in
+          jurisdictions chosen for their opacity.
         </p>
-        <p style="line-height: 1.8;">
-          Our mission: Provide continuous proof-of-reserve verification that exceeds all industry standards.
-          No mystery PDFs. No hidden offshore accounts. Just copper, cameras, and eagles.
+        <p>
+          We thought it would be interesting to try the opposite. What if you could
+          literally see the money? What if "proof of reserves" meant pointing a camera
+          at a pile of coins and saying "look, there they are"?
+        </p>
+        <p>
+          It's a little absurd. We know. That's part of the point.
         </p>
       </div>
     </div>
+  </section>
 
-    <div class="terminal-window">
-      <div class="terminal-header">
-        <span>🎯 PROOF-OF-RESERVE SYSTEMS</span>
-        <span>●●●</span>
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2>A Note on Fort Knox</h2>
+        <p style="font-style: italic; color: var(--text-tertiary);">For context.</p>
       </div>
-      <div class="terminal-body">
-        <div class="proof-grid">
-          <div class="proof-card">
-            <h3>🎥 24/7 SURVEILLANCE</h3>
-            <p>
-              Multi-angle 4K camera arrays provide continuous visual verification of vault contents.
-              All footage archived to decentralized storage for permanent public access.
-            </p>
-          </div>
-          <div class="proof-card">
-            <h3>🧾 ON-CHAIN RECEIPTS</h3>
-            <p>
-              Every mint operation is accompanied by physical documentation, photographic evidence,
-              and immutable blockchain records. Token supply matches physical penny count 1:1.
-            </p>
-          </div>
-          <div class="proof-card">
-            <h3>🦅 EAGLE VERIFICATION</h3>
-            <p>
-              Biological security layer provides redundant oversight. Eagles patrol vault perimeter
-              and verify penny integrity through direct observation protocols.
-            </p>
-          </div>
-          <div class="proof-card">
-            <h3>⚖️ PUBLIC RECONCILIATION</h3>
-            <p>
-              Live dashboard updates. Compare on-chain token supply against
-              documented physical reserves. Math is public, verifiable, and permanent.
-            </p>
-          </div>
+      <div style="max-width: 700px; font-size: 1.05rem; line-height: 1.8; color: var(--text-secondary);">
+        <p style="margin-bottom: 20px;">
+          Fort Knox holds about $400 billion in gold. It's one of the most secure
+          facilities on Earth. The last comprehensive public audit was in 1953.
+        </p>
+        <p style="margin-bottom: 20px;">
+          Seventy years. No cameras. No visits. Just trust.
+        </p>
+        <p>
+          We're not saying anything is wrong at Fort Knox. We're just saying:
+          you can come count our pennies whenever you want.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-bottom: none; padding-bottom: 100px;">
+    <div class="container">
+      <div class="visit-section">
+        <h2>Visit the Vault</h2>
+        <p>
+          We welcome verification. Schedule an appointment to see the reserves
+          in person, count the pennies, and confirm the backing yourself.
+        </p>
+        <a href="vault-visit.html" class="btn">Request a Visit</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="index-earnest.html">Home</a>
+          <a href="transparency.html">Transparency</a>
+          <a href="whitepaper.html">Whitepaper</a>
+          <a href="mailto:contact@fortcent.com">Contact</a>
+        </div>
+        <div class="footer-legal">
+          CENT is an experimental token project.
+          This is not financial advice.
         </div>
       </div>
     </div>
-
-    <div class="terminal-window">
-      <div class="terminal-header">
-        <span>⚠️ COMPARATIVE THREAT ANALYSIS</span>
-        <span>CRITICAL</span>
-      </div>
-      <div class="terminal-body">
-        <div style="font-size: 1rem; margin-bottom: 1.5rem; text-align: center; color: #ffff00;">
-          CENT TRANSPARENCY vs. INDUSTRY "STANDARDS"
-        </div>
-        <div class="comparison-grid">
-          <div class="comparison-box bad-comparison-box">
-            <div class="comparison-title bad-comparison-title">❌ CONVENTIONAL OPERATIONS</div>
-            <div class="comparison-item bad-comparison-item">
-              ❌ Quarterly attestation reports (outdated instantly)
-            </div>
-            <div class="comparison-item bad-comparison-item">
-              ❌ Treasury composition: "Various instruments" (translation: mystery)
-            </div>
-            <div class="comparison-item bad-comparison-item">
-              ❌ Physical verification: None or infrequent
-            </div>
-            <div class="comparison-item bad-comparison-item">
-              ❌ Public surveillance feeds: Unavailable
-            </div>
-            <div class="comparison-item bad-comparison-item">
-              ❌ Real-time proof-of-reserve: Not provided
-            </div>
-            <div class="comparison-item bad-comparison-item">
-              ❌ Eagle-based security: Zero implementations
-            </div>
-            <div style="margin-top: 1.5rem; text-align: center; color: #ff0000; font-size: 2rem;">
-              TRANSPARENCY RATING: COMPROMISED
-            </div>
-          </div>
-
-          <div class="comparison-box">
-            <div class="comparison-title">✅ CENT PROTOCOL</div>
-            <div class="comparison-item">
-              ✅ Continuous 60-second update cycles
-            </div>
-            <div class="comparison-item">
-              ✅ Treasury composition: 100% physical U.S. pennies (no mystery)
-            </div>
-            <div class="comparison-item">
-              ✅ Physical verification: 24/7 livestream + archive
-            </div>
-            <div class="comparison-item">
-              ✅ Public surveillance feeds: 4K multi-angle coverage
-            </div>
-            <div class="comparison-item">
-              ✅ Real-time proof-of-reserve: Always current
-            </div>
-            <div class="comparison-item">
-              ✅ Eagle-based security: Three (3) active units
-            </div>
-            <div style="margin-top: 1.5rem; text-align: center; color: #00ff41; font-size: 2rem;">
-              TRANSPARENCY RATING: MAXIMUM
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="terminal-window">
-      <div class="terminal-header">
-        <span>📊 CURRENT RESERVE STATUS</span>
-        <span class="alert-secure">● VERIFIED</span>
-      </div>
-      <div class="terminal-body">
-        <div class="stat-line">
-          <span>TOTAL PHYSICAL PENNIES:</span>
-          <span class="stat-value">1,000,000 UNITS</span>
-        </div>
-        <div class="stat-line">
-          <span>TOTAL MINTED TOKENS:</span>
-          <span class="stat-value">1,000,000 CENT</span>
-        </div>
-        <div class="stat-line">
-          <span>BACKING RATIO:</span>
-          <span class="stat-value alert-secure">1:1 PERFECT</span>
-        </div>
-        <div class="stat-line">
-          <span>LAST VERIFICATION:</span>
-          <span class="stat-value">00:47 AGO</span>
-        </div>
-        <div class="stat-line">
-          <span>DISCREPANCIES DETECTED:</span>
-          <span class="stat-value alert-secure">ZERO</span>
-        </div>
-        <div class="stat-line">
-          <span>TRANSPARENCY SCORE:</span>
-          <span class="stat-value alert-secure">100/100</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="terminal-window">
-      <div class="terminal-header">
-        <span>🏛️ FORT KNOX COMPARISON</span>
-        <span>📈</span>
-      </div>
-      <div class="terminal-body">
-        <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(255, 255, 0, 0.1); border: 1px solid #ffff00;">
-          <div style="font-weight: bold; color: #ffff00; margin-bottom: 0.5rem;">INTELLIGENCE BRIEF:</div>
-          <div style="line-height: 1.8;">
-            Fort Knox, the most famous secure facility in the United States, has not conducted a comprehensive
-            public audit of its gold reserves since the 1950s. Nearly 70 years without transparent verification.
-          </div>
-        </div>
-
-        <div class="comparison-grid">
-          <div>
-            <div style="font-weight: bold; margin-bottom: 1rem; color: #ff9900;">FORT KNOX TRANSPARENCY:</div>
-            <div class="stat-line" style="border-color: #ff9900;">
-              <span>Last full audit:</span>
-              <span style="color: #ff9900;">~70 years ago</span>
-            </div>
-            <div class="stat-line" style="border-color: #ff9900;">
-              <span>Public surveillance:</span>
-              <span style="color: #ff9900;">None</span>
-            </div>
-            <div class="stat-line" style="border-color: #ff9900;">
-              <span>Real-time verification:</span>
-              <span style="color: #ff9900;">Unavailable</span>
-            </div>
-            <div class="stat-line" style="border-color: #ff9900;">
-              <span>Public access:</span>
-              <span style="color: #ff9900;">Restricted</span>
-            </div>
-          </div>
-
-          <div>
-            <div style="font-weight: bold; margin-bottom: 1rem; color: #00ff41;">FORT CENT TRANSPARENCY:</div>
-            <div class="stat-line">
-              <span>Continuous verification:</span>
-              <span class="stat-value">24/7/365</span>
-            </div>
-            <div class="stat-line">
-              <span>Public surveillance:</span>
-              <span class="stat-value">4K livestream</span>
-            </div>
-            <div class="stat-line">
-              <span>Real-time verification:</span>
-              <span class="stat-value">Continuous</span>
-            </div>
-            <div class="stat-line">
-              <span>Public access:</span>
-              <span class="stat-value">Visit anytime</span>
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(0, 255, 65, 0.1); border: 1px solid #00ff41; text-align: center;">
-          <div style="font-weight: bold; color: #00ff41; margin-bottom: 0.5rem;">CONCLUSION:</div>
-          <div>
-            Fort CENT provides more transparency for 1 million pennies than Fort Knox provides for
-            $400 billion in gold. This is not a comparison. This is a statement.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="terminal-window">
-      <div class="terminal-header">
-        <span>🚪 VAULT ACCESS PROTOCOLS</span>
-        <span>🔐</span>
-      </div>
-      <div class="terminal-body" style="text-align: center; padding: 2rem;">
-        <div style="font-size: 1.2rem; margin-bottom: 1rem; color: #ffff00;">
-          UNLIKE SECRETIVE FACILITIES, FORT CENT WELCOMES VERIFICATION
-        </div>
-        <div style="margin: 2rem 0; opacity: 0.9; font-size: 0.95rem; line-height: 1.8;">
-          Visit the vault. Count the pennies. Record content. Verify livestream accuracy.<br>
-          Transparency is not a marketing slogan. It's an operational requirement.
-        </div>
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-          <a class="access-button" href="index.html">← MAIN TERMINAL</a>
-          <a class="access-button" href="mailto:hello@stablecent.money">REQUEST VAULT ACCESS</a>
-          <a class="access-button" href="https://x.com/stablecentmoney" target="_blank">SHARE INTEL</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer-terminal">
-    <div>FORT CENT - TRANSPARENCY PROTOCOLS</div>
-    <div style="margin-top: 1rem; opacity: 0.5;">
-      More transparent than Fort Knox. More secure than mystery PDF attestations.<br>
-      Protected by eagles and public verification since 2025.
-    </div>
-  </div>
-
-  <script>
-    function updateTimestamp() {
-      const now = new Date();
-      const timestamp = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
-      document.getElementById('timestamp').textContent = timestamp;
-    }
-    updateTimestamp();
-    setInterval(updateTimestamp, 1000);
-  </script>
+  </footer>
 </body>
 </html>

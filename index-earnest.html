@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+  <meta name="theme-color" content="#f8f7f4">
+  <title>CENT – Penny-Backed Digital Currency</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #f8f7f4;
+      --bg-card: #ffffff;
+      --text: #1c1c1c;
+      --text-secondary: #5c5c5c;
+      --text-tertiary: #8a8a8a;
+      --copper: #8b5a3c;
+      --copper-light: #a67c5b;
+      --border: #e5e3de;
+      --border-light: #eeece7;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      /* Subtle paper texture */
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-blend-mode: overlay;
+      background-size: 200px;
+    }
+
+    .serif {
+      font-family: 'Source Serif 4', Georgia, serif;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    nav {
+      display: flex;
+      gap: 36px;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .btn-primary:hover {
+      background: #333;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--text-secondary);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 100px 0 80px;
+      max-width: 720px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.85rem;
+      color: var(--copper);
+      font-weight: 500;
+      margin-bottom: 16px;
+      letter-spacing: 0.03em;
+    }
+
+    .hero h1 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 3.2rem;
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+    }
+
+    /* Buy Section */
+    .buy-section {
+      background: var(--bg-card);
+      border: 2px solid var(--copper);
+      border-radius: 4px;
+      padding: 40px;
+      margin-bottom: 60px;
+    }
+
+    .buy-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .buy-content h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .buy-content p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .price-display {
+      text-align: right;
+    }
+
+    .price-label {
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .price-value {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .price-value.above-peg {
+      color: #16a34a;
+    }
+
+    .depeg-alert {
+      display: none;
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      border-radius: 4px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+      color: #92400e;
+    }
+
+    .depeg-alert.visible {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: alertPulse 2s ease-in-out infinite;
+    }
+
+    .depeg-alert .alert-icon {
+      font-size: 1.1rem;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes alertPulse {
+      0%, 100% { background: #fef3c7; }
+      50% { background: #fde68a; }
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .buy-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .buy-button {
+      background: var(--copper);
+      color: white;
+      padding: 16px 40px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.2s;
+      animation: buttonPulse 2s ease-in-out infinite;
+    }
+
+    .buy-button:hover {
+      background: var(--copper-light);
+      transform: translateY(-1px);
+    }
+
+    @keyframes buttonPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(139, 90, 60, 0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(139, 90, 60, 0); }
+    }
+
+    .buy-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 16px 24px;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .buy-secondary:hover {
+      border-color: var(--text-secondary);
+    }
+
+    @media (max-width: 600px) {
+      .buy-section {
+        padding: 24px;
+      }
+
+      .buy-header {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .price-display {
+        text-align: left;
+      }
+
+      .buy-actions {
+        flex-direction: column;
+      }
+
+      .buy-button, .buy-secondary {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    /* Stats */
+    .stats-section {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 48px;
+    }
+
+    .stat-item {
+      text-align: left;
+    }
+
+    .stat-value {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Content Sections */
+    section {
+      padding: 80px 0;
+    }
+
+    .section-header {
+      margin-bottom: 48px;
+    }
+
+    .section-header h2 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .section-header p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+    }
+
+    /* Two Column */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .prose {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    .prose p {
+      margin-bottom: 20px;
+    }
+
+    .prose strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* Data Table */
+    .data-table {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .data-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 0.95rem;
+    }
+
+    .data-row:last-child {
+      border-bottom: none;
+    }
+
+    .data-row .label {
+      color: var(--text-secondary);
+    }
+
+    .data-row .value {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .footnote {
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      margin-top: 16px;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* Comparison Table */
+    .comparison-section {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 80px 0;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    .comparison-table th {
+      text-align: left;
+      padding: 16px 20px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .comparison-table th:last-child {
+      color: var(--copper);
+    }
+
+    .comparison-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-light);
+      color: var(--text-secondary);
+    }
+
+    .comparison-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .comparison-table td:first-child {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .comparison-table td:last-child {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .check {
+      color: var(--copper);
+    }
+
+    /* Philosophy Section */
+    .philosophy-section {
+      background: linear-gradient(135deg, #f5f0e8 0%, var(--bg) 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .philosophy-content {
+      max-width: 640px;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    .philosophy-content h2 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .philosophy-content p {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .philosophy-content .philosophy-last {
+      font-style: italic;
+      color: var(--text-tertiary);
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .feature-card {
+      transition: transform 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .feature-card h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* Thesis Section */
+    .thesis-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .thesis-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 28px;
+      transition: all 0.2s;
+    }
+
+    .thesis-card:hover {
+      border-color: var(--copper);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .thesis-card h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .thesis-card p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* CTA */
+    .cta-section {
+      padding: 100px 0;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    .cta-section p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 32px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    .footer-legal {
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      max-width: 400px;
+      text-align: right;
+      line-height: 1.6;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .two-col {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .thesis-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+
+      .hero {
+        padding: 60px 0 40px;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+      }
+
+      .stat-value {
+        font-size: 1.8rem;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+      .comparison-table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .footer-legal {
+        text-align: left;
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 1.9rem;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="/" class="logo">CENT</a>
+      <nav>
+        <a href="transparency.html">Transparency</a>
+        <a href="whitepaper.html">Whitepaper</a>
+        <a href="minting.html" class="btn btn-primary">Get Started</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="hero">
+      <div class="hero-eyebrow">Token With Physical Reserves</div>
+      <h1>A token issued against U.S. penny reserves</h1>
+      <p>
+        Each CENT token is issued against a physical penny held in auditable reserve.
+        Following the cessation of U.S. penny production, our reserves constitute
+        a finite stock of legal tender you can verify.
+      </p>
+      <div class="hero-cta">
+        <a href="#buy" class="btn btn-primary">Buy CENT</a>
+        <a href="transparency.html" class="btn btn-secondary">View Reserves</a>
+      </div>
+    </section>
+
+    <div class="buy-section" id="buy">
+      <div class="depeg-alert" id="depeg-alert">
+        <span class="alert-icon">🚨</span>
+        <span><strong>Price Alert:</strong> CENT is currently trading above $0.01. A penny is worth more than a penny.</span>
+      </div>
+      <div class="buy-header">
+        <div class="buy-content">
+          <h3>CENT is now trading</h3>
+          <p>Available on Raydium DEX. Swap SOL or USDC for CENT.</p>
+        </div>
+        <div class="price-display">
+          <div class="price-label">Current Price</div>
+          <div class="price-value" id="current-price">$0.0100</div>
+        </div>
+      </div>
+      <div class="buy-actions">
+        <a href="https://raydium.io/liquidity-pools/?search=4SR9DXBDwi2Gshpp7dZsKdFgdELno3XUsa7RZgT3MSS9" class="buy-button" id="raydium-link">Buy CENT on Raydium →</a>
+        <a href="transparency.html" class="buy-secondary">View Reserves</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-value">1,000,000</div>
+          <div class="stat-label">Pennies in Reserve</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">>100%</div>
+          <div class="stat-label">Collateralization</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">24/7</div>
+          <div class="stat-label">Live Monitoring</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">Solana</div>
+          <div class="stat-label">Network</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="two-col">
+        <div>
+          <div class="section-header">
+            <h2>A Reserve You Can Verify</h2>
+          </div>
+          <div class="prose">
+            <p>
+              Most stablecoin issuers publish quarterly attestations from accounting firms.
+              We maintain a vault you can visit. You can literally touch the reserves.
+              The distinction matters.
+            </p>
+            <p>
+              Our holdings are not distributed across banking partners, money market funds,
+              or commercial paper. They exist as physical U.S. currency in a single secure
+              location—observable via 24/7 video feed, and verifiable in person by appointment.
+            </p>
+            <p>
+              <strong>Following the U.S. Mint's decision to end penny production</strong>,
+              no additional supply will enter circulation. Unlike Bitcoin, which continues
+              mining until 2140, penny issuance has permanently ceased. The total addressable
+              reserve is fixed.
+            </p>
+          </div>
+        </div>
+        <div>
+          <div class="data-table">
+            <div class="data-row">
+              <span class="label">Total Units</span>
+              <span class="value">1,000,000 pennies</span>
+            </div>
+            <div class="data-row">
+              <span class="label">Tokens Issued</span>
+              <span class="value">1,000,000 CENT</span>
+            </div>
+            <div class="data-row">
+              <span class="label">Collateralization Ratio</span>
+              <span class="value">100%+*</span>
+            </div>
+            <div class="data-row">
+              <span class="label">Total Mass</span>
+              <span class="value">2,500 kg</span>
+            </div>
+            <div class="data-row">
+              <span class="label">Network</span>
+              <span class="value">Solana</span>
+            </div>
+            <div class="data-row">
+              <span class="label">Decimal Precision</span>
+              <span class="value">8 (centoshis)</span>
+            </div>
+          </div>
+          <div class="footnote">
+            *Based on face value. Actual collateralization exceeds 100% when calculated
+            using average metallic content of pennies in circulation (weighted blend of
+            pre-1982 copper and post-1982 zinc compositions).
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="comparison-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Reserve Comparison</h2>
+        <p>How CENT's backing compares to other digital assets.</p>
+      </div>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th style="width: 30%;">Characteristic</th>
+            <th>USDT</th>
+            <th>USDC</th>
+            <th>Bitcoin</th>
+            <th>CENT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Physical backing</td>
+            <td>Partial</td>
+            <td>Partial</td>
+            <td>None</td>
+            <td class="check">100% physical</td>
+          </tr>
+          <tr>
+            <td>Live reserve visibility</td>
+            <td>None</td>
+            <td>None</td>
+            <td>N/A</td>
+            <td class="check">24/7 video feed</td>
+          </tr>
+          <tr>
+            <td>New supply being created</td>
+            <td>Unlimited</td>
+            <td>Unlimited</td>
+            <td>Until 2140</td>
+            <td class="check">Ended</td>
+          </tr>
+          <tr>
+            <td>Counterparty risk</td>
+            <td>Banks, funds</td>
+            <td>Banks, funds</td>
+            <td>None</td>
+            <td class="check">None</td>
+          </tr>
+          <tr>
+            <td>Government legal tender</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No</td>
+            <td class="check">Yes</td>
+          </tr>
+          <tr>
+            <td>In-person verification</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No</td>
+            <td class="check">Yes</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2>How It Works</h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Physical Custody</h3>
+          <p>
+            All pennies are held in a climate-controlled facility with 24/7
+            video surveillance. No fractional reserves, no rehypothecation,
+            no synthetic exposure.
+          </p>
+        </div>
+        <div class="feature-card">
+          <h3>On-Chain Issuance</h3>
+          <p>
+            CENT tokens are minted on Solana with each issuance corresponding
+            to verified physical deposits. All transactions are recorded
+            immutably on the public blockchain.
+          </p>
+        </div>
+        <div class="feature-card">
+          <h3>Continuous Transparency</h3>
+          <p>
+            Rather than periodic attestations, we provide real-time visibility
+            into reserve holdings. Count the pennies yourself via our live
+            monitoring feed.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="philosophy-section">
+    <div class="container">
+      <div class="philosophy-content">
+        <h2>What's the point?</h2>
+        <p>
+          Look, we know what you're thinking. Well, technically this is NOT a stablecoin...
+        </p>
+        <p>
+          But here's the thing: most "backed" assets aren't actually backed by
+          anything you can see or touch. They're backed by trust in institutions,
+          attestations from auditors, and PDFs that no one reads.
+        </p>
+        <p>
+          We wanted to try something different. What happens when you make the
+          backing so literal, so visible, so absurdly tangible that anyone can
+          verify it with their own eyes? What happens when you can visit the vault
+          and pick up a coin?
+        </p>
+        <p class="philosophy-last">
+          We don't know exactly. But we thought it would be fun to find out.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2>Reserve Characteristics</h2>
+        <p>Properties that distinguish penny-backed reserves.</p>
+      </div>
+      <div class="thesis-grid">
+        <div class="thesis-card">
+          <h3>Absolute Scarcity</h3>
+          <p>
+            Bitcoin's supply cap is enforced by code. Penny supply is constrained
+            by physical reality—the U.S. Mint has ceased production entirely.
+            No fork, no governance vote, no protocol change can create more pennies.
+          </p>
+        </div>
+        <div class="thesis-card">
+          <h3>Intrinsic Material Value</h3>
+          <p>
+            Pre-1982 pennies contain 95% copper. At current commodity prices,
+            the metal content exceeds face value, providing a floor on reserve
+            valuation independent of monetary policy.
+          </p>
+        </div>
+        <div class="thesis-card">
+          <h3>Sovereign Backing</h3>
+          <p>
+            Each penny carries the full faith and credit of the United States
+            government. Unlike corporate-issued stablecoins, the underlying
+            asset is official legal tender.
+          </p>
+        </div>
+        <div class="thesis-card">
+          <h3>Natural Security</h3>
+          <p>
+            At $0.01 per 2.5 grams, pennies present one of the lowest
+            value-to-weight ratios of any store of value. Physical extraction
+            offers minimal economic incentive. We maintain security protocols
+            nonetheless.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2>Curious?</h2>
+      <p>Buy some pennies. Or just watch them on the livestream. We're not here to tell you what to do.</p>
+      <div class="cta-buttons">
+        <a href="#buy" class="btn btn-primary">Buy CENT</a>
+        <a href="whitepaper.html" class="btn btn-secondary">Read Whitepaper</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="transparency.html">Transparency</a>
+          <a href="whitepaper.html">Whitepaper</a>
+          <a href="mailto:contact@fortcent.com">Contact</a>
+        </div>
+        <div class="footer-legal">
+          CENT is an experimental digital asset project.
+          This is not financial advice. Tokens may fluctuate in value.
+          Review the whitepaper for complete disclosures.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ===========================================
+    // CENT PRICE TICKER - JUPITER API INTEGRATION
+    // ===========================================
+    // TODO: Replace with actual CENT token mint address when deployed
+    const CENT_MINT = 'YOUR_CENT_TOKEN_MINT_ADDRESS';
+    const PEG_VALUE = 0.01; // $0.01 per penny
+
+    async function updatePrice() {
+      try {
+        // Jupiter Price API
+        const response = await fetch(`https://price.jup.ag/v4/price?ids=${CENT_MINT}`);
+        const data = await response.json();
+
+        if (data.data && data.data[CENT_MINT]) {
+          const price = data.data[CENT_MINT].price;
+          displayPrice(price);
+        }
+      } catch (error) {
+        console.log('Price fetch error:', error);
+        // Keep showing last known price or default
+      }
+    }
+
+    function displayPrice(price) {
+      const priceElement = document.getElementById('current-price');
+      const alertElement = document.getElementById('depeg-alert');
+
+      // Format price
+      const formattedPrice = '$' + price.toFixed(4);
+      priceElement.textContent = formattedPrice;
+
+      // Check if above peg
+      if (price > PEG_VALUE) {
+        priceElement.classList.add('above-peg');
+        alertElement.classList.add('visible');
+      } else {
+        priceElement.classList.remove('above-peg');
+        alertElement.classList.remove('visible');
+      }
+    }
+
+    // For demo/testing: uncomment to simulate above-peg price
+    // displayPrice(0.0142);
+
+    // Start price updates when mint address is configured
+    if (CENT_MINT !== 'YOUR_CENT_TOKEN_MINT_ADDRESS') {
+      updatePrice();
+      setInterval(updatePrice, 10000); // Update every 10 seconds
+    }
+  </script>
+</body>
+</html>
