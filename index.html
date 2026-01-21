@@ -454,7 +454,7 @@
       letter-spacing: 0.05em;
     }
 
-    .comparison-table th:last-child {
+    .comparison-table th:nth-child(2) {
       color: var(--copper);
     }
 
@@ -473,7 +473,7 @@
       font-weight: 500;
     }
 
-    .comparison-table td:last-child {
+    .comparison-table td:nth-child(2) {
       color: var(--text);
       font-weight: 500;
     }
@@ -882,54 +882,54 @@
         <thead>
           <tr>
             <th style="width: 30%;">Characteristic</th>
+            <th>CENT</th>
             <th>USDT</th>
             <th>USDC</th>
             <th>Bitcoin</th>
-            <th>CENT</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Physical backing</td>
+            <td class="check">100% physical</td>
             <td>Partial</td>
             <td>Partial</td>
             <td>None</td>
-            <td class="check">100% physical</td>
           </tr>
           <tr>
             <td>Live reserve visibility</td>
+            <td class="check">24/7 video feed</td>
             <td>None</td>
             <td>None</td>
             <td>N/A</td>
-            <td class="check">24/7 video feed</td>
           </tr>
           <tr>
             <td>New underlying supply being created</td>
+            <td class="check">No</td>
             <td>Unlimited</td>
             <td>Unlimited</td>
             <td>Until 2140</td>
-            <td class="check">No</td>
           </tr>
           <tr>
             <td>Counterparty risk</td>
+            <td class="check">None</td>
             <td>Banks, funds</td>
             <td>Banks, funds</td>
             <td>None</td>
-            <td class="check">None</td>
           </tr>
           <tr>
             <td>Government legal tender</td>
-            <td>No</td>
-            <td>No</td>
-            <td>No</td>
             <td class="check">Yes</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No</td>
           </tr>
           <tr>
             <td>In-person verification</td>
-            <td>No</td>
-            <td>No</td>
-            <td>No</td>
             <td class="check">Yes</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No</td>
           </tr>
         </tbody>
       </table>
