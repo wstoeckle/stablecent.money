@@ -5,6 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
   <meta name="theme-color" content="#f8f7f4">
   <title>Deposit Pennies – CENT</title>
+
+  <!-- Google Analytics 4 -->
+  <!-- Replace G-EW38M2E8P6 with your actual GA4 Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EW38M2E8P6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-EW38M2E8P6', {
+      'send_page_view': true,
+      'page_title': 'CENT - Minting',
+      'page_location': window.location.href
+    });
+  </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -547,5 +562,14 @@
       </div>
     </div>
   </footer>
+
+  <!-- GA4 Custom Event Tracking -->
+  <script src="assets/js/ga4-tracking.js"></script>
+  <script>
+    // Track minting page view
+    if (typeof trackMintingView === 'function') {
+      trackMintingView();
+    }
+  </script>
 </body>
 </html>
