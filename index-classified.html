@@ -877,14 +877,13 @@
      * and prominently display it at the top of the homepage.
      */
 
-    /*
     async function updatePrice() {
       try {
-        const CENT_MINT = 'YOUR_TOKEN_MINT_ADDRESS'; // Replace with actual mint address
+        const CENT_MINT = '72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH';
         const USDC_MINT = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'; // USDC mint address
 
-        // Fetch price from Jupiter Price API
-        const response = await fetch(`https://price.jup.ag/v4/price?ids=${CENT_MINT}`);
+        // Fetch price from Jupiter Price API v6
+        const response = await fetch(`https://price.jup.ag/v6/price?ids=${CENT_MINT}`);
         const data = await response.json();
 
         if (data.data && data.data[CENT_MINT]) {
@@ -914,7 +913,6 @@
     // Update price every 10 seconds
     updatePrice();
     setInterval(updatePrice, 10000);
-    */
   </script>
 </body>
 </html>

@@ -1078,14 +1078,13 @@
     // ===========================================
     // CENT PRICE TICKER - JUPITER API INTEGRATION
     // ===========================================
-    // TODO: Replace with actual CENT token mint address when deployed
-    const CENT_MINT = 'YOUR_CENT_TOKEN_MINT_ADDRESS';
+    const CENT_MINT = '72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH';
     const PEG_VALUE = 0.01; // $0.01 per penny
 
     async function updatePrice() {
       try {
-        // Jupiter Price API
-        const response = await fetch(`https://price.jup.ag/v4/price?ids=${CENT_MINT}`);
+        // Jupiter Price API v6
+        const response = await fetch(`https://price.jup.ag/v6/price?ids=${CENT_MINT}`);
         const data = await response.json();
 
         if (data.data && data.data[CENT_MINT]) {
@@ -1119,11 +1118,9 @@
     // For demo/testing: uncomment to simulate above-peg price
     // displayPrice(0.0142);
 
-    // Start price updates when mint address is configured
-    if (CENT_MINT !== 'YOUR_CENT_TOKEN_MINT_ADDRESS') {
-      updatePrice();
-      setInterval(updatePrice, 10000); // Update every 10 seconds
-    }
+    // Start price updates
+    updatePrice();
+    setInterval(updatePrice, 10000); // Update every 10 seconds
   </script>
 </body>
 </html>
