@@ -182,7 +182,17 @@
       border: 2px solid var(--copper);
       border-radius: 4px;
       padding: 40px;
-      margin-bottom: 60px;
+      margin-bottom: 20px;
+    }
+    
+    .last-updated {
+        display: block;
+        text-align: right;
+        margin-bottom: 60px;
+        font-size: 0.75rem;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .buy-header {
@@ -649,6 +659,12 @@
       font-size: 0.9rem;
     }
 
+    .cmc-link {
+      color: var(--copper);
+      text-decoration: none;
+      font-size: 0.7rem;
+    }
+
     .footer-links a:hover {
       color: var(--text);
     }
@@ -775,7 +791,7 @@
     <div class="buy-section" id="buy">
       <div class="depeg-alert" id="depeg-alert">
         <span class="alert-icon">🚨</span>
-        <span><strong>Price Alert:</strong> CENT is currently trading above $0.01. A penny is worth more than a penny.</span>
+        <span><strong>Price Alert:</strong> CENT is currently trading above $0.01. One CENT is worth more than one penny.</span>
       </div>
       <div class="buy-header">
         <div class="buy-content">
@@ -784,7 +800,7 @@
         </div>
         <div class="price-display">
           <div class="price-label">1 CENT</div>
-          <div class="price-value" id="current-price">= $0.0100</div>
+          <div class="price-value" id="current-price">loading...</div>
         </div>
       </div>
       <div class="buy-actions">
@@ -792,6 +808,7 @@
         <a href="transparency.html" class="buy-secondary">View Reserves</a>
       </div>
     </div>
+    <div class="last-updated">Price cached at: <span id="last-updated-text">loading...</span> | <a class="cmc-link" href="https://dex.coinmarketcap.com/token/solana/72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH/" target="_blank">View on CoinMarketCap</a></div>
   </div>
 
   <div class="stats-section">
@@ -1093,11 +1110,10 @@
     // ===========================================
     // CENT PRICE TICKER
     // ===========================================
-    
+    const PEG_VALUE = 0.01
+
     async function updatePrice() {
-      const PEG_VALUE = 0.01
       try {
-        // Jupiter Price API v6
         const response = await fetch(`https://fortcent.val.run/`);
         const data = await response.json();
 
@@ -1105,6 +1121,12 @@
           const price = data.usdPrice;
           displayPrice(price);
         }
+
+        if (data.cachedAt) {
+          const lastUpdated = data.cachedAt;
+          displayLastUpdated(lastUpdated);
+        }
+
       } catch (error) {
         console.log('Price fetch error:', error);
         // Keep showing last known price or default
@@ -1127,6 +1149,11 @@
         priceElement.classList.remove('above-peg');
         alertElement.classList.remove('visible');
       }
+    }
+
+    function displayLastUpdated(lastUpdated) {
+      const lastUpdatedElement = document.getElementById('last-updated-text');
+      lastUpdatedElement.textContent = new Date(lastUpdated).toLocaleString();
     }
 
     // Start price updates
