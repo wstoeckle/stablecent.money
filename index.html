@@ -758,6 +758,66 @@
         flex-direction: column;
       }
     }
+
+    /* Newsfeed Section */
+    .newsfeed-section {
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+      background: var(--bg-card);
+    }
+
+    .newsfeed-section .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .newsfeed-section .section-header h2 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .newsfeed-section .section-header p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .twitter-feed-container {
+      max-width: 600px;
+      margin: 0 auto;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .twitter-feed-container .twitter-timeline {
+      width: 100% !important;
+    }
+
+    .newsfeed-follow-link {
+      display: block;
+      text-align: center;
+      margin-top: 24px;
+      color: var(--copper);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .newsfeed-follow-link:hover {
+      color: var(--copper-light);
+    }
+
+    @media (max-width: 768px) {
+      .newsfeed-section {
+        padding: 60px 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1089,6 +1149,28 @@
     </div>
   </section>
 
+  <section class="newsfeed-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Latest from X</h2>
+        <p>Stay updated with news from the vault.</p>
+      </div>
+      <div class="twitter-feed-container">
+        <a class="twitter-timeline"
+           data-height="500"
+           data-theme="light"
+           data-chrome="noheader nofooter noborders transparent"
+           data-tweet-limit="5"
+           href="https://twitter.com/the_cent_token?ref_src=twsrc%5Etfw">
+          Loading tweets from @the_cent_token...
+        </a>
+      </div>
+      <a href="https://x.com/the_cent_token" class="newsfeed-follow-link" target="_blank" rel="noopener">
+        Follow @the_cent_token on X
+      </a>
+    </div>
+  </section>
+
   <footer>
     <div class="container">
       <div class="footer-content">
@@ -1165,5 +1247,8 @@
 
   <!-- GA4 Custom Event Tracking -->
   <script src="assets/js/ga4-tracking.js"></script>
+
+  <!-- Twitter/X Timeline Widget -->
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </body>
 </html>
