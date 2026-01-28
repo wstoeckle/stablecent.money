@@ -788,14 +788,23 @@
     .twitter-feed-container {
       max-width: 600px;
       margin: 0 auto;
-      border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: 12px;
       overflow: hidden;
-      background: var(--bg);
+      background: #ffffff;
+      min-height: 400px;
     }
 
-    .twitter-feed-container .twitter-timeline {
-      width: 100% !important;
+    .twitter-feed-container iframe {
+      border-radius: 12px !important;
+    }
+
+    .twitter-feed-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+      color: var(--text-tertiary);
+      font-size: 0.9rem;
     }
 
     .newsfeed-follow-link {
@@ -1159,10 +1168,10 @@
         <a class="twitter-timeline"
            data-height="500"
            data-theme="light"
-           data-chrome="noheader nofooter noborders transparent"
+           data-chrome="noheader nofooter"
            data-tweet-limit="5"
-           href="https://twitter.com/the_cent_token?ref_src=twsrc%5Etfw">
-          Loading tweets from @the_cent_token...
+           href="https://x.com/the_cent_token">
+          <div class="twitter-feed-loading">Loading tweets from @the_cent_token...</div>
         </a>
       </div>
       <a href="https://x.com/the_cent_token" class="newsfeed-follow-link" target="_blank" rel="noopener">
