@@ -2,10 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SUPPLY DEPOT - CENT DEFENSE MONITORING</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Ctext%20y='14'%20font-size='16'%3E%F0%9F%A6%85%3C/text%3E%3C/svg%3E">
-  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+  <meta name="theme-color" content="#f8f7f4">
+  <title>Official Provisions – CENT</title>
+  
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EW38M2E8P6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-EW38M2E8P6', {
+      'send_page_view': true,
+      'page_title': 'CENT - Shop',
+      'page_location': window.location.href
+    });
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -13,234 +27,463 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --bg: #f8f7f4;
+      --bg-card: #ffffff;
+      --text: #1c1c1c;
+      --text-secondary: #5c5c5c;
+      --text-tertiary: #8a8a8a;
+      --copper: #8b5a3c;
+      --copper-light: #a67c5b;
+      --border: #e5e3de;
+      --border-light: #eeece7;
+    }
+
     body {
-      font-family: 'Courier Prime', monospace;
-      background: #0a0e0a;
-      color: #00ff41;
-      line-height: 1.4;
-      overflow-x: hidden;
-      min-height: 100vh;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-blend-mode: overlay;
+      background-size: 200px;
     }
 
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
+    .serif {
+      font-family: 'Source Serif 4', Georgia, serif;
     }
 
-    @keyframes scan {
-      0% { transform: translateY(-100%); }
-      100% { transform: translateY(100vh); }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
     }
 
-    .scan-line {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(to bottom, transparent, #00ff41, transparent);
-      animation: scan 3s linear infinite;
-      pointer-events: none;
-      z-index: 9999;
+    /* Header */
+    header {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
     }
 
-    .classified-header {
-      background: #000;
-      border-bottom: 2px solid #00ff41;
-      padding: 0.5rem 2rem;
+    header .container {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-family: 'Share Tech Mono', monospace;
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
     }
 
-    .terminal-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    .terminal-window {
-      background: rgba(0, 20, 0, 0.9);
-      border: 2px solid #00ff41;
-      padding: 0;
-      box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
-      margin-bottom: 2rem;
-    }
-
-    .terminal-header {
-      background: #00ff41;
-      color: #000;
-      padding: 1rem 2rem;
-      font-weight: bold;
-      font-size: 1.2rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      text-align: center;
-    }
-
-    .terminal-body {
-      padding: 2rem;
-    }
-
-    .supply-info {
-      background: rgba(255, 255, 0, 0.1);
-      border: 1px solid #ffff00;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .supply-info p {
-      line-height: 1.8;
-      margin-bottom: 1rem;
-    }
-
-    .supply-info p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* Override Ecwid styles for terminal aesthetic */
-    #my-store-112462508 {
-      background: transparent !important;
-      color: #00ff41 !important;
-    }
-
-    /* Style Ecwid elements to match terminal */
-    #my-store-112462508 * {
-      font-family: 'Courier Prime', monospace !important;
-    }
-
-    .back-link {
-      display: inline-block;
-      color: #00ff41;
+    .logo {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
       text-decoration: none;
-      margin-bottom: 1rem;
-      padding: 0.5rem 1rem;
-      border: 1px solid #00ff41;
+      letter-spacing: -0.02em;
+    }
+
+    nav {
+      display: flex;
+      gap: 36px;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .btn-primary:hover {
+      background: #333;
+    }
+
+    /* Page Header */
+    .page-header {
+      padding: 80px 0 60px;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .page-header h1 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 3rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .page-header p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* Shop Grid */
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-bottom: 80px;
+    }
+
+    .product-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+      border-color: var(--copper-light);
+    }
+
+    .product-image {
+      width: 100%;
+      aspect-ratio: 1;
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--border-light);
+      position: relative;
+    }
+
+    .product-image img {
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .product-details {
+      padding: 24px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .product-price {
+      font-size: 1rem;
+      color: var(--copper);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .product-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }
+
+    .product-btn {
+      width: 100%;
+      display: block;
+      text-align: center;
+      background: transparent;
+      border: 1px solid var(--text);
+      color: var(--text);
+      padding: 12px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
       transition: all 0.2s;
     }
 
-    .back-link:hover {
-      background: #00ff41;
-      color: #000;
+    .product-btn:hover {
+      background: var(--text);
+      color: var(--bg);
     }
 
-    .store-note {
-      margin-top: 2rem;
-      padding: 1rem;
-      background: rgba(0, 255, 65, 0.1);
-      border-left: 3px solid #00ff41;
-      font-size: 0.85rem;
-      opacity: 0.8;
-    }
-
-    .footer-terminal {
-      background: #000;
-      border-top: 2px solid #00ff41;
-      padding: 2rem;
+    /* Disclaimer */
+    .disclaimer-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 32px;
       text-align: center;
-      font-size: 0.75rem;
-      margin-top: 2rem;
+      margin-bottom: 80px;
+      border-radius: 4px;
     }
 
-    .timestamp {
-      font-size: 0.7rem;
-      opacity: 0.6;
+    .disclaimer-section h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.2rem;
+      margin-bottom: 12px;
     }
 
-    @media (max-width: 768px) {
-      .terminal-container {
-        padding: 1rem 0.5rem;
+    .disclaimer-section p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    .footer-legal {
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      max-width: 400px;
+      text-align: right;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 900px) {
+      .shop-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .shop-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .page-header h1 {
+        font-size: 2.2rem;
       }
 
-      .terminal-body {
-        padding: 1.5rem 1rem;
+      nav {
+        display: none;
       }
 
-      .classified-header {
-        font-size: 0.65rem;
-        padding: 0.5rem 1rem;
+      .footer-content {
         flex-direction: column;
-        gap: 0.5rem;
-        text-align: center;
+        gap: 24px;
+      }
+
+      .footer-legal {
+        text-align: left;
       }
     }
   </style>
 </head>
 <body>
-  <div class="scan-line"></div>
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">CENT</a>
+      <nav>
+        <a href="transparency.html">Transparency</a>
+        <a href="whitepaper.html">Whitepaper</a>
+        <a href="merch.html" style="color: var(--text);">Shop</a>
+        <a href="minting.html" class="btn btn-primary">Get Started</a>
+      </nav>
+    </div>
+  </header>
 
-  <div class="classified-header">
-    <span>SUPPLY DEPOT - AUTHORIZED PERSONNEL ONLY</span>
-    <span class="timestamp" id="timestamp"></span>
-    <span class="blink">● SECURE CONNECTION</span>
-  </div>
+  <div class="container">
+    <div class="page-header">
+      <h1>Official Provisions</h1>
+      <p>
+        Uniforms and equipment for the Penny Standard. 
+        High-quality goods for a high-transparency lifestyle.
+      </p>
+    </div>
 
-  <div class="terminal-container">
-    <a href="index.html" class="back-link">← RETURN TO MAIN TERMINAL</a>
-
-    <div class="terminal-window">
-      <div class="terminal-header">
-        🛒 Official CENT Supply Depot
-      </div>
-      <div class="terminal-body">
-        <div class="supply-info">
-          <p style="font-weight: bold; color: #ffff00; margin-bottom: 1rem;">
-            MISSION: EQUIP PERSONNEL WITH OFFICIAL GEAR
-          </p>
-          <p>
-            The CENT Defense Monitoring Station Supply Depot provides official merchandise for all authorized
-            personnel and eagle enthusiasts. All proceeds support vault operations and eagle feeding programs.
-          </p>
-          <p style="margin-bottom: 0;">
-            Standard issue includes: T-shirts, hoodies, tactical pennywear, and eagle-approved accessories.
-            All items feature regulation CENT insignia and fort-grade quality.
-          </p>
+    <div class="shop-grid">
+      <!-- Product 1: Black Hoodie -->
+      <div class="product-card">
+        <div class="product-image">
+          <svg width="100%" height="100%" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="400" fill="#1a1a1a"/>
+            <circle cx="200" cy="200" r="40" fill="#8b5a3c" opacity="0.8"/>
+            <text x="200" y="280" font-family="Georgia" font-size="20" fill="#8b5a3c" text-anchor="middle">CENT</text>
+          </svg>
         </div>
-
-        <!-- Ecwid Embed Code -->
-        <div id="my-store-112462508" role="region" aria-label="CENT merchandise store"></div>
-
-        <div class="store-note">
-          📦 All orders processed securely through encrypted channels.<br>
-          🦅 Eagle delivery not available (yet). Standard shipping applies.<br>
-          💚 Revenue supports vault operations and eagle welfare programs.
+        <div class="product-details">
+          <div class="product-title">Black Pocket Hoodie</div>
+          <div class="product-price">$58.00</div>
+          <div class="product-desc">
+            Heavyweight fleece in stealth black. Featuring the "Unum Pro Uno" seal on the chest.
+          </div>
+          <a href="https://fortcent-shop.fourthwall.com/products/cent-black-pocket-hoodie" target="_blank" class="product-btn">Buy Now</a>
         </div>
       </div>
+
+      <!-- Product 2: Grey Hoodie -->
+      <div class="product-card">
+        <div class="product-image">
+          <svg width="100%" height="100%" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="400" fill="#7a7a7a"/>
+            <circle cx="200" cy="200" r="40" fill="#8b5a3c" opacity="0.8"/>
+            <text x="200" y="280" font-family="Georgia" font-size="20" fill="#8b5a3c" text-anchor="middle">CENT</text>
+          </svg>
+        </div>
+        <div class="product-details">
+          <div class="product-title">Grey Pocket Hoodie</div>
+          <div class="product-price">$58.00</div>
+          <div class="product-desc">
+            Standard issue athletic heather grey. Premium comfort for vault inventory days.
+          </div>
+          <a href="https://fortcent-shop.fourthwall.com/products/cent-grey-pocket-hoodie" target="_blank" class="product-btn">Buy Now</a>
+        </div>
+      </div>
+
+      <!-- Product 3: Pink Hoodie -->
+      <div class="product-card">
+        <div class="product-image">
+          <svg width="100%" height="100%" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="400" fill="#ffb6c1"/>
+            <circle cx="200" cy="200" r="40" fill="#8b5a3c" opacity="0.8"/>
+            <text x="200" y="280" font-family="Georgia" font-size="20" fill="#8b5a3c" text-anchor="middle">CENT</text>
+          </svg>
+        </div>
+        <div class="product-details">
+          <div class="product-title">Pink Pocket Hoodie</div>
+          <div class="product-price">$58.00</div>
+          <div class="product-desc">
+            Limited edition pink fleece. High visibility for community transparency advocates.
+          </div>
+          <a href="https://fortcent-shop.fourthwall.com/products/cent-pink-pocket-hoodie" target="_blank" class="product-btn">Buy Now</a>
+        </div>
+      </div>
+
+       <!-- Product 4: Dad Hat -->
+       <div class="product-card">
+        <div class="product-image">
+          <svg width="100%" height="100%" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="400" fill="#e5e3de"/>
+            <path d="M100 200 Q200 100 300 200 L320 200 L320 240 L80 240 L80 200 Z" fill="#1a1a1a"/>
+            <text x="200" y="190" font-family="Georgia" font-size="14" fill="#8b5a3c" text-anchor="middle">CENT</text>
+          </svg>
+        </div>
+        <div class="product-details">
+          <div class="product-title">CENT Dad Hat</div>
+          <div class="product-price">$28.00</div>
+          <div class="product-desc">
+            Classic 6-panel unstructured cap. Embroidered with the official insignia.
+          </div>
+          <a href="https://fortcent-shop.fourthwall.com/products/cent-dad-hat" target="_blank" class="product-btn">Buy Now</a>
+        </div>
+      </div>
+      
+       <!-- Product 5: Bucket Hat -->
+       <div class="product-card">
+        <div class="product-image">
+          <svg width="100%" height="100%" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="400" fill="#e5e3de"/>
+            <path d="M150 150 L250 150 L270 220 L130 220 Z" fill="#1a1a1a"/>
+            <path d="M110 220 L290 220 Q290 250 200 250 Q110 250 110 220" fill="#1a1a1a"/>
+          </svg>
+        </div>
+        <div class="product-details">
+          <div class="product-title">CENT Bucket Hat</div>
+          <div class="product-price">$32.00</div>
+          <div class="product-desc">
+            Tactical outdoor headwear. 360-degree shade for long days at the mint.
+          </div>
+          <a href="https://fortcent-shop.fourthwall.com/products/cent-bucket-hat" target="_blank" class="product-btn">Buy Now</a>
+        </div>
+      </div>
+
+       <!-- Product 6: Main Shop -->
+       <div class="product-card">
+        <div class="product-image">
+          <rect width="400" height="400" fill="#f5f0e8"/>
+          <text x="200" y="210" font-family="Source Serif 4" font-size="24" fill="#1a1a1a" text-anchor="middle">FULL CATALOG</text>
+        </div>
+        <div class="product-details">
+          <div class="product-title">Official Fourthwall Store</div>
+          <div class="product-price">Varies</div>
+          <div class="product-desc">
+            Browse our full range of provisions and official gear directly on our partner store.
+          </div>
+          <a href="https://fortcent-shop.fourthwall.com/" target="_blank" class="product-btn">Visit Store</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="disclaimer-section">
+      <h3>Fulfillment Protocol</h3>
+      <p>
+        To maintain focus on vault security and penny polishing, CENT utilizes a distributed 
+        manufacturing network (Fourthwall). Orders are printed and shipped directly 
+        from our partners. We do not hold inventory. Returns are handled by the provider.
+      </p>
     </div>
   </div>
 
-  <div class="footer-terminal">
-    <div>CENT DEFENSE MONITORING STATION - SUPPLY DEPOT</div>
-    <div style="margin-top: 1rem; opacity: 0.5;">
-      Official merchandise authorized and distributed under military-grade security protocols.<br>
-      Protected by eagles and blockchain since 2025.
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="transparency.html">Transparency</a>
+          <a href="whitepaper.html">Whitepaper</a>
+          <a href="merch.html">Shop</a>
+          <a href="mailto:contact@stablemetals.com">Contact</a>
+        </div>
+        <div class="footer-legal">
+          CENT is an experimental digital asset project.
+          Merchandise sales support the project but do not constitute investment.
+        </div>
+      </div>
     </div>
-  </div>
+  </footer>
 
-  <!-- Ecwid Scripts -->
-  <script data-cfasync="false" type="text/javascript"
-    src="https://app.ecwid.com/script.js?112462508&data_platform=code&data_date=2025-02-12" charset="utf-8">
-  </script>
-  <script type="text/javascript">
-    xProductBrowser("categoriesPerRow=3",
-      "views=grid(20,3) list(60) table(60)",
-      "categoryView=grid",
-      "searchView=list",
-      "id=my-store-112462508");
-  </script>
-
-  <script>
-    function updateTimestamp() {
-      const now = new Date();
-      const timestamp = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
-      document.getElementById('timestamp').textContent = timestamp;
-    }
-    updateTimestamp();
-    setInterval(updateTimestamp, 1000);
-  </script>
 </body>
 </html>

@@ -1,0 +1,12 @@
+{
+  "name": "solana-nft-mint",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "mint": "node mint-nft.js"
+  },
+  "dependencies": {
+    "@metaplex-foundation/js": "^0.20.1",
+    "@solana/web3.js": "^1.95.8"
+  }
+}
