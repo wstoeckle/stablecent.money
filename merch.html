@@ -121,7 +121,7 @@
 
     /* Page Header */
     .page-header {
-      padding: 60px 0 40px;
+      padding: 60px 0 20px;
       text-align: center;
       max-width: 700px;
       margin: 0 auto;
@@ -139,31 +139,116 @@
       font-size: 1.05rem;
       color: var(--text-secondary);
       line-height: 1.7;
-      margin-bottom: 8px;
     }
 
-    .page-header .subtext {
+    /* Merch Showcase */
+    .merch-showcase {
+      padding: 60px 0 80px;
+    }
+
+    .showcase-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .showcase-text h2 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .showcase-text .lead {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+
+    .product-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .highlight-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .highlight-icon {
+      font-size: 2rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .highlight-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .highlight-text strong {
+      font-size: 1rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .highlight-text span {
       font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .shop-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 36px;
+      background: var(--copper);
+      color: white;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(139, 90, 60, 0.2);
+    }
+
+    .shop-cta:hover {
+      background: var(--copper-light);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(139, 90, 60, 0.3);
+    }
+
+    .disclaimer {
+      font-size: 0.85rem;
       color: var(--text-tertiary);
+      line-height: 1.6;
+      margin-top: 32px;
       font-style: italic;
     }
 
-    /* Shop Embed Container */
-    .shop-embed-container {
-      width: 100%;
-      max-width: 1400px;
-      margin: 0 auto 60px;
-      background: white;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    .showcase-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .shop-embed-container iframe {
+    .seal-container {
       width: 100%;
-      min-height: 1200px;
-      border: none;
-      display: block;
+      max-width: 400px;
+      opacity: 0.95;
+    }
+
+    .seal-container svg {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
     }
 
     /* Footer */
@@ -212,11 +297,37 @@
       }
 
       .page-header {
-        padding: 40px 0 30px;
+        padding: 40px 0 20px;
       }
 
-      .shop-embed-container iframe {
-        min-height: 1400px;
+      .merch-showcase {
+        padding: 40px 0 60px;
+      }
+
+      .showcase-content {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .showcase-visual {
+        order: -1;
+      }
+
+      .seal-container {
+        max-width: 280px;
+      }
+
+      .showcase-text h2 {
+        font-size: 1.5rem;
+      }
+
+      .showcase-text .lead {
+        font-size: 1rem;
+      }
+
+      .shop-cta {
+        width: 100%;
+        text-align: center;
       }
 
       .footer-content {
@@ -247,21 +358,75 @@
     <div class="page-header">
       <h1>Official Provisions</h1>
       <p>
-        Uniforms and equipment for the Penny Standard.
-      </p>
-      <p class="subtext">
-        Powered by Fourthwall. Orders ship directly from our manufacturing partners.
+        Uniforms and equipment for the Penny Standard. High-quality goods for a high-transparency lifestyle.
       </p>
     </div>
-  </div>
 
-  <div class="shop-embed-container">
-    <iframe
-      src="https://fortcent-shop.fourthwall.com/"
-      title="CENT Official Shop"
-      scrolling="yes"
-      loading="lazy">
-    </iframe>
+    <div class="merch-showcase">
+      <div class="showcase-content">
+        <div class="showcase-text">
+          <h2>Supply Depot</h2>
+          <p class="lead">
+            Browse our full collection of CENT-branded apparel and accessories. Every purchase
+            supports the penny preservation initiative.
+          </p>
+
+          <div class="product-highlights">
+            <div class="highlight-item">
+              <div class="highlight-icon">👕</div>
+              <div class="highlight-text">
+                <strong>Premium Hoodies</strong>
+                <span>Organic cotton fleece with embroidered seal</span>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-icon">🧢</div>
+              <div class="highlight-text">
+                <strong>Headwear</strong>
+                <span>Dad hats and bucket hats for vault monitoring</span>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-icon">📦</div>
+              <div class="highlight-text">
+                <strong>Print-on-Demand</strong>
+                <span>Sustainable manufacturing, shipped direct</span>
+              </div>
+            </div>
+          </div>
+
+          <a href="https://fortcent-shop.fourthwall.com/" target="_blank" rel="noopener" class="shop-cta">
+            Visit Official Shop →
+          </a>
+
+          <p class="disclaimer">
+            Orders are fulfilled by our partner Fourthwall. We do not hold inventory.
+            Returns and customer service handled by the provider.
+          </p>
+        </div>
+
+        <div class="showcase-visual">
+          <div class="seal-container">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+              <!-- Outer circle -->
+              <circle cx="200" cy="200" r="180" fill="none" stroke="#8b5a3c" stroke-width="3"/>
+              <circle cx="200" cy="200" r="170" fill="none" stroke="#8b5a3c" stroke-width="1"/>
+
+              <!-- Inner circle -->
+              <circle cx="200" cy="200" r="120" fill="#8b5a3c" opacity="0.1"/>
+
+              <!-- Penny symbol -->
+              <circle cx="200" cy="200" r="60" fill="#8b5a3c" opacity="0.8"/>
+
+              <!-- Text -->
+              <text x="200" y="90" font-family="Georgia" font-size="18" fill="#8b5a3c" text-anchor="middle" font-weight="600">FORT CENT</text>
+              <text x="200" y="320" font-family="Georgia" font-size="16" fill="#8b5a3c" text-anchor="middle">OFFICIAL PROVISIONS</text>
+              <text x="200" y="215" font-family="Georgia" font-size="28" fill="#ffffff" text-anchor="middle" font-weight="600">¢</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <footer>
