@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
   <meta name="theme-color" content="#f8f7f4">
   <title>Official Provisions – CENT</title>
-  
+
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-EW38M2E8P6"></script>
   <script>
@@ -50,10 +50,6 @@
       background-size: 200px;
     }
 
-    .serif {
-      font-family: 'Source Serif 4', Georgia, serif;
-    }
-
     .container {
       max-width: 1100px;
       margin: 0 auto;
@@ -64,6 +60,7 @@
     header {
       padding: 20px 0;
       border-bottom: 1px solid var(--border);
+      background: var(--bg);
     }
 
     header .container {
@@ -124,7 +121,7 @@
 
     /* Page Header */
     .page-header {
-      padding: 80px 0 60px;
+      padding: 60px 0 40px;
       text-align: center;
       max-width: 700px;
       margin: 0 auto;
@@ -132,135 +129,48 @@
 
     .page-header h1 {
       font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 3rem;
+      font-size: 2.5rem;
       font-weight: 600;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       color: var(--text);
     }
 
     .page-header p {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: var(--text-secondary);
       line-height: 1.7;
-    }
-
-    /* Shop Grid */
-    .shop-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-      margin-bottom: 80px;
-    }
-
-    .product-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .product-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-      border-color: var(--copper-light);
-    }
-
-    .product-image {
-      width: 100%;
-      aspect-ratio: 1;
-      background: #f0f0f0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-bottom: 1px solid var(--border-light);
-      position: relative;
-    }
-
-    .product-image img {
-      max-width: 100%;
-      height: auto;
-      object-fit: cover;
-    }
-
-    .product-details {
-      padding: 24px;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .product-title {
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 1.2rem;
-      font-weight: 600;
       margin-bottom: 8px;
-      color: var(--text);
     }
 
-    .product-price {
-      font-size: 1rem;
-      color: var(--copper);
-      font-weight: 600;
-      margin-bottom: 16px;
-    }
-
-    .product-desc {
+    .page-header .subtext {
       font-size: 0.9rem;
-      color: var(--text-secondary);
-      margin-bottom: 24px;
-      flex-grow: 1;
+      color: var(--text-tertiary);
+      font-style: italic;
     }
 
-    .product-btn {
+    /* Shop Embed Container */
+    .shop-embed-container {
       width: 100%;
+      max-width: 1400px;
+      margin: 0 auto 60px;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .shop-embed-container iframe {
+      width: 100%;
+      min-height: 1200px;
+      border: none;
       display: block;
-      text-align: center;
-      background: transparent;
-      border: 1px solid var(--text);
-      color: var(--text);
-      padding: 12px;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.9rem;
-      transition: all 0.2s;
-    }
-
-    .product-btn:hover {
-      background: var(--text);
-      color: var(--bg);
-    }
-
-    /* Disclaimer */
-    .disclaimer-section {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      padding: 32px;
-      text-align: center;
-      margin-bottom: 80px;
-      border-radius: 4px;
-    }
-
-    .disclaimer-section h3 {
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 1.2rem;
-      margin-bottom: 12px;
-    }
-
-    .disclaimer-section p {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto;
     }
 
     /* Footer */
     footer {
       border-top: 1px solid var(--border);
       padding: 40px 0;
+      background: var(--bg);
     }
 
     .footer-content {
@@ -292,23 +202,21 @@
       line-height: 1.6;
     }
 
-    @media (max-width: 900px) {
-      .shop-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .shop-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .page-header h1 {
-        font-size: 2.2rem;
-      }
-
+    @media (max-width: 768px) {
       nav {
         display: none;
+      }
+
+      .page-header h1 {
+        font-size: 2rem;
+      }
+
+      .page-header {
+        padding: 40px 0 30px;
+      }
+
+      .shop-embed-container iframe {
+        min-height: 1400px;
       }
 
       .footer-content {
@@ -339,133 +247,21 @@
     <div class="page-header">
       <h1>Official Provisions</h1>
       <p>
-        Uniforms and equipment for the Penny Standard. 
-        High-quality goods for a high-transparency lifestyle.
+        Uniforms and equipment for the Penny Standard.
+      </p>
+      <p class="subtext">
+        Powered by Fourthwall. Orders ship directly from our manufacturing partners.
       </p>
     </div>
+  </div>
 
-    <div class="shop-grid">
-      <!-- Product 1: Black Hoodie -->
-      <div class="product-card">
-        <div class="product-image">
-          <svg width="100%" height="100%" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="400" fill="#1a1a1a"/>
-            <circle cx="200" cy="200" r="40" fill="#8b5a3c" opacity="0.8"/>
-            <text x="200" y="280" font-family="Georgia" font-size="20" fill="#8b5a3c" text-anchor="middle">CENT</text>
-          </svg>
-        </div>
-        <div class="product-details">
-          <div class="product-title">Black Pocket Hoodie</div>
-          <div class="product-price">$58.00</div>
-          <div class="product-desc">
-            Heavyweight fleece in stealth black. Featuring the "Unum Pro Uno" seal on the chest.
-          </div>
-          <a href="https://fortcent-shop.fourthwall.com/products/cent-black-pocket-hoodie" target="_blank" class="product-btn">Buy Now</a>
-        </div>
-      </div>
-
-      <!-- Product 2: Grey Hoodie -->
-      <div class="product-card">
-        <div class="product-image">
-          <svg width="100%" height="100%" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="400" fill="#7a7a7a"/>
-            <circle cx="200" cy="200" r="40" fill="#8b5a3c" opacity="0.8"/>
-            <text x="200" y="280" font-family="Georgia" font-size="20" fill="#8b5a3c" text-anchor="middle">CENT</text>
-          </svg>
-        </div>
-        <div class="product-details">
-          <div class="product-title">Grey Pocket Hoodie</div>
-          <div class="product-price">$58.00</div>
-          <div class="product-desc">
-            Standard issue athletic heather grey. Premium comfort for vault inventory days.
-          </div>
-          <a href="https://fortcent-shop.fourthwall.com/products/cent-grey-pocket-hoodie" target="_blank" class="product-btn">Buy Now</a>
-        </div>
-      </div>
-
-      <!-- Product 3: Pink Hoodie -->
-      <div class="product-card">
-        <div class="product-image">
-          <svg width="100%" height="100%" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="400" fill="#ffb6c1"/>
-            <circle cx="200" cy="200" r="40" fill="#8b5a3c" opacity="0.8"/>
-            <text x="200" y="280" font-family="Georgia" font-size="20" fill="#8b5a3c" text-anchor="middle">CENT</text>
-          </svg>
-        </div>
-        <div class="product-details">
-          <div class="product-title">Pink Pocket Hoodie</div>
-          <div class="product-price">$58.00</div>
-          <div class="product-desc">
-            Limited edition pink fleece. High visibility for community transparency advocates.
-          </div>
-          <a href="https://fortcent-shop.fourthwall.com/products/cent-pink-pocket-hoodie" target="_blank" class="product-btn">Buy Now</a>
-        </div>
-      </div>
-
-       <!-- Product 4: Dad Hat -->
-       <div class="product-card">
-        <div class="product-image">
-          <svg width="100%" height="100%" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="400" fill="#e5e3de"/>
-            <path d="M100 200 Q200 100 300 200 L320 200 L320 240 L80 240 L80 200 Z" fill="#1a1a1a"/>
-            <text x="200" y="190" font-family="Georgia" font-size="14" fill="#8b5a3c" text-anchor="middle">CENT</text>
-          </svg>
-        </div>
-        <div class="product-details">
-          <div class="product-title">CENT Dad Hat</div>
-          <div class="product-price">$28.00</div>
-          <div class="product-desc">
-            Classic 6-panel unstructured cap. Embroidered with the official insignia.
-          </div>
-          <a href="https://fortcent-shop.fourthwall.com/products/cent-dad-hat" target="_blank" class="product-btn">Buy Now</a>
-        </div>
-      </div>
-      
-       <!-- Product 5: Bucket Hat -->
-       <div class="product-card">
-        <div class="product-image">
-          <svg width="100%" height="100%" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="400" fill="#e5e3de"/>
-            <path d="M150 150 L250 150 L270 220 L130 220 Z" fill="#1a1a1a"/>
-            <path d="M110 220 L290 220 Q290 250 200 250 Q110 250 110 220" fill="#1a1a1a"/>
-          </svg>
-        </div>
-        <div class="product-details">
-          <div class="product-title">CENT Bucket Hat</div>
-          <div class="product-price">$32.00</div>
-          <div class="product-desc">
-            Tactical outdoor headwear. 360-degree shade for long days at the mint.
-          </div>
-          <a href="https://fortcent-shop.fourthwall.com/products/cent-bucket-hat" target="_blank" class="product-btn">Buy Now</a>
-        </div>
-      </div>
-
-       <!-- Product 6: Main Shop -->
-       <div class="product-card">
-        <div class="product-image">
-          <rect width="400" height="400" fill="#f5f0e8"/>
-          <text x="200" y="210" font-family="Source Serif 4" font-size="24" fill="#1a1a1a" text-anchor="middle">FULL CATALOG</text>
-        </div>
-        <div class="product-details">
-          <div class="product-title">Official Fourthwall Store</div>
-          <div class="product-price">Varies</div>
-          <div class="product-desc">
-            Browse our full range of provisions and official gear directly on our partner store.
-          </div>
-          <a href="https://fortcent-shop.fourthwall.com/" target="_blank" class="product-btn">Visit Store</a>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="disclaimer-section">
-      <h3>Fulfillment Protocol</h3>
-      <p>
-        To maintain focus on vault security and penny polishing, CENT utilizes a distributed 
-        manufacturing network (Fourthwall). Orders are printed and shipped directly 
-        from our partners. We do not hold inventory. Returns are handled by the provider.
-      </p>
-    </div>
+  <div class="shop-embed-container">
+    <iframe
+      src="https://fortcent-shop.fourthwall.com/"
+      title="CENT Official Shop"
+      scrolling="yes"
+      loading="lazy">
+    </iframe>
   </div>
 
   <footer>
