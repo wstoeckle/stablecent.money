@@ -888,11 +888,11 @@
     <div class="container">
       <div class="stats-grid">
         <div class="stat-item">
-          <div class="stat-value">1,000,000</div>
+          <div class="stat-value" id="stat-pennies">1,000,000</div>
           <div class="stat-label">Pennies in Reserve</div>
         </div>
         <div class="stat-item">
-          <div class="stat-value">>100%</div>
+          <div class="stat-value" id="stat-collateralization">>100%</div>
           <div class="stat-label">Collateralization</div>
         </div>
         <div class="stat-item">
@@ -944,19 +944,19 @@
           <div class="data-table">
             <div class="data-row">
               <span class="label">Total Units</span>
-              <span class="value">1,000,000 pennies</span>
+              <span class="value" id="data-total-units">1,000,000 pennies</span>
             </div>
             <div class="data-row">
               <span class="label">Tokens Issued</span>
-              <span class="value">1,000,000 CENT</span>
+              <span class="value" id="data-tokens-issued">1,000,000 CENT</span>
             </div>
             <div class="data-row">
               <span class="label">Collateralization Ratio</span>
-              <span class="value">100%+*</span>
+              <span class="value" id="data-collateralization">100%+*</span>
             </div>
             <div class="data-row">
               <span class="label">Total Mass</span>
-              <span class="value">&gt;2,500 kg</span>
+              <span class="value" id="data-total-mass">&gt;2,500 kg</span>
             </div>
             <div class="data-row">
               <span class="label">Network</span>
@@ -1256,6 +1256,89 @@
     // Start price updates
     updatePrice();
     setInterval(updatePrice, 1000 * 60); // Update every minute
+  </script>
+
+  <script>
+    // ===========================================
+    // DYNAMIC TOKEN SUPPLY
+    // Fetches on-chain CENT supply from Solana RPC.
+    // Pennies in reserve always mirrors tokens minted.
+    // Falls back to localStorage cache if RPC fails.
+    // ===========================================
+    const CENT_MINT = '72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH';
+    const SOLANA_RPC = 'https://api.mainnet-beta.solana.com';
+    const PENNY_WEIGHT_GRAMS = 2.5;
+    const SUPPLY_CACHE_KEY = 'cent_token_supply';
+
+    function getCachedSupply() {
+      try {
+        const cached = localStorage.getItem(SUPPLY_CACHE_KEY);
+        if (cached) return JSON.parse(cached);
+      } catch (e) {}
+      return null;
+    }
+
+    function setCachedSupply(supply) {
+      try {
+        localStorage.setItem(SUPPLY_CACHE_KEY, JSON.stringify({
+          supply: supply,
+          timestamp: Date.now()
+        }));
+      } catch (e) {}
+    }
+
+    async function updateTokenSupply() {
+      try {
+        const response = await fetch(SOLANA_RPC, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            jsonrpc: '2.0',
+            id: 1,
+            method: 'getTokenSupply',
+            params: [CENT_MINT]
+          })
+        });
+        const data = await response.json();
+
+        if (data.result && data.result.value) {
+          const supply = parseFloat(data.result.value.uiAmountString);
+          setCachedSupply(supply);
+          updateSupplyDisplay(supply);
+        }
+      } catch (error) {
+        console.log('Token supply fetch error:', error);
+        const cached = getCachedSupply();
+        if (cached) updateSupplyDisplay(cached.supply);
+      }
+    }
+
+    function updateSupplyDisplay(supply) {
+      const formatted = Math.floor(supply).toLocaleString();
+      const massKg = (supply * PENNY_WEIGHT_GRAMS) / 1000;
+      const massFormatted = massKg.toLocaleString(undefined, { maximumFractionDigits: 0 });
+
+      // Stats grid — pennies mirrors tokens minted
+      const statPennies = document.getElementById('stat-pennies');
+      if (statPennies) statPennies.textContent = formatted;
+
+      // Data table
+      const totalUnits = document.getElementById('data-total-units');
+      if (totalUnits) totalUnits.textContent = formatted + ' pennies';
+
+      const tokensIssued = document.getElementById('data-tokens-issued');
+      if (tokensIssued) tokensIssued.textContent = formatted + ' CENT';
+
+      const totalMass = document.getElementById('data-total-mass');
+      if (totalMass) totalMass.textContent = '>' + massFormatted + ' kg';
+    }
+
+    // Show cached value immediately while fresh fetch loads
+    const cached = getCachedSupply();
+    if (cached) updateSupplyDisplay(cached.supply);
+
+    updateTokenSupply();
+    setInterval(updateTokenSupply, 1000 * 60);
   </script>
 
   <!-- GA4 Custom Event Tracking -->
