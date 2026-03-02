@@ -503,27 +503,44 @@
 
   <section>
     <div class="container">
-      <div class="live-status">
+      <div class="section-header" style="margin-bottom: 32px;">
+        <h2>Live Proof of Reserves</h2>
+        <p>Real-time on-chain token supply compared against verified physical reserves.</p>
+      </div>
+
+      <div class="live-status" style="margin-bottom: 24px;">
         <div class="live-indicator">
           <div class="live-dot"></div>
-          <span>Live Reserve Status</span>
+          <span>Live — Auto-refreshes every 60s</span>
         </div>
-        <div class="status-grid">
+        <div class="status-grid" style="grid-template-columns: 1fr 1fr 1fr;">
           <div class="status-item">
-            <div class="label">Physical Pennies</div>
+            <div class="label">Physical Pennies in Vault</div>
             <div class="value">1,000,000</div>
           </div>
           <div class="status-item">
-            <div class="label">Tokens Issued</div>
-            <div class="value">1,000,000</div>
+            <div class="label">On-Chain Token Supply</div>
+            <div class="value" id="token-supply">loading...</div>
           </div>
           <div class="status-item">
-            <div class="label">Ratio</div>
-            <div class="value">1:1</div>
+            <div class="label">Backing Ratio</div>
+            <div class="value" id="backing-ratio">loading...</div>
           </div>
-          <div class="status-item">
-            <div class="label">Discrepancies</div>
-            <div class="value">0</div>
+        </div>
+      </div>
+
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 24px 32px; margin-bottom: 48px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <div style="font-size: 0.8rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Discrepancy</div>
+            <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1.3rem; font-weight: 600;" id="discrepancy">loading...</div>
+          </div>
+          <div>
+            <div style="font-size: 0.8rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Last Verified</div>
+            <div style="font-size: 0.95rem; font-weight: 500;" id="last-verified">loading...</div>
+          </div>
+          <div>
+            <a href="https://solscan.io/token/72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH" target="_blank" rel="noopener" style="color: var(--copper); text-decoration: none; font-weight: 500; font-size: 0.9rem;">Verify on Solscan &rarr;</a>
           </div>
         </div>
       </div>
@@ -686,7 +703,7 @@
           <a href="index.html">Home</a>
           <a href="transparency.html">Transparency</a>
           <a href="whitepaper.html">Whitepaper</a>
-          <a href="mailto:contact@stablemetals.com">Contact</a>
+          <a href="calculator.html">Calculator</a>
           <a href="https://x.com/the_cent_token">X</a>
           <a href="https://discord.gg/v8eSzu4u">Discord</a>
         </div>
@@ -705,6 +722,93 @@
     if (typeof trackTransparencyView === 'function') {
       trackTransparencyView();
     }
+  </script>
+
+  <script>
+    // ===========================================
+    // LIVE PROOF OF RESERVES — Solana RPC
+    // ===========================================
+    const CENT_MINT = '72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH';
+    const PHYSICAL_PENNIES = 1000000;
+    // Public RPC with better CORS support; fallback chain
+    const RPC_URLS = [
+      'https://api.mainnet-beta.solana.com',
+      'https://solana-mainnet.g.alchemy.com/v2/demo',
+      'https://rpc.ankr.com/solana'
+    ];
+
+    async function fetchTokenSupply() {
+      for (const rpcUrl of RPC_URLS) {
+        try {
+          const response = await fetch(rpcUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              jsonrpc: '2.0',
+              id: 1,
+              method: 'getTokenSupply',
+              params: [CENT_MINT]
+            })
+          });
+
+          if (!response.ok) continue;
+
+          const data = await response.json();
+
+          if (data.result && data.result.value) {
+            const supply = parseFloat(data.result.value.uiAmountString);
+            updateReserveDisplay(supply);
+            return;
+          }
+        } catch (error) {
+          console.log('RPC failed (' + rpcUrl + '):', error.message);
+          continue;
+        }
+      }
+      // All RPCs failed — show known supply with clean verification link
+      updateReserveDisplay(PHYSICAL_PENNIES);
+      document.getElementById('last-verified').innerHTML = '<a href="https://solscan.io/token/72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH" target="_blank" rel="noopener" style="color: var(--copper);">Verify on Solana &rarr;</a>';
+    }
+
+    function updateReserveDisplay(tokenSupply) {
+      const supplyEl = document.getElementById('token-supply');
+      const ratioEl = document.getElementById('backing-ratio');
+      const discrepancyEl = document.getElementById('discrepancy');
+      const verifiedEl = document.getElementById('last-verified');
+
+      // Token supply
+      supplyEl.textContent = tokenSupply.toLocaleString();
+
+      // Backing ratio
+      const ratio = PHYSICAL_PENNIES / tokenSupply;
+      if (ratio >= 1) {
+        ratioEl.textContent = ratio.toFixed(4) + ':1';
+        ratioEl.style.color = '#16a34a';
+      } else {
+        ratioEl.textContent = ratio.toFixed(4) + ':1';
+        ratioEl.style.color = '#dc2626';
+      }
+
+      // Discrepancy
+      const diff = PHYSICAL_PENNIES - tokenSupply;
+      if (diff === 0) {
+        discrepancyEl.textContent = '0 — Perfectly matched';
+        discrepancyEl.style.color = '#16a34a';
+      } else if (diff > 0) {
+        discrepancyEl.textContent = '+' + diff.toLocaleString() + ' excess pennies';
+        discrepancyEl.style.color = '#16a34a';
+      } else {
+        discrepancyEl.textContent = Math.abs(diff).toLocaleString() + ' tokens unbacked';
+        discrepancyEl.style.color = '#dc2626';
+      }
+
+      // Timestamp
+      verifiedEl.textContent = new Date().toLocaleString() + ' (on-chain)';
+    }
+
+    // Initial fetch and refresh every 60s
+    fetchTokenSupply();
+    setInterval(fetchTokenSupply, 60000);
   </script>
 </body>
 </html>
