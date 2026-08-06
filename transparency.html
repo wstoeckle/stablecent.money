@@ -22,106 +22,10 @@
   </script>
 
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="assets/images/favicon.png">
+  <link rel="stylesheet" href="assets/css/shared.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --bg: #f8f7f4;
-      --bg-card: #ffffff;
-      --text: #1c1c1c;
-      --text-secondary: #5c5c5c;
-      --text-tertiary: #8a8a8a;
-      --copper: #8b5a3c;
-      --copper-light: #a67c5b;
-      --border: #e5e3de;
-      --border-light: #eeece7;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      font-size: 16px;
-      /* Subtle paper texture */
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
-      background-blend-mode: overlay;
-      background-size: 200px;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* Header */
-    header {
-      padding: 20px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    header .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--text);
-      text-decoration: none;
-      letter-spacing: -0.02em;
-    }
-
-    nav {
-      display: flex;
-      gap: 36px;
-      align-items: center;
-    }
-
-    nav a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-
-    nav a:hover,
-    nav a.active {
-      color: var(--text);
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 24px;
-      border-radius: 4px;
-      font-weight: 500;
-      font-size: 0.9rem;
-      text-decoration: none;
-      transition: all 0.2s;
-      border: none;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      background: var(--text);
-      color: var(--bg);
-    }
-
-    .btn-primary:hover {
-      background: #333;
-    }
-
     /* Page Header */
     .page-header {
       padding: 80px 0 60px;
@@ -286,7 +190,7 @@
       font-size: 0.85rem;
     }
 
-    .comparison-table th:last-child {
+    .comparison-table th:nth-child(2) {
       color: var(--copper);
     }
 
@@ -306,7 +210,7 @@
       font-weight: 500;
     }
 
-    .comparison-table td:last-child {
+    .comparison-table td:nth-child(2) {
       color: var(--text);
       font-weight: 500;
     }
@@ -388,41 +292,6 @@
       background: var(--copper-light);
     }
 
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 0;
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 32px;
-    }
-
-    .footer-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-
-    .footer-links a:hover {
-      color: var(--text);
-    }
-
-    .footer-legal {
-      font-size: 0.85rem;
-      color: var(--text-tertiary);
-      max-width: 400px;
-      text-align: right;
-      line-height: 1.6;
-    }
-
     /* Responsive */
     @media (max-width: 900px) {
       .methods-grid {
@@ -435,10 +304,6 @@
     }
 
     @media (max-width: 768px) {
-      nav {
-        display: none;
-      }
-
       .page-header {
         padding: 60px 0 40px;
       }
@@ -459,16 +324,6 @@
       .visit-section {
         padding: 32px 24px;
       }
-
-      .footer-content {
-        flex-direction: column;
-        gap: 24px;
-      }
-
-      .footer-legal {
-        text-align: left;
-        max-width: none;
-      }
     }
 
     @media (max-width: 480px) {
@@ -484,12 +339,26 @@
     <div class="container">
       <a href="index.html" class="logo">CENT</a>
       <nav>
-        <a href="transparency.html" class="active">Transparency</a>
+        <a href="index.html#buy">Buy CENT</a>
+        <a href="minting.html">Get Started</a>
+        <a href="calculator.html">Calculator</a>
         <a href="whitepaper.html">Whitepaper</a>
-        <a href="index.html#buy" class="btn btn-primary">Buy CENT</a>
+        <a href="transparency.html" class="active">Transparency</a>
       </nav>
+      <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </header>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="index.html#buy">Buy CENT</a>
+    <a href="minting.html">Get Started</a>
+    <a href="calculator.html">Calculator</a>
+    <a href="whitepaper.html">Whitepaper</a>
+    <a href="transparency.html">Transparency</a>
+  </div>
 
   <div class="page-header">
     <div class="container">
@@ -505,25 +374,25 @@
     <div class="container">
       <div class="section-header" style="margin-bottom: 32px;">
         <h2>Live Proof of Reserves</h2>
-        <p>Real-time on-chain token supply compared against verified physical reserves.</p>
+        <p>Live on-chain supply shown against the project's reported physical penny count.</p>
       </div>
 
       <div class="live-status" style="margin-bottom: 24px;">
         <div class="live-indicator">
           <div class="live-dot"></div>
-          <span>Live — Auto-refreshes every 60s</span>
+          <span>On-chain data — auto-refreshes every 60s</span>
         </div>
         <div class="status-grid" style="grid-template-columns: 1fr 1fr 1fr;">
           <div class="status-item">
-            <div class="label">Physical Pennies in Vault</div>
-            <div class="value">1,000,000</div>
+            <div class="label">Reported Physical Pennies</div>
+            <div class="value" data-reported-physical-pennies>1,295,008</div>
           </div>
           <div class="status-item">
             <div class="label">On-Chain Token Supply</div>
             <div class="value" id="token-supply">loading...</div>
           </div>
           <div class="status-item">
-            <div class="label">Backing Ratio</div>
+            <div class="label">Reported Backing Ratio</div>
             <div class="value" id="backing-ratio">loading...</div>
           </div>
         </div>
@@ -532,11 +401,11 @@
       <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 24px 32px; margin-bottom: 48px;">
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
           <div>
-            <div style="font-size: 0.8rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Discrepancy</div>
+            <div style="font-size: 0.8rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Difference</div>
             <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1.3rem; font-weight: 600;" id="discrepancy">loading...</div>
           </div>
           <div>
-            <div style="font-size: 0.8rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Last Verified</div>
+            <div style="font-size: 0.8rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Last Chain Check</div>
             <div style="font-size: 0.95rem; font-weight: 500;" id="last-verified">loading...</div>
           </div>
           <div>
@@ -564,7 +433,8 @@
           <h3>On-Chain Records</h3>
           <p>
             Every mint and burn operation is recorded on the Solana blockchain.
-            Token supply is publicly verifiable and matches physical reserves 1:1.
+            Live token supply is publicly verifiable and displayed beside the
+            project's reported physical reserve count, including any difference.
           </p>
           <a href="https://solscan.io/token/72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH">View on Solscan →</a>
         </div>
@@ -591,47 +461,47 @@
         <thead>
           <tr>
             <th style="width: 30%;">Verification Method</th>
+            <th>CENT</th>
             <th>USDT</th>
             <th>USDC</th>
             <th>Fort Knox</th>
-            <th>CENT</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Audit frequency</td>
+            <td class="check">Live chain data; physical count reported separately</td>
             <td>Quarterly</td>
             <td>Monthly</td>
             <td>~70 years ago</td>
-            <td class="check">Continuous</td>
           </tr>
           <tr>
             <td>Public video surveillance</td>
-            <td>None</td>
-            <td>None</td>
-            <td>None</td>
             <td class="check">24/7 live feed</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
           </tr>
           <tr>
             <td>Physical visit allowed</td>
-            <td>No</td>
-            <td>No</td>
-            <td>No</td>
             <td class="check">By appointment</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No</td>
           </tr>
           <tr>
             <td>Reserve composition</td>
+            <td class="check">Reported physical pennies</td>
             <td>Various instruments</td>
             <td>Cash + treasuries</td>
             <td>Gold (claimed)</td>
-            <td class="check">100% physical pennies</td>
           </tr>
           <tr>
             <td>On-chain verification</td>
+            <td class="check">Supply visible</td>
             <td>Supply only</td>
             <td>Supply only</td>
             <td>None</td>
-            <td class="check">Full transparency</td>
           </tr>
         </tbody>
       </table>
@@ -701,15 +571,14 @@
       <div class="footer-content">
         <div class="footer-links">
           <a href="index.html">Home</a>
-          <a href="transparency.html">Transparency</a>
-          <a href="whitepaper.html">Whitepaper</a>
-          <a href="calculator.html">Calculator</a>
           <a href="https://x.com/the_cent_token">X</a>
           <a href="https://discord.gg/v8eSzu4u">Discord</a>
+          <a href="calculator.html">Calculator</a>
+          <a href="index.html#buy">Buy CENT</a>
         </div>
         <div class="footer-legal">
-          CENT is an experimental token project.
-          This is not financial advice.
+          CENT is an experimental digital asset project.
+          This is not financial advice. Tokens may fluctuate in value.
         </div>
       </div>
     </div>
@@ -723,92 +592,59 @@
       trackTransparencyView();
     }
   </script>
-
+  <script src="assets/js/reserve-data.js"></script>
   <script>
-    // ===========================================
-    // LIVE PROOF OF RESERVES — Solana RPC
-    // ===========================================
-    const CENT_MINT = '72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH';
-    const PHYSICAL_PENNIES = 1000000;
-    // Public RPC with better CORS support; fallback chain
-    const RPC_URLS = [
-      'https://api.mainnet-beta.solana.com',
-      'https://solana-mainnet.g.alchemy.com/v2/demo',
-      'https://rpc.ankr.com/solana'
-    ];
+    async function updateReserveDisplay() {
+      const physical = window.CENT_RESERVES.reportedPhysicalPennies;
+      document.querySelectorAll('[data-reported-physical-pennies]').forEach((element) => {
+        element.textContent = window.CENT_RESERVES.formatCount(physical, 0);
+      });
 
-    async function fetchTokenSupply() {
-      for (const rpcUrl of RPC_URLS) {
-        try {
-          const response = await fetch(rpcUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              jsonrpc: '2.0',
-              id: 1,
-              method: 'getTokenSupply',
-              params: [CENT_MINT]
-            })
-          });
-
-          if (!response.ok) continue;
-
-          const data = await response.json();
-
-          if (data.result && data.result.value) {
-            const supply = parseFloat(data.result.value.uiAmountString);
-            updateReserveDisplay(supply);
-            return;
-          }
-        } catch (error) {
-          console.log('RPC failed (' + rpcUrl + '):', error.message);
-          continue;
-        }
-      }
-      // All RPCs failed — show known supply with clean verification link
-      updateReserveDisplay(PHYSICAL_PENNIES);
-      document.getElementById('last-verified').innerHTML = '<a href="https://solscan.io/token/72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH" target="_blank" rel="noopener" style="color: var(--copper);">Verify on Solana &rarr;</a>';
-    }
-
-    function updateReserveDisplay(tokenSupply) {
+      const reserveData = await window.CENT_RESERVES.fetchTokenSupply();
       const supplyEl = document.getElementById('token-supply');
       const ratioEl = document.getElementById('backing-ratio');
       const discrepancyEl = document.getElementById('discrepancy');
-      const verifiedEl = document.getElementById('last-verified');
+      const checkedEl = document.getElementById('last-verified');
 
-      // Token supply
-      supplyEl.textContent = tokenSupply.toLocaleString();
-
-      // Backing ratio
-      const ratio = PHYSICAL_PENNIES / tokenSupply;
-      if (ratio >= 1) {
-        ratioEl.textContent = ratio.toFixed(4) + ':1';
-        ratioEl.style.color = '#16a34a';
-      } else {
-        ratioEl.textContent = ratio.toFixed(4) + ':1';
-        ratioEl.style.color = '#dc2626';
+      if (!reserveData) {
+        supplyEl.textContent = 'unavailable';
+        ratioEl.textContent = 'unavailable';
+        discrepancyEl.textContent = 'Live chain data unavailable';
+        checkedEl.innerHTML = '<a href="https://solscan.io/token/72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH" target="_blank" rel="noopener" style="color: var(--copper);">Check Solscan &rarr;</a>';
+        return;
       }
 
-      // Discrepancy
-      const diff = PHYSICAL_PENNIES - tokenSupply;
-      if (diff === 0) {
-        discrepancyEl.textContent = '0 — Perfectly matched';
+      const supply = reserveData.supply;
+      const ratio = physical / supply;
+      const difference = physical - supply;
+
+      supplyEl.textContent = window.CENT_RESERVES.formatCount(supply);
+      ratioEl.textContent = (ratio * 100).toFixed(2) + '%';
+      ratioEl.style.color = ratio >= 1 ? '#16a34a' : '#dc2626';
+
+      if (Math.abs(difference) < 0.01) {
+        discrepancyEl.textContent = '0 — Matched';
         discrepancyEl.style.color = '#16a34a';
-      } else if (diff > 0) {
-        discrepancyEl.textContent = '+' + diff.toLocaleString() + ' excess pennies';
+      } else if (difference > 0) {
+        discrepancyEl.textContent = '+' + window.CENT_RESERVES.formatCount(difference) + ' reported excess pennies';
         discrepancyEl.style.color = '#16a34a';
       } else {
-        discrepancyEl.textContent = Math.abs(diff).toLocaleString() + ' tokens unbacked';
+        discrepancyEl.textContent = window.CENT_RESERVES.formatCount(Math.abs(difference)) + ' more tokens than reported pennies';
         discrepancyEl.style.color = '#dc2626';
       }
 
-      // Timestamp
-      verifiedEl.textContent = new Date().toLocaleString() + ' (on-chain)';
+      checkedEl.textContent = new Date(reserveData.checkedAt).toLocaleString() + (reserveData.source === 'cache' ? ' (cached)' : '');
     }
 
-    // Initial fetch and refresh every 60s
-    fetchTokenSupply();
-    setInterval(fetchTokenSupply, 60000);
+    updateReserveDisplay();
+    setInterval(updateReserveDisplay, 60_000);
+  </script>
+  <script>
+    document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+      this.classList.toggle('open');
+      this.setAttribute('aria-expanded', this.classList.contains('open'));
+      document.getElementById('mobile-nav').classList.toggle('open');
+    });
   </script>
 </body>
 </html>

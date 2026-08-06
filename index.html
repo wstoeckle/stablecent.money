@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
   <meta name="theme-color" content="#f8f7f4">
-  <title>CENT - The Penny Backed Token</title>
-  <meta name="description" content="Each CENT token is issued against a physical penny held in auditable reserve. Verify on-chain. Watch on livestream.">
-  <meta property="og:title" content="CENT - The Penny Backed Token">
-  <meta property="og:description" content="Each CENT token is issued against a physical penny held in auditable reserve. Verify on-chain. Watch on livestream.">
+  <title>CENT - The Penny Reserve Experiment</title>
+  <meta name="description" content="A Solana token experiment that shows reported physical penny reserves beside live on-chain supply.">
+  <meta property="og:title" content="CENT - The Penny Reserve Experiment">
+  <meta property="og:description" content="Reported physical penny reserves, live on-chain supply, and the difference shown side by side.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://fortcent.com">
   <meta property="og:image" content="https://fortcent.com/assets/images/fort-cent-seal.jpg">
@@ -27,119 +27,10 @@
   </script>
 
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="assets/images/favicon.png">
+  <link rel="stylesheet" href="assets/css/shared.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --bg: #f8f7f4;
-      --bg-card: #ffffff;
-      --text: #1c1c1c;
-      --text-secondary: #5c5c5c;
-      --text-tertiary: #8a8a8a;
-      --copper: #8b5a3c;
-      --copper-light: #a67c5b;
-      --border: #e5e3de;
-      --border-light: #eeece7;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      font-size: 16px;
-      /* Subtle paper texture */
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
-      background-blend-mode: overlay;
-      background-size: 200px;
-    }
-
-    .serif {
-      font-family: 'Source Serif 4', Georgia, serif;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* Header */
-    header {
-      padding: 20px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    header .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--text);
-      text-decoration: none;
-      letter-spacing: -0.02em;
-    }
-
-    nav {
-      display: flex;
-      gap: 36px;
-      align-items: center;
-    }
-
-    nav a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-
-    nav a:hover {
-      color: var(--text);
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 24px;
-      border-radius: 4px;
-      font-weight: 500;
-      font-size: 0.9rem;
-      text-decoration: none;
-      transition: all 0.2s;
-      border: none;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      background: var(--text);
-      color: var(--bg);
-    }
-
-    .btn-primary:hover {
-      background: #333;
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--text-secondary);
-    }
-
     /* Hero */
     .hero {
       padding: 100px 0 80px;
@@ -639,45 +530,10 @@
       justify-content: center;
     }
 
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 0;
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 32px;
-    }
-
-    .footer-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-
     .cmc-link {
       color: var(--copper);
       text-decoration: none;
       font-size: 0.7rem;
-    }
-
-    .footer-links a:hover {
-      color: var(--text);
-    }
-
-    .footer-legal {
-      font-size: 0.85rem;
-      color: var(--text-tertiary);
-      max-width: 400px;
-      text-align: right;
-      line-height: 1.6;
     }
 
     /* Responsive */
@@ -698,10 +554,6 @@
     }
 
     @media (max-width: 768px) {
-      nav {
-        display: none;
-      }
-
       .hero {
         padding: 60px 0 40px;
       }
@@ -731,16 +583,6 @@
         display: block;
         overflow-x: auto;
       }
-
-      .footer-content {
-        flex-direction: column;
-        gap: 24px;
-      }
-
-      .footer-legal {
-        text-align: left;
-        max-width: none;
-      }
     }
 
     @media (max-width: 480px) {
@@ -762,74 +604,6 @@
       }
     }
 
-    /* Newsfeed Section */
-    .newsfeed-section {
-      padding: 80px 0;
-      border-top: 1px solid var(--border);
-      background: var(--bg-card);
-    }
-
-    .newsfeed-section .section-header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .newsfeed-section .section-header h2 {
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 1.8rem;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-
-    .newsfeed-section .section-header p {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .twitter-feed-container {
-      max-width: 600px;
-      margin: 0 auto;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #ffffff;
-      min-height: 400px;
-    }
-
-    .twitter-feed-container iframe {
-      border-radius: 12px !important;
-    }
-
-    .twitter-feed-loading {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 400px;
-      color: var(--text-tertiary);
-      font-size: 0.9rem;
-    }
-
-    .newsfeed-follow-link {
-      display: block;
-      text-align: center;
-      margin-top: 24px;
-      color: var(--copper);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
-      transition: color 0.2s;
-    }
-
-    .newsfeed-follow-link:hover {
-      color: var(--copper-light);
-    }
-
-    @media (max-width: 768px) {
-      .newsfeed-section {
-        padding: 60px 0;
-      }
-    }
   </style>
 </head>
 <body>
@@ -837,21 +611,33 @@
     <div class="container">
       <a href="/" class="logo">CENT</a>
       <nav>
-        <a href="transparency.html">Transparency</a>
-        <a href="whitepaper.html">Whitepaper</a>
+        <a href="#buy">Buy CENT</a>
+        <a href="minting.html">Get Started</a>
         <a href="calculator.html">Calculator</a>
-        <a href="merch.html">Shop</a>
-        <a href="minting.html" class="btn btn-primary">Get Started</a>
+        <a href="whitepaper.html">Whitepaper</a>
+        <a href="transparency.html">Transparency</a>
       </nav>
+      <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </header>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#buy">Buy CENT</a>
+    <a href="minting.html">Get Started</a>
+    <a href="calculator.html">Calculator</a>
+    <a href="whitepaper.html">Whitepaper</a>
+    <a href="transparency.html">Transparency</a>
+  </div>
 
   <div class="container">
     <section class="hero">
       <div class="hero-eyebrow">The Original Physical Reserve Token</div>
       <h1>A token issued against U.S. penny reserves</h1>
       <p>
-        Each CENT token is issued against a physical penny held in auditable reserve.
+        CENT is designed around physical pennies held in an auditable reserve.
         Unlike Fort Knox, you can actually visit our vault and count the reserves yourself.
         Following the cessation of U.S. penny production, these constitute a finite stock
         of legal tender you can independently verify.
@@ -865,12 +651,13 @@
     <div class="buy-section" id="buy">
       <div class="depeg-alert" id="depeg-alert">
         <span class="alert-icon">🚨</span>
-        <span><strong>Price Alert:</strong> CENT is currently trading above $0.01. One CENT is worth more than one penny.</span>
+        <span><strong>Price Alert:</strong> The current pool quote is above $0.01. Limited liquidity can make quoted prices volatile.</span>
       </div>
       <div class="buy-header">
         <div class="buy-content">
           <h3>CENT is now trading</h3>
           <p>Available on Raydium DEX. Swap SOL or USDC for CENT.</p>
+          <p id="liquidity-note">Pool liquidity: loading...</p>
         </div>
         <div class="price-display">
           <div class="price-label">1 CENT</div>
@@ -889,16 +676,16 @@
     <div class="container">
       <div class="stats-grid">
         <div class="stat-item">
-          <div class="stat-value" id="stat-pennies">1,000,000</div>
-          <div class="stat-label">Pennies in Reserve</div>
+          <div class="stat-value" data-reported-physical-pennies>1,295,008</div>
+          <div class="stat-label">Reported Pennies in Reserve</div>
         </div>
         <div class="stat-item">
-          <div class="stat-value" id="stat-collateralization">>100%</div>
-          <div class="stat-label">Collateralization</div>
+          <div class="stat-value" id="stat-token-supply">loading...</div>
+          <div class="stat-label">On-Chain CENT Supply</div>
         </div>
         <div class="stat-item">
-          <div class="stat-value">24/7</div>
-          <div class="stat-label">Live Monitoring</div>
+          <div class="stat-value" id="stat-backing-ratio">loading...</div>
+          <div class="stat-label">Reported Backing Ratio</div>
         </div>
         <div class="stat-item">
           <div class="stat-value">Solana</div>
@@ -913,7 +700,7 @@
       <div class="two-col">
         <div>
           <div class="section-header">
-            <h2>A Reserve You Can Verify</h2>
+            <h2>A Reserve Claim You Can Inspect</h2>
           </div>
           <div class="prose">
             <p>
@@ -923,7 +710,7 @@
             </p>
             <p>
               <strong>Fort Knox holds 147 million ounces of gold</strong> that hasn't been
-              fully audited by independent parties since 1953. We hold 1 million pennies
+              fully audited by independent parties since 1953. We report holding <span data-reported-physical-pennies>1,295,008</span> pennies
               you can count on a 24/7 livestream and inspect by appointment. Some people
               are calling it the most verifiable reserve in America.
             </p>
@@ -945,19 +732,19 @@
           <div class="data-table">
             <div class="data-row">
               <span class="label">Total Units</span>
-              <span class="value" id="data-total-units">1,000,000 pennies</span>
+              <span class="value"><span data-reported-physical-pennies>1,295,008</span> reported pennies</span>
             </div>
             <div class="data-row">
               <span class="label">Tokens Issued</span>
-              <span class="value" id="data-tokens-issued">1,000,000 CENT</span>
+              <span class="value" id="data-tokens-issued">loading...</span>
             </div>
             <div class="data-row">
-              <span class="label">Collateralization Ratio</span>
-              <span class="value" id="data-collateralization">100%+*</span>
+              <span class="label">Reported Backing Ratio</span>
+              <span class="value" id="data-backing-ratio">loading...</span>
             </div>
             <div class="data-row">
               <span class="label">Total Mass</span>
-              <span class="value" id="data-total-mass">&gt;2,500 kg</span>
+              <span class="value">&gt;3,237 kg</span>
             </div>
             <div class="data-row">
               <span class="label">Network</span>
@@ -965,13 +752,13 @@
             </div>
             <div class="data-row">
               <span class="label">Decimal Precision</span>
-              <span class="value">8 (centoshis)</span>
+              <span class="value">9</span>
             </div>
           </div>
           <div class="footnote">
-            *Based on face value. Actual collateralization exceeds 100% when calculated
-            using average metallic content of pennies in circulation (weighted blend of
-            pre-1982 copper and post-1982 zinc compositions).
+            The reported backing ratio compares the disclosed physical penny count with
+            live on-chain token supply. Metallic value varies by penny composition and
+            does not create redemption rights for token holders.
           </div>
         </div>
       </div>
@@ -997,7 +784,7 @@
         <tbody>
           <tr>
             <td>Physical backing</td>
-            <td class="check">100% physical</td>
+            <td class="check">Reported penny reserve</td>
             <td>Partial</td>
             <td>Partial</td>
             <td>None</td>
@@ -1018,14 +805,14 @@
           </tr>
           <tr>
             <td>Counterparty risk</td>
-            <td class="check">None</td>
+            <td>Vault custodian</td>
             <td>Banks, funds</td>
             <td>Banks, funds</td>
             <td>None</td>
           </tr>
           <tr>
-            <td>Government legal tender</td>
-            <td class="check">Yes</td>
+            <td>Underlying is government legal tender</td>
+            <td class="check">Yes — pennies</td>
             <td>No</td>
             <td>No</td>
             <td>No</td>
@@ -1051,17 +838,15 @@
         <div class="feature-card">
           <h3>Physical Custody</h3>
           <p>
-            All pennies are held in a climate-controlled facility with 24/7
-            video surveillance. No fractional reserves, no rehypothecation,
-            no synthetic exposure.
+            The project reports that its pennies are held in a monitored facility.
+            The live dashboard compares that reported physical count with on-chain supply.
           </p>
         </div>
         <div class="feature-card">
           <h3>On-Chain Issuance</h3>
           <p>
-            CENT tokens are minted on Solana with each issuance corresponding
-            to verified physical deposits. All transactions are recorded
-            immutably on the public blockchain.
+            CENT token supply and mint activity are publicly visible on Solana.
+            Physical deposits and counts remain an off-chain custody process.
           </p>
         </div>
         <div class="feature-card">
@@ -1125,9 +910,9 @@
         <div class="thesis-card">
           <h3>Intrinsic Material Value</h3>
           <p>
-            Pre-1982 pennies contain 95% copper. At current commodity prices,
-            the metal content exceeds face value, providing a floor on reserve
-            valuation independent of monetary policy.
+            Pre-1982 pennies contain 95% copper, while newer pennies are mostly zinc.
+            Composition and commodity prices affect metal value; neither creates a
+            guaranteed token-price floor or redemption right.
           </p>
         </div>
         <div class="thesis-card">
@@ -1163,42 +948,18 @@
     </div>
   </section>
 
-  <section class="newsfeed-section">
-    <div class="container">
-      <div class="section-header">
-        <h2>Latest from X</h2>
-        <p>Stay updated with news from the vault.</p>
-      </div>
-      <div class="twitter-feed-container">
-        <a class="twitter-timeline"
-           data-height="500"
-           data-theme="light"
-           data-chrome="noheader nofooter"
-           data-tweet-limit="5"
-           href="https://x.com/the_cent_token">
-          <div class="twitter-feed-loading">Loading tweets from @the_cent_token...</div>
-        </a>
-      </div>
-      <a href="https://x.com/the_cent_token" class="newsfeed-follow-link" target="_blank" rel="noopener">
-        Follow @the_cent_token on X
-      </a>
-    </div>
-  </section>
-
   <footer>
     <div class="container">
       <div class="footer-content">
         <div class="footer-links">
-          <a href="transparency.html">Transparency</a>
-          <a href="whitepaper.html">Whitepaper</a>
-          <a href="calculator.html">Calculator</a>
           <a href="https://x.com/the_cent_token">X</a>
           <a href="https://discord.gg/v8eSzu4u">Discord</a>
+          <a href="calculator.html">Calculator</a>
+          <a href="#buy">Buy CENT</a>
         </div>
         <div class="footer-legal">
           CENT is an experimental digital asset project.
           This is not financial advice. Tokens may fluctuate in value.
-          Review the whitepaper for disclosures.
         </div>
       </div>
     </div>
@@ -1216,30 +977,34 @@
         const data = await response.json();
 
         if (data.usdPrice) {
-          const price = data.usdPrice;
-          displayPrice(price);
+          displayPrice(data.usdPrice, data.liquidity);
+        } else {
+          showPriceFallback();
         }
 
         if (data.cachedAt) {
-          const lastUpdated = data.cachedAt;
-          displayLastUpdated(lastUpdated);
+          displayLastUpdated(data.cachedAt);
         }
-
       } catch (error) {
         console.log('Price fetch error:', error);
-        // Keep showing last known price or default
+        showPriceFallback();
       }
     }
 
-    function displayPrice(price) {
+    function displayPrice(price, liquidity) {
       const priceElement = document.getElementById('current-price');
       const alertElement = document.getElementById('depeg-alert');
+      const liquidityElement = document.getElementById('liquidity-note');
 
-      // Format price
       const formattedPrice = '= $' + price.toFixed(4);
       priceElement.textContent = formattedPrice;
 
-      // Check if above peg
+      if (Number.isFinite(liquidity)) {
+        liquidityElement.textContent = 'Quoted pool liquidity: $' + liquidity.toLocaleString(undefined, { maximumFractionDigits: 2 });
+      } else {
+        liquidityElement.textContent = 'Pool liquidity unavailable';
+      }
+
       if (price > PEG_VALUE) {
         priceElement.classList.add('above-peg');
         alertElement.classList.add('visible');
@@ -1249,103 +1014,70 @@
       }
     }
 
+    function showPriceFallback() {
+      const priceElement = document.getElementById('current-price');
+      priceElement.innerHTML = '';
+      const link = document.createElement('a');
+      link.href = 'https://raydium.io/swap/?inputMint=72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH&outputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
+      link.textContent = 'See live price \u2192';
+      link.style.cssText = 'color: var(--copper); text-decoration: none; font-size: 1rem;';
+      link.target = '_blank';
+      link.rel = 'noopener';
+      priceElement.appendChild(link);
+      document.getElementById('liquidity-note').textContent = 'Pool liquidity unavailable';
+      document.getElementById('last-updated-text').parentElement.style.display = 'none';
+    }
+
     function displayLastUpdated(lastUpdated) {
       const lastUpdatedElement = document.getElementById('last-updated-text');
       lastUpdatedElement.textContent = new Date(lastUpdated).toLocaleString();
     }
 
-    // Start price updates
     updatePrice();
-    setInterval(updatePrice, 1000 * 60); // Update every minute
+    setInterval(updatePrice, 1000 * 60);
   </script>
 
+  <script src="assets/js/reserve-data.js"></script>
   <script>
-    // ===========================================
-    // DYNAMIC TOKEN SUPPLY
-    // Fetches on-chain CENT supply from Solana RPC.
-    // Pennies in reserve always mirrors tokens minted.
-    // Falls back to localStorage cache if RPC fails.
-    // ===========================================
-    const CENT_MINT = '72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH';
-    const SOLANA_RPC = 'https://api.mainnet-beta.solana.com';
-    const PENNY_WEIGHT_GRAMS = 2.5;
-    const SUPPLY_CACHE_KEY = 'cent_token_supply';
+    async function updateReserveSummary() {
+      const physical = window.CENT_RESERVES.reportedPhysicalPennies;
+      document.querySelectorAll('[data-reported-physical-pennies]').forEach((element) => {
+        element.textContent = window.CENT_RESERVES.formatCount(physical, 0);
+      });
 
-    function getCachedSupply() {
-      try {
-        const cached = localStorage.getItem(SUPPLY_CACHE_KEY);
-        if (cached) return JSON.parse(cached);
-      } catch (e) {}
-      return null;
-    }
-
-    function setCachedSupply(supply) {
-      try {
-        localStorage.setItem(SUPPLY_CACHE_KEY, JSON.stringify({
-          supply: supply,
-          timestamp: Date.now()
-        }));
-      } catch (e) {}
-    }
-
-    async function updateTokenSupply() {
-      try {
-        const response = await fetch(SOLANA_RPC, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            jsonrpc: '2.0',
-            id: 1,
-            method: 'getTokenSupply',
-            params: [CENT_MINT]
-          })
-        });
-        const data = await response.json();
-
-        if (data.result && data.result.value) {
-          const supply = parseFloat(data.result.value.uiAmountString);
-          setCachedSupply(supply);
-          updateSupplyDisplay(supply);
-        }
-      } catch (error) {
-        console.log('Token supply fetch error:', error);
-        const cached = getCachedSupply();
-        if (cached) updateSupplyDisplay(cached.supply);
+      const reserveData = await window.CENT_RESERVES.fetchTokenSupply();
+      if (!reserveData) {
+        document.getElementById('stat-token-supply').textContent = 'unavailable';
+        document.getElementById('stat-backing-ratio').textContent = 'unavailable';
+        document.getElementById('data-tokens-issued').textContent = 'unavailable';
+        document.getElementById('data-backing-ratio').textContent = 'unavailable';
+        return;
       }
+
+      const supply = reserveData.supply;
+      const ratio = physical / supply;
+      const formattedSupply = window.CENT_RESERVES.formatCount(supply);
+      const formattedRatio = (ratio * 100).toFixed(2) + '%';
+
+      document.getElementById('stat-token-supply').textContent = formattedSupply;
+      document.getElementById('stat-backing-ratio').textContent = formattedRatio;
+      document.getElementById('data-tokens-issued').textContent = formattedSupply + ' CENT';
+      document.getElementById('data-backing-ratio').textContent = formattedRatio;
     }
 
-    function updateSupplyDisplay(supply) {
-      const formatted = Math.floor(supply).toLocaleString();
-      const massKg = (supply * PENNY_WEIGHT_GRAMS) / 1000;
-      const massFormatted = massKg.toLocaleString(undefined, { maximumFractionDigits: 0 });
-
-      // Stats grid — pennies mirrors tokens minted
-      const statPennies = document.getElementById('stat-pennies');
-      if (statPennies) statPennies.textContent = formatted;
-
-      // Data table
-      const totalUnits = document.getElementById('data-total-units');
-      if (totalUnits) totalUnits.textContent = formatted + ' pennies';
-
-      const tokensIssued = document.getElementById('data-tokens-issued');
-      if (tokensIssued) tokensIssued.textContent = formatted + ' CENT';
-
-      const totalMass = document.getElementById('data-total-mass');
-      if (totalMass) totalMass.textContent = '>' + massFormatted + ' kg';
-    }
-
-    // Show cached value immediately while fresh fetch loads
-    const cached = getCachedSupply();
-    if (cached) updateSupplyDisplay(cached.supply);
-
-    updateTokenSupply();
-    setInterval(updateTokenSupply, 1000 * 60);
+    updateReserveSummary();
+    setInterval(updateReserveSummary, 60_000);
   </script>
 
   <!-- GA4 Custom Event Tracking -->
   <script src="assets/js/ga4-tracking.js"></script>
 
-  <!-- Twitter/X Timeline Widget -->
-  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <script>
+    document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+      this.classList.toggle('open');
+      this.setAttribute('aria-expanded', this.classList.contains('open'));
+      document.getElementById('mobile-nav').classList.toggle('open');
+    });
+  </script>
 </body>
 </html>
