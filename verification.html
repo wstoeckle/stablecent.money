@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+  <meta name="theme-color" content="#f8f7f4">
+  <title>Token Verification – CENT</title>
+  <meta name="description" content="Canonical CENT token identity, Solana authorities, market links, and reserve disclosures.">
+  <link rel="canonical" href="https://fortcent.com/verification.html">
+  <meta property="og:title" content="Verify CENT on Solana">
+  <meta property="og:description" content="Canonical token identity, on-chain controls, market links, and reserve disclosures for CENT.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fortcent.com/verification.html">
+  <meta property="og:image" content="https://arweave.net/xlYt0_SeXaG95rpZrreLXPBSBeGbwWBpJ9ptwxtVYQM">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@the_cent_token">
+  <meta name="twitter:title" content="Verify CENT on Solana">
+  <meta name="twitter:description" content="Canonical token identity, on-chain controls, market links, and reserve disclosures for CENT.">
+  <meta name="twitter:image" content="https://arweave.net/xlYt0_SeXaG95rpZrreLXPBSBeGbwWBpJ9ptwxtVYQM">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "CENT Token Verification",
+    "url": "https://fortcent.com/verification.html",
+    "description": "Canonical CENT token identity, Solana authorities, market links, and reserve disclosures.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "CENT",
+      "url": "https://fortcent.com/"
+    },
+    "sameAs": [
+      "https://x.com/the_cent_token",
+      "https://github.com/wstoeckle/cent-token",
+      "https://solscan.io/token/72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH"
+    ]
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EW38M2E8P6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-EW38M2E8P6', {
+      'send_page_view': true,
+      'page_title': 'CENT - Verification',
+      'page_location': window.location.href
+    });
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="assets/images/favicon.png">
+  <link rel="stylesheet" href="assets/css/shared.css">
+  <style>
+    .page-header {
+      padding: 80px 0 56px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-header h1,
+    .section-header h2 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .page-header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 16px;
+    }
+
+    .page-header p,
+    .section-header p {
+      color: var(--text-secondary);
+      max-width: 740px;
+    }
+
+    section {
+      padding: 64px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-header {
+      margin-bottom: 28px;
+    }
+
+    .section-header h2 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .status-grid,
+    .card-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .status-grid {
+      grid-template-columns: repeat(3, 1fr);
+      margin-bottom: 16px;
+    }
+
+    .card-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .status-card,
+    .info-card,
+    .notice {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .status-card,
+    .info-card {
+      padding: 24px;
+    }
+
+    .status-card .label,
+    .record dt {
+      color: var(--text-tertiary);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .status-card .value {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 6px;
+    }
+
+    .status-card .detail,
+    .info-card p,
+    .notice {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+
+    .info-card h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .notice {
+      padding: 20px 24px;
+      line-height: 1.7;
+    }
+
+    .notice strong {
+      color: var(--text);
+    }
+
+    .record {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .record-row {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 24px;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .record-row:last-child {
+      border-bottom: none;
+    }
+
+    .record dt,
+    .record dd {
+      margin: 0;
+    }
+
+    .record dd {
+      overflow-wrap: anywhere;
+    }
+
+    .record a,
+    .info-card a,
+    .notice a {
+      color: var(--copper);
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.88em;
+    }
+
+    .link-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .link-list a {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      padding: 8px 12px;
+      text-decoration: none;
+    }
+
+    .link-list a:hover {
+      border-color: var(--copper);
+      color: var(--copper);
+    }
+
+    @media (max-width: 760px) {
+      .status-grid,
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .record-row {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .page-header h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">CENT</a>
+      <nav>
+        <a href="index.html#buy">Buy CENT</a>
+        <a href="minting.html">Get Started</a>
+        <a href="whitepaper.html">Whitepaper</a>
+        <a href="transparency.html">Transparency</a>
+        <a href="verification.html" class="active">Verification</a>
+      </nav>
+      <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="index.html#buy">Buy CENT</a>
+    <a href="minting.html">Get Started</a>
+    <a href="whitepaper.html">Whitepaper</a>
+    <a href="transparency.html">Transparency</a>
+    <a href="verification.html">Verification</a>
+  </div>
+
+  <div class="page-header">
+    <div class="container">
+      <h1>Verify CENT</h1>
+      <p>
+        This is the canonical public record for CENT's token identity, on-chain controls,
+        market, and reserve disclosures. Always verify the mint address before interacting.
+      </p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2>Reserve and supply</h2>
+        <p>The physical count is project-reported. Token supply is queried from Solana and may change.</p>
+      </div>
+      <div class="status-grid">
+        <div class="status-card">
+          <div class="label">Reported Physical Pennies</div>
+          <div class="value" data-reported-physical-pennies>1,295,008</div>
+          <div class="detail">$12,950.08 face value</div>
+        </div>
+        <div class="status-card">
+          <div class="label">Live CENT Supply</div>
+          <div class="value" id="token-supply">loading...</div>
+          <div class="detail">Solana mainnet, 9 decimals</div>
+        </div>
+        <div class="status-card">
+          <div class="label">Reported Reserve Ratio</div>
+          <div class="value" id="reserve-ratio">loading...</div>
+          <div class="detail" id="reserve-difference">loading difference...</div>
+        </div>
+      </div>
+      <div class="notice">
+        <strong>What this does not prove:</strong> on-chain records prove token issuance and supply changes;
+        they do not independently prove physical custody. The physical count has not yet been independently
+        attested. Holding CENT does not create a guaranteed redemption right or a legal claim on a specific penny.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2>Canonical token identity</h2>
+        <p>Use these exact values for wallets, explorers, exchanges, and listing requests.</p>
+      </div>
+      <dl class="record">
+        <div class="record-row"><dt>Name / symbol</dt><dd>CENT / CENT</dd></div>
+        <div class="record-row"><dt>Network</dt><dd>Solana mainnet-beta</dd></div>
+        <div class="record-row"><dt>Mint address</dt><dd><code>72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH</code></dd></div>
+        <div class="record-row"><dt>Decimals</dt><dd>9</dd></div>
+        <div class="record-row"><dt>Official website</dt><dd><a href="https://fortcent.com/">https://fortcent.com/</a></dd></div>
+        <div class="record-row"><dt>Official X account</dt><dd><a href="https://x.com/the_cent_token">@the_cent_token</a></dd></div>
+        <div class="record-row"><dt>Token logo</dt><dd><a href="https://arweave.net/xlYt0_SeXaG95rpZrreLXPBSBeGbwWBpJ9ptwxtVYQM">512 × 512 PNG on Arweave</a></dd></div>
+        <div class="record-row"><dt>Raydium pool</dt><dd><code>4SR9DXBDwi2Gshpp7dZsKdFgdELno3XUsa7RZgT3MSS9</code></dd></div>
+      </dl>
+      <div class="link-list">
+        <a href="https://solscan.io/token/72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH">Solscan</a>
+        <a href="https://explorer.solana.com/address/72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH">Solana Explorer</a>
+        <a href="https://raydium.io/swap/?inputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&amp;outputMint=72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH">Raydium</a>
+        <a href="https://www.geckoterminal.com/solana/tokens/72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH">GeckoTerminal</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2>On-chain controls</h2>
+        <p>Authorities are disclosed explicitly. Verify them against a Solana explorer.</p>
+      </div>
+      <div class="card-grid">
+        <div class="info-card">
+          <h3>Freeze authority revoked</h3>
+          <p>The CENT mint has no freeze authority. Token accounts cannot be frozen through that authority.</p>
+        </div>
+        <div class="info-card">
+          <h3>Mint authority active</h3>
+          <p>
+            Mint authority remains active through the project's Solana program. Project policy is to mint
+            only after corresponding physical pennies are received; this is a policy, not an immutable supply cap.
+          </p>
+        </div>
+        <div class="info-card">
+          <h3>Upgradeable program</h3>
+          <p>
+            Minting program: <code>8ut4mptpdzQ7qkEfuVsiT5QR9kADKZTszcpKCYmmfaXg</code>.
+            The program remains upgradeable. Its upgrade authority is a Squads vault governed by
+            a 2-of-3 voting threshold.
+          </p>
+        </div>
+        <div class="info-card">
+          <h3>Mutable metadata</h3>
+          <p>
+            Token metadata remains mutable. The same 2-of-3 Squads vault controls program upgrades
+            and metadata updates. Vault authority:
+            <code>A5v2A5mwwM7a2S3JX2h9aHQ7BSBQEoje5TesFWFE3tUy</code>.
+          </p>
+        </div>
+        <div class="info-card">
+          <h3>2-of-3 voter approvals</h3>
+          <p>
+            The controlling Squads v4 account requires two approvals from three voting members.
+            Individual member addresses are intentionally not republished here; the threshold and
+            permissions can be verified on-chain.
+          </p>
+        </div>
+        <div class="info-card">
+          <h3>Liquidity is multisig-controlled, not locked</h3>
+          <p>
+            All four current Raydium CENT/USDC concentrated-liquidity position NFTs are held by the
+            same Squads vault. Withdrawing or repositioning project liquidity therefore follows the
+            2-of-3 approval path. The positions are not time-locked and may be rebalanced when needed.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2>Machine-readable records</h2>
+        <p>Public files for token directories, researchers, and independent checks.</p>
+      </div>
+      <div class="card-grid">
+        <div class="info-card">
+          <h3>Token record</h3>
+          <p>Canonical identity, social links, markets, authorities, and reserve summary.</p>
+          <div class="link-list"><a href="token.json">Open token.json</a></div>
+        </div>
+        <div class="info-card">
+          <h3>Reserve snapshot</h3>
+          <p>Reported physical inventory, a dated on-chain snapshot, and explicit limitations.</p>
+          <div class="link-list"><a href="reserve.json">Open reserve.json</a></div>
+        </div>
+        <div class="info-card">
+          <h3>Metadata candidate</h3>
+          <p>Expanded off-chain metadata prepared for a future authority-signed on-chain metadata update.</p>
+          <div class="link-list"><a href="token-metadata.json">Open token-metadata.json</a></div>
+        </div>
+        <div class="info-card">
+          <h3>Source repository</h3>
+          <p>Website, token program, monitoring code, and documentation.</p>
+          <div class="link-list"><a href="https://github.com/wstoeckle/cent-token">Open GitHub</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="transparency.html">Transparency</a>
+          <a href="whitepaper.html">Whitepaper</a>
+          <a href="https://x.com/the_cent_token">X</a>
+        </div>
+        <div class="footer-legal">
+          CENT is an experimental digital asset project. This is not financial advice.
+          Tokens may fluctuate in value.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/reserve-data.js"></script>
+  <script>
+    async function updateVerificationData() {
+      const physical = window.CENT_RESERVES.reportedPhysicalPennies;
+      document.querySelectorAll('[data-reported-physical-pennies]').forEach((element) => {
+        element.textContent = window.CENT_RESERVES.formatCount(physical, 0);
+      });
+
+      const reserveData = await window.CENT_RESERVES.fetchTokenSupply();
+      const supplyEl = document.getElementById('token-supply');
+      const ratioEl = document.getElementById('reserve-ratio');
+      const differenceEl = document.getElementById('reserve-difference');
+
+      if (!reserveData) {
+        supplyEl.textContent = 'unavailable';
+        ratioEl.textContent = 'unavailable';
+        differenceEl.textContent = 'Check Solscan for live supply';
+        return;
+      }
+
+      const supply = reserveData.supply;
+      const difference = physical - supply;
+      supplyEl.textContent = window.CENT_RESERVES.formatCount(supply);
+      ratioEl.textContent = ((physical / supply) * 100).toFixed(4) + '%';
+      differenceEl.textContent = difference >= 0
+        ? window.CENT_RESERVES.formatCount(difference) + ' reported excess pennies'
+        : window.CENT_RESERVES.formatCount(Math.abs(difference)) + ' more tokens than reported pennies';
+    }
+
+    updateVerificationData();
+    setInterval(updateVerificationData, 60_000);
+
+    document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+      this.classList.toggle('open');
+      this.setAttribute('aria-expanded', this.classList.contains('open'));
+      document.getElementById('mobile-nav').classList.toggle('open');
+    });
+  </script>
+  <script src="assets/js/ga4-tracking.js"></script>
+</body>
+</html>

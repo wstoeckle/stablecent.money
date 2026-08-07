@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "asset": "physical United States one-cent coins",
+  "reported_physical_pennies": 1295008,
+  "reported_face_value_usd": 12950.08,
+  "reported_as_of": "2026-08-06",
+  "reporting_basis": "Project-reported physical inventory. Under project policy, CENT is minted only after the corresponding physical pennies have been received.",
+  "on_chain_snapshot": {
+    "network": "solana-mainnet-beta",
+    "mint": "72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH",
+    "slot": 437612832,
+    "captured_at": "2026-08-06",
+    "cumulative_minted_cent": "1295008",
+    "outstanding_supply_cent": "1294998.761621659",
+    "net_burned_cent": "9.238378341",
+    "reported_reserve_surplus_pennies": "9.238378341"
+  },
+  "live_supply_source": {
+    "method": "Solana JSON-RPC getTokenSupply",
+    "rpc_url": "https://api.mainnet-beta.solana.com",
+    "live_comparison_url": "https://fortcent.com/transparency.html"
+  },
+  "limitations": [
+    "The physical count is reported by the project and has not yet been independently attested.",
+    "On-chain mint and burn records verify token issuance and supply changes; they do not independently prove physical custody.",
+    "Holding CENT does not create a guaranteed redemption right or a legal claim on any specific penny.",
+    "The live token supply may change after this snapshot."
+  ]
+}

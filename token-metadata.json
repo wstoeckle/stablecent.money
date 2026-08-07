@@ -1,0 +1,31 @@
+{
+  "name": "CENT",
+  "symbol": "CENT",
+  "description": "CENT is an experimental Solana token associated with a project-reported reserve of physical United States pennies. Reported reserves and live token supply are disclosed separately at fortcent.com.",
+  "image": "https://arweave.net/xlYt0_SeXaG95rpZrreLXPBSBeGbwWBpJ9ptwxtVYQM",
+  "external_url": "https://fortcent.com/verification.html",
+  "attributes": [
+    {
+      "trait_type": "Network",
+      "value": "Solana"
+    },
+    {
+      "trait_type": "Token Standard",
+      "value": "SPL Token"
+    }
+  ],
+  "properties": {
+    "category": "image",
+    "files": [
+      {
+        "uri": "https://arweave.net/xlYt0_SeXaG95rpZrreLXPBSBeGbwWBpJ9ptwxtVYQM",
+        "type": "image/png"
+      }
+    ]
+  },
+  "extensions": {
+    "website": "https://fortcent.com/",
+    "twitter": "https://x.com/the_cent_token",
+    "discord": "https://discord.gg/v8eSzu4u"
+  }
+}

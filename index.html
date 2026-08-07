@@ -6,11 +6,31 @@
   <meta name="theme-color" content="#f8f7f4">
   <title>CENT - The Penny Reserve Experiment</title>
   <meta name="description" content="A Solana token experiment that shows reported physical penny reserves beside live on-chain supply.">
+  <link rel="canonical" href="https://fortcent.com/">
   <meta property="og:title" content="CENT - The Penny Reserve Experiment">
   <meta property="og:description" content="Reported physical penny reserves, live on-chain supply, and the difference shown side by side.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://fortcent.com">
   <meta property="og:image" content="https://fortcent.com/assets/images/fort-cent-seal.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@the_cent_token">
+  <meta name="twitter:title" content="CENT - The Penny Reserve Experiment">
+  <meta name="twitter:description" content="Reported physical penny reserves, live on-chain supply, and the difference shown side by side.">
+  <meta name="twitter:image" content="https://fortcent.com/assets/images/fort-cent-seal.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "CENT",
+    "url": "https://fortcent.com/",
+    "description": "A Solana token experiment that shows reported physical penny reserves beside live on-chain supply.",
+    "sameAs": [
+      "https://x.com/the_cent_token",
+      "https://github.com/wstoeckle/cent-token",
+      "https://solscan.io/token/72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH"
+    ]
+  }
+  </script>
 
   <!-- Google Analytics 4 -->
   <!-- Replace G-EW38M2E8P6 with your actual GA4 Measurement ID -->
@@ -616,6 +636,7 @@
         <a href="calculator.html">Calculator</a>
         <a href="whitepaper.html">Whitepaper</a>
         <a href="transparency.html">Transparency</a>
+        <a href="verification.html">Verification</a>
       </nav>
       <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">
         <span></span>
@@ -630,6 +651,7 @@
     <a href="calculator.html">Calculator</a>
     <a href="whitepaper.html">Whitepaper</a>
     <a href="transparency.html">Transparency</a>
+    <a href="verification.html">Verification</a>
   </div>
 
   <div class="container">
@@ -637,10 +659,10 @@
       <div class="hero-eyebrow">The Original Physical Reserve Token</div>
       <h1>A token issued against U.S. penny reserves</h1>
       <p>
-        CENT is designed around physical pennies held in an auditable reserve.
-        Unlike Fort Knox, you can actually visit our vault and count the reserves yourself.
-        Following the cessation of U.S. penny production, these constitute a finite stock
-        of legal tender you can independently verify.
+        CENT is designed around a project-reported inventory of physical pennies.
+        Compare the reported count with live on-chain supply, watch the vault feed,
+        or request an in-person visit. Circulating penny production ended in 2025;
+        collectible pennies can still be produced.
       </p>
       <div class="hero-cta">
         <a href="#buy" class="btn btn-primary">Buy CENT</a>
@@ -665,11 +687,11 @@
         </div>
       </div>
       <div class="buy-actions">
-        <a href="https://raydium.io/swap/?inputMint=72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH&outputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" class="buy-button" id="raydium-link">Buy CENT on Raydium →</a>
+        <a href="https://raydium.io/swap/?inputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&amp;outputMint=72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH" class="buy-button" id="raydium-link">Buy CENT on Raydium →</a>
         <a href="transparency.html" class="buy-secondary">View Reserves</a>
       </div>
     </div>
-    <div class="last-updated">Price cached at: <span id="last-updated-text">loading...</span> | <a class="cmc-link" href="https://dex.coinmarketcap.com/token/solana/72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH/" target="_blank">View on CoinMarketCap</a></div>
+    <div class="last-updated">Price cached at: <span id="last-updated-text">loading...</span> | <a class="cmc-link" href="verification.html">Verify token details</a></div>
   </div>
 
   <div class="stats-section">
@@ -709,10 +731,10 @@
               The distinction matters.
             </p>
             <p>
-              <strong>Fort Knox holds 147 million ounces of gold</strong> that hasn't been
-              fully audited by independent parties since 1953. We report holding <span data-reported-physical-pennies>1,295,008</span> pennies
-              you can count on a 24/7 livestream and inspect by appointment. Some people
-              are calling it the most verifiable reserve in America.
+              <strong>The U.S. Mint reports 147.4 million fine troy ounces of gold at Fort Knox.</strong>
+              Treasury controls and inspections have occurred over time, but public visibility is limited.
+              We report holding <span data-reported-physical-pennies>1,295,008</span> pennies you can watch
+              on a 24/7 feed and inspect by appointment.
             </p>
             <p>
               Our holdings are not distributed across banking partners, money market funds,
@@ -720,11 +742,10 @@
               location—observable via 24/7 video feed, and verifiable in person by appointment.
             </p>
             <p>
-              <strong>Following the U.S. Mint's decision to end penny production</strong>,
-              no additional supply will enter circulation. Unlike Bitcoin, which continues
-              mining until 2140, penny issuance has permanently ceased. The total number of
-              pennies is fixed, and the only way create more CENT is to deposit pennies into
-              the vault.
+              <strong>The U.S. Mint ended production of circulating pennies in 2025.</strong>
+              Existing pennies remain in circulation, and collectible penny products may still be made.
+              CENT is not hard-capped: the active minting program can issue tokens when the project
+              accepts corresponding physical deposits. Live supply and controls are disclosed publicly.
             </p>
           </div>
         </div>
@@ -870,9 +891,9 @@
           Look, we know what you're thinking. Well, technically this is NOT a stablecoin...
         </p>
         <p>
-          There's been speculation for decades about whether Fort Knox actually holds
-          the gold it claims. Congressional committees have demanded audits. Conspiracy
-          theories abound. Why? Because nobody can actually see inside.
+          Fort Knox has inspired decades of public debate about how national gold reserves
+          should be inspected and disclosed. Official controls and historical inspections exist,
+          but the public cannot simply watch a live view or schedule a count.
         </p>
         <p>
           Most "backed" assets aren't actually backed by anything you can see or touch.
@@ -900,11 +921,12 @@
       </div>
       <div class="thesis-grid">
         <div class="thesis-card">
-          <h3>Absolute Scarcity</h3>
+          <h3>Physical Constraints</h3>
           <p>
-            Bitcoin's supply cap is enforced by code. Penny supply is constrained
-            by physical reality—the U.S. Mint has ceased production entirely.
-            No fork, no governance vote, no protocol change can create more pennies.
+            CENT is not an immutable fixed-supply token. New CENT can be issued through
+            the disclosed minting program when the project accepts corresponding physical
+            penny deposits. Circulating penny production ended in 2025, while collectible
+            penny products remain possible.
           </p>
         </div>
         <div class="thesis-card">
@@ -955,6 +977,7 @@
           <a href="https://x.com/the_cent_token">X</a>
           <a href="https://discord.gg/v8eSzu4u">Discord</a>
           <a href="calculator.html">Calculator</a>
+          <a href="verification.html">Verification</a>
           <a href="#buy">Buy CENT</a>
         </div>
         <div class="footer-legal">
@@ -1018,7 +1041,7 @@
       const priceElement = document.getElementById('current-price');
       priceElement.innerHTML = '';
       const link = document.createElement('a');
-      link.href = 'https://raydium.io/swap/?inputMint=72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH&outputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
+      link.href = 'https://raydium.io/swap/?inputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&outputMint=72NTbVWqvCxmGARj3zjEzFDybGJ5ehrgLcT1DfRdcwFH';
       link.textContent = 'See live price \u2192';
       link.style.cssText = 'color: var(--copper); text-decoration: none; font-size: 1rem;';
       link.target = '_blank';
