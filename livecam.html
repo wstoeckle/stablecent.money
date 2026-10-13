@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
   <meta name="theme-color" content="#f8f7f4">
-  <title>Live Camera – CENT</title>
-  <meta name="description" content="Watch the CENT penny reserves in real-time. 24/7 live vault surveillance.">
+  <title>Vault Camera Offline – CENT</title>
+  <meta name="description" content="The CENT vault camera is offline. The reported penny reserve is still public; the livestream is not.">
 
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-EW38M2E8P6"></script>
@@ -39,36 +39,14 @@
       letter-spacing: -0.02em;
     }
 
-    .coming-soon-notice {
-      background: #fef3c7;
-      border: 1px solid #f59e0b;
-      border-radius: 4px;
-      padding: 16px 24px;
-      margin-bottom: 40px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-    }
-
-    .coming-soon-notice p {
-      color: #92400e;
-      font-size: 1rem;
-      margin: 0;
+    .page-header p {
+      margin-top: 12px;
     }
 
     .hoard-container {
       max-width: 900px;
       margin: 0 auto;
       padding: 0 24px 100px;
-    }
-
-    .hoard-image {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
     }
 
     .image-caption {
@@ -117,6 +95,7 @@
         <a href="calculator.html">Calculator</a>
         <a href="whitepaper.html">Whitepaper</a>
         <a href="transparency.html">Transparency</a>
+        <a href="verification.html">Verification</a>
       </nav>
       <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">
         <span></span>
@@ -131,30 +110,49 @@
     <a href="calculator.html">Calculator</a>
     <a href="whitepaper.html">Whitepaper</a>
     <a href="transparency.html">Transparency</a>
+    <a href="verification.html">Verification</a>
   </div>
 
   <div class="page-header">
     <div class="container">
       <h1>Live Vault Camera</h1>
+      <p class="feed-lede">The public feed is offline. The pennies are still the reported pile. They are just not on television.</p>
     </div>
   </div>
 
   <div class="hoard-container">
-    <div style="position: relative; width: 100%; padding-top: 56.25%; margin-bottom: 16px;">
-      <iframe
-        src="https://player.twitch.tv/?channel=fortcent&amp;parent=fortcent.com&amp;parent=localhost&amp;parent=127.0.0.1"
-        title="Live CENT vault camera"
-        frameborder="0"
-        allowfullscreen="true"
-        scrolling="no"
-        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);"
-      ></iframe>
+    <div id="feed-slot">
+      <div class="feed-monitor" id="feed-offline">
+        <div class="feed-chrome">
+          <span>Cam 01 · Vault</span>
+          <span class="feed-status"><span class="feed-lamp" aria-hidden="true"></span> Off air</span>
+        </div>
+        <div class="feed-screen" role="img" aria-label="Offline vault camera. Error 404, no signal.">
+          <div class="feed-static" aria-hidden="true"></div>
+          <div class="feed-readout" aria-hidden="true">
+            <p class="feed-code">404</p>
+            <p class="feed-signal">No signal</p>
+            <p class="feed-scan">Searching for pennies<span class="feed-cursor">_</span></p>
+          </div>
+        </div>
+        <div class="feed-chrome feed-chrome-bottom">
+          <span>Frame — — —</span>
+          <span>Ch fortcent</span>
+        </div>
+      </div>
     </div>
 
-    <p class="image-caption">Live feed of the reported physical penny reserve. Compare it with on-chain supply on the transparency page.</p>
+    <p class="feed-copy">
+      The camera returned a 404. The coins did not. A dark feed is not a count,
+      and a live one would not have been an audit either. The supply comparison
+      is still on the <a href="transparency.html">transparency page</a>. If you
+      want to look with your eyes, the vault
+      <a href="vault-visit.html">takes appointments</a>.
+    </p>
 
-    <div style="margin-top: 32px; text-align: center;">
-      <a href="https://twitch.tv/fortcent" target="_blank" rel="noopener" style="color: var(--copper); text-decoration: none; font-weight: 500; font-size: 0.9rem;">Watch on Twitch &rarr;</a>
+    <div class="feed-actions">
+      <button type="button" class="btn btn-secondary" id="try-feed">Try the player anyway</button>
+      <a class="btn btn-primary" href="https://twitch.tv/fortcent" target="_blank" rel="noopener">Open the Twitch channel</a>
     </div>
 
     <div class="back-link">
@@ -187,6 +185,31 @@
     this.classList.toggle('open');
     this.setAttribute('aria-expanded', this.classList.contains('open'));
     document.getElementById('mobile-nav').classList.toggle('open');
+  });
+
+  var offlineMarkup = document.getElementById('feed-slot').innerHTML;
+  var showingPlayer = false;
+  var tryFeed = document.getElementById('try-feed');
+
+  tryFeed.addEventListener('click', function() {
+    var slot = document.getElementById('feed-slot');
+    showingPlayer = !showingPlayer;
+
+    if (!showingPlayer) {
+      slot.innerHTML = offlineMarkup;
+      tryFeed.textContent = 'Try the player anyway';
+      return;
+    }
+
+    var host = location.hostname || 'localhost';
+    var parents = ['fortcent.com', 'www.fortcent.com', 'localhost', '127.0.0.1'];
+    if (parents.indexOf(host) === -1) parents.push(host);
+    var src = 'https://player.twitch.tv/?channel=fortcent&' + parents.map(function(parent) {
+      return 'parent=' + encodeURIComponent(parent);
+    }).join('&');
+
+    slot.innerHTML = '<div class="feed-frame"><iframe src="' + src + '" title="CENT vault camera on Twitch" allowfullscreen></iframe></div>';
+    tryFeed.textContent = 'Show the outage again';
   });
 </script>
 </body>

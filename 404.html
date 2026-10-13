@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+  <meta name="theme-color" content="#f8f7f4">
+  <title>404 – CENT</title>
+  <meta name="description" content="This page is not in the CENT vault. The pennies are elsewhere.">
+  <meta name="robots" content="noindex">
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="/assets/css/shared.css">
+  <style>
+    .page-header {
+      padding: 80px 0 40px;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 2.8rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .missing-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+    }
+
+    @media (max-width: 768px) {
+      .page-header {
+        padding: 60px 0 30px;
+      }
+
+      .page-header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="/" class="logo">CENT</a>
+      <nav>
+        <a href="/#buy">Buy CENT</a>
+        <a href="/minting.html">Get Started</a>
+        <a href="/calculator.html">Calculator</a>
+        <a href="/whitepaper.html">Whitepaper</a>
+        <a href="/transparency.html">Transparency</a>
+        <a href="/verification.html">Verification</a>
+      </nav>
+      <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="/#buy">Buy CENT</a>
+    <a href="/minting.html">Get Started</a>
+    <a href="/calculator.html">Calculator</a>
+    <a href="/whitepaper.html">Whitepaper</a>
+    <a href="/transparency.html">Transparency</a>
+    <a href="/verification.html">Verification</a>
+  </div>
+
+  <div class="page-header">
+    <div class="container">
+      <h1>This page is not in the vault</h1>
+      <p class="feed-lede">We checked the reported pile, the on-chain supply, and the pocket behind the eagle. This address was in none of them.</p>
+    </div>
+  </div>
+
+  <div class="missing-container">
+    <div class="feed-monitor">
+      <div class="feed-chrome">
+        <span>Cam 404 · Missing</span>
+        <span class="feed-status"><span class="feed-lamp" aria-hidden="true"></span> Off air</span>
+      </div>
+      <div class="feed-screen" role="img" aria-label="Error 404. This page was not found.">
+        <div class="feed-static" aria-hidden="true"></div>
+        <div class="feed-readout" aria-hidden="true">
+          <p class="feed-code">404</p>
+          <p class="feed-signal">Not found</p>
+          <p class="feed-scan">No pennies at this URL<span class="feed-cursor">_</span></p>
+        </div>
+      </div>
+      <div class="feed-chrome feed-chrome-bottom">
+        <span>Frame — — —</span>
+        <span>Ch nowhere</span>
+      </div>
+    </div>
+
+    <div class="feed-actions">
+      <a class="btn btn-primary" href="/">Back home</a>
+      <a class="btn btn-secondary" href="/transparency.html">See the reserves</a>
+      <a class="btn btn-secondary" href="/livecam.html">Check the camera</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="https://x.com/the_cent_token">X</a>
+          <a href="https://discord.gg/v8eSzu4u">Discord</a>
+          <a href="/calculator.html">Calculator</a>
+          <a href="/#buy">Buy CENT</a>
+        </div>
+        <div class="footer-legal">
+          CENT is an experimental digital asset project.
+          This is not financial advice. Tokens may fluctuate in value.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+      this.classList.toggle('open');
+      this.setAttribute('aria-expanded', this.classList.contains('open'));
+      document.getElementById('mobile-nav').classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
